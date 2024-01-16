@@ -4,6 +4,31 @@
 # -----------------------------------
 # -------- Initialization
 # -----------------------------------
+# Make sure the `brew` command is available on Linux
+if [ "$(uname)" = 'Linux' ] && ! command -v brew &> /dev/null; then
+  [ -d '/home/linuxbrew' ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+command -v brew &> /dev/null && export HOMEBREW_PREFIX="$(brew --prefix)"
+
+
+# -----------------------------------
+# -------- Optional Package
+# -----------------------------------
+if [ -v HOMEBREW_PREFIX ]; then
+  [ -d "$HOMEBREW_PREFIX/opt/python@3.10" ] && PATH="$HOMEBREW_PREFIX/opt/python@3.10/libexec/bin:$PATH"
+  [ -d "$HOMEBREW_PREFIX/opt/llvm" ]        && PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
+  [ -d "$HOMEBREW_PREFIX/opt/make" ]        && PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
+  [ -d "$HOMEBREW_PREFIX/opt/openjdk" ]     && PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
+fi
+
+
+
+# =============================================
+# ======== Homebrew Installer and Sourcer
+# =============================================
+# -----------------------------------
+# -------- Initialization
+# -----------------------------------
 HOMEBREW_OFFICIAL_BREW_GIT_REMOTE='https://github.com/Homebrew/brew.git'
 HOMEBREW_OFFICIAL_CORE_GIT_REMOTE='https://github.com/Homebrew/homebrew-core.git'
 
@@ -65,7 +90,7 @@ fi
 
 
 # -----------------------------------
-# -------- Source
+# -------- Sourcer
 # -----------------------------------
 if command -v brew &> /dev/null; then
   # Official Source

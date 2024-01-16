@@ -20,21 +20,15 @@ alias mv='mv -v'
 alias ctaz='tar -zcvf' xtaz='tar -zxvf'
 alias gcmm='git commit -m' gcmmd='gcmm "$(DATE)"'
 
-# Kitty
-[ "$TERM" = 'xterm-kitty' ] && alias kssh='kitty +kitten ssh'
-# Rsync
-command -v rsync &> /dev/null && alias frsync='rsync -razvhP'
-# Mysql
-command -v mysql &> /dev/null && alias mysqlStart='mysql.server start' mysqlStop='mysql.server stop'
-
 
 # -----------------------------------
 # -------- Plugins
 # -----------------------------------
 source "$ZPLUGINDIR/homebrew.zsh"
-
 source "$ZPLUGINDIR/neovim.zsh"
-source "$ZPLUGINDIR/gadget.zsh"
+
+source "$ZPLUGINDIR/utils.zsh"
 source "$ZPLUGINDIR/python.zsh"
+source "$ZPLUGINDIR/installer.zsh"
 
 source "$ZPLUGINDIR/zinit.zsh"
