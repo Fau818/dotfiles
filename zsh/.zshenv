@@ -83,5 +83,6 @@ export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
 export TLDR_CACHE_DIR="$XDG_DATA_HOME/tldr"
 # Npm
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/config"
+export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 # Docker (FIXME: not working)
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
