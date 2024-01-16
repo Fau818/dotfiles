@@ -1,0 +1,65 @@
+# Necessary
+gcc
+git
+
+# Utils
+bat
+btop
+fzf
+jq
+lazygit
+macos-trash
+neofetch
+rsync
+stow
+tldr
+tree
+wakatime-cli
+wget
+yazi
+zoxide
+
+# Neovim
+neovim
+node
+ripgrep
+yarn
+
+# Yabai
+sketchybar
+skhd
+yabai
+
+# Optional
+deeplx
+llvm
+lua
+macfuse
+poetry
+syncthing
+youtube-dl
+
+# Font
+font-sf-mono-nerd-font-ligaturized
+font-victor-mono-nerd-font
+
+# Cask
+discord
+docker
+grammarly-desktop
+hammerspoon
+iina
+karabiner-elements
+keycastr
+kitty
+logi-options-plus
+lyricsx
+miniconda
+obsidian
+qq
+raycast
+sf-symbols
+typora
+visual-studio-code
+xquartz
+zerotier-one
