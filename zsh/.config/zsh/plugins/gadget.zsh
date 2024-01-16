@@ -33,3 +33,32 @@ if (command -v yazi && ! command -v __yazi) &> /dev/null; then
   }
   alias yazi=__yazi
 fi
+
+
+# -----------------------------------
+# -------- Stow
+# -----------------------------------
+if (command -v stow && ! command -v __stow) &> /dev/null; then
+  function __stow() {
+    # Parse args
+    local opts=() pkgs=()
+    for arg in "$@"; do
+      if [[ "$arg" == -* ]]; then
+        # EXIT: Invalid format
+        [[ ! -z "$pkgs" ]] && echo_red "ERROR: Format should be [option ...] [-D|-S|-R] package ..." && return 0
+        opts+=("$arg")
+      else pkgs+=("$arg")
+      fi
+    done
+    # EXIT: Empty packages
+    [[ -z "$pkgs" ]] && (stow --help || return 0)
+
+    # Execute
+    [[ ! -v DOTFILE_PATH ]] && (DOTFILE_PATH=$([[ "$(uname)" == 'Darwin' ]] && echo "$HOME/Documents/Fau/dotfiles" || echo "${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles"))
+    for name in "${pkgs[@]}"; do
+      local dotfile_dir=$([[ -d "$DOTFILE_PATH/private/$name" ]] && echo "$DOTFILE_PATH/private" || echo "$DOTFILE_PATH")
+      stow --dir="$dotfile_dir" --target="$HOME" --ignore='.DS_Store' "${opts[@]}" "$name"
+    done
+  }
+  alias stow=__stow
+fi

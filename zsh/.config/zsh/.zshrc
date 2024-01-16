@@ -26,17 +26,6 @@ alias gcmm='git commit -m' gcmmd='gcmm "$(DATE)"'
 command -v rsync &> /dev/null && alias frsync='rsync -razvhP'
 # Mysql
 command -v mysql &> /dev/null && alias mysqlStart='mysql.server start' mysqlStop='mysql.server stop'
-# Stow
-if (command -v stow && ! command -v __stow) &> /dev/null; then
-  function __stow() {
-    [[ -z "$1" ]] && echo_red "ERROE: Empty Package Name!" && return 0
-    local name="$1"
-    local dotfile_dir=$([[ -d "$DOTFILE_PATH/private/$name" ]] && echo "$DOTFILE_PATH/private" || echo "$DOTFILE_PATH")
-
-    stow --dir="$dotfile_dir" --target="$HOME" --ignore='.DS_Store' "$name"
-  }
-  alias stow=__stow
-fi
 
 
 # -----------------------------------
@@ -45,7 +34,7 @@ fi
 source "$ZPLUGINDIR/homebrew.zsh"
 
 source "$ZPLUGINDIR/neovim.zsh"
-source "$ZPLUGINDIR/python.zsh"
 source "$ZPLUGINDIR/gadget.zsh"
+source "$ZPLUGINDIR/python.zsh"
 
 source "$ZPLUGINDIR/zinit.zsh"
