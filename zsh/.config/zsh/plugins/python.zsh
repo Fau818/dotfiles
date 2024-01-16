@@ -40,8 +40,8 @@ function __pip_set_tsinghua_source() {
   echo 'trusted-host = pypi.tuna.tsinghua.edu.cn' >> "$pip_conf_file"
 }
 
-# Alibaba Source
-function __pip_set_ali_source() {
+# Aliyun Source
+function __pip_set_aliyun_source() {
   local pip_conf_file=$(___pip_get_config_file_path)
 
   echo '[global]' > "$pip_conf_file" && \

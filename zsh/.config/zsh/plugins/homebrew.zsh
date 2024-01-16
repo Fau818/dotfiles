@@ -4,14 +4,28 @@
 # -----------------------------------
 # -------- Initialization
 # -----------------------------------
+HOMEBREW_OFFICIAL_BREW_GIT_REMOTE='https://github.com/Homebrew/brew.git'
+HOMEBREW_OFFICIAL_CORE_GIT_REMOTE='https://github.com/Homebrew/homebrew-core.git'
+
+HOMEBREW_TSINGHUA_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
+HOMEBREW_TSINGHUA_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+HOMEBREW_TSINGHUA_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
+HOMEBREW_TSINGHUA_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+
+HOMEBREW_ALIYUN_BREW_GIT_REMOTE='https://mirrors.aliyun.com/homebrew/brew.git'
+HOMEBREW_ALIYUN_CORE_GIT_REMOTE='https://mirrors.aliyun.com/homebrew/homebrew-core.git'
+HOMEBREW_ALIYUN_API_DOMAIN='https://mirrors.aliyun.com/homebrew-bottles/api'
+HOMEBREW_ALIYUN_BOTTLE_DOMAIN='https://mirrors.aliyun.com/homebrew/homebrew-bottles'
+
 # Auto set bottle domain
 function ___homebrew_auto_set_bottle_domain() {
-  local HOMEBREW_TSINGHUA_BOTTLE_DOMAIN='https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git'
-  local HOMEBREW_OFFICIAL_BOTTLE_DOMAIN='https://github.com/Homebrew/brew.git'
+  # Get repository url and force end with `.git`
   local homebrew_repo_url="$(git -C "$(brew --repo)" remote get-url origin)"
-  if [ "$homebrew_repo_url" = "$HOMEBREW_TSINGHUA_BOTTLE_DOMAIN" ]; then
-    export HOMEBREW_BOTTLE_DOMAIN='https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles'
-  elif [ "$homebrew_repo_url" = "$HOMEBREW_OFFICIAL_BOTTLE_DOMAIN" ]; then unset HOMEBREW_BOTTLE_DOMAIN
+  [[ $homebrew_repo_url != *.git ]] && homebrew_repo_url="$homebrew_repo_url.git"
+  # Determine repository type
+  if [[ "$homebrew_repo_url" == "$HOMEBREW_OFFICIAL_BREW_GIT_REMOTE" ]]; then unset HOMEBREW_BOTTLE_DOMAIN
+  elif [[ "$homebrew_repo_url" == "$HOMEBREW_TSINGHUA_BREW_GIT_REMOTE" ]]; then export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_TSINGHUA_BOTTLE_DOMAIN"
+  elif [[ "$homebrew_repo_url" == "$HOMEBREW_ALIYUN_BREW_GIT_REMOTE" ]]; then export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_ALIYUN_BOTTLE_DOMAIN"
   else echo_yellow 'Unknown homebrew repo url, please set `HOMEBREW_BOTTLE_DOMAIN` manually.'
   fi
 }
@@ -35,14 +49,12 @@ if ! command -v brew &> /dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   }
 
-  # Tsinghua Repository
-  function __homebrew_install_from_tsinghua_repo() {
-    if [ "$(uname)" = 'Darwin' ]; then export HOMEBREW_CORE_GIT_REMOTE='https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git'
-    else export HOMEBREW_CORE_GIT_REMOTE='https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/linuxbrew-core.git'
-    fi
-    export HOMEBREW_BREW_GIT_REMOTE='https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git'
-    export HOMEBREW_API_DOMAIN='https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api'
-    export HOMEBREW_BOTTLE_DOMAIN='https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles'
+  # Aliyun Repository
+  function __homebrew_install_from_aliyun_repo() {
+    export HOMEBREW_BREW_GIT_REMOTE="$HOMEBREW_ALIYUN_BREW_GIT_REMOTE"
+    export HOMEBREW_CORE_GIT_REMOTE="$HOMEBREW_ALIYUN_CORE_GIT_REMOTE"
+    export HOMEBREW_API_DOMAIN="$HOMEBREW_ALIYUN_API_DOMAIN"
+    export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_ALIYUN_BOTTLE_DOMAIN"
     /bin/bash -c "$(curl -fsSL https://gitee.com/ineo6/homebrew-install/raw/master/install.sh)"
   }
 fi
@@ -55,13 +67,7 @@ if command -v brew &> /dev/null; then
   # Official Source
   function __homebrew_set_official_source() {
     if command -v brew &> /dev/null; then
-      local brew_repo_path="$(brew --repo)"
-      local brew_repo_core_path="$(brew --repo homebrew/core)"
-      local brew_repo_cask_path="$(brew --repo homebrew/cask)"
-      [ -d "$brew_repo_path" ]      && git -C "$brew_repo_path"       remote set-url origin https://github.com/Homebrew/brew.git
-      [ -d "$brew_repo_core_path" ] && git -C "$brew_repo_core_path"  remote set-url origin https://github.com/Homebrew/homebrew-core.git
-      [ -d "$brew_repo_cask_path" ] && git -C "$brew_repo_cask_path"  remote set-url origin https://github.com/Homebrew/homebrew-cask.git
-
+      git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_OFFICIAL_BREW_GIT_REMOTE"
       # Set bottle domain
       ___homebrew_auto_set_bottle_domain
     else echo_red 'Not found: `brew` command'
@@ -71,13 +77,17 @@ if command -v brew &> /dev/null; then
   # Tsinghua Source
   function __homebrew_set_tsinghua_source() {
     if command -v brew &> /dev/null; then
-      local brew_repo_path="$(brew --repo)"
-      local brew_repo_core_path="$(brew --repo homebrew/core)"
-      local brew_repo_cask_path="$(brew --repo homebrew/cask)"
-      [ -d "$brew_repo_path" ]      && git -C "$brew_repo_path"      remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
-      [ -d "$brew_repo_core_path" ] && git -C "$brew_repo_core_path" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
-      [ -d "$brew_repo_cask_path" ] && git -C "$brew_repo_cask_path" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git
+      git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_TSINGHUA_BREW_GIT_REMOTE"
+      # Set bottle domain
+      ___homebrew_auto_set_bottle_domain
+    else echo_red 'Not found: `brew` command'
+    fi
+  }
 
+  # Aliyun Source
+  function __homebrew_set_aliyun_source() {
+    if command -v brew &> /dev/null; then
+      git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_ALIYUN_BREW_GIT_REMOTE"
       # Set bottle domain
       ___homebrew_auto_set_bottle_domain
     else echo_red 'Not found: `brew` command'

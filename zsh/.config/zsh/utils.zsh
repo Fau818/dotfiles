@@ -18,7 +18,7 @@ function echo_white()  { echo "\e[97m$1\e[0m" }
 # -------- Apt Source
 # -----------------------------------
 if [ "$(uname)" = 'Linux' ]; then
-  function __apt_set_ali_source() {
+  function __apt_set_aliyun_source() {
     local file_path='/etc/apt/sources.list'
     sudo mv $file_path '/etc/apt/sources.list.bak'
     sudo touch $file_path
@@ -66,17 +66,6 @@ function __nerd_font_install() {
     echo_red "Unsupported operating system: $OSTYPE"
     return 1
   fi
-}
-
-
-# -----------------------------------
-# -------- Dotfile Puller
-# -----------------------------------
-# NOTE: WIP...
-function __dotfile_puller() {
-  export DOTFILE_PATH=$([ "$(uname)" = 'Darwin' ] && echo "$HOME/Documents/Fau/dotfiles" || echo "$XDG_CONFIG_HOME/dotfiles")
-  [ ! -e "$DOTFILE_PATH" ] && git clone --depth 1 https://github.com/Fau818/dotfiles.git "$DOTFILE_PATH"
-  # stow='stow --dir="$DOTFILE_PATH" --target="$HOME" --ignore=".DS_Store"'
 }
 
 
