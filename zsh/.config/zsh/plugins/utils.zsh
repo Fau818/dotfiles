@@ -50,6 +50,7 @@ fi
 # -------- Stow
 # -----------------------------------
 if (command -v stow && ! command -v __stow) &> /dev/null; then
+  # Refactor stow
   function __stow() {
     # Parse args
     local opts=() pkgs=()
@@ -72,4 +73,30 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
     done
   }
   alias stow=__stow
+
+
+  # Stow for installed binaries automatically
+  function auto_stow() {
+    typeset -A configs=(
+      [clangd]="clangd"
+      [git]="git"
+      [github-copilot]="nvim"
+      [kaggle]="kaggle"
+      [lazygit]="lazygit"
+      [npm]="npm"
+      [ssh]="ssh"
+      [wakatime]="wakatime-cli"
+      [yazi]="yazi"
+      [zsh]="zsh"
+    )
+
+    for config in "${(@k)configs}"; do
+      binary=${configs[$config]}
+
+      if command -v "$binary" &> /dev/null; then
+        __stow "$config"
+        echo_blue "Stowed configuration for '$config'."
+      fi
+    done
+  }
 fi
