@@ -17,6 +17,11 @@ if [[ "$(uname)" == 'Linux' ]]; then
     sudo sh -c "echo 'deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse' >> '$file_path'"
   }
 
+  # Utils Installer
+  function __utils_installer() {
+    brew install bat btop fzf lazygit neofetch tldr tree yazi zoxide
+    sudo apt-get install -y rsync stow wget
+  }
 
   # Docker
   alias __docker_installer='curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh && rm ./get-docker.sh'
