@@ -1,0 +1,21 @@
+# NOTE: For MacOS, you should run `ln -s ~/.config/clangd ~/Library/Preferences/clangd`
+# \ (before running please make sure the directory `~/Library/Preferences/clangd` does not exist)
+
+CompileFlags:  # Tweak the parse settings
+  Add:
+    - -xc++
+    - -Wall
+    - -std=c++17
+    - -DCODE_Fau
+
+  Compiler: /usr/local/opt/llvm/bin/clang++  # Change argv[0] of compile flags to `clang++`
+  # Compiler: /opt/homebrew/opt/llvm/bin/clang++
+
+Diagnostics:
+  Suppress:
+    - shift-op-parentheses
+  # ClangTidy:
+  #   Add: "*"
+
+Hover:
+  ShowAKA: true

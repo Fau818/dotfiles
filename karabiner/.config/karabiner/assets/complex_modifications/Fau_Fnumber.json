@@ -1,0 +1,185 @@
+{
+	"title": "Fau F_number",
+	"rules": [
+		{
+			"description": "<R_CTRL>1 := <F1>",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "1",
+						"modifiers": {
+							"mandatory": [ "right_control" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [ { "key_code": "f1" } ]
+				}
+			]
+		},
+
+
+		{
+			"description": "<R_CTRL>2 := <F2>",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "2",
+						"modifiers": {
+							"mandatory": [ "right_control" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [ { "key_code": "f2" } ]
+				}
+			]
+		},
+
+
+		{
+			"description": "<R_CTRL>3 := <F3>",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "3",
+						"modifiers": {
+							"mandatory": [ "right_control" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [ { "key_code": "f3" } ]
+				}
+			]
+		},
+
+
+		{
+			"description": "<R_CTRL>4 := <F4>",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "4",
+						"modifiers": {
+							"mandatory": [ "right_control" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [ { "key_code": "f4" } ]
+				}
+			]
+		},
+
+
+		{
+			"description": "<R_CTRL>5 := <F5>",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "5",
+						"modifiers": {
+							"mandatory": [ "right_control" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [ { "key_code": "f5" } ]
+				}
+			]
+		},
+
+
+		{
+			"description": "<R_CTRL>6 := <F6>",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "6",
+						"modifiers": {
+							"mandatory": [ "right_control" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [ { "key_code": "f6" } ]
+				}
+			]
+		},
+
+
+		{
+			"description": "<R_CTRL>7 := <F7>",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "7",
+						"modifiers": {
+							"mandatory": [ "right_control" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [ { "key_code": "f7" } ]
+				}
+			]
+		},
+
+
+		{
+			"description": "<R_CTRL>8 := <F8>",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "8",
+						"modifiers": {
+							"mandatory": [ "right_control" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [ { "key_code": "f8" } ]
+				}
+			]
+		},
+
+
+		{
+			"description": "<R_CTRL>9 := <F9>",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "9",
+						"modifiers": {
+							"mandatory": [ "right_control" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [ { "key_code": "f9" } ]
+				}
+			]
+		},
+
+
+		{
+			"description": "<R_CTRL>0 := <F10>",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "0",
+						"modifiers": {
+							"mandatory": [ "right_control" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [ { "key_code": "f10" } ]
+				}
+			]
+		}
+
+
+	]
+}

@@ -1,0 +1,12 @@
+# Hammerspoon
+hammerspoon/.config/hammerspoon/Spoons/EmmyLua.spoon/annotations/
+
+# Karabiner
+karabiner/automatic_backups
+
+# Lazygit
+lazygit/.config/lazygit/state.yml
+
+# Zsh
+zsh/.config/zsh/.zcompdump
+zsh/.config/zsh/.zsh_history

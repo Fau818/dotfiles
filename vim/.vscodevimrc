@@ -1,0 +1,88 @@
+" #########################
+" #######  Fau_vim  #######
+" #########################
+noremap H ^
+noremap J 5j
+noremap K 5k
+noremap L <END>
+
+
+nnoremap <LEADER>w :w<CR>
+nnoremap <LEADER>q :q<CR>
+nnoremap <LEADER>Q :q!<CR>
+nnoremap Q <nop>
+nnoremap U <C-r>
+
+
+nnoremap <TAB> >>
+nnoremap <S-TAB> <<
+vnoremap <TAB> >gv
+vnoremap <S-TAB> <gv
+nnoremap <CR> o<ESC>
+
+" nnoremap v <C-V> conflict surround
+" nnoremap <C-V> v
+
+
+
+
+nnoremap y "+y
+vnoremap y "+y
+noremap Y "+Y
+nnoremap p "+p
+vnoremap p "+p
+noremap P "+P
+noremap x "_x
+noremap X "_X
+
+
+noremap <leader>d "+d
+noremap <leader>D "+D
+noremap <leader>y y
+noremap <leader>Y Y
+noremap <leader>p p
+noremap <leader>P P
+
+
+
+
+
+
+" surround插件替换
+nmap ss yss
+vmap s S
+nmap sw ysiw
+nmap sW ysiW
+
+
+
+
+nnoremap cia ci<
+nnoremap caa ca<
+nmap dia di<
+nmap daa da<
+nmap yia yi<
+nmap yaa ya<
+vnoremap ia i<
+vnoremap aa a<
+
+nnoremap cir ci[
+nnoremap car ca[
+nmap dir di[
+nmap dar da[
+nmap yir yi[
+nmap yar ya[
+vnoremap ir i[
+vnoremap ar a[
+
+
+
+" test
+nnoremap cw ciw
+nmap dw diw
+nmap yw yiw
+nnoremap vw viw
+nnoremap s <NOP>
+
+
+nnoremap <A-m> J

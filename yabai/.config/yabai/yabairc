@@ -1,0 +1,141 @@
+#!/usr/bin/env zsh
+# NOTE: This file should be executable.
+
+# See: https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+
+# =============================================
+# ======== Configuration
+# =============================================
+config=(
+  # -----------------------------------
+  # -------- Space
+  # -----------------------------------
+  # values: `bsp` | `float` | `stack`
+  layout bsp
+
+  top_padding 8
+  bottom_padding 8
+  left_padding 8
+  right_padding 8
+  window_gap 8
+
+  auto_balance off
+  # If auto_balance is disabled, the split_ratio defines the old window's ratio
+  split_ratio 0.5
+  split_type auto
+
+
+  # -----------------------------------
+  # -------- Mouse
+  # -----------------------------------
+  mouse_modifier fn
+  # set modifier + left-click drag to move window
+  mouse_action1 move
+  # set modifier + right-click drag to resize window
+  mouse_action2 resize
+  # values: `swap` | `stack`
+  mouse_drop_action swap
+
+  focus_follows_mouse off
+  mouse_follows_focus off
+
+  debug_output off
+  external_bar all:0:0
+
+
+  # -----------------------------------
+  # -------- Window
+  # -----------------------------------
+  window_origin_display default
+  window_zoom_persist on
+  window_shadow float
+
+  # values: `first_child` | `second_child`
+  # first_child  : new window to the left or top
+  # second_child : new window to the right or bottom
+  window_placement second_child
+
+  window_opacity off
+  window_opacity_duration 0.0
+  active_window_opacity 1.0
+  normal_window_opacity 0.9
+
+  window_animation_duration 0.0
+  window_animation_frame_rate 120
+
+  insert_feedback_color 0xFFD75F5F
+)
+
+yabai -m config "${config[@]}"
+
+
+
+# =============================================
+# ======== Rule
+# =============================================
+# -----------------------------------
+# -------- White List
+# -----------------------------------
+white_list_array=(
+  kitty
+  Code
+
+  Safari
+  Arc
+  "Google Chrome"
+)
+
+function create_regex_string() {
+  local array=("$@") regex_string=""
+  for element in "${array[@]}"; do regex_string+="^${element}$|"; done
+  regex_string="${regex_string%|}"
+  echo $regex_string
+}
+
+white_list=$(create_regex_string "$white_list_array[@]")
+
+
+# -----------------------------------
+# -------- Apply Rule
+# -----------------------------------
+yabai -m rule --add app!="$white_list" manage=off
+# Disable in Little Arc
+yabai -m rule --add app="^Arc$" title="^Space.*$" manage=off
+# Disable in Arc Preference
+yabai -m rule --add app="^Arc$" title="^Fau$" manage=off
+# Disable in Safari Preference (maybe `can-resize` is another way to do this)
+yabai -m rule --add app="^Safari$" title="General|Tabs|AutoFill|Passwords|Search|Security|Privacy|Websites|Profiles|Extensions|Advanced|Developer|Feature Flags" manage=off
+
+
+
+# =============================================
+# ======== Signal
+# =============================================
+# Refocus window when window is destroyed
+yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/refocus_window.sh '$white_list'"
+yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/destroy_space_if_no_window.sh"
+
+
+
+# =============================================
+# ======== END
+# =============================================
+# brew tap FelixKratz/formulae && brew install borders
+# borders active_color=0xfc26a69a inactive_color=0x00494d64 width=5.0 &
+
+echo "yabai configuration loaded.."
+
+
+# signal with sketchybar [TODO]
+# yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+# yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
+# yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
+# shift + alt - f : yabai -m window --toggle float; sketchybar --trigger window_focus
+# shift + alt - m : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
+# shift + alt - n : yabai -m space --create; sketchybar --trigger window_focus
+# shift + alt - d : yabai -m space --destroy; sketchybar --trigger window_focus
+# shift + alt - 1 : yabai -m window --space 1 && sketchybar --trigger windows_on_spaces
+# 123123

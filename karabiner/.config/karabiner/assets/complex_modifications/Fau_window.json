@@ -1,0 +1,204 @@
+{
+	"title": "Window Opertions",
+	"rules": [
+		{
+			"description": "~ := ~ and <R_SHIFT><L_OPTION>(<WINKEY1>)",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "grave_accent_and_tilde",
+						"modifiers": {
+							"mandatory": [  ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [
+						{
+							"key_code": "right_shift",
+							"modifiers": [ "left_option" ],
+							"lazy": true
+						}
+					],
+					"to_if_alone": [ { "key_code": "grave_accent_and_tilde" } ]
+				}
+			]
+		},
+
+
+		{
+			"description": "<ESC> := <L_CTRL><SPACE> and <L_CTRL><R_SHIFT><L_OPTION>(<WINKEY2>)",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "escape",
+						"modifiers": {
+							"mandatory": [  ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [
+						{
+							"key_code": "right_shift",
+							"modifiers": [ "left_option", "left_control" ],
+							"lazy": true
+						}
+					],
+					"to_if_alone": [
+						{
+							"key_code": "spacebar",
+							"modifiers": [ "left_control" ]
+						}
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<L_SHIFT>~ := <FN><WINKEY1>(<WINKEY3)",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "grave_accent_and_tilde",
+						"modifiers": {
+							"mandatory": [ "left_shift" ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [
+						{
+							"key_code": "fn",
+							"modifiers": [ "right_shift", "left_option" ],
+							"lazy": true
+						}
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<fn>~ := <FN><WINKEY1>(<WINKEY3)",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "grave_accent_and_tilde",
+						"modifiers": {
+							"mandatory": [ "fn" ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [
+						{
+							"key_code": "fn",
+							"modifiers": [ "right_shift", "left_option" ],
+							"lazy": true
+						}
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<ESC>~ := <FN><WINKEY2>(<WINKEY4)",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "grave_accent_and_tilde",
+						"modifiers": {
+							"mandatory": [ "right_shift", "left_option", "left_control" ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [
+						{
+							"key_code": "fn",
+							"modifiers": [ "right_shift", "left_option", "left_control" ],
+							"lazy": true
+						}
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "~<ESC> := <FN><WINKEY2>(<WINKEY4)",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "escape",
+						"modifiers": {
+							"mandatory": [ "left_option", "right_shift" ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [
+						{
+							"key_code": "fn",
+							"modifiers": [ "right_shift", "left_option", "left_control" ],
+							"lazy": true
+						}
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<FN><ESC> := <FN><WINKEY2>(<WINKEY4)",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "escape",
+						"modifiers": {
+							"mandatory": [ "fn" ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [
+						{
+							"key_code": "fn",
+							"modifiers": [ "right_shift", "left_option", "left_control" ],
+							"lazy": true
+						}
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<L_SHIFT><ESC> := <FN><WINKEY2>(<WINKEY4)",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "escape",
+						"modifiers": {
+							"mandatory": [ "left_shift" ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [
+						{
+							"key_code": "fn",
+							"modifiers": [ "right_shift", "left_option", "left_control" ],
+							"lazy": true
+						}
+					]
+				}
+			]
+		}
+
+
+	]
+}

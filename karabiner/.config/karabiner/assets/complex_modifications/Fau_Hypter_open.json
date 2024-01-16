@@ -1,0 +1,521 @@
+{
+	"title": "Fau hyper open ...",
+	"rules": [
+		{
+			"description": "<R_CMD> := <HYPER> with sticky",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "right_command",
+						"modifiers": {
+							"mandatory": [  ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{
+							"key_code": "left_shift",
+							"modifiers": [ "left_control", "left_option", "right_command" ],
+							"lazy": true
+						}
+					],
+					"to_if_alone": [
+						{ "sticky_modifier": { "left_shift"   : "toggle" } },
+						{ "sticky_modifier": { "left_control" : "toggle" } },
+						{ "sticky_modifier": { "left_option"  : "toggle" } },
+						{ "sticky_modifier": { "right_command": "toggle" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "revise <R_CMD><BK> := <L_CMD><BK>",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "delete_or_backspace",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{
+							"key_code": "delete_or_backspace",
+							"modifiers": [ "left_command" ]
+						}
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "revise <CMD><OPTION><CTRL><SHIFT>, := <L_CMD>,",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "comma",
+						"modifiers": {
+							"mandatory": [ "shift", "control", "option", "command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{
+							"key_code": "comma",
+							"modifiers": [ "left_command" ]
+						}
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "revise <CMD><OPTION><CTRL><SHIFT>. := <L_CMD>.",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "period",
+						"modifiers": {
+							"mandatory": [ "shift", "control", "option", "command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{
+							"key_code": "period",
+							"modifiers": [ "left_command" ]
+						}
+					]
+				}
+			]
+		},
+
+
+
+		{
+			"description": "<HYPER>s := open Browser (Arc)",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "s",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a Arc" },
+						{ "sticky_modifier": { "left_shift"   : "off" } },
+						{ "sticky_modifier": { "left_control" : "off" } },
+						{ "sticky_modifier": { "left_option"  : "off" } },
+						{ "sticky_modifier": { "right_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HYPER>m := open Music",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "m",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a Music" },
+						{ "sticky_modifier": { "left_shift"   : "off" } },
+						{ "sticky_modifier": { "left_control" : "off" } },
+						{ "sticky_modifier": { "left_option"  : "off" } },
+						{ "sticky_modifier": { "right_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HYPER>t := open Terminal (kitty)",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "t",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a kitty" },
+						{ "sticky_modifier": { "left_shift"   : "off" } },
+						{ "sticky_modifier": { "left_control" : "off" } },
+						{ "sticky_modifier": { "left_option"  : "off" } },
+						{ "sticky_modifier": { "right_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HYPER>p := open PyCharm",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "p",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a PyCharm" },
+						{ "sticky_modifier": { "left_shift"   : "off" } },
+						{ "sticky_modifier": { "left_control" : "off" } },
+						{ "sticky_modifier": { "left_option"  : "off" } },
+						{ "sticky_modifier": { "right_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HYPER>c := open Clion",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "c",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a Clion" },
+						{ "sticky_modifier": { "left_shift"   : "off" } },
+						{ "sticky_modifier": { "left_control" : "off" } },
+						{ "sticky_modifier": { "left_option"  : "off" } },
+						{ "sticky_modifier": { "right_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HYPER>d := open Dash",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "d",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a Dash" },
+						{ "sticky_modifier": { "left_shift"   : "off" } },
+						{ "sticky_modifier": { "left_control" : "off" } },
+						{ "sticky_modifier": { "left_option"  : "off" } },
+						{ "sticky_modifier": { "right_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HYPER>b := open Bob",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "b",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a Bob" },
+						{ "sticky_modifier": { "left_shift"   : "off" } },
+						{ "sticky_modifier": { "left_control" : "off" } },
+						{ "sticky_modifier": { "left_option"  : "off" } },
+						{ "sticky_modifier": { "right_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HYPER>g := open Google Chrome",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "g",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a Google\\ Chrome" },
+						{ "sticky_modifier": { "left_shift"   : "off" } },
+						{ "sticky_modifier": { "left_control" : "off" } },
+						{ "sticky_modifier": { "left_option"  : "off" } },
+						{ "sticky_modifier": { "right_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HYPER>v := open VSCode",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "v",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a Visual\\ Studio\\ Code" },
+						{ "sticky_modifier": { "left_shift"   : "off" } },
+						{ "sticky_modifier": { "left_control" : "off" } },
+						{ "sticky_modifier": { "left_option"  : "off" } },
+						{ "sticky_modifier": { "right_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HYPER>o := open Obsidian",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "o",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a Obsidian" },
+						{ "sticky_modifier": { "left_shift"   : "off" } },
+						{ "sticky_modifier": { "left_control" : "off" } },
+						{ "sticky_modifier": { "left_option"  : "off" } },
+						{ "sticky_modifier": { "right_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HYPER>f := open Finder",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "f",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a Finder" },
+						{ "sticky_modifier": { "left_shift"   : "off" } },
+						{ "sticky_modifier": { "left_control" : "off" } },
+						{ "sticky_modifier": { "left_option"  : "off" } },
+						{ "sticky_modifier": { "right_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HYPER>w := open Warp",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "w",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a Warp" },
+						{ "sticky_modifier": { "left_shift"   : "off" } },
+						{ "sticky_modifier": { "left_control" : "off" } },
+						{ "sticky_modifier": { "left_option"  : "off" } },
+						{ "sticky_modifier": { "right_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HYPER>r := open Reminders",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "r",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a Reminders" },
+						{ "sticky_modifier": { "left_shift"   : "off" } },
+						{ "sticky_modifier": { "left_control" : "off" } },
+						{ "sticky_modifier": { "left_option"  : "off" } },
+						{ "sticky_modifier": { "right_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+
+		{
+			"description": "<R_OPT> := <HHYPER> with sticky",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "right_option",
+						"modifiers": {
+							"mandatory": [  ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{
+							"key_code": "left_shift",
+							"modifiers": [ "left_control", "right_option", "left_command" ],
+							"lazy": true
+						}
+					],
+					"to_if_alone": [
+						{ "sticky_modifier": { "left_shift"  : "toggle" } },
+						{ "sticky_modifier": { "left_control": "toggle" } },
+						{ "sticky_modifier": { "right_option": "toggle" } },
+						{ "sticky_modifier": { "left_command": "toggle" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HHYPER>d := open Downie4",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "d",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "right_option", "left_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a Downie\\ 4" },
+						{ "sticky_modifier": { "left_shift"  : "off" } },
+						{ "sticky_modifier": { "left_control": "off" } },
+						{ "sticky_modifier": { "right_option": "off" } },
+						{ "sticky_modifier": { "left_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HHYPER>m := open Mail",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "m",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "right_option", "left_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a Mail" },
+						{ "sticky_modifier": { "left_shift"  : "off" } },
+						{ "sticky_modifier": { "left_control": "off" } },
+						{ "sticky_modifier": { "right_option": "off" } },
+						{ "sticky_modifier": { "left_command": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<HHYPER>t := open Termius",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "t",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "right_option", "left_command" ],
+							"optional": [ "any" ]
+						}
+					},
+					"to": [
+						{ "shell_command"  : "open -a Termius" },
+						{ "sticky_modifier": { "left_shift"  : "off" } },
+						{ "sticky_modifier": { "left_control": "off" } },
+						{ "sticky_modifier": { "right_option": "off" } },
+						{ "sticky_modifier": { "left_command": "off" } }
+					]
+				}
+			]
+		}
+
+
+
+	]
+}

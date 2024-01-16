@@ -1,0 +1,218 @@
+" =============================================
+" ========== Options
+" =============================================
+set number              "显示行号
+set relativenumber      "设置相对行号
+set showcmd             "一般模式 在屏幕右下角显示输入的指令
+set incsearch           "边打边搜
+set ignorecase          "搜索忽略大小写
+set smartcase           "搜索时, 智能大小写
+set showmode
+set scrolloff=8
+set iskeyword+=-
+set clipboard=unnamedplus
+
+noremap <SPACE> <NOP>
+let mapleader=" "       "设置leader键
+
+
+
+" =============================================
+" ========== Plugins
+" =============================================
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'machakann/vim-highlightedyank'
+Plug 'easymotion/vim-easymotion'
+Plug 'preservim/nerdtree'
+map <LEADER> <Plug>(easymotion-prefix)
+
+
+
+" =============================================
+" ========== Preferences
+" =============================================
+" Quick Move
+nnoremap H ^
+nmap J 5j
+nmap K 5k
+nnoremap L <END>
+xnoremap H ^
+xnoremap J 5j
+xnoremap K 5k
+xnoremap L <END>
+onoremap H ^
+onoremap J 5j
+onoremap K 5k
+onoremap L <END>
+
+" Quick Close
+nnoremap Q :q<CR>
+
+" Undo
+nnoremap U <C-r>
+nnoremap <A-u> U
+
+" Merge Line
+noremap <A-m> J
+
+" Visual Mode
+nnoremap v <C-V>
+nnoremap <C-V> v
+
+" <CR> to Break Line in Normal Mode
+nnoremap <CR> o<ESC>
+nnoremap <LEADER><CR> <CR>
+
+" Recording
+nnoremap <LEADER>q q
+
+" No Highlight Search
+nnoremap <LEADER>n :noh<CR>
+
+" Edit Vimrc
+nnoremap <LEADER>ve :edit ~/.ideavimrc<CR>
+nnoremap <LEADER>vs :source ~/.ideavimrc<CR>
+
+" Indent Line and Keep Cursor
+noremap <silent> <tab> :action EditorIndentLineOrSelection<CR>
+nnoremap <C-i> <C-i>
+
+
+
+" =============================================
+" ========== Yank, Paste, Delete(Cut)
+" =============================================
+" Normal Mode
+nnoremap x "_x
+nnoremap X "_X
+nnoremap c "_c
+nnoremap C "_C
+nnoremap d ""d
+nnoremap D ""D
+nnoremap <LEADER>y ""y
+nnoremap <LEADER>Y ""Y
+nnoremap <LEADER>p ""p
+nnoremap <LEADER>P ""P
+nnoremap <LEADER>d d
+nnoremap <LEADER>D D
+
+" Visual Mode
+xnoremap x "_x
+xnoremap X "_X
+xnoremap c "_c
+xnoremap C "_C
+xnoremap d ""d
+xnoremap D ""D
+xnoremap <LEADER>y ""y
+xnoremap <LEADER>Y ""Y
+xnoremap <LEADER>p ""p
+xnoremap <LEADER>P ""P
+xnoremap <LEADER>d d
+xnoremap <LEADER>D D
+
+" Cancel Yank Selection Area When Paste sth in Vim Visual Mode
+xnoremap p "_dP
+
+
+
+" =============================================
+" ========== Quick Range Operations
+" =============================================
+" Operator-pending Mode
+onoremap w iw
+onoremap W iW
+onoremap ia i>
+onoremap aa a>
+onoremap ir i]
+onoremap ar a]
+
+" Visual Mode
+xnoremap w iw
+xnoremap W iW
+xnoremap ia i>
+xnoremap aa a>
+xnoremap ir i]
+xnoremap ar a]
+
+
+
+" =============================================
+" ========== Plugin Configuration
+" =============================================
+" Surround
+nmap sw ysw
+nmap sW ysW
+xmap s S
+nmap ss HvLhs
+nmap SS O<ESC>jo<ESC>kVks
+
+" 输入法切换
+let keep_input_source_in_normal="com.apple.keylayout.ABC"
+set keep-english-in-normal
+
+" NerdTree
+nnoremap <leader>e :NERDTreeToggle<CR>
+
+
+
+" =============================================
+" ========== Buffer and Window operations
+" =============================================
+" Window Operations
+nnoremap<C-h> <C-w>h
+nnoremap<C-j> <C-w>j
+nnoremap<C-k> <C-w>k
+nnoremap<C-l> <C-w>l
+
+" Buffer Operations
+nnoremap <leader>1 :action GoToTab1<CR>
+nnoremap <leader>2 :action GoToTab2<CR>
+nnoremap <leader>3 :action GoToTab3<CR>
+nnoremap <leader>4 :action GoToTab4<CR>
+nnoremap <leader>5 :action GoToTab5<CR>
+nnoremap <leader>6 :action GoToTab6<CR>
+nnoremap <leader>7 :action GoToTab7<CR>
+nnoremap <leader>8 :action GoToTab8<CR>
+nnoremap <leader>9 :action GoToTab9<CR>
+nnoremap <A-1> :action GoToTab1<CR>
+nnoremap <A-2> :action GoToTab2<CR>
+nnoremap <A-3> :action GoToTab3<CR>
+nnoremap <A-4> :action GoToTab4<CR>
+nnoremap <A-5> :action GoToTab5<CR>
+nnoremap <A-6> :action GoToTab6<CR>
+nnoremap <A-7> :action GoToTab7<CR>
+nnoremap <A-8> :action GoToTab8<CR>
+nnoremap <A-9> :action GoToTab9<CR>
+
+nnoremap <A-h> :action PreviousTab<CR>
+nnoremap <A-l> :action NextTab<CR>
+nnoremap <A-q> :action CloseContent<CR>
+
+nnoremap q :action SaveAll<CR>
+
+
+
+" =============================================
+" ========== LSP
+" =============================================
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gD :action GotoTypeDeclaration<CR>
+nnoremap <LEADER>lr :action RenameElement<CR>
+nnoremap <LEADER>ld :action ActivateProblemsViewToolWindow<CR>
+
+nnoremap <LEADER>la :action DatabaseView.Tools<CR>
+
+nnoremap <LEADER>lp :action SwitcherPreviousProblem<CR>
+nnoremap <LEADER>ln :action SwitcherNextProblem<CR>
+
+nnoremap <A-p> :action GotoPrevElementUnderCaretUsage<CR>
+nnoremap <A-n> :action GotoNextElementUnderCaretUsage<CR>
+
+
+" =============================================
+" ========== Ideavim Bugs
+" =============================================
+nnoremap zj :set scrolloff=0<CR>
+nnoremap zp :set scrolloff=8<CR>
+nnoremap s <nop>

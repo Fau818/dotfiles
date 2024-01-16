@@ -1,0 +1,131 @@
+{
+	"title": "Fau_fn",
+	"rules": [
+		{
+			"description": "<FN> := <FN> with sticky",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "fn",
+						"modifiers": {
+							"mandatory": [  ],
+							"optional": [ "caps_lock", "fn" ]
+						}
+					},
+					"to": [ { "key_code": "fn", "lazy": true } ],
+					"to_if_alone": [ { "sticky_modifier": { "fn": "toggle" } } ]
+				}
+			]
+		},
+
+
+
+		{
+			"description": "<FN>q := open QQ",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "q",
+						"modifiers": {
+							"mandatory": [ "fn" ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [
+						{ "shell_command": "open -a QQ" },
+						{ "sticky_modifier": { "fn": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<FN>w := open WeChat",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "w",
+						"modifiers": {
+							"mandatory": [ "fn" ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [
+						{ "shell_command": "open -a WeChat" },
+						{ "sticky_modifier": { "fn": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<FN>t := open Telegram",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "t",
+						"modifiers": {
+							"mandatory": [ "fn" ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [
+						{ "shell_command": "open -a Telegram\\ Lite" },
+						{ "sticky_modifier": { "fn": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<FN>f := open Feishu",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "f",
+						"modifiers": {
+							"mandatory": [ "fn" ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [
+						{ "shell_command": "open -a Lark" },
+						{ "sticky_modifier": { "fn": "off" } }
+					]
+				}
+			]
+		},
+
+
+		{
+			"description": "<FN>d := open Discord",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "d",
+						"modifiers": {
+							"mandatory": [ "fn" ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [
+						{ "shell_command": "open -a Discord" },
+						{ "sticky_modifier": { "fn": "off" } }
+					]
+				}
+			]
+		}
+
+
+
+	]
+}

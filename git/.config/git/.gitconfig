@@ -1,0 +1,11 @@
+[init]
+  defaultBranch = main
+[user]
+  name = Fau
+  email = Fau818@qq.com
+[core]
+  excludesfile = ~/.config/git/gitignore_global
+  editor = nvim
+  ignorecase = false
+[commit]
+  verbose = true

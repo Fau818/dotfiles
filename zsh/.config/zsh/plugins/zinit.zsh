@@ -1,0 +1,55 @@
+# =============================================
+# ======== Zinit
+# =============================================
+# -----------------------------------
+# -------- Zinit Installer
+# -----------------------------------
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+if [[ ! -f "$ZINIT_HOME/zinit.zsh" ]]; then
+  print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+  command mkdir -p "$(dirname $ZINIT_HOME)" && command chmod g-rwX "$(dirname $ZINIT_HOME)"
+  command git clone --depth=1 https://github.com/zdharma-continuum/zinit "$ZINIT_HOME" && \
+    print -P "%F{33} %F{34}Installation successful.%f%b" || \
+    print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$ZINIT_HOME/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+# zinit wait lucid depth=1 light-mode for \
+#   zdharma-continuum/zinit-annex-as-monitor \
+#   zdharma-continuum/zinit-annex-bin-gem-node \
+#   zdharma-continuum/zinit-annex-patch-dl \
+#   zdharma-continuum/zinit-annex-rust
+
+
+# -----------------------------------
+# -------- OMZ Migration
+# -----------------------------------
+# For OMZ completion
+HYPHEN_INSENSITIVE='true'
+COMPLETION_WAITING_DOTS='true'
+
+zinit ice wait lucid depth=1; zinit snippet OMZL::clipboard.zsh
+zinit ice wait lucid depth=1; zinit snippet OMZL::completion.zsh
+zinit ice depth=1; zinit snippet OMZL::directories.zsh
+zinit ice wait lucid depth=1; zinit snippet OMZL::grep.zsh
+zinit ice wait lucid depth=1; zinit snippet OMZL::history.zsh
+zinit ice wait lucid depth=1; zinit snippet OMZL::key-bindings.zsh
+zinit ice depth=1; zinit snippet OMZL::theme-and-appearance.zsh
+
+zinit ice wait lucid depth=1 atload"unalias grv"; zinit snippet OMZP::git
+
+
+# -----------------------------------
+# -------- Zinit Plugins
+# -----------------------------------
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
+zinit ice depth=1; zinit light zdharma-continuum/fast-syntax-highlighting
+zinit ice wait lucid depth=1; zinit light MichaelAquilina/zsh-you-should-use
+zinit ice wait lucid depth=1 blockf atload"zicompinit; zicdreplay"; zinit light zsh-users/zsh-completions
