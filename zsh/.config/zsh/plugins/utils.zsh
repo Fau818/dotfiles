@@ -90,9 +90,9 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
       [zsh]="zsh"
     )
 
+    local config
     for config in "${(@k)configs}"; do
-      binary=${configs[$config]}
-
+      local binary=${configs[$config]}
       if command -v "$binary" &> /dev/null; then
         __stow "$config"
         echo_blue "Stowed configuration for '$config'."
