@@ -3,19 +3,6 @@
 # ******************** Install script for Ubuntu or MacOS ********************
 # ****************************************************************************
 # -----------------------------------
-# -------- Homebrew
-# -----------------------------------
-# Aliyun Repository
-function __homebrew_install_from_aliyun_repo() {
-  export HOMEBREW_BREW_GIT_REMOTE="$HOMEBREW_ALIYUN_BREW_GIT_REMOTE"
-  export HOMEBREW_CORE_GIT_REMOTE="$HOMEBREW_ALIYUN_CORE_GIT_REMOTE"
-  export HOMEBREW_API_DOMAIN="$HOMEBREW_ALIYUN_API_DOMAIN"
-  export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_ALIYUN_BOTTLE_DOMAIN"
-  /bin/bash -c "$(curl -fsSL https://gitee.com/ineo6/homebrew-install/raw/master/install.sh)"
-}
-
-
-# -----------------------------------
 # -------- Dotfile Puller
 # -----------------------------------
 # BUG: Network error in accessing github.

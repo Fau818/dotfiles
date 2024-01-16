@@ -23,9 +23,13 @@ function ___homebrew_auto_set_bottle_domain() {
   local homebrew_repo_url="$(git -C "$(brew --repo)" remote get-url origin)"
   [[ $homebrew_repo_url != *.git ]] && homebrew_repo_url="$homebrew_repo_url.git"
   # Determine repository type
-  if [[ "$homebrew_repo_url" == "$HOMEBREW_OFFICIAL_BREW_GIT_REMOTE" ]]; then unset HOMEBREW_BOTTLE_DOMAIN
-  elif [[ "$homebrew_repo_url" == "$HOMEBREW_TSINGHUA_BREW_GIT_REMOTE" ]]; then export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_TSINGHUA_BOTTLE_DOMAIN"
-  elif [[ "$homebrew_repo_url" == "$HOMEBREW_ALIYUN_BREW_GIT_REMOTE" ]]; then export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_ALIYUN_BOTTLE_DOMAIN"
+  if [[ "$homebrew_repo_url" == "$HOMEBREW_OFFICIAL_BREW_GIT_REMOTE" ]]; then unset HOMEBREW_API_DOMAIN HOMEBREW_BOTTLE_DOMAIN
+  elif [[ "$homebrew_repo_url" == "$HOMEBREW_TSINGHUA_BREW_GIT_REMOTE" ]]; then
+    export HOMEBREW_API_DOMAIN="$HOMEBREW_TSINGHUA_API_DOMAIN"
+    export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_TSINGHUA_BOTTLE_DOMAIN"
+  elif [[ "$homebrew_repo_url" == "$HOMEBREW_ALIYUN_BREW_GIT_REMOTE" ]]; then
+    export HOMEBREW_API_DOMAIN="$HOMEBREW_ALIYUN_API_DOMAIN"
+    export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_ALIYUN_BOTTLE_DOMAIN"
   else echo_yellow 'Unknown homebrew repo url, please set `HOMEBREW_BOTTLE_DOMAIN` manually.'
   fi
 }
