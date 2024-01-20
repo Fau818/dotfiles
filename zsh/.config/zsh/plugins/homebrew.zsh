@@ -15,7 +15,6 @@ command -v brew &> /dev/null && export HOMEBREW_PREFIX="$(brew --prefix)"
 # -------- Optional Package
 # -----------------------------------
 if [ -v HOMEBREW_PREFIX ]; then
-  [ -d "$HOMEBREW_PREFIX/opt/python@3.10" ] && PATH="$HOMEBREW_PREFIX/opt/python@3.10/libexec/bin:$PATH"
   [ -d "$HOMEBREW_PREFIX/opt/llvm" ]        && PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
   [ -d "$HOMEBREW_PREFIX/opt/make" ]        && PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
   [ -d "$HOMEBREW_PREFIX/opt/openjdk" ]     && PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
