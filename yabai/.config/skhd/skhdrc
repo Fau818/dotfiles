@@ -49,10 +49,10 @@ rshift + lalt + fn - k : $HOME/.config/yabai/stack.sh north
 rshift + lalt + fn - l : $HOME/.config/yabai/stack.sh east
 
 # Toggle window layout (WINKEY1)
-# TODO: if float, auto center (do in hammerspoon);
 rshift + lalt - f : yabai -m window --toggle float; [ $(yabai -m query --windows --window | jq '.["is-floating"]') = 'true' ] && hs -c "Fau_hs.window.center_window(0.6)"
 rshift + lalt - s : [ $(yabai -m query --windows --window | jq '.["is-floating"]') = 'true' ] && yabai -m window --toggle float
 rshift + lalt - t : yabai -m window --toggle split
+rshift + lalt - space : yabai -m window --toggle pip
 # rshift + lalt - e : yabai -m window --toggle zoom-parent
 
 

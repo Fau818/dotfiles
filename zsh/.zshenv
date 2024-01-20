@@ -43,7 +43,7 @@ export DOTFILE_PATH=$([ "$(uname)" = 'Darwin' ] && echo "$HOME/Documents/Fau/dot
 # Copilot
 export COPILOT_ENABLE=$([ -f "$XDG_CONFIG_HOME/github-copilot/hosts.json" ] && echo 1 || echo 0)
 # OpenAI
-export OPENAI_API_PATH="$DOTFILE_PATH/openai"
+export OPENAI_API_PATH="$DOTFILE_PATH/private/openai"
 
 
 
