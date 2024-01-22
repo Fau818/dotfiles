@@ -79,11 +79,11 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
   function auto_stow() {
     typeset -A configs=(
       [clangd]="clangd"
+      [clash]=$([[ "$(uname)" == 'Darwin' ]] && echo "test" || echo "clash")
       [git]="git"
       [github-copilot]="nvim"
       [kaggle]="kaggle"
       [lazygit]="lazygit"
-      [nvim]="nvim"
       [ssh]="ssh"
       [wakatime]="wakatime-cli"
       [yazi]="yazi"
