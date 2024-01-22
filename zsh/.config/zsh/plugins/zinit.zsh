@@ -37,11 +37,11 @@ zinit ice wait lucid depth=1; zinit snippet OMZL::clipboard.zsh
 zinit ice wait lucid depth=1; zinit snippet OMZL::completion.zsh
 zinit ice depth=1; zinit snippet OMZL::directories.zsh
 zinit ice wait lucid depth=1; zinit snippet OMZL::grep.zsh
-zinit ice wait lucid depth=1; zinit snippet OMZL::history.zsh
+zinit ice depth=1; zinit snippet OMZL::history.zsh
 zinit ice wait lucid depth=1; zinit snippet OMZL::key-bindings.zsh
 zinit ice depth=1; zinit snippet OMZL::theme-and-appearance.zsh
 
-zinit ice wait lucid depth=1 atload"unalias grv"; zinit snippet OMZP::git
+zinit ice wait lucid depth=1 atload"unalias grv g"; zinit snippet OMZP::git
 
 
 # -----------------------------------

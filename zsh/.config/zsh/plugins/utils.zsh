@@ -83,6 +83,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
       [github-copilot]="nvim"
       [kaggle]="kaggle"
       [lazygit]="lazygit"
+      [nvim]="nvim"
       [ssh]="ssh"
       [wakatime]="wakatime-cli"
       [yazi]="yazi"

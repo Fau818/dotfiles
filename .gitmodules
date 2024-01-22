@@ -1,3 +1,6 @@
 [submodule "private"]
 	path = private
 	url = git@github.com:Fau818/dotfiles-private.git
+[submodule "nvim/.config/nvim"]
+	path = nvim/.config/nvim
+	url = https://github.com/Fau818/nvim-config.git
