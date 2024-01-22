@@ -1,6 +1,12 @@
 [submodule "private"]
 	path = private
 	url = git@github.com:Fau818/dotfiles-private.git
+	branch = main
+	update = merge
+	shallow = true
 [submodule "nvim/.config/nvim"]
 	path = nvim/.config/nvim
 	url = https://github.com/Fau818/nvim-config.git
+	branch = main
+	update = merge
+	shallow = true
