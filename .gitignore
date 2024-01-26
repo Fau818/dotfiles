@@ -9,5 +9,5 @@ lazygit/.config/lazygit/state.yml
 
 # Zsh
 zsh/.config/zsh/.zcompcache/
-zsh/.config/zsh/.zcompdump
+zsh/.config/zsh/.zcompdump*
 zsh/.config/zsh/.zsh_history

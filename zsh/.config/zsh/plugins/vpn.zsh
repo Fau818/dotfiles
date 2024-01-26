@@ -36,7 +36,7 @@ fi
 # -----------------------------------
 # -------- Autostart
 # -----------------------------------
-if [ "$(uname)" = 'Darwin' ]; then vpn start
+if [ "$(uname)" = 'Darwin' ]; then pgrep -i clash &> /dev/null && vpn start
 elif [ "$(uname)" = 'Linux' ]; then pgrep -x clash &> /dev/null && vpn start
 else echo_red 'Not supported: Unknown OS, auto start VPN failed.'
 fi
