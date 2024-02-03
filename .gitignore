@@ -2,7 +2,7 @@
 hammerspoon/.config/hammerspoon/Spoons/EmmyLua.spoon/annotations/
 
 # Karabiner
-karabiner/automatic_backups
+karabiner/.config/karabiner/automatic_backups
 
 # Lazygit
 lazygit/.config/lazygit/state.yml
@@ -10,4 +10,7 @@ lazygit/.config/lazygit/state.yml
 # Zsh
 zsh/.config/zsh/.zcompcache/
 zsh/.config/zsh/.zcompdump*
+zsh/.config/zsh/.zsh_sessions/
 zsh/.config/zsh/.zsh_history
+
+ios_rule_script/

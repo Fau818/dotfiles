@@ -57,6 +57,7 @@ export IPYTHONDIR="$XDG_CACHE_HOME/ipython"
 export KAGGLE_CONFIG_DIR="$XDG_CONFIG_HOME/kaggle"
 export CLEARML_CONFIG_FILE="$XDG_CONFIG_HOME/clearml/clearml.conf"
 export MPLCONFIGDIR="$XDG_CACHE_HOME/matplotlib"
+export PIP_CACHE_DIR="$XDG_CACHE_HOME/pip"
 
 
 # -----------------------------------
