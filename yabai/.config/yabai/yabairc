@@ -43,7 +43,7 @@ config=(
   mouse_follows_focus off
 
   debug_output off
-  external_bar all:0:0
+  external_bar all:36:0
 
 
   # -----------------------------------
@@ -121,11 +121,16 @@ yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/destroy
 
 
 # =============================================
-# ======== END
+# ======== Border
 # =============================================
 # brew tap FelixKratz/formulae && brew install borders
-# borders active_color=0xfc26a69a inactive_color=0x00494d64 width=5.0 &
+borders active_color=0xFF9999FF inactive_color=0x00494D64 width=5.0
 
+
+
+# =============================================
+# ======== END
+# =============================================
 echo "yabai configuration loaded.."
 
 
@@ -138,4 +143,3 @@ echo "yabai configuration loaded.."
 # shift + alt - n : yabai -m space --create; sketchybar --trigger window_focus
 # shift + alt - d : yabai -m space --destroy; sketchybar --trigger window_focus
 # shift + alt - 1 : yabai -m window --space 1 && sketchybar --trigger windows_on_spaces
-# 123123

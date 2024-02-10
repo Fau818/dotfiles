@@ -57,10 +57,11 @@ function __pip_set_aliyun_source() {
 # -----------------------------------
 # -------- Initialization
 # -----------------------------------
-if [ "$(uname)" = 'Darwin' ] && [ -v HOMEBREW_PREFIX ];            then export CONDA_ROOT="$HOMEBREW_PREFIX/Caskroom/miniconda/base"
-elif [ "$(uname)" = 'Linux' ] && [ -d "$HOME/miniconda3" ];        then export CONDA_ROOT="$HOME/miniconda3"
-elif [ "$(uname)" = 'Linux' ] && [ -d "$HOME/.local/miniconda3" ]; then export CONDA_ROOT="$HOME/.local/miniconda3"
-elif [ "$(uname)" = 'Linux' ] && [ -d "/usr/local/miniconda3" ];   then export CONDA_ROOT="/usr/local/miniconda3"
+if [ "$(uname)" = 'Darwin' ] && [ -v HOMEBREW_PREFIX ];              then export CONDA_ROOT="$HOMEBREW_PREFIX/Caskroom/miniconda/base"
+elif [ "$(uname)" = 'Linux' ] && [ -d "$HOME/miniconda3" ];          then export CONDA_ROOT="$HOME/miniconda3"
+elif [ "$(uname)" = 'Linux' ] && [ -d "$HOME/.local/miniconda3" ];   then export CONDA_ROOT="$HOME/.local/miniconda3"
+elif [ "$(uname)" = 'Linux' ] && [ -d "$XDG_DATA_HOME/miniconda3" ]; then export CONDA_ROOT="$XDG_DATA_HOME/miniconda3"
+elif [ "$(uname)" = 'Linux' ] && [ -d "/usr/local/miniconda3" ];     then export CONDA_ROOT="/usr/local/miniconda3"
 fi
 
 [ -v CONDA_ROOT ] && [ -f "$CONDA_ROOT/etc/profile.d/conda.sh" ] && source "$CONDA_ROOT/etc/profile.d/conda.sh"

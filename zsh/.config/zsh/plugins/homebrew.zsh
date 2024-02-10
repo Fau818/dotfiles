@@ -4,6 +4,9 @@
 # -----------------------------------
 # -------- Initialization
 # -----------------------------------
+# Disable AUTO_UPDATE
+export HOMEBREW_NO_AUTO_UPDATE=1
+
 # Make sure the `brew` command is available on Linux
 if [ "$(uname)" = 'Linux' ] && ! command -v brew &> /dev/null; then
   [ -d '/home/linuxbrew' ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
