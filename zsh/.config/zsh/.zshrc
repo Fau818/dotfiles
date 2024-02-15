@@ -15,7 +15,7 @@ fi
 # -----------------------------------
 # -------- Basic Aliases
 # -----------------------------------
-alias sudo='sudo '
+alias sudo='sudo -E '
 alias mv='mv -v'
 alias ctaz='tar -zcvf' xtaz='tar -zxvf'
 alias gcmm='git commit -m' gcmmd='gcmm "$(DATE)"'

@@ -43,7 +43,7 @@ config=(
   mouse_follows_focus off
 
   debug_output off
-  external_bar all:36:0
+  external_bar all:32:0
 
 
   # -----------------------------------
@@ -64,7 +64,6 @@ config=(
   normal_window_opacity 0.9
 
   window_animation_duration 0.0
-  window_animation_frame_rate 120
 
   insert_feedback_color 0xFFD75F5F
 )
@@ -118,13 +117,19 @@ yabai -m rule --add app="^Safari$" title="General|Tabs|AutoFill|Passwords|Search
 yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/refocus_window.sh '$white_list'"
 yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/destroy_space_if_no_window.sh"
 
+# Sketchybar
+yabai -m signal --add event=window_created      action="sketchybar --trigger yabai_window_created && echo yabai_window_created"
+yabai -m signal --add event=window_focused      action="sketchybar --trigger yabai_window_focused"
+yabai -m signal --add event=window_resized      action="sketchybar --trigger yabai_window_resized"
+yabai -m signal --add event=window_moved        action="sketchybar --trigger yabai_window_moved"
+yabai -m signal --add event=application_visible action="sketchybar --trigger yabai_application_visible"
 
 
 # =============================================
 # ======== Border
 # =============================================
 # brew tap FelixKratz/formulae && brew install borders
-borders active_color=0xFF9999FF inactive_color=0x00494D64 width=5.0
+borders active_color=0xFFCDCDCD inactive_color=0x00494D64 width=5.0
 
 
 

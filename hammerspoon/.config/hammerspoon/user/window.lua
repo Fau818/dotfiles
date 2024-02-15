@@ -7,7 +7,7 @@
 local screen = hs.screen.mainScreen()
 local screen_frame = screen:frame()
 local gap = 8
-local top = 36
+local top = 32
 hs.window.animationDuration = -1  -- Disable animation
 
 
