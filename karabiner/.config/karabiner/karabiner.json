@@ -13,319 +13,22 @@
                     "basic.simultaneous_threshold_milliseconds": 0,
                     "basic.to_delayed_action_delay_milliseconds": 0,
                     "basic.to_if_alone_timeout_milliseconds": 115,
-                    "basic.to_if_held_down_threshold_milliseconds": 0,
+                    "basic.to_if_held_down_threshold_milliseconds": 115,
                     "mouse_motion_to_scroll.speed": 100
                 },
                 "rules": [
                     {
-                        "description": "<R_CTRL>1 := <F1>",
+                        "description": "~ := <WINKEY1>",
                         "manipulators": [
                             {
-                                "from": {
-                                    "key_code": "1",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f1"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CTRL>2 := <F2>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "2",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f2"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CTRL>3 := <F3>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "3",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f3"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CTRL>4 := <F4>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "4",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f4"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CTRL>5 := <F5>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "5",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f5"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CTRL>6 := <F6>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "6",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f6"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CTRL>7 := <F7>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "7",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f7"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CTRL>8 := <F8>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "8",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f8"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CTRL>9 := <F9>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "9",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f9"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CTRL>0 := <F10>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "0",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f10"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<L_SHIFT><ESC> := <FN><WINKEY2>(<WINKEY4)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "escape",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "fn",
-                                        "lazy": true,
-                                        "modifiers": [
-                                            "right_shift",
-                                            "left_option",
-                                            "left_control"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<L_SHIFT>~ := <FN><WINKEY1>(<WINKEY3)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "grave_accent_and_tilde",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "fn",
-                                        "lazy": true,
-                                        "modifiers": [
-                                            "right_shift",
-                                            "left_option"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "~ := ~ and <R_SHIFT><L_OPTION>(<WINKEY1>)",
-                        "manipulators": [
-                            {
+                                "description": "~ := ~ and <R_SHIFT><L_OPTION>(<WINKEY1>)",
                                 "from": {
                                     "key_code": "grave_accent_and_tilde",
                                     "modifiers": {
                                         "mandatory": [],
                                         "optional": [
-                                            "caps_lock"
+                                            "caps_lock",
+                                            "fn"
                                         ]
                                     }
                                 },
@@ -348,15 +51,17 @@
                         ]
                     },
                     {
-                        "description": "<ESC> := <L_CTRL><SPACE> and <L_CTRL><R_SHIFT><L_OPTION>(<WINKEY2>)",
+                        "description": "<ESC> := <L_CTRL><SPACE> and <WINKEY2>",
                         "manipulators": [
                             {
+                                "description": "<ESC> := <L_CTRL><SPACE> and <R_SHIFT><L_CTRL><L_OPTION>(<WINKEY2>)",
                                 "from": {
                                     "key_code": "escape",
                                     "modifiers": {
                                         "mandatory": [],
                                         "optional": [
-                                            "caps_lock"
+                                            "caps_lock",
+                                            "fn"
                                         ]
                                     }
                                 },
@@ -365,8 +70,8 @@
                                         "key_code": "right_shift",
                                         "lazy": true,
                                         "modifiers": [
-                                            "left_option",
-                                            "left_control"
+                                            "left_control",
+                                            "left_option"
                                         ]
                                     }
                                 ],
@@ -383,14 +88,15 @@
                         ]
                     },
                     {
-                        "description": "<fn>~ := <FN><WINKEY1>(<WINKEY3)",
+                        "description": "<L_SHIFT>~ := <WINKEY3>",
                         "manipulators": [
                             {
+                                "description": "<L_SHIFT>~ := <FN><WINKEY1>(<WINKEY3)",
                                 "from": {
                                     "key_code": "grave_accent_and_tilde",
                                     "modifiers": {
                                         "mandatory": [
-                                            "fn"
+                                            "left_shift"
                                         ],
                                         "optional": [
                                             "caps_lock"
@@ -412,506 +118,83 @@
                         ]
                     },
                     {
-                        "description": "<ESC>~ := <FN><WINKEY2>(<WINKEY4)",
+                        "description": "<ESC>~ / <L_SHIFT><ESC> := <WINKEY4>",
                         "manipulators": [
                             {
+                                "description": "<ESC>~ := <FN><WINKEY2>(<WINKEY4)",
                                 "from": {
                                     "key_code": "grave_accent_and_tilde",
                                     "modifiers": {
                                         "mandatory": [
                                             "right_shift",
-                                            "left_option",
-                                            "left_control"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "fn",
-                                        "lazy": true,
-                                        "modifiers": [
-                                            "right_shift",
-                                            "left_option",
-                                            "left_control"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "~<ESC> := <FN><WINKEY2>(<WINKEY4)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "escape",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_option",
-                                            "right_shift"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "fn",
-                                        "lazy": true,
-                                        "modifiers": [
-                                            "right_shift",
-                                            "left_option",
-                                            "left_control"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<FN><ESC> := <FN><WINKEY2>(<WINKEY4)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "escape",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "fn"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "fn",
-                                        "lazy": true,
-                                        "modifiers": [
-                                            "right_shift",
-                                            "left_option",
-                                            "left_control"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<FN> := <FN> with sticky",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "fn",
-                                    "modifiers": {
-                                        "mandatory": [],
-                                        "optional": [
-                                            "caps_lock",
-                                            "fn"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "fn",
-                                        "lazy": true
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "sticky_modifier": {
-                                            "fn": "toggle"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<FN>q := open QQ",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "q",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "fn"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a QQ"
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "fn": "off"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<FN>w := open WeChat",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "w",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "fn"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a WeChat"
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "fn": "off"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<FN>t := open Telegram",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "t",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "fn"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a Telegram\\ Lite"
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "fn": "off"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<FN>f := open Feishu",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "f",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "fn"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a Lark"
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "fn": "off"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<FN>d := open Discord",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "d",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "fn"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a Discord"
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "fn": "off"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CTRL>h := <LEFT>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CTRL>l := <RIGHT>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CTRL>j := <DOWN>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "down_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CTRL>k := <UP>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "up_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<CAPS_LOCK> := <ESC> and <R_CTRL>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "mandatory": [],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_control",
-                                        "lazy": true
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "escape"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CTRL><SPACE> := <CAPS_LOCK>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "spacebar",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "caps_lock"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "alone<L_CTRL> := <CAPS_LOCK>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "left_control",
-                                    "modifiers": {
-                                        "mandatory": [],
-                                        "optional": [
-                                            "caps_lock",
-                                            "option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_control",
-                                        "lazy": true
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "caps_lock"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<TAB> := <R_OPTION>",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "tab",
-                                    "modifiers": {
-                                        "mandatory": [],
-                                        "optional": [
-                                            "caps_lock",
-                                            "control"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_option",
-                                        "lazy": true
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "tab"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "alone<L_CMD> = <HYPER><UP>(Mission Control)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "left_command",
-                                    "modifiers": {
-                                        "mandatory": [],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_command",
-                                        "lazy": true
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "up_arrow",
-                                        "modifiers": [
-                                            "right_command",
                                             "left_control",
-                                            "left_shift",
+                                            "left_option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "fn",
+                                        "lazy": true,
+                                        "modifiers": [
+                                            "right_shift",
+                                            "left_control",
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "~<ESC> := <FN><WINKEY2>(<WINKEY4)",
+                                "from": {
+                                    "key_code": "escape",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "left_option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "fn",
+                                        "lazy": true,
+                                        "modifiers": [
+                                            "right_shift",
+                                            "left_control",
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<L_SHIFT><ESC> := <FN><WINKEY2>(<WINKEY4)",
+                                "from": {
+                                    "key_code": "escape",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "fn",
+                                        "lazy": true,
+                                        "modifiers": [
+                                            "right_shift",
+                                            "left_control",
                                             "left_option"
                                         ]
                                     }
@@ -921,35 +204,10 @@
                         ]
                     },
                     {
-                        "description": "Fix Touch ID key in locking screen",
+                        "description": "<R_CMD> := <HYPER>",
                         "manipulators": [
                             {
-                                "from": {
-                                    "consumer_key_code": "al_terminal_lock_or_screensaver",
-                                    "modifiers": {
-                                        "mandatory": [],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "q",
-                                        "modifiers": [
-                                            "left_command",
-                                            "left_control"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<R_CMD> := <HYPER> with sticky",
-                        "manipulators": [
-                            {
+                                "description": "<R_CMD> := <HYPER> with sticky",
                                 "from": {
                                     "key_code": "right_command",
                                     "modifiers": {
@@ -961,6 +219,13 @@
                                 },
                                 "to": [
                                     {
+                                        "set_variable": {
+                                            "key_up_value": false,
+                                            "name": "alone_right_command",
+                                            "value": false
+                                        }
+                                    },
+                                    {
                                         "key_code": "left_shift",
                                         "lazy": true,
                                         "modifiers": [
@@ -970,7 +235,49 @@
                                         ]
                                     }
                                 ],
+                                "to_after_key_up": [
+                                    {
+                                        "set_variable": {
+                                            "key_up_value": false,
+                                            "name": "alone_right_command",
+                                            "value": false
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_shift": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_control": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_option": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "right_command": "off"
+                                        }
+                                    }
+                                ],
                                 "to_if_alone": [
+                                    {
+                                        "set_variable": {
+                                            "key_up_value": true,
+                                            "name": "alone_right_command",
+                                            "value": true
+                                        }
+                                    },
+                                    {
+                                        "description": "key_code is not really work; just a placeholder",
+                                        "halt": true,
+                                        "key_code": "right_command",
+                                        "lazy": true
+                                    },
                                     {
                                         "sticky_modifier": {
                                             "left_shift": "toggle"
@@ -993,13 +300,9 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "revise <R_CMD><BK> := <L_CMD><BK>",
-                        "manipulators": [
+                            },
                             {
+                                "description": "Revise <R_CMD><BK> := <L_CMD><BK>",
                                 "from": {
                                     "key_code": "delete_or_backspace",
                                     "modifiers": {
@@ -1023,21 +326,17 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "revise <CMD><OPTION><CTRL><SHIFT>, := <L_CMD>,",
-                        "manipulators": [
+                            },
                             {
+                                "description": "Revise <R_CMD>, := <L_CMD>,",
                                 "from": {
                                     "key_code": "comma",
                                     "modifiers": {
                                         "mandatory": [
-                                            "shift",
-                                            "control",
-                                            "option",
-                                            "command"
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
                                         ],
                                         "optional": [
                                             "any"
@@ -1053,21 +352,17 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "revise <CMD><OPTION><CTRL><SHIFT>. := <L_CMD>.",
-                        "manipulators": [
+                            },
                             {
+                                "description": "Revise <R_CMD>. := <L_CMD>.",
                                 "from": {
                                     "key_code": "period",
                                     "modifiers": {
                                         "mandatory": [
-                                            "shift",
-                                            "control",
-                                            "option",
-                                            "command"
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
                                         ],
                                         "optional": [
                                             "any"
@@ -1087,9 +382,47 @@
                         ]
                     },
                     {
-                        "description": "<HYPER>s := open Browser (Arc)",
+                        "description": "<HYPER>key Open",
                         "manipulators": [
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>s := open Browser (Arc)",
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Arc"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>s := open Browser (Arc)",
                                 "from": {
                                     "key_code": "s",
                                     "modifiers": {
@@ -1130,13 +463,16 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<HYPER>m := open Music",
-                        "manipulators": [
+                            },
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>m := open Music (Spotify)",
                                 "from": {
                                     "key_code": "m",
                                     "modifiers": {
@@ -1153,7 +489,37 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a Music"
+                                        "shell_command": "open -a Spotify"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>m := open Music (Spotify)",
+                                "from": {
+                                    "key_code": "m",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Spotify"
                                     },
                                     {
                                         "sticky_modifier": {
@@ -1177,13 +543,112 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<HYPER>t := open Terminal (kitty)",
-                        "manipulators": [
+                            },
                             {
+                                "description": "<HYPER>space := Toggle Playing [Spotify]",
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript -e 'tell application \"Spotify\" to playpause'"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "Alone<HYPER>m := Toggle Playing [Spotify]",
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript -e 'tell application \"Spotify\" to playpause'"
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_shift": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_control": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_option": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "right_command": "off"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>t := open Terminal (Kitty)",
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a kitty"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>t := open Terminal (Kitty)",
                                 "from": {
                                     "key_code": "t",
                                     "modifiers": {
@@ -1224,13 +689,16 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<HYPER>p := open PyCharm",
-                        "manipulators": [
+                            },
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>p := open PyCharm",
                                 "from": {
                                     "key_code": "p",
                                     "modifiers": {
@@ -1247,7 +715,37 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a PyCharm"
+                                        "shell_command": "open -a PyCharm\\ Professional"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>p := open PyCharm",
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a PyCharm\\ Professional"
                                     },
                                     {
                                         "sticky_modifier": {
@@ -1271,13 +769,16 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<HYPER>c := open Clion",
-                        "manipulators": [
+                            },
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>c := open CLion",
                                 "from": {
                                     "key_code": "c",
                                     "modifiers": {
@@ -1294,7 +795,37 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a Clion"
+                                        "shell_command": "open -a CLion"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>c := open CLion",
+                                "from": {
+                                    "key_code": "c",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a CLion"
                                     },
                                     {
                                         "sticky_modifier": {
@@ -1318,13 +849,46 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<HYPER>d := open Dash",
-                        "manipulators": [
+                            },
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>d := open Dash",
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Dash"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>d := open Dash",
                                 "from": {
                                     "key_code": "d",
                                     "modifiers": {
@@ -1365,13 +929,46 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<HYPER>b := open Bob",
-                        "manipulators": [
+                            },
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>b := open Bob",
+                                "from": {
+                                    "key_code": "b",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Bob"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>b := open Bob",
                                 "from": {
                                     "key_code": "b",
                                     "modifiers": {
@@ -1412,13 +1009,46 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<HYPER>g := open Google Chrome",
-                        "manipulators": [
+                            },
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>g := open Google Chrome",
+                                "from": {
+                                    "key_code": "g",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Google\\ Chrome"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>g := open Google Chrome",
                                 "from": {
                                     "key_code": "g",
                                     "modifiers": {
@@ -1459,13 +1089,46 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<HYPER>v := open VSCode",
-                        "manipulators": [
+                            },
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>v := open VSCode",
+                                "from": {
+                                    "key_code": "v",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Visual\\ Studio\\ Code"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>v := open VSCode",
                                 "from": {
                                     "key_code": "v",
                                     "modifiers": {
@@ -1506,13 +1169,46 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<HYPER>o := open Obsidian",
-                        "manipulators": [
+                            },
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>o := open Obsidian",
+                                "from": {
+                                    "key_code": "o",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Obsidian"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>o := open Obsidian",
                                 "from": {
                                     "key_code": "o",
                                     "modifiers": {
@@ -1553,13 +1249,46 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<HYPER>f := open Finder",
-                        "manipulators": [
+                            },
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>f := open Finder",
+                                "from": {
+                                    "key_code": "f",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Finder"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>f := open Finder",
                                 "from": {
                                     "key_code": "f",
                                     "modifiers": {
@@ -1600,15 +1329,18 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<HYPER>w := open Warp",
-                        "manipulators": [
+                            },
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>r := open Reminders",
                                 "from": {
-                                    "key_code": "w",
+                                    "key_code": "r",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_shift",
@@ -1623,37 +1355,20 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a Warp"
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_shift": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_control": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_option": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "right_command": "off"
-                                        }
+                                        "shell_command": "open -a Reminders"
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<HYPER>r := open Reminders",
-                        "manipulators": [
+                            },
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>r := open Reminders",
                                 "from": {
                                     "key_code": "r",
                                     "modifiers": {
@@ -1698,9 +1413,10 @@
                         ]
                     },
                     {
-                        "description": "<R_OPT> := <HHYPER> with sticky",
+                        "description": "<R_OPT> := <HHYPER>",
                         "manipulators": [
                             {
+                                "description": "<R_OPT> := <HHYPER> with sticky",
                                 "from": {
                                     "key_code": "right_option",
                                     "modifiers": {
@@ -1712,6 +1428,13 @@
                                 },
                                 "to": [
                                     {
+                                        "set_variable": {
+                                            "key_up_value": false,
+                                            "name": "alone_right_option",
+                                            "value": false
+                                        }
+                                    },
+                                    {
                                         "key_code": "left_shift",
                                         "lazy": true,
                                         "modifiers": [
@@ -1721,7 +1444,49 @@
                                         ]
                                     }
                                 ],
+                                "to_after_key_up": [
+                                    {
+                                        "set_variable": {
+                                            "key_up_value": false,
+                                            "name": "alone_right_option",
+                                            "value": false
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_shift": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_control": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "right_option": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_command": "off"
+                                        }
+                                    }
+                                ],
                                 "to_if_alone": [
+                                    {
+                                        "set_variable": {
+                                            "key_up_value": true,
+                                            "name": "alone_right_option",
+                                            "value": true
+                                        }
+                                    },
+                                    {
+                                        "description": "key_code is not really work; just a placeholder",
+                                        "halt": true,
+                                        "key_code": "right_option",
+                                        "lazy": true
+                                    },
                                     {
                                         "sticky_modifier": {
                                             "left_shift": "toggle"
@@ -1748,9 +1513,47 @@
                         ]
                     },
                     {
-                        "description": "<HHYPER>d := open Downie4",
+                        "description": "<HHYPER>key Open",
                         "manipulators": [
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_option",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HHYPER>d := open Downie4",
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "right_option",
+                                            "left_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Downie\\ 4"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_option",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HHYPER>d := open Downie4",
                                 "from": {
                                     "key_code": "d",
                                     "modifiers": {
@@ -1791,13 +1594,46 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<HHYPER>m := open Mail",
-                        "manipulators": [
+                            },
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_option",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HHYPER>m := open Mail",
+                                "from": {
+                                    "key_code": "m",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "right_option",
+                                            "left_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Mail"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_option",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HHYPER>m := open Mail",
                                 "from": {
                                     "key_code": "m",
                                     "modifiers": {
@@ -1838,13 +1674,46 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<HHYPER>t := open Termius",
-                        "manipulators": [
+                            },
                             {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_option",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HHYPER>t := open Terminal (Termius)",
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "right_option",
+                                            "left_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Termius"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_option",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HHYPER>t := open Terminal (Termius)",
                                 "from": {
                                     "key_code": "t",
                                     "modifiers": {
@@ -1882,6 +1751,764 @@
                                         "sticky_modifier": {
                                             "left_command": "off"
                                         }
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "<FN> := <FN> with sticky",
+                        "manipulators": [
+                            {
+                                "description": "<FN> := <FN> with sticky",
+                                "from": {
+                                    "key_code": "fn",
+                                    "modifiers": {
+                                        "mandatory": [],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "key_up_value": false,
+                                            "name": "alone_fn",
+                                            "value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "fn",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_after_key_up": [
+                                    {
+                                        "set_variable": {
+                                            "key_up_value": false,
+                                            "name": "alone_fn",
+                                            "value": false
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "fn": "off"
+                                        }
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "set_variable": {
+                                            "key_up_value": true,
+                                            "name": "alone_fn",
+                                            "value": true
+                                        }
+                                    },
+                                    {
+                                        "description": "key_code is not really work; just a placeholder",
+                                        "halt": true,
+                                        "key_code": "fn",
+                                        "lazy": true
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "fn": "toggle"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "<FN>key Open",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_fn",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<FN>q := open QQ",
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a QQ"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_fn",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<FN>q := open QQ",
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a QQ"
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "fn": "off"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_fn",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<FN>w := open WeChat",
+                                "from": {
+                                    "key_code": "w",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a WeChat"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_fn",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<FN>w := open WeChat",
+                                "from": {
+                                    "key_code": "w",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a WeChat"
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "fn": "off"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_fn",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<FN>t := open Telegram",
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Telegram\\ Lite"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_fn",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<FN>t := open Telegram",
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Telegram\\ Lite"
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "fn": "off"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_fn",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<FN>d := open Discord",
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Discord"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_fn",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<FN>d := open Discord",
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Discord"
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "fn": "off"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Better <CAPS_LOCK>",
+                        "manipulators": [
+                            {
+                                "description": "<CAPS_LOCK> := <ESC> and <R_CTRL>",
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "mandatory": [],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_control",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "escape"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<R_CTRL><SPACE> := <CAPS_LOCK>",
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "caps_lock"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "Alone<L_CTRL> := <CAPS_LOCK>",
+                                "from": {
+                                    "key_code": "left_control",
+                                    "modifiers": {
+                                        "mandatory": [],
+                                        "optional": [
+                                            "caps_lock",
+                                            "left_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_control",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "caps_lock"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "<R_CTRL>h/j/k/l := <ARROW>",
+                        "manipulators": [
+                            {
+                                "description": "<R_CTRL>h := <LEFT>",
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<R_CTRL>l := <RIGHT>",
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_arrow"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<R_CTRL>j := <DOWN>",
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "down_arrow"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<R_CTRL>k := <UP>",
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "up_arrow"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "<R_CTRL><NUMBER> := <F_NUMBER>",
+                        "manipulators": [
+                            {
+                                "description": "<R_CTRL>1 := <F1>",
+                                "from": {
+                                    "key_code": "1",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f1"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<R_CTRL>2 := <F2>",
+                                "from": {
+                                    "key_code": "2",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f2"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<R_CTRL>3 := <F3>",
+                                "from": {
+                                    "key_code": "3",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f3"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<R_CTRL>4 := <F4>",
+                                "from": {
+                                    "key_code": "4",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f4"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<R_CTRL>5 := <F5>",
+                                "from": {
+                                    "key_code": "5",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f5"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<R_CTRL>6 := <F6>",
+                                "from": {
+                                    "key_code": "6",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f6"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<R_CTRL>7 := <F7>",
+                                "from": {
+                                    "key_code": "7",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f7"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<R_CTRL>8 := <F8>",
+                                "from": {
+                                    "key_code": "8",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f8"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<R_CTRL>9 := <F9>",
+                                "from": {
+                                    "key_code": "9",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f9"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<R_CTRL>0 := <F10>",
+                                "from": {
+                                    "key_code": "0",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f10"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "<TAB> := <R_OPTION>",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "tab",
+                                    "modifiers": {
+                                        "mandatory": [],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_option",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "tab"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Alone<L_CMD> = <HYPER><UP>(Mission Control)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "left_command",
+                                    "modifiers": {
+                                        "mandatory": [],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_command",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "up_arrow",
+                                        "modifiers": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Fix Touch ID Key in Locking Screen",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "consumer_key_code": "al_terminal_lock_or_screensaver",
+                                    "modifiers": {
+                                        "mandatory": [],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "q",
+                                        "modifiers": [
+                                            "left_control",
+                                            "left_command"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
