@@ -48,7 +48,7 @@
 						"key_code": "delete_or_backspace",
 						"modifiers": {
 							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
-							"optional": [ "any" ]
+							"optional": [ "caps_lock" ]
 						}
 					},
 					"to": [ { "key_code": "delete_or_backspace", "modifiers": [ "left_command" ] } ]
@@ -61,7 +61,7 @@
 						"key_code": "comma",
 						"modifiers": {
 							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
-							"optional": [ "any" ]
+							"optional": [ "caps_lock" ]
 						}
 					},
 					"to": [ { "key_code": "comma", "modifiers": [ "left_command" ] } ]
@@ -74,7 +74,7 @@
 						"key_code": "period",
 						"modifiers": {
 							"mandatory": [ "left_shift", "left_control", "left_option", "right_command" ],
-							"optional": [ "any" ]
+							"optional": [ "caps_lock" ]
 						}
 					},
 					"to": [ { "key_code": "period", "modifiers": [ "left_command" ] } ]
@@ -92,7 +92,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": false } ],
 					"from": {
 						"key_code": "s",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Arc" } ]
 				},
@@ -102,7 +102,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": true } ],
 					"from": {
 						"key_code": "s",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Arc" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
 				},
@@ -113,7 +113,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": false } ],
 					"from": {
 						"key_code": "m",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Spotify" } ]
 				},
@@ -123,7 +123,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": true } ],
 					"from": {
 						"key_code": "m",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Spotify" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
 				},
@@ -133,7 +133,7 @@
 					"type": "basic",
 					"from": {
 						"key_code": "spacebar",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command"  : "osascript -e 'tell application \"Spotify\" to playpause'" } ]
 				},
@@ -142,7 +142,7 @@
 					"type": "basic",
 					"from": {
 						"key_code": "spacebar",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command"  : "osascript -e 'tell application \"Spotify\" to playpause'" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
 				},
@@ -153,7 +153,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": false } ],
 					"from": {
 						"key_code": "t",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a kitty" } ]
 				},
@@ -163,7 +163,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": true } ],
 					"from": {
 						"key_code": "t",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a kitty" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
 				},
@@ -174,7 +174,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": false } ],
 					"from": {
 						"key_code": "p",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a PyCharm\\ Professional" } ]
 				},
@@ -184,7 +184,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": true } ],
 					"from": {
 						"key_code": "p",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a PyCharm\\ Professional" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
 				},
@@ -195,7 +195,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": false } ],
 					"from": {
 						"key_code": "c",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a CLion" } ]
 				},
@@ -205,7 +205,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": true } ],
 					"from": {
 						"key_code": "c",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a CLion" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
 				},
@@ -216,7 +216,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": false } ],
 					"from": {
 						"key_code": "d",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Dash" } ]
 				},
@@ -226,7 +226,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": true } ],
 					"from": {
 						"key_code": "d",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Dash" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
 				},
@@ -237,7 +237,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": false } ],
 					"from": {
 						"key_code": "b",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Bob" } ]
 				},
@@ -247,7 +247,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": true } ],
 					"from": {
 						"key_code": "b",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Bob" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
 				},
@@ -258,7 +258,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": false } ],
 					"from": {
 						"key_code": "g",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Google\\ Chrome" } ]
 				},
@@ -268,7 +268,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": true } ],
 					"from": {
 						"key_code": "g",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Google\\ Chrome" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
 				},
@@ -279,7 +279,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": false } ],
 					"from": {
 						"key_code": "v",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Visual\\ Studio\\ Code" } ]
 				},
@@ -289,7 +289,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": true } ],
 					"from": {
 						"key_code": "v",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Visual\\ Studio\\ Code" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
 				},
@@ -300,7 +300,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": false } ],
 					"from": {
 						"key_code": "o",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Obsidian" } ]
 				},
@@ -310,7 +310,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": true } ],
 					"from": {
 						"key_code": "o",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Obsidian" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
 				},
@@ -321,7 +321,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": false } ],
 					"from": {
 						"key_code": "f",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Finder" } ]
 				},
@@ -331,7 +331,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": true } ],
 					"from": {
 						"key_code": "f",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Finder" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
 				},
@@ -342,7 +342,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": false } ],
 					"from": {
 						"key_code": "r",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Reminders" } ]
 				},
@@ -352,7 +352,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": true } ],
 					"from": {
 						"key_code": "r",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Reminders" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
 				}
@@ -399,6 +399,32 @@
 						{ "sticky_modifier": { "right_option": "off" } },
 						{ "sticky_modifier": { "left_command": "off" } }
 					]
+				},
+
+				{
+					"description": "Revise <R_OPT>, := <L_OPT>,",
+					"type": "basic",
+					"from": {
+						"key_code": "comma",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "right_option", "left_command" ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [ { "key_code": "comma", "modifiers": [ "left_option" ] } ]
+				},
+
+				{
+					"description": "Revise <R_OPT>. := <L_OPT>.",
+					"type": "basic",
+					"from": {
+						"key_code": "period",
+						"modifiers": {
+							"mandatory": [ "left_shift", "left_control", "right_option", "left_command" ],
+							"optional": [ "caps_lock" ]
+						}
+					},
+					"to": [ { "key_code": "period", "modifiers": [ "left_option" ] } ]
 				}
 			]
 		},
@@ -413,7 +439,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_option", "value": false } ],
 					"from": {
 						"key_code": "d",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "right_option", "left_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "right_option", "left_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Downie\\ 4" } ]
 				},
@@ -423,7 +449,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_option", "value": true } ],
 					"from": {
 						"key_code": "d",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "right_option", "left_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "right_option", "left_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Downie\\ 4" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "right_option": "off" } }, { "sticky_modifier": { "left_command": "off" } } ]
 				},
@@ -434,7 +460,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_option", "value": false } ],
 					"from": {
 						"key_code": "m",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "right_option", "left_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "right_option", "left_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Mail" } ]
 				},
@@ -444,7 +470,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_option", "value": true } ],
 					"from": {
 						"key_code": "m",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "right_option", "left_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "right_option", "left_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Mail" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "right_option": "off" } }, { "sticky_modifier": { "left_command": "off" } } ]
 				},
@@ -455,7 +481,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_option", "value": false } ],
 					"from": {
 						"key_code": "t",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "right_option", "left_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "right_option", "left_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Termius" } ]
 				},
@@ -465,7 +491,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_right_option", "value": true } ],
 					"from": {
 						"key_code": "t",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "right_option", "left_command" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "left_shift", "left_control", "right_option", "left_command" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Termius" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "right_option": "off" } }, { "sticky_modifier": { "left_command": "off" } } ]
 				}
@@ -482,7 +508,7 @@
 					"type": "basic",
 					"from": {
 						"key_code": "fn",
-						"modifiers": { "mandatory": [  ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [  ], "optional": [ "caps_lock", "fn" ] }
 					},
 					"to": [
 						{ "set_variable": { "name": "alone_fn", "value": false, "key_up_value": false } },
@@ -516,7 +542,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_fn", "value": false } ],
 					"from": {
 						"key_code": "q",
-						"modifiers": { "mandatory": [ "fn" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "fn" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a QQ" } ]
 				},
@@ -526,7 +552,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_fn", "value": true } ],
 					"from": {
 						"key_code": "q",
-						"modifiers": { "mandatory": [ "fn" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "fn" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a QQ" }, { "sticky_modifier": { "fn": "off" } } ]
 				},
@@ -537,7 +563,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_fn", "value": false } ],
 					"from": {
 						"key_code": "w",
-						"modifiers": { "mandatory": [ "fn" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "fn" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a WeChat" } ]
 				},
@@ -547,7 +573,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_fn", "value": true } ],
 					"from": {
 						"key_code": "w",
-						"modifiers": { "mandatory": [ "fn" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "fn" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a WeChat" }, { "sticky_modifier": { "fn": "off" } } ]
 				},
@@ -558,7 +584,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_fn", "value": false } ],
 					"from": {
 						"key_code": "t",
-						"modifiers": { "mandatory": [ "fn" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "fn" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Telegram\\ Lite" } ]
 				},
@@ -568,7 +594,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_fn", "value": true } ],
 					"from": {
 						"key_code": "t",
-						"modifiers": { "mandatory": [ "fn" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "fn" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Telegram\\ Lite" }, { "sticky_modifier": { "fn": "off" } } ]
 				},
@@ -579,7 +605,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_fn", "value": false } ],
 					"from": {
 						"key_code": "d",
-						"modifiers": { "mandatory": [ "fn" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "fn" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Discord" } ]
 				},
@@ -589,7 +615,7 @@
 					"conditions": [ { "type": "variable_if", "name": "alone_fn", "value": true } ],
 					"from": {
 						"key_code": "d",
-						"modifiers": { "mandatory": [ "fn" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "fn" ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "shell_command": "open -a Discord" }, { "sticky_modifier": { "fn": "off" } } ]
 				}
