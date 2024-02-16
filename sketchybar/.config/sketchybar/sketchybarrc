@@ -1,0 +1,210 @@
+#!/usr/bin/env bash
+
+# NOTE: Please run the command to install dependencies `brew install jq blueutil ifstat`.
+# =============================================
+# ======== Initialization
+# =============================================
+# -----------------------------------
+# -------- Path Definition
+# -----------------------------------
+ITEM_DIR="$CONFIG_DIR/items"
+SCRIPT_DIR="$CONFIG_DIR/scripts"
+
+
+# -----------------------------------
+# -------- Setup Helper
+# -----------------------------------
+# Setting up and starting the helper process
+HELPER='fau.helper'
+killall helper
+cd $CONFIG_DIR/helper && make
+$CONFIG_DIR/helper/helper $HELPER > /dev/null 2>&1 &
+
+
+# -----------------------------------
+# -------- Fields
+# -----------------------------------
+# Colors
+BLACK=0xFF181926
+WHITE=0xFFCAD3F5
+RED=0xFFED8796
+GREEN=0xFFA6DA95
+BLUE=0xFF8AADF4
+YELLOW=0xFFEED49F
+ORANGE=0xFFF5A97F
+MAGENTA=0xFFC6A0F6
+GRAY=0xFF939AB7
+TRANSPARENT=0x00000000
+
+# Text
+# Format: Ultralight, Thin, Light, Regular, Medium, Semibold, Bold, Heavy, Black
+FONT='SF Pro'
+NERD_FONT='Liga SFMono Nerd Font'
+ITEM_PADDING=2
+
+# Bar
+BAR_HEIGHT=32
+BAR_COLOR=0xAA36485E
+BAR_BORDER_COLOR="$ORANGE"
+BAR_BORDER_WIDTH=0
+BAR_PADDING=10
+
+# Icon and Label
+ICON_COLOR="$WHITE"
+LABEL_COLOR="$WHITE"
+ICON_FONT="$FONT:Bold:14.0"
+LABEL_FONT="$FONT:Medium:12.0"
+ITEM_MARGIN=5
+
+# Background
+BACKGROUND_HEIGHT=26
+BACKGROUND_COLOR=0xBB2E3750
+BACKGROUND_BORDER_WIDTH=1
+BACKGROUND_BORDER_COLOR="$ORANGE"
+BACKGROUND_CORNER_RADIUS=8
+BACKGROUND_MARGIN=8
+BACKGROUND_PADDING=0
+
+# Popup
+POPUP_COLOR=0xAA1E1E2E
+POPUP_BORDER_WIDTH=2
+POPUP_BORDER_COLOR="$WHITE"
+POPUP_CORNER_RADIUS=8
+POPUP_BLUR_RADIUS=50
+
+
+
+# =============================================
+# ======== Default Configuration
+# =============================================
+# -----------------------------------
+# -------- Bar Configuration
+# -----------------------------------
+# SEE: https://felixkratz.github.io/SketchyBar/config/bar
+bar=(
+  color="$BAR_COLOR"
+  border_color="$BAR_BORDER_COLOR"
+
+  position=top
+  y_offset=0
+  height="$BAR_HEIGHT"
+  border_width="$BAR_BORDER_WIDTH"
+  margin=-"$BAR_BORDER_WIDTH"  # NOTE: same as the minus `border_width` to remove the borders on both sides
+  corner_radius=0
+
+  padding_left="$BAR_PADDING"
+  padding_right="$BAR_PADDING"
+
+  topmost=off  # set to `window` to avoid sketchybar being covered by windows
+  sticky=on
+
+  notch_width=250
+
+  font_smoothing=off
+  shadow=off
+)
+
+sketchybar --bar "${bar[@]}"
+
+
+# -----------------------------------
+# -------- Item Configuration
+# -----------------------------------
+# SEE: https://felixkratz.github.io/SketchyBar/config/items
+# \    https://felixkratz.github.io/SketchyBar/config/popups
+defaults=(
+  # Scripting properties
+  updates=when_shown
+  update_freq=0
+
+  # Geometry Properties
+  drawing=on
+  position=right
+
+  # Icons
+  icon.font="$ICON_FONT"
+  icon.color="$ICON_COLOR"
+  icon.padding_left="$ITEM_PADDING"
+  icon.padding_right="$ITEM_PADDING"
+
+  # Labels
+  label.font="$LABEL_FONT"
+  label.color="$LABEL_COLOR"
+  label.padding_left="$ITEM_PADDING"
+  label.padding_right="$ITEM_PADDING"
+
+  # Background
+  background.drawing=off
+  background.height="$BACKGROUND_HEIGHT"
+  # background.color="$BACKGROUND_COLOR"
+  background.border_width="$BACKGROUND_BORDER_WIDTH"
+  background.border_color="$BACKGROUND_BORDER_COLOR"
+  background.corner_radius="$BACKGROUND_CORNER_RADIUS"
+  background.padding_left="$BACKGROUND_PADDING"
+  background.padding_right="$BACKGROUND_PADDING"
+
+  # Popup Menus
+  popup.background.color="$POPUP_COLOR"
+  popup.background.border_width="$POPUP_BORDER_WIDTH"
+  popup.background.border_color="$POPUP_BORDER_COLOR"
+  popup.background.corner_radius="$POPUP_CORNER_RADIUS"
+  popup.blur_radius="$POPUP_BLUR_RADIUS"
+)
+
+sketchybar --default "${defaults[@]}"
+
+
+# -----------------------------------
+# -------- Custom Events
+# -----------------------------------
+sketchybar \
+  --add event bluetooth_on "IOBluetoothHostControllerPoweredOnNotification"   \
+  --add event bluetooth_off "IOBluetoothHostControllerPoweredOffNotification" \
+  \
+  --add event yabai_window_created      \
+  --add event yabai_window_moved        \
+  --add event yabai_window_focused      \
+  --add event yabai_window_resized      \
+  --add event yabai_application_visible \
+  --add event skhd_space_type_changed   \
+  --add event skhd_window_type_changed
+
+
+# =============================================
+# ======== Items
+# =============================================
+# -----------------------------------
+# -------- Left
+# -----------------------------------
+source "$ITEM_DIR/apple.sh"
+source "$ITEM_DIR/spaces.sh"
+source "$ITEM_DIR/front_app.sh"
+source "$ITEM_DIR/yabai.sh"
+
+
+# -----------------------------------
+# -------- Center
+# -----------------------------------
+source "$ITEM_DIR/media.sh"
+
+
+# -----------------------------------
+# -------- Right
+# -----------------------------------
+source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/volume.sh"
+source "$ITEM_DIR/bluetooth.sh"
+source "$ITEM_DIR/wifi.sh"
+# source "$ITEM_DIR/system.sh"
+source "$ITEM_DIR/app.sh"
+
+
+# =============================================
+# ======== Launch
+# =============================================
+sketchybar --hotload on
+# Forcing all item scripts to run (never do this outside of sketchybarrc)
+sketchybar --update
+
+echo "sketchybar configuation loaded.."
