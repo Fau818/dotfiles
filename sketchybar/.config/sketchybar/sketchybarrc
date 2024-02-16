@@ -98,7 +98,7 @@ bar=(
   topmost=off  # set to `window` to avoid sketchybar being covered by windows
   sticky=on
 
-  notch_width=250
+  notch_width=350
 
   font_smoothing=off
   shadow=off
