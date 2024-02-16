@@ -67,12 +67,13 @@ space_creator=(
 # -----------------------------------
 for i in "${!SPACE_ICONS[@]}"; do
   sid=$(($i+1))
-  sketchybar --add space space.$sid left                                               \
-             --set       space.$sid "${space[@]}"                                      \
-             --set       space.$sid space=$sid                                         \
-             --set       space.$sid icon="${SPACE_ICONS[i]}"                           \
-             --subscribe space.$sid mouse.clicked space_change skhd_space_type_changed \
-             --subscribe space.$sid space_windows_change yabai_window_created yabai_application_visible
+  sketchybar --add space space.$sid left                                              \
+             --set       space.$sid "${space[@]}"                                     \
+             --set       space.$sid space=$sid                                        \
+             --set       space.$sid icon="${SPACE_ICONS[i]}"                          \
+             --subscribe space.$sid mouse.clicked                                     \
+                                    space_change skhd_space_type_changed yabai_loaded \
+                                    space_windows_change yabai_window_created yabai_application_visible
 done
 
 sketchybar --add item  space_creator left \

@@ -161,6 +161,7 @@ sketchybar \
   --add event bluetooth_on "IOBluetoothHostControllerPoweredOnNotification"   \
   --add event bluetooth_off "IOBluetoothHostControllerPoweredOffNotification" \
   \
+  --add event yabai_loaded              \
   --add event yabai_window_created      \
   --add event yabai_window_moved        \
   --add event yabai_window_focused      \

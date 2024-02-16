@@ -76,17 +76,8 @@ yabai -m config "${config[@]}"
 # ======== Rule
 # =============================================
 # -----------------------------------
-# -------- White List
+# -------- Utils
 # -----------------------------------
-white_list_array=(
-  kitty
-  Code
-
-  Safari
-  Arc
-  "Google Chrome"
-)
-
 function create_regex_string() {
   local array=("$@") regex_string=""
   for element in "${array[@]}"; do regex_string+="^${element}$|"; done
@@ -94,7 +85,23 @@ function create_regex_string() {
   echo $regex_string
 }
 
+
+# -----------------------------------
+# -------- Fields
+# -----------------------------------
+white_list_array=(
+  kitty Code
+  Safari Arc 'Google Chrome'
+)
 white_list=$(create_regex_string "$white_list_array[@]")
+
+
+extra_list_array=(
+  Finder Mail
+  Music Spotify
+  QQ WeChat 'Telegram Lite'
+)
+extra_list=$(create_regex_string "$extra_list_array[@]")
 
 
 # -----------------------------------
@@ -114,37 +121,29 @@ yabai -m rule --add app="^Safari$" title="General|Tabs|AutoFill|Passwords|Search
 # ======== Signal
 # =============================================
 # Refocus window when window is destroyed
-yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/refocus_window.sh '$white_list'"
+yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/refocus_window.sh '$white_list|$extra_list'"
 yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/destroy_space_if_no_window.sh"
 
 # Sketchybar
-yabai -m signal --add event=window_created      action="sketchybar --trigger yabai_window_created && echo yabai_window_created"
-yabai -m signal --add event=window_focused      action="sketchybar --trigger yabai_window_focused"
-yabai -m signal --add event=window_resized      action="sketchybar --trigger yabai_window_resized"
-yabai -m signal --add event=window_moved        action="sketchybar --trigger yabai_window_moved"
-yabai -m signal --add event=application_visible action="sketchybar --trigger yabai_application_visible"
+yabai -m signal --add event=window_created      action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_window_created"
+# yabai -m signal --add event=window_destroyed    action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_window_destroyed"
+yabai -m signal --add event=window_focused      action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_window_focused"
+yabai -m signal --add event=window_resized      action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_window_resized"
+yabai -m signal --add event=window_moved        action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_window_moved"
+yabai -m signal --add event=application_visible action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_application_visible"
+# yabai -m signal --add event=application_hidden  action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_application_hidden"
 
 
 # =============================================
 # ======== Border
 # =============================================
 # brew tap FelixKratz/formulae && brew install borders
-borders active_color=0xFFCDCDCD inactive_color=0x00494D64 width=5.0
+borders active_color=0xFFCDCDCD inactive_color=0x00494D64 width=5.0 &
 
 
 
 # =============================================
 # ======== END
 # =============================================
+command -v sketchybar &> /dev/null && sketchybar --trigger yabai_loaded
 echo "yabai configuration loaded.."
-
-
-# signal with sketchybar [TODO]
-# yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
-# yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
-# yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
-# shift + alt - f : yabai -m window --toggle float; sketchybar --trigger window_focus
-# shift + alt - m : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
-# shift + alt - n : yabai -m space --create; sketchybar --trigger window_focus
-# shift + alt - d : yabai -m space --destroy; sketchybar --trigger window_focus
-# shift + alt - 1 : yabai -m window --space 1 && sketchybar --trigger windows_on_spaces

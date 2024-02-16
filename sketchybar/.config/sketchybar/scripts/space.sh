@@ -82,12 +82,12 @@ function mouse_clicked() {
 case "$SENDER" in
   'mouse.clicked') mouse_clicked
     ;;
-  'forced'|'skhd_space_type_changed'|'space_change') update_space_type
+  'forced'|'skhd_space_type_changed'|'space_change'|'yabai_loaded') update_space_type
     ;;
   'space_windows_change') update_space_windows
     ;;
-  'yabai_window_created'|'yabai_application_visible') sketchybar --trigger space_windows_change
+  'yabai_window_created'|'yabai_application_visible') [[ "$SELECTED" == 'true' ]] && sketchybar --trigger space_windows_change
     ;;
-  *) echo "Invalid sender: `$SENDER`" in $0
+  *) echo "Invalid sender: $SENDER" in $0
     ;;
 esac
