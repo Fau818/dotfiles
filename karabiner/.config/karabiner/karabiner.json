@@ -10,13 +10,199 @@
         {
             "complex_modifications": {
                 "parameters": {
-                    "basic.simultaneous_threshold_milliseconds": 0,
+                    "basic.simultaneous_threshold_milliseconds": 50,
                     "basic.to_delayed_action_delay_milliseconds": 0,
                     "basic.to_if_alone_timeout_milliseconds": 115,
-                    "basic.to_if_held_down_threshold_milliseconds": 0,
+                    "basic.to_if_held_down_threshold_milliseconds": 115,
                     "mouse_motion_to_scroll.speed": 100
                 },
                 "rules": [
+                    {
+                        "description": "~ := <WINKEY1>",
+                        "manipulators": [
+                            {
+                                "description": "~ := ~ and <R_SHIFT><L_OPTION>(<WINKEY1>)",
+                                "from": {
+                                    "key_code": "grave_accent_and_tilde",
+                                    "modifiers": {
+                                        "mandatory": [],
+                                        "optional": [
+                                            "caps_lock",
+                                            "fn"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_shift",
+                                        "lazy": true,
+                                        "modifiers": [
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "grave_accent_and_tilde"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "<ESC> := <L_CTRL><SPACE> and <WINKEY2>",
+                        "manipulators": [
+                            {
+                                "description": "<ESC> := <L_CTRL><SPACE> and <R_SHIFT><L_CTRL><L_OPTION>(<WINKEY2>)",
+                                "from": {
+                                    "key_code": "escape",
+                                    "modifiers": {
+                                        "mandatory": [],
+                                        "optional": [
+                                            "caps_lock",
+                                            "fn"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_shift",
+                                        "lazy": true,
+                                        "modifiers": [
+                                            "left_control",
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "spacebar",
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "<L_SHIFT>~ := <WINKEY3>",
+                        "manipulators": [
+                            {
+                                "description": "<L_SHIFT>~ := <FN><WINKEY1>(<WINKEY3)",
+                                "from": {
+                                    "key_code": "grave_accent_and_tilde",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "fn",
+                                        "lazy": true,
+                                        "modifiers": [
+                                            "right_shift",
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "<ESC>~ / <L_SHIFT><ESC> := <WINKEY4>",
+                        "manipulators": [
+                            {
+                                "description": "<ESC>~ := <FN><WINKEY2>(<WINKEY4)",
+                                "from": {
+                                    "key_code": "grave_accent_and_tilde",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "left_control",
+                                            "left_option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "fn",
+                                        "lazy": true,
+                                        "modifiers": [
+                                            "right_shift",
+                                            "left_control",
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "~<ESC> := <FN><WINKEY2>(<WINKEY4)",
+                                "from": {
+                                    "key_code": "escape",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "left_option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "fn",
+                                        "lazy": true,
+                                        "modifiers": [
+                                            "right_shift",
+                                            "left_control",
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<L_SHIFT><ESC> := <FN><WINKEY2>(<WINKEY4)",
+                                "from": {
+                                    "key_code": "escape",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "fn",
+                                        "lazy": true,
+                                        "modifiers": [
+                                            "right_shift",
+                                            "left_control",
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
                     {
                         "description": "<R_CMD> := <HYPER>",
                         "manipulators": [
@@ -1931,192 +2117,6 @@
                         ]
                     },
                     {
-                        "description": "~ := <WINKEY1>",
-                        "manipulators": [
-                            {
-                                "description": "~ := ~ and <R_SHIFT><L_OPTION>(<WINKEY1>)",
-                                "from": {
-                                    "key_code": "grave_accent_and_tilde",
-                                    "modifiers": {
-                                        "mandatory": [],
-                                        "optional": [
-                                            "caps_lock",
-                                            "fn"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_shift",
-                                        "lazy": true,
-                                        "modifiers": [
-                                            "left_option"
-                                        ]
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "grave_accent_and_tilde"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<ESC> := <L_CTRL><SPACE> and <WINKEY2>",
-                        "manipulators": [
-                            {
-                                "description": "<ESC> := <L_CTRL><SPACE> and <R_SHIFT><L_CTRL><L_OPTION>(<WINKEY2>)",
-                                "from": {
-                                    "key_code": "escape",
-                                    "modifiers": {
-                                        "mandatory": [],
-                                        "optional": [
-                                            "caps_lock",
-                                            "fn"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_shift",
-                                        "lazy": true,
-                                        "modifiers": [
-                                            "left_control",
-                                            "left_option"
-                                        ]
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "spacebar",
-                                        "modifiers": [
-                                            "left_control"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<L_SHIFT>~ := <WINKEY3>",
-                        "manipulators": [
-                            {
-                                "description": "<L_SHIFT>~ := <FN><WINKEY1>(<WINKEY3)",
-                                "from": {
-                                    "key_code": "grave_accent_and_tilde",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "fn",
-                                        "lazy": true,
-                                        "modifiers": [
-                                            "right_shift",
-                                            "left_option"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "<ESC>~ / <L_SHIFT><ESC> := <WINKEY4>",
-                        "manipulators": [
-                            {
-                                "description": "<ESC>~ := <FN><WINKEY2>(<WINKEY4)",
-                                "from": {
-                                    "key_code": "grave_accent_and_tilde",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_shift",
-                                            "left_control",
-                                            "left_option"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "fn",
-                                        "lazy": true,
-                                        "modifiers": [
-                                            "right_shift",
-                                            "left_control",
-                                            "left_option"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "~<ESC> := <FN><WINKEY2>(<WINKEY4)",
-                                "from": {
-                                    "key_code": "escape",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_shift",
-                                            "left_option"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "fn",
-                                        "lazy": true,
-                                        "modifiers": [
-                                            "right_shift",
-                                            "left_control",
-                                            "left_option"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "<L_SHIFT><ESC> := <FN><WINKEY2>(<WINKEY4)",
-                                "from": {
-                                    "key_code": "escape",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "fn",
-                                        "lazy": true,
-                                        "modifiers": [
-                                            "right_shift",
-                                            "left_control",
-                                            "left_option"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Better <CAPS_LOCK>",
                         "manipulators": [
                             {
@@ -2152,7 +2152,8 @@
                                             "right_control"
                                         ],
                                         "optional": [
-                                            "any"
+                                            "caps_lock",
+                                            "left_option"
                                         ]
                                     }
                                 },
@@ -2171,7 +2172,7 @@
                                         "mandatory": [],
                                         "optional": [
                                             "caps_lock",
-                                            "left_control"
+                                            "left_option"
                                         ]
                                     }
                                 },
@@ -2489,7 +2490,9 @@
                                     "modifiers": {
                                         "mandatory": [],
                                         "optional": [
-                                            "any"
+                                            "caps_lock",
+                                            "left_control",
+                                            "right_control"
                                         ]
                                     }
                                 },
@@ -2509,7 +2512,7 @@
                         ]
                     },
                     {
-                        "description": "Alone<L_CMD> = <HYPER><UP>(Mission Control)",
+                        "description": "Alone<L_CMD> = <LEFT_HYPER><UP>(Mission Control)",
                         "manipulators": [
                             {
                                 "from": {
@@ -2517,7 +2520,7 @@
                                     "modifiers": {
                                         "mandatory": [],
                                         "optional": [
-                                            "any"
+                                            "caps_lock"
                                         ]
                                     }
                                 },
@@ -2551,7 +2554,7 @@
                                     "modifiers": {
                                         "mandatory": [],
                                         "optional": [
-                                            "any"
+                                            "caps_lock"
                                         ]
                                     }
                                 },

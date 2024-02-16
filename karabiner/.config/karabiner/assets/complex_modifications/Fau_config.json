@@ -20,7 +20,7 @@
 					"type": "basic",
 					"from": {
 						"key_code": "spacebar",
-						"modifiers": { "mandatory": [ "right_control" ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [ "right_control" ], "optional": [ "caps_lock", "left_option" ] }
 					},
 					"to": [ { "key_code": "caps_lock" } ]
 				},
@@ -30,7 +30,7 @@
 					"type": "basic",
 					"from": {
 						"key_code": "left_control",
-						"modifiers": { "mandatory": [  ], "optional": [ "caps_lock", "left_control" ] }
+						"modifiers": { "mandatory": [  ], "optional": [ "caps_lock", "left_option" ] }
 					},
 					"to": [ { "key_code": "left_control", "lazy": true } ],
 					"to_if_alone": [ { "key_code": "caps_lock" } ]
@@ -169,7 +169,7 @@
 					"type": "basic",
 					"from": {
 						"key_code": "tab",
-						"modifiers": { "mandatory": [  ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [  ], "optional": [ "caps_lock", "left_control", "right_control" ] }
 					},
 					"to": [ { "key_code": "right_option", "lazy": true } ],
 					"to_if_alone": [ { "key_code": "tab" } ]
@@ -180,13 +180,13 @@
 
 
 		{
-			"description": "Alone<L_CMD> = <HYPER><UP>(Mission Control)",
+			"description": "Alone<L_CMD> = <LEFT_HYPER><UP>(Mission Control)",
 			"manipulators": [
 				{
 					"type": "basic",
 					"from": {
 						"key_code": "left_command",
-						"modifiers": { "mandatory": [  ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [  ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "key_code": "left_command", "lazy": true } ],
 					"to_if_alone": [ { "key_code": "up_arrow", "modifiers": [ "left_shift", "left_control", "left_option", "left_command" ] } ]
@@ -203,7 +203,7 @@
 					"type": "basic",
 					"from": {
 						"consumer_key_code": "al_terminal_lock_or_screensaver",
-						"modifiers": { "mandatory": [  ], "optional": [ "any" ] }
+						"modifiers": { "mandatory": [  ], "optional": [ "caps_lock" ] }
 					},
 					"to": [ { "key_code": "q", "modifiers": [ "left_control", "left_command" ] } ]
 				}
