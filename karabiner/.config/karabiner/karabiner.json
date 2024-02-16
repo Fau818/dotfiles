@@ -392,9 +392,9 @@
                                         "value": false
                                     }
                                 ],
-                                "description": "<HYPER>s := open Browser (Arc)",
+                                "description": "<HYPER>b := open Bob",
                                 "from": {
-                                    "key_code": "s",
+                                    "key_code": "b",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_shift",
@@ -409,7 +409,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a Arc"
+                                        "shell_command": "open -a Bob"
                                     }
                                 ],
                                 "type": "basic"
@@ -422,9 +422,9 @@
                                         "value": true
                                     }
                                 ],
-                                "description": "Alone<HYPER>s := open Browser (Arc)",
+                                "description": "Alone<HYPER>b := open Bob",
                                 "from": {
-                                    "key_code": "s",
+                                    "key_code": "b",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_shift",
@@ -439,313 +439,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a Arc"
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_shift": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_control": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_option": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "right_command": "off"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "alone_right_command",
-                                        "type": "variable_if",
-                                        "value": false
-                                    }
-                                ],
-                                "description": "<HYPER>m := open Music (Spotify)",
-                                "from": {
-                                    "key_code": "m",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a Spotify"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "alone_right_command",
-                                        "type": "variable_if",
-                                        "value": true
-                                    }
-                                ],
-                                "description": "Alone<HYPER>m := open Music (Spotify)",
-                                "from": {
-                                    "key_code": "m",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a Spotify"
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_shift": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_control": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_option": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "right_command": "off"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "<HYPER>space := Toggle Playing [Spotify]",
-                                "from": {
-                                    "key_code": "spacebar",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "osascript -e 'tell application \"Spotify\" to playpause'"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "Alone<HYPER>m := Toggle Playing [Spotify]",
-                                "from": {
-                                    "key_code": "spacebar",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "osascript -e 'tell application \"Spotify\" to playpause'"
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_shift": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_control": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_option": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "right_command": "off"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "alone_right_command",
-                                        "type": "variable_if",
-                                        "value": false
-                                    }
-                                ],
-                                "description": "<HYPER>t := open Terminal (Kitty)",
-                                "from": {
-                                    "key_code": "t",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a kitty"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "alone_right_command",
-                                        "type": "variable_if",
-                                        "value": true
-                                    }
-                                ],
-                                "description": "Alone<HYPER>t := open Terminal (Kitty)",
-                                "from": {
-                                    "key_code": "t",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a kitty"
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_shift": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_control": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_option": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "right_command": "off"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "alone_right_command",
-                                        "type": "variable_if",
-                                        "value": false
-                                    }
-                                ],
-                                "description": "<HYPER>p := open PyCharm",
-                                "from": {
-                                    "key_code": "p",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a PyCharm\\ Professional"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "alone_right_command",
-                                        "type": "variable_if",
-                                        "value": true
-                                    }
-                                ],
-                                "description": "Alone<HYPER>p := open PyCharm",
-                                "from": {
-                                    "key_code": "p",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a PyCharm\\ Professional"
+                                        "shell_command": "open -a Bob"
                                     },
                                     {
                                         "sticky_modifier": {
@@ -938,9 +632,9 @@
                                         "value": false
                                     }
                                 ],
-                                "description": "<HYPER>b := open Bob",
+                                "description": "<HYPER>f := open Finder",
                                 "from": {
-                                    "key_code": "b",
+                                    "key_code": "f",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_shift",
@@ -955,7 +649,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a Bob"
+                                        "shell_command": "open -a Finder"
                                     }
                                 ],
                                 "type": "basic"
@@ -968,9 +662,9 @@
                                         "value": true
                                     }
                                 ],
-                                "description": "Alone<HYPER>b := open Bob",
+                                "description": "Alone<HYPER>f := open Finder",
                                 "from": {
-                                    "key_code": "b",
+                                    "key_code": "f",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_shift",
@@ -985,7 +679,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a Bob"
+                                        "shell_command": "open -a Finder"
                                     },
                                     {
                                         "sticky_modifier": {
@@ -1098,9 +792,9 @@
                                         "value": false
                                     }
                                 ],
-                                "description": "<HYPER>v := open VSCode",
+                                "description": "<HYPER>m := open Music (Spotify)",
                                 "from": {
-                                    "key_code": "v",
+                                    "key_code": "m",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_shift",
@@ -1115,7 +809,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a Visual\\ Studio\\ Code"
+                                        "shell_command": "open -a Spotify"
                                     }
                                 ],
                                 "type": "basic"
@@ -1128,9 +822,9 @@
                                         "value": true
                                     }
                                 ],
-                                "description": "Alone<HYPER>v := open VSCode",
+                                "description": "Alone<HYPER>m := open Music (Spotify)",
                                 "from": {
-                                    "key_code": "v",
+                                    "key_code": "m",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_shift",
@@ -1145,7 +839,87 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a Visual\\ Studio\\ Code"
+                                        "shell_command": "open -a Spotify"
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_shift": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_control": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_option": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "right_command": "off"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>space := Toggle Playing [Spotify]",
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript -e 'tell application \"Spotify\" to playpause'"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>space := Toggle Playing [Spotify]",
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript -e 'tell application \"Spotify\" to playpause'"
                                     },
                                     {
                                         "sticky_modifier": {
@@ -1258,9 +1032,9 @@
                                         "value": false
                                     }
                                 ],
-                                "description": "<HYPER>f := open Finder",
+                                "description": "<HYPER>p := open PyCharm",
                                 "from": {
-                                    "key_code": "f",
+                                    "key_code": "p",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_shift",
@@ -1275,7 +1049,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a Finder"
+                                        "shell_command": "open -a PyCharm\\ Professional"
                                     }
                                 ],
                                 "type": "basic"
@@ -1288,9 +1062,9 @@
                                         "value": true
                                     }
                                 ],
-                                "description": "Alone<HYPER>f := open Finder",
+                                "description": "Alone<HYPER>p := open PyCharm",
                                 "from": {
-                                    "key_code": "f",
+                                    "key_code": "p",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_shift",
@@ -1305,7 +1079,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a Finder"
+                                        "shell_command": "open -a PyCharm\\ Professional"
                                     },
                                     {
                                         "sticky_modifier": {
@@ -1386,6 +1160,246 @@
                                 "to": [
                                     {
                                         "shell_command": "open -a Reminders"
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_shift": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_control": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_option": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "right_command": "off"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>s := open Browser (Arc)",
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Arc"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>s := open Browser (Arc)",
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Arc"
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_shift": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_control": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_option": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "right_command": "off"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>t := open Terminal (Kitty)",
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a kitty"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>t := open Terminal (Kitty)",
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a kitty"
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_shift": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_control": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_option": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "right_command": "off"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<HYPER>v := open VSCode",
+                                "from": {
+                                    "key_code": "v",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Visual\\ Studio\\ Code"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_command",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HYPER>v := open VSCode",
+                                "from": {
+                                    "key_code": "v",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option",
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Visual\\ Studio\\ Code"
                                     },
                                     {
                                         "sticky_modifier": {
@@ -1886,6 +1900,124 @@
                                         "value": false
                                     }
                                 ],
+                                "description": "<FN>d := open Discord",
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Discord"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_fn",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<FN>d := open Discord",
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Discord"
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "fn": "off"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_fn",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<FN>t := open Telegram",
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Telegram\\ Lite"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_fn",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<FN>t := open Telegram",
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Telegram\\ Lite"
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "fn": "off"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_fn",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
                                 "description": "<FN>q := open QQ",
                                 "from": {
                                     "key_code": "q",
@@ -1987,124 +2119,6 @@
                                 "to": [
                                     {
                                         "shell_command": "open -a WeChat"
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "fn": "off"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "alone_fn",
-                                        "type": "variable_if",
-                                        "value": false
-                                    }
-                                ],
-                                "description": "<FN>t := open Telegram",
-                                "from": {
-                                    "key_code": "t",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "fn"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a Telegram\\ Lite"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "alone_fn",
-                                        "type": "variable_if",
-                                        "value": true
-                                    }
-                                ],
-                                "description": "Alone<FN>t := open Telegram",
-                                "from": {
-                                    "key_code": "t",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "fn"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a Telegram\\ Lite"
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "fn": "off"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "alone_fn",
-                                        "type": "variable_if",
-                                        "value": false
-                                    }
-                                ],
-                                "description": "<FN>d := open Discord",
-                                "from": {
-                                    "key_code": "d",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "fn"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a Discord"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "alone_fn",
-                                        "type": "variable_if",
-                                        "value": true
-                                    }
-                                ],
-                                "description": "Alone<FN>d := open Discord",
-                                "from": {
-                                    "key_code": "d",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "fn"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a Discord"
                                     },
                                     {
                                         "sticky_modifier": {
