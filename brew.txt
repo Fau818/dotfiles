@@ -30,6 +30,10 @@ sketchybar
 skhd
 yabai
 
+# Sketchybar
+blueutil
+ifstat
+
 # Optional
 deeplx
 llvm

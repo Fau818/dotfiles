@@ -121,8 +121,8 @@ yabai -m rule --add app="^Safari$" title="General|Tabs|AutoFill|Passwords|Search
 # ======== Signal
 # =============================================
 # Refocus window when window is destroyed
-yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/refocus_window.sh '$white_list|$extra_list'"
 yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/destroy_space_if_no_window.sh"
+yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/refocus_window.sh '$white_list|$extra_list'"
 
 # Sketchybar
 yabai -m signal --add event=window_created      action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_window_created"
