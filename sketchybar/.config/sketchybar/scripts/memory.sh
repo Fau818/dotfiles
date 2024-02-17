@@ -45,6 +45,6 @@ function update_memory_status() {
 case "$SENDER" in
   'forced'|'routine') update_memory_status
     ;;
-  *) echo "Invalid sender: `$SENDER`" in $0
+  *) echo "Invalid sender: $SENDER" in $0
     ;;
 esac

@@ -18,6 +18,6 @@ case "$SENDER" in
     ;;
   'front_app_switched') update_front_app_status
     ;;
-  *) echo "Invalid sender: `$SENDER`" in $0
+  *) echo "Invalid sender: $SENDER" in $0
     ;;
 esac

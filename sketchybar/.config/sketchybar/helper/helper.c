@@ -2,13 +2,19 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <time.h>
 
+static int last_day = -1;
 
 void clock_updater(CFRunLoopTimerRef timer, void* info) {
   time_t current_time;
   time(&current_time);
+  struct tm *local_time = localtime(&current_time);
+
+  if (last_day != -1 && last_day != local_time->tm_mday) sketchybar("--trigger system_woke");
+  last_day = local_time->tm_mday;
+
   const char* format = "%H:%M:%S";
   char buffer[64];
-  strftime(buffer, sizeof(buffer), format, localtime(&current_time));
+  strftime(buffer, sizeof(buffer), format, local_time);
 
   uint32_t message_size = sizeof(buffer) + 64;
   char message[message_size];

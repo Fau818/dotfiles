@@ -90,6 +90,6 @@ case "$SENDER" in
     ;;
   'wifi_change') update_wifi_status
     ;;
-  *) echo "Invalid sender: `$SENDER`" in $0
+  *) echo "Invalid sender: $SENDER" in $0
     ;;
 esac

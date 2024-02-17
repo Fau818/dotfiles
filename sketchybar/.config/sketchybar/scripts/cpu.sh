@@ -35,6 +35,6 @@ function update_cpu_status() {
 case "$SENDER" in
   'forced'|'routine') update_cpu_status
     ;;
-  *) echo "Invalid sender: `$SENDER`" in $0
+  *) echo "Invalid sender: $SENDER" in $0
     ;;
 esac

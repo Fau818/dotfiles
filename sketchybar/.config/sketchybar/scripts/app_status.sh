@@ -31,6 +31,6 @@ function update_app_status() {
 case "$SENDER" in
   'forced'|'routine') update_app_status
     ;;
-  *) echo "Invalid sender: `$SENDER`" in $0
+  *) echo "Invalid sender: $SENDER" in $0
     ;;
 esac

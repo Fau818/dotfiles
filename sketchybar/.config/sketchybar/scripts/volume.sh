@@ -69,6 +69,6 @@ case "$SENDER" in
     ;;
   'volume_change') update_volume_status
     ;;
-  *) echo "Invalid sender: `$SENDER`" in $0
+  *) echo "Invalid sender: $SENDER" in $0
     ;;
 esac

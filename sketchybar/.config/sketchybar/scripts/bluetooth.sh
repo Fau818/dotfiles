@@ -22,6 +22,6 @@ function update_bluetooth_status() {
 case "$SENDER" in
   'forced'|'bluetooth_on'|'bluetooth_off') update_bluetooth_status
     ;;
-  *) echo "Invalid sender: `$SENDER`" in $0
+  *) echo "Invalid sender: $SENDER" in $0
     ;;
 esac

@@ -58,8 +58,10 @@ function update_battery() {
 # -------- Trigger
 # -----------------------------------
 case "$SENDER" in
-  'forced'|'routine'|'power_source_change'|'system_woke') update_battery
+  'forced')
     ;;
-  *) echo "Invalid sender: `$SENDER`" in $0
+  'routine'|'power_source_change'|'system_woke') update_battery
+    ;;
+  *) echo "Invalid sender: $SENDER" in $0
     ;;
 esac

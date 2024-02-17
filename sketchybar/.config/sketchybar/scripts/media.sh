@@ -26,6 +26,6 @@ case "$SENDER" in
     ;;
   'media_change') update_media_status
     ;;
-  *) echo "Invalid sender: `$SENDER`" in $0
+  *) echo "Invalid sender: $SENDER" in $0
     ;;
 esac
