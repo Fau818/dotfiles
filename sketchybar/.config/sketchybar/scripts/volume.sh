@@ -24,6 +24,24 @@ PADDING=3
 # -----------------------------------
 # -------- Scripts
 # -----------------------------------
+function show_slider() {
+  sketchybar --animate tanh 30 \
+             --set volume_slider slider.width="$WIDTH" background.padding_right="$BACKGROUND_MARGIN" \
+             --set volume label.padding_right="$PADDING"
+}
+
+function hide_slider() {
+  sketchybar --animate tanh 30 \
+             --set volume_slider slider.width=0 background.padding_right=0 \
+             --set volume label.padding_right="$BACKGROUND_MARGIN"
+}
+
+function toggle_slider() {
+  slider_width="$(sketchybar --query volume_slider | jq -r '.slider.width')"
+  [[ "$slider_width" == 0 ]] && show_slider || hide_slider
+}
+
+
 function update_volume_status() {
   VOLUME_PERCENT="$INFO"
   case "$VOLUME_PERCENT" in
@@ -44,20 +62,12 @@ function update_volume_status() {
              --set volume_slider slider.percentage="$VOLUME_PERCENT"
 
   slider_width="$(sketchybar --query volume_slider | jq -r ".slider.width")"
-  if [[ "$slider_width" == 0 ]]; then
-    sketchybar --animate tanh 30 \
-               --set volume_slider slider.width="$WIDTH" background.padding_right="$BACKGROUND_MARGIN" \
-               --set volume label.padding_right="$PADDING"
-  fi
+  [[ "$slider_width" == 0 ]] && show_slider
   sleep 2
 
   # Check wether the volume was changed another time while sleeping
   final_percentage="$(sketchybar --query volume_slider | jq -r ".slider.percentage")"
-  if [[ "$final_percentage" -eq "$VOLUME_PERCENT" ]]; then
-    sketchybar --animate tanh 30 \
-               --set volume_slider slider.width=0 background.padding_right=0 \
-               --set volume label.padding_right="$BACKGROUND_MARGIN"
-  fi
+  [[ "$final_percentage" -eq "$VOLUME_PERCENT" ]] && hide_slider
 }
 
 
@@ -68,6 +78,8 @@ case "$SENDER" in
   'forced')
     ;;
   'volume_change') update_volume_status
+    ;;
+  'mouse.clicked') toggle_slider
     ;;
   *) echo "Invalid sender: $SENDER" in $0
     ;;

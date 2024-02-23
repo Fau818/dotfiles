@@ -40,7 +40,6 @@ volume_slider=(
 volume=(
   update_freq=0
   script="$SCRIPT_DIR/volume.sh"
-  click_script="$SCRIPT_DIR/click/volume.sh"
 
   icon="$VOLUME_ERROR"
   icon.font="$ICON_FONT"
@@ -64,9 +63,9 @@ volume_bracket=(
 sketchybar --add slider  volume_slider right                       \
            --set         volume_slider "${volume_slider[@]}"       \
            \
-           --add item    volume right          \
-           --set         volume "${volume[@]}" \
-           --subscribe   volume volume_change  \
+           --add item    volume right                       \
+           --set         volume "${volume[@]}"              \
+           --subscribe   volume volume_change mouse.clicked \
            \
            --add bracket volume_bracket volume volume_slider \
            --set         volume_bracket "${volume_bracket[@]}"

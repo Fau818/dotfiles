@@ -4,6 +4,9 @@
 # -------- Scripts
 # -----------------------------------
 function update_media_status() {
+  app="$(echo "$INFO" | jq -r '.app')"
+  if [[ "$app" == 'Arc' ]]; then return 0; fi
+
   state="$(echo "$INFO" | jq -r '.state')"
 
   # { "state": "playing", "title": "name", "album": "xxxx", "artist": "singer", "app": "Spotify" }

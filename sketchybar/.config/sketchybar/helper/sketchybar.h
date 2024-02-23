@@ -1,12 +1,12 @@
 #pragma once
 
 #include <mach/mach.h>
-#include <mach/mach_port.h>
 #include <mach/message.h>
 #include <bootstrap.h>
 #include <stdlib.h>
 #include <pthread.h>
 #include <stdio.h>
+#include <unistd.h>
 
 typedef char* env;
 
@@ -36,6 +36,7 @@ struct mach_server {
 
 static struct mach_server g_mach_server;
 static mach_port_t g_mach_port = 0;
+static char* g_response = NULL;
 
 static inline char* env_get_value_for_key(env env, char* key) {
   uint32_t caret = 0;
@@ -80,7 +81,7 @@ static inline void mach_receive_message(mach_port_t port, struct mach_buffer* bu
                           0,
                           sizeof(struct mach_buffer),
                           port,
-                          100,
+                          1000,
                           MACH_PORT_NULL             );
   else
     msg_return = mach_msg(&buffer->message.header,
@@ -101,10 +102,23 @@ static inline char* mach_send_message(mach_port_t port, char* message, uint32_t 
     return NULL;
   }
 
+  mach_port_t response_port;
+  mach_port_name_t task = mach_task_self();
+  if (mach_port_allocate(task, MACH_PORT_RIGHT_RECEIVE,
+                               &response_port          ) != KERN_SUCCESS) {
+    return NULL;
+  }
+
+  if (mach_port_insert_right(task, response_port,
+                                   response_port,
+                                   MACH_MSG_TYPE_MAKE_SEND)!= KERN_SUCCESS) {
+    return NULL;
+  }
+
   struct mach_message msg = { 0 };
   msg.header.msgh_remote_port = port;
-  msg.header.msgh_local_port = 0;
-  msg.header.msgh_id = 0;
+  msg.header.msgh_local_port = response_port;
+  msg.header.msgh_id = response_port;
   msg.header.msgh_bits = MACH_MSGH_BITS_SET(MACH_MSG_TYPE_COPY_SEND,
                                             MACH_MSG_TYPE_MAKE_SEND,
                                             0,
@@ -126,7 +140,23 @@ static inline char* mach_send_message(mach_port_t port, char* message, uint32_t 
            MACH_MSG_TIMEOUT_NONE,
            MACH_PORT_NULL              );
 
-  return NULL;
+  struct mach_buffer buffer = { 0 };
+  mach_receive_message(response_port, &buffer, true);
+
+  if (buffer.message.descriptor.address) {
+    g_response = (char*)realloc(g_response, strlen(buffer.message.descriptor.address) + 1);
+    memcpy(g_response, buffer.message.descriptor.address,
+           strlen(buffer.message.descriptor.address) + 1);
+  } else {
+    g_response = (char*)realloc(g_response, 1);
+    *g_response = '\0';
+  }
+
+  mach_msg_destroy(&buffer.message.header);
+  mach_port_mod_refs(task, response_port, MACH_PORT_RIGHT_RECEIVE, -1);
+  mach_port_deallocate(task, response_port);
+
+  return g_response;
 }
 
 #pragma clang diagnostic push
@@ -137,6 +167,17 @@ static inline bool mach_server_begin(struct mach_server* mach_server, mach_handl
   if (mach_port_allocate(mach_server->task,
                          MACH_PORT_RIGHT_RECEIVE,
                          &mach_server->port      ) != KERN_SUCCESS) {
+    return false;
+  }
+
+  struct mach_port_limits limits = {};
+  limits.mpl_qlimit = MACH_PORT_QLIMIT_LARGE;
+
+  if (mach_port_set_attributes(mach_server->task,
+                               mach_server->port,
+                               MACH_PORT_LIMITS_INFO,
+                               (mach_port_info_t)&limits,
+                               MACH_PORT_LIMITS_INFO_COUNT) != KERN_SUCCESS) {
     return false;
   }
 
@@ -163,7 +204,13 @@ static inline bool mach_server_begin(struct mach_server* mach_server, mach_handl
   mach_server->is_running = true;
   struct mach_buffer buffer;
   while (mach_server->is_running) {
-    mach_receive_message(mach_server->port, &buffer, false);
+    mach_receive_message(mach_server->port, &buffer, true);
+    if (getppid() == 1) exit(0);
+    if (!buffer.message.descriptor.address) continue;
+    if (*(char*)buffer.message.descriptor.address == 'k'
+        && buffer.message.descriptor.size == 2) {
+      exit(0);
+    }
     mach_server->handler((env)buffer.message.descriptor.address);
     mach_msg_destroy(&buffer.message.header);
   }
