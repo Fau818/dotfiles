@@ -51,9 +51,9 @@ rshift + lalt + fn - l : $HOME/.config/yabai/stack.sh east
 # Toggle window layout (WINKEY1)
 rshift + lalt - f : yabai -m window --toggle float; [ $(yabai -m query --windows --window | jq '.["is-floating"]') = 'true' ] && hs -c "Fau_hs.window.center_window(0.6)"; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
 rshift + lalt - s : [ $(yabai -m query --windows --window | jq '.["is-floating"]') = 'true' ] && yabai -m window --toggle float; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
+rshift + lalt - e : yabai -m window --toggle zoom-parent; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
 rshift + lalt - t : yabai -m window --toggle split; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
 rshift + lalt - space : yabai -m window --toggle pip; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
-# rshift + lalt - e : yabai -m window --toggle zoom-parent
 
 
 

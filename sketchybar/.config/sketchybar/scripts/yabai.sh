@@ -18,6 +18,7 @@ RED=0xFFED8796
 BLUE=0xFF8AADF4 FLOAT_LAYOUT_COLOR="$BLUE"
 YELLOW=0xFFEED49F BSP_LAYOUT_COLOR="$YELLOW"
 MAGENTA=0xFFC6A0F6 STACK_LAYOUT_COLOR="$MAGENTA"
+ORANGE=0xFFF5A97F SPECIAL_STATUS="$ORANGE"
 
 
 # -----------------------------------
@@ -53,6 +54,9 @@ function update_yabai_status() {
       fi
     fi
   fi
+
+  # SPECIAL: zoom-parent mode
+  [[ "$(echo $window_info | jq -r '."has-parent-zoom"')" == 'true' ]] && label+='(ZP)' && color="$SPECIAL_STATUS"
 
   sketchybar --set "$NAME" icon="$icon" label="$label" icon.color="$color" label.color="$color"
 }
