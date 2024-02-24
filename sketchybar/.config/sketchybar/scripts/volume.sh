@@ -11,6 +11,7 @@ VOLUME_10=􀊥
 # VOLUME_10=􀊡
 VOLUME_0=􀊣
 VOLUME_ERROR=􀾐
+AIRPODS_ICON=􀪷
 
 
 # -----------------------------------
@@ -67,7 +68,11 @@ function update_volume_status() {
 
   # Check wether the volume was changed another time while sleeping
   final_percentage="$(sketchybar --query volume_slider | jq -r ".slider.percentage")"
-  [[ "$final_percentage" -eq "$VOLUME_PERCENT" ]] && hide_slider
+  if [[ "$final_percentage" -eq "$VOLUME_PERCENT" ]]; then
+    hide_slider
+    output_device_name="$(command -v SwitchAudioSource &> /dev/null && SwitchAudioSource -c)"
+    [[ "$(echo "$output_device_name" | grep 'AirPods')" > /dev/null ]] && icon="$AIRPODS_ICON" && sketchybar --set volume icon="$icon"
+  fi
 }
 
 

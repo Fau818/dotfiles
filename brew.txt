@@ -33,6 +33,7 @@ yabai
 # Sketchybar
 blueutil
 ifstat
+switchaudio-osx
 
 # Optional
 deeplx
