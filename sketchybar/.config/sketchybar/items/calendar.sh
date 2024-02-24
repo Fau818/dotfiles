@@ -39,8 +39,8 @@ calendar=(
   label.font="$LABEL_FONT"
   label.color="$WHITE"
   label.padding_right="$BACKGROUND_MARGIN"
-  label.width=65
-  label.align=right
+  label.width=70
+  label.align=center
 
   background.color="$BACKGROUND_COLOR"
 )

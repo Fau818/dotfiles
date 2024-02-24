@@ -5,7 +5,10 @@
 # -----------------------------------
 function update_media_status() {
   app="$(echo "$INFO" | jq -r '.app')"
-  if [[ "$app" == 'Arc' ]]; then return 0; fi
+  if [[ "$app" == 'Arc' ]]; then
+    sketchybar --set "$NAME" drawing=off
+    return 0
+  fi
 
   state="$(echo "$INFO" | jq -r '.state')"
 
@@ -13,7 +16,7 @@ function update_media_status() {
   if [[ "$state" == 'playing' ]]; then
     # app=$(echo "$INFO" | jq -r '.app')
     media="$(echo "$INFO" | jq -r '.title + " - " + .artist')"
-    sketchybar --set "$NAME" label="$media" drawing=on
+    sketchybar --set "$NAME" drawing=on label="$media"
   else
     sketchybar --set "$NAME" drawing=off
   fi

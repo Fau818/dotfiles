@@ -14,7 +14,7 @@ config=(
   # -------- Space
   # -----------------------------------
   # values: `bsp` | `float` | `stack`
-  layout bsp
+  layout float
 
   top_padding 8
   bottom_padding 8
