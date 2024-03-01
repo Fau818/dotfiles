@@ -34,10 +34,10 @@ fi
 HOMEBREW_OFFICIAL_BREW_GIT_REMOTE='https://github.com/Homebrew/brew.git'
 HOMEBREW_OFFICIAL_CORE_GIT_REMOTE='https://github.com/Homebrew/homebrew-core.git'
 
-HOMEBREW_TSINGHUA_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
-HOMEBREW_TSINGHUA_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
-HOMEBREW_TSINGHUA_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
-HOMEBREW_TSINGHUA_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+HOMEBREW_TSINGHUA_BREW_GIT_REMOTE='https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git'
+HOMEBREW_TSINGHUA_CORE_GIT_REMOTE='https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git'
+HOMEBREW_TSINGHUA_API_DOMAIN='https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api'
+HOMEBREW_TSINGHUA_BOTTLE_DOMAIN='https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles'
 
 HOMEBREW_ALIYUN_BREW_GIT_REMOTE='https://mirrors.aliyun.com/homebrew/brew.git'
 HOMEBREW_ALIYUN_CORE_GIT_REMOTE='https://mirrors.aliyun.com/homebrew/homebrew-core.git'
