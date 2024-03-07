@@ -51,7 +51,7 @@ config=(
   # -----------------------------------
   window_origin_display default
   window_zoom_persist on
-  window_shadow float
+  window_shadow off
 
   # values: `first_child` | `second_child`
   # first_child  : new window to the left or top

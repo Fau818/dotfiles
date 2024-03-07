@@ -9,8 +9,8 @@ BATTERY_CLICK_SCRIPT='open x-apple.systempreferences:com.apple.preference.batter
 # -----------------------------------
 # -------- Fields
 # -----------------------------------
-ICON_FONT="$FONT:Medium:17.5"
-LABEL_FONT="$FONT:Bold:12.0"
+ICON_FONT="$FONT:Medium:16.0"
+LABEL_FONT="$FONT:Bold:11.0"
 
 
 # -----------------------------------
@@ -24,10 +24,10 @@ battery=(
   padding_left="$ITEM_MARGIN"  # NOTE: Margin for `volume`
 
   icon.font="$ICON_FONT"
-  icon.y_offset=1
+  # icon.y_offset=1
 
   label.font="$LABEL_FONT"
-  label.y_offset=1
+  # label.y_offset=1
 
   icon.padding_left="$BACKGROUND_MARGIN"
   label.padding_right="$BACKGROUND_MARGIN"
