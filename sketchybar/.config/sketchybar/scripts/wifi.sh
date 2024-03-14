@@ -25,13 +25,15 @@ function _get_wifi_speed() {
 
   speed=$(ifstat -i en0 1 1 | awk 'NR==3 {print $1}')
   if (( $(echo "$speed > 1024*1024" | bc -l) )); then
-    speed=$(echo "scale=0; $speed / (1024*1024)" | bc)
+    # Round up for GB/s calculation
+    speed=$(echo "scale=2; ($speed / (1024*1024)) + 0.005" | bc | awk '{printf "%d\n", $1 + 0.5}')
     unit='GB/s'
   elif (( $(echo "$speed > 1024" | bc -l) )); then
-    speed=$(echo "scale=0; $speed / 1024" | bc)
+    # Round up for MB/s calculation
+    speed=$(echo "scale=2; ($speed / 1024) + 0.005" | bc | awk '{printf "%d\n", $1 + 0.5}')
     unit='MB/s'
   else
-    speed=$(echo $speed | awk '{printf "%d", $1}')
+    speed=$(echo "$speed + 0.5" | bc | awk '{printf "%d", $1}')
     unit='KB/s'
   fi
 

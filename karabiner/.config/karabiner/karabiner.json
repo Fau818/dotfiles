@@ -792,7 +792,7 @@
                                         "value": false
                                     }
                                 ],
-                                "description": "<HYPER>m := open Music (Spotify)",
+                                "description": "<HYPER>m := open Music (Apple Music)",
                                 "from": {
                                     "key_code": "m",
                                     "modifiers": {
@@ -809,7 +809,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a Spotify"
+                                        "shell_command": "open -a Music"
                                     }
                                 ],
                                 "type": "basic"
@@ -822,7 +822,7 @@
                                         "value": true
                                     }
                                 ],
-                                "description": "Alone<HYPER>m := open Music (Spotify)",
+                                "description": "Alone<HYPER>m := open Music (Apple Music)",
                                 "from": {
                                     "key_code": "m",
                                     "modifiers": {
@@ -839,87 +839,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a Spotify"
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_shift": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_control": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "left_option": "off"
-                                        }
-                                    },
-                                    {
-                                        "sticky_modifier": {
-                                            "right_command": "off"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "alone_right_command",
-                                        "type": "variable_if",
-                                        "value": false
-                                    }
-                                ],
-                                "description": "<HYPER>space := Toggle Playing [Spotify]",
-                                "from": {
-                                    "key_code": "spacebar",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "osascript -e 'tell application \"Spotify\" to playpause'"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "alone_right_command",
-                                        "type": "variable_if",
-                                        "value": true
-                                    }
-                                ],
-                                "description": "Alone<HYPER>space := Toggle Playing [Spotify]",
-                                "from": {
-                                    "key_code": "spacebar",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "osascript -e 'tell application \"Spotify\" to playpause'"
+                                        "shell_command": "open -a Music"
                                     },
                                     {
                                         "sticky_modifier": {

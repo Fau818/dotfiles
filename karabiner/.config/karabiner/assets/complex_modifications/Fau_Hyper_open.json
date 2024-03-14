@@ -192,45 +192,24 @@
 				},
 
 				{
-					"description": "<HYPER>m := open Music (Spotify)",
+					"description": "<HYPER>m := open Music (Apple Music)",
 					"type": "basic",
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": false } ],
 					"from": {
 						"key_code": "m",
 						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
-					"to": [ { "shell_command": "open -a Spotify" } ]
+					"to": [ { "shell_command": "open -a Music" } ]
 				},
 				{
-					"description": "Alone<HYPER>m := open Music (Spotify)",
+					"description": "Alone<HYPER>m := open Music (Apple Music)",
 					"type": "basic",
 					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": true } ],
 					"from": {
 						"key_code": "m",
 						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
 					},
-					"to": [ { "shell_command": "open -a Spotify" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
-				},
-
-				{
-					"description": "<HYPER>space := Toggle Playing [Spotify]",
-					"type": "basic",
-					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": false } ],
-					"from": {
-						"key_code": "spacebar",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
-					},
-					"to": [ { "shell_command": "osascript -e 'tell application \"Spotify\" to playpause'" } ]
-				},
-				{
-					"description": "Alone<HYPER>space := Toggle Playing [Spotify]",
-					"type": "basic",
-					"conditions": [ { "type": "variable_if", "name": "alone_right_command", "value": true } ],
-					"from": {
-						"key_code": "spacebar",
-						"modifiers": { "mandatory": [ "left_shift", "left_control", "left_option", "right_command" ], "optional": [ "caps_lock" ] }
-					},
-					"to": [ { "shell_command": "osascript -e 'tell application \"Spotify\" to playpause'" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
+					"to": [ { "shell_command": "open -a Music" }, { "sticky_modifier": { "left_shift": "off" } }, { "sticky_modifier": { "left_control": "off" } }, { "sticky_modifier": { "left_option": "off" } }, { "sticky_modifier": { "right_command": "off" } } ]
 				},
 
 				{

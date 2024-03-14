@@ -93,7 +93,7 @@ white_list_array=(
   kitty Code
   Safari Arc 'Google Chrome'
 )
-white_list=$(create_regex_string "$white_list_array[@]")
+white_list=$(create_regex_string "${white_list_array[@]}")
 
 
 extra_list_array=(
@@ -101,7 +101,7 @@ extra_list_array=(
   Music Spotify
   QQ WeChat 'Telegram Lite'
 )
-extra_list=$(create_regex_string "$extra_list_array[@]")
+extra_list=$(create_regex_string "${extra_list_array[@]}")
 
 
 # -----------------------------------
