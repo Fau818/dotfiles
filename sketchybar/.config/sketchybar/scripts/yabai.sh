@@ -111,7 +111,7 @@ function update_yabai_status() {
 # -------- Trigger
 # -----------------------------------
 case "$SENDER" in
-  'forced'|'skhd_space_type_changed'|'skhd_window_type_changed'|'yabai_window_focused'|'yabai_loaded') update_yabai_status
+  'forced'|'space_change'|'skhd_space_type_changed'|'skhd_window_type_changed'|'yabai_window_focused'|'yabai_loaded') update_yabai_status
     ;;
   *) echo "Invalid sender: $SENDER" in $0
     ;;

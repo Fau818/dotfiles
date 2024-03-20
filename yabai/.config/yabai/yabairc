@@ -51,7 +51,7 @@ config=(
   # -----------------------------------
   window_origin_display default
   window_zoom_persist on
-  window_shadow off
+  window_shadow float
 
   # values: `first_child` | `second_child`
   # first_child  : new window to the left or top
@@ -133,6 +133,7 @@ yabai -m signal --add event=window_focused      action="command -v sketchybar &>
 yabai -m signal --add event=window_resized      action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_window_resized"
 yabai -m signal --add event=window_moved        action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_window_moved"
 yabai -m signal --add event=application_visible action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_application_visible"
+# yabai -m signal --add event=space_changed       action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_space_changed"
 # yabai -m signal --add event=application_hidden  action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_application_hidden"
 
 
