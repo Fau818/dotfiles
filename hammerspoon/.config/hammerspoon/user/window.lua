@@ -41,7 +41,12 @@ local maximum = {
 ---@param position table {x, y, w, h}
 local function _move_and_resize_window(position)
   local window = hs.window.focusedWindow()
-  if window then window:move(position)
+  if window then
+    local is_standard = window:isStandard()
+    if not is_standard then window:centerOnScreen()
+    elseif window:application():name() == "System Settings" then window:centerOnScreen()
+    else window:move(position)
+    end
   else hs.alert.show("ERROR: No active window!")
   end
 end
