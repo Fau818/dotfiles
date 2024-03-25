@@ -43,8 +43,9 @@ local function _move_and_resize_window(position)
   local window = hs.window.focusedWindow()
   if window then
     local is_standard = window:isStandard()
-    if not is_standard then window:centerOnScreen()
-    elseif window:application():name() == "System Settings" then window:centerOnScreen()
+    local app_name = window:application():name()
+    if app_name == "Arc" then window:move(position)
+    elseif not is_standard or app_name == "System Settings" then window:centerOnScreen()
     else window:move(position)
     end
   else hs.alert.show("ERROR: No active window!")

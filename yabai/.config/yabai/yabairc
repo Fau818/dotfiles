@@ -14,7 +14,7 @@ config=(
   # -------- Space
   # -----------------------------------
   # values: `bsp` | `float` | `stack`
-  layout float
+  layout stack
 
   top_padding 8
   bottom_padding 8
@@ -141,7 +141,7 @@ yabai -m signal --add event=application_visible action="command -v sketchybar &>
 # ======== Border
 # =============================================
 # brew tap FelixKratz/formulae && brew install borders
-borders active_color=0xFFCDCDCD inactive_color=0x00494D64 width=5.0 &
+borders active_color=0xFFFFA500 inactive_color=0x00494D64 width=5.5 &
 
 
 
