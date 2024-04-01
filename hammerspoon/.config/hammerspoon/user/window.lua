@@ -40,12 +40,15 @@ local maximum = {
 ---Move and resize window
 ---@param position table {x, y, w, h}
 local function _move_and_resize_window(position)
+  local special_app_list = { ["System Settings"] = true, ["Quantumult X"] = true, ["Arc"] = false }
   local window = hs.window.focusedWindow()
   if window then
     local is_standard = window:isStandard()
     local app_name = window:application():name()
-    if app_name == "Arc" then window:move(position)
-    elseif not is_standard or app_name == "System Settings" then window:centerOnScreen()
+    -- hs.alert.show(app_name)
+    if special_app_list[app_name] ~= nil then
+      if special_app_list[app_name] then window:centerOnScreen() else window:move(position) end
+    elseif not is_standard then window:centerOnScreen()
     else window:move(position)
     end
   else hs.alert.show("ERROR: No active window!")
