@@ -23,10 +23,11 @@ function vpn() {
 # Quick Start VPN on Linux
 if [ "$(uname)" = 'Linux' ]; then
   function startClash() {
+    local tool_name="$(command -v mihomo &> /dev/null && echo 'mihomo' || echo 'clash')"
     # Check `clash` command
-    (! command -v clash &> /dev/null) && echo_red 'Not found: `clash` command' && return 1
+    (! command -v "$tool_name" &> /dev/null) && echo_red 'Not found: `clash/mihomo` command' && return 1
     # Start clash
-    (pgrep -x clash &> /dev/null && echo_yellow 'Clash is already running!') || nohup clash > /dev/null &
+    (pgrep -x "$tool_name" &> /dev/null && echo_yellow 'Clash is already running!') || nohup "$tool_name" > /dev/null &
     # Start VPN
     vpn start
   }
@@ -36,7 +37,11 @@ fi
 # -----------------------------------
 # -------- Autostart
 # -----------------------------------
-if [ "$(uname)" = 'Darwin' ]; then pgrep -i clash &> /dev/null && vpn start
-elif [ "$(uname)" = 'Linux' ]; then pgrep -x clash &> /dev/null && vpn start
-else echo_red 'Not supported: Unknown OS, auto start VPN failed.'
-fi
+function _auto_start_vpn() {
+  local tool_name="$(command -v mihomo &> /dev/null && echo 'mihomo' || echo 'clash')"
+  if [ "$(uname)" = 'Darwin' ]; then pgrep -i "$tool_name" &> /dev/null && vpn start
+  elif [ "$(uname)" = 'Linux' ]; then pgrep -x "$tool_name" &> /dev/null && vpn start
+  else echo_red 'Not supported: Unknown OS, auto start VPN failed.'
+  fi
+}
+_auto_start_vpn
