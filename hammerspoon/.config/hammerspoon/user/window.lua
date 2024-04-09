@@ -46,6 +46,10 @@ local function _move_and_resize_window(position)
     local is_standard = window:isStandard()
     local app_name = window:application():name()
     -- hs.alert.show(app_name)
+
+    -- EXIT: Special treatment for `Battle.net`.
+    if app_name == "Battle.net" then if window:title() == "Battle.net Login" then window:centerOnScreen() else window:move(position) end return end
+
     if special_app_list[app_name] ~= nil then
       if special_app_list[app_name] then window:centerOnScreen() else window:move(position) end
     elseif not is_standard then window:centerOnScreen()
