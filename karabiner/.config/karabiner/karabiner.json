@@ -2056,6 +2056,86 @@
                                         "value": false
                                     }
                                 ],
+                                "description": "<HHYPER>s := open Browser (Safari)",
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "right_option",
+                                            "left_command"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Safari"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_option",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "Alone<HHYPER>s := open Browser (Safari)",
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "right_option",
+                                            "left_command"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Safari"
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_shift": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_control": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "right_option": "off"
+                                        }
+                                    },
+                                    {
+                                        "sticky_modifier": {
+                                            "left_command": "off"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "alone_right_option",
+                                        "type": "variable_if",
+                                        "value": false
+                                    }
+                                ],
                                 "description": "<HHYPER>t := open Terminal (Termius)",
                                 "from": {
                                     "key_code": "t",
