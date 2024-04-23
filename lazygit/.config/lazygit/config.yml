@@ -3,10 +3,13 @@ gui:
   windowSize: 'normal' # one of 'normal' | 'half' | 'full' default is 'normal'
   scrollHeight: 2 # how many lines you scroll by
   scrollPastBottom: true # enable scrolling past the bottom
+  scrollOffMargin: 2 # how many lines to keep before/after the cursor when it reaches the top/bottom of the view; see 'Scroll-off Margin' section below
+  scrollOffBehavior: 'margin' # one of 'margin' | 'jump'; see 'Scroll-off Margin' section below
   sidePanelWidth: 0.3333 # number from 0 to 1
   expandFocusedSidePanel: false
   mainPanelSplitMode: 'flexible' # one of 'horizontal' | 'flexible' | 'vertical'
-  language: 'auto' # one of 'auto' | 'en' | 'zh' | 'pl' | 'nl' | 'ja' | 'ko' | 'ru'
+  enlargedSideViewLocation: 'left' # one of 'left' | 'top'
+  language: 'auto' # one of 'auto' | 'en' | 'zh-CN' | 'zh-TW' | 'pl' | 'nl' | 'ja' | 'ko' | 'ru'
   timeFormat: '02 Jan 06' # https://pkg.go.dev/time#Time.Format
   shortTimeFormat: '3:04PM'
   theme:
@@ -22,8 +25,6 @@ gui:
       - blue
     selectedLineBgColor:
       - blue # set to `default` to have no background colour
-    selectedRangeBgColor:
-      - blue
     cherryPickedCommitBgColor:
       - cyan
     cherryPickedCommitFgColor:
@@ -42,20 +43,30 @@ gui:
   showRandomTip: true
   showBranchCommitHash: false # show commit hashes alongside branch names
   showBottomLine: true # for hiding the bottom information line (unless it has important information to tell you)
+  showPanelJumps: true # for showing the jump-to-panel keybindings as panel subtitles
   showCommandLog: true
   showIcons: false # deprecated: use nerdFontsVersion instead
   nerdFontsVersion: "" # nerd fonts version to use ("2" or "3"); empty means don't show nerd font icons
+  showFileIcons: true # for hiding file icons in the file views
   commandLogSize: 8
   splitDiff: 'auto' # one of 'auto' | 'always'
   skipRewordInEditorWarning: false # for skipping the confirmation before launching the reword editor
-  border: 'single' # one of 'single' | 'double' | 'rounded' | 'hidden'
+  border: 'rounded' # one of 'single' | 'double' | 'rounded' | 'hidden'
   animateExplosion: true # shows an explosion animation when nuking the working tree
+  portraitMode: 'auto' # one of 'auto' | 'never' | 'always'
+  filterMode: 'substring' # one of 'substring' | 'fuzzy'; see 'Filtering' section below
+  spinner:
+    frames: ['|', '/', '-', '\\']
+    rate: 50 # spinner rate in milliseconds
+  statusPanelView: 'dashboard' # one of 'dashboard' | 'allBranchesLog'
 git:
   paging:
     colorArg: always
     useConfig: false
   commit:
     signOff: false
+    autoWrapCommitMessage: true # automatic WYSIWYG wrapping of the commit message as you type
+    autoWrapWidth: 72 # if autoWrapCommitMessage is true, the width to wrap to
   merging:
     # only applicable to unix users
     manualCommit: false
@@ -65,10 +76,14 @@ git:
     # one of date-order, author-date-order, topo-order or default.
     # topo-order makes it easier to read the git log graph, but commits may not
     # appear chronologically. See https://git-scm.com/docs/git-log#_commit_ordering
+    #
+    # Deprecated: Configure this with `Log menu -> Commit sort order` (<c-l> in the commits window by default).
     order: 'topo-order'
     # one of always, never, when-maximised
     # this determines whether the git graph is rendered in the commits panel
-    showGraph: 'when-maximised'
+    #
+    # Deprecated: Configure this with `Log menu -> Show git graph` (<c-l> in the commits window by default).
+    showGraph: 'always'
     # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
     showWholeGraph: false
   skipHookPrefix: WIP
@@ -83,7 +98,7 @@ git:
   overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
   disableForcePushing: false
   parseEmoji: false
-  diffContextSize: 3 # how many lines of context are shown around a change in diffs
+  truncateCopiedCommitHashesTo: 12 # When copying commit hashes to the clipboard, truncate them to this length. Set to 40 to disable truncation.
 os:
   copyToClipboardCmd: '' # See 'Custom Command for Copying to Clipboard' section
   editPreset: '' # see 'Configuring File Editing' section
@@ -128,7 +143,7 @@ keybinding:
     jumpToBlock: ['1', '2', '3', '4', '5'] # goto the Nth block / panel
     nextMatch: 'n'
     prevMatch: 'N'
-    optionMenu: null # show help menu
+    optionMenu: <disabled> # show help menu
     optionMenu-alt1: '?' # show help menu
     select: '<space>'
     goInto: '<enter>'
@@ -165,6 +180,9 @@ keybinding:
     toggleWhitespaceInDiffView: '<c-w>'
     increaseContextInDiffView: '}'
     decreaseContextInDiffView: '{'
+    toggleRangeSelect: 'v'
+    rangeSelectUp: '<s-up>'
+    rangeSelectDown: '<s-down>'
   status:
     checkForUpdate: 'u'
     recentRepos: '<enter>'
@@ -173,6 +191,8 @@ keybinding:
     commitChangesWithoutHook: 'w' # commit changes without pre-commit hook
     amendLastCommit: 'A'
     commitChangesWithEditor: 'C'
+    findBaseCommitForFixup: '<c-f>'
+    confirmDiscard: 'x'
     ignoreFile: 'i'
     refreshFiles: 'r'
     stashAllChanges: 's'
@@ -208,11 +228,11 @@ keybinding:
     moveDownCommit: '<c-j>' # move commit down one
     moveUpCommit: '<c-k>' # move commit up one
     amendToCommit: 'A'
+    amendAttributeMenu: 'a'
     pickCommit: 'p' # pick commit (when mid-rebase)
     revertCommit: 't'
-    cherryPickCopy: 'c'
-    cherryPickCopyRange: 'C'
-    pasteCommits: 'v'
+    cherryPickCopy: 'C'
+    pasteCommits: 'V'
     tagCommit: 'T'
     checkoutCommit: '<space>'
     resetCherryPick: '<c-R>'
@@ -225,11 +245,15 @@ keybinding:
   commitFiles:
     checkoutCommitFile: 'c'
   main:
-    toggleDragSelect: 'v'
-    toggleDragSelect-alt: 'V'
     toggleSelectHunk: 'a'
     pickBothHunks: 'b'
   submodules:
     init: 'i'
     update: 'u'
     bulkMenu: 'b'
+  commitMessage:
+    commitMenu: '<c-o>'
+  amendAttribute:
+    addCoAuthor: 'c'
+    resetAuthor: 'a'
+    setAuthor: 'A'
