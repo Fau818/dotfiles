@@ -2,7 +2,7 @@
   defaultBranch = main
 [user]
   name = Fau
-  email = Fau818@qq.com
+  email = zhangyuFau@gmail.com
 [core]
   excludesfile = ~/.config/git/gitignore_global
   editor = nvim

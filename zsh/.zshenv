@@ -15,6 +15,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 # -----------------------------------
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZPLUGINDIR="$ZDOTDIR/plugins"
+export ZSCRIPTDIR="$ZDOTDIR/scripts"
 export HISTFILE="$ZDOTDIR/.zsh_history"
 
 
