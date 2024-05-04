@@ -45,9 +45,21 @@ wifi=(
 )
 
 
+Surge=(
+  alias.update_freq=1
+  alias.color="$GREEN"
+  click_script="$SCRIPT_DIR/click/surge.sh"
+
+  padding_right="$ITEM_MARGIN"
+  padding_left="$ITEM_MARGIN"
+  background.color="$BACKGROUND_COLOR"
+)
+
 # -----------------------------------
 # -------- Setup
 # -----------------------------------
-sketchybar --add item  wifi right        \
-           --set       wifi "${wifi[@]}" \
-           --subscribe wifi wifi_change
+# sketchybar --add item  wifi right        \
+#            --set       wifi "${wifi[@]}" \
+#            --subscribe wifi wifi_change
+sketchybar --add alias Surge right \
+           --set Surge "${Surge[@]}"

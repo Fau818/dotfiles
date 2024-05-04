@@ -44,4 +44,3 @@ function _auto_start_vpn() {
   else echo_red 'Not supported: Unknown OS, auto start VPN failed.'
   fi
 }
-_auto_start_vpn
