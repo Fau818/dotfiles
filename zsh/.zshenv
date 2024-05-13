@@ -41,8 +41,6 @@ export LANG='en_US.UTF-8' LC_ALL='en_US.UTF-8' LC_CTYPE='en_US.UTF-8'
 export DOTFILE_PATH=$([ "$(uname)" = 'Darwin' ] && echo "$HOME/Documents/Fau/dotfiles" || echo "$XDG_CONFIG_HOME/dotfiles")
 # ICLOUD
 [ "$(uname)" = 'Darwin' ] && export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
-# Copilot
-export COPILOT_ENABLE=$([ -f "$XDG_CONFIG_HOME/github-copilot/hosts.json" ] && echo 1 || echo 0)
 # OpenAI
 export OPENAI_API_PATH="$DOTFILE_PATH/private/openai"
 
