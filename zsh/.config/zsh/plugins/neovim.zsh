@@ -16,7 +16,8 @@ else
       # Install dependencies on Linux
       [ "$(uname)" = 'Linux' ] && sudo apt-get install -y language-pack-en-base kitty xclip gcc g++
       # Install dependencies
-      brew install make ripgrep fd node yarn
+      brew install lua make node yarn ripgrep lazygit
+      brew install xclip
       # Install neovim nightly version
       brew install --HEAD neovim
     else echo_red 'Not found: `brew` command'

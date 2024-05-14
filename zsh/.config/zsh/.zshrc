@@ -20,6 +20,7 @@ alias mv='mv -v'
 alias ctaz='tar -zcvf' xtaz='tar -zxvf'
 alias gcmm='git commit -m' gcmmd='gcmm "$(DATE)"'
 
+
 # -----------------------------------
 # -------- Scripts
 # -----------------------------------
@@ -41,3 +42,9 @@ source "$ZPLUGINDIR/python.zsh"
 source "$ZPLUGINDIR/installer.zsh"
 
 source "$ZPLUGINDIR/zinit.zsh"
+
+
+# -----------------------------------
+# -------- Goto Home if Login Shell
+# -----------------------------------
+[[ "$(uname)" == 'Linux' && "$SHLVL" -eq 1 ]] && cd ~ || true
