@@ -43,10 +43,10 @@ lctrl + rshift + lalt + fn - k : yabai -m window --warp north
 lctrl + rshift + lalt + fn - l : yabai -m window --warp east
 
 # Stack window (WINKEY3)
-rshift + lalt + fn - h : $HOME/.config/yabai/stack.sh west
-rshift + lalt + fn - j : $HOME/.config/yabai/stack.sh south
-rshift + lalt + fn - k : $HOME/.config/yabai/stack.sh north
-rshift + lalt + fn - l : $HOME/.config/yabai/stack.sh east
+rshift + lalt + fn - h : ($HOME/.config/yabai/stack.sh west)  && sketchybar --trigger skhd_window_type_changed
+rshift + lalt + fn - j : ($HOME/.config/yabai/stack.sh south) && sketchybar --trigger skhd_window_type_changed
+rshift + lalt + fn - k : ($HOME/.config/yabai/stack.sh north) && sketchybar --trigger skhd_window_type_changed
+rshift + lalt + fn - l : ($HOME/.config/yabai/stack.sh east)  && sketchybar --trigger skhd_window_type_changed
 
 # Toggle window layout (WINKEY1)
 rshift + lalt - f : yabai -m window --toggle float; [ $(yabai -m query --windows --window | jq '.["is-floating"]') = 'true' ] && hs -c "Fau_hs.window.center_window(0.6)"; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed

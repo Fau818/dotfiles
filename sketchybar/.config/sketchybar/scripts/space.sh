@@ -50,10 +50,10 @@ function update_space_windows() {
   space="$(echo "$INFO" | jq -r '.space')"  # NOTE: Different with `$SID`
   apps="$(echo "$INFO" | jq -r '.apps | keys[]')"
 
-  icon_strip=''
+  icon_strip=' '
   if [ "${apps}" != '' ]; then
     while read -r app
-    do icon_strip+=" $($CONFIG_DIR/scripts/icon_map.sh "$app")"
+    do icon_strip+="$($CONFIG_DIR/scripts/icon_map.sh "$app")"
     done <<< "${apps}"
   else icon_strip=' —'
   fi
@@ -82,7 +82,7 @@ function mouse_clicked() {
 case "$SENDER" in
   'mouse.clicked') mouse_clicked
     ;;
-  'forced'|'skhd_space_type_changed'|'space_change'|'yabai_loaded') update_space_type
+  'forced'|'space_change'|'skhd_space_type_changed'|'yabai_loaded') update_space_type
     ;;
   'space_windows_change') update_space_windows
     ;;

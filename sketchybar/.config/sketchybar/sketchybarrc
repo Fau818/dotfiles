@@ -137,16 +137,16 @@ defaults=(
   background.drawing=off
   background.height="$BACKGROUND_HEIGHT"
   # background.color="$BACKGROUND_COLOR"
-  background.border_width="$BACKGROUND_BORDER_WIDTH"
   background.border_color="$BACKGROUND_BORDER_COLOR"
+  background.border_width="$BACKGROUND_BORDER_WIDTH"
   background.corner_radius="$BACKGROUND_CORNER_RADIUS"
   background.padding_left="$BACKGROUND_PADDING"
   background.padding_right="$BACKGROUND_PADDING"
 
   # Popup Menus
   popup.background.color="$POPUP_COLOR"
-  popup.background.border_width="$POPUP_BORDER_WIDTH"
   popup.background.border_color="$POPUP_BORDER_COLOR"
+  popup.background.border_width="$POPUP_BORDER_WIDTH"
   popup.background.corner_radius="$POPUP_CORNER_RADIUS"
   popup.blur_radius="$POPUP_BLUR_RADIUS"
 )
