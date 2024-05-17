@@ -34,7 +34,7 @@ local media_title_config = {
     padding_left = 2 * settings.item_padding,
     y_offset = 7,
     width = 85,
-    max_chars = 15,
+    max_chars = 12,
   },
 }
 
