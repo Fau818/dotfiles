@@ -19,7 +19,7 @@ else
       brew install lua make node yarn ripgrep lazygit
       brew install xclip
       # Install neovim nightly version
-      brew install --HEAD neovim
+      brew install neovim
     else echo_red 'Not found: `brew` command'
     fi
   }

@@ -37,6 +37,6 @@ function __brew_install_packages() {
 
     brew install lua make ripgrep node yarn
     brew install xclip
-    brew install --HEAD neovim
+    brew install neovim
   fi
 }
