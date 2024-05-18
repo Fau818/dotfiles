@@ -99,7 +99,7 @@ white_list=$(create_regex_string "${white_list_array[@]}")
 extra_list_array=(
   Finder Mail
   Music Spotify
-  QQ WeChat 'Telegram Lite'
+  QQ WeChat Discord 'Telegram Lite'
 )
 extra_list=$(create_regex_string "${extra_list_array[@]}")
 
@@ -124,7 +124,10 @@ yabai -m rule --apply
 # =============================================
 # Refocus window when window is destroyed
 yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/destroy_space_if_no_window.sh"
+# NOTE: Since some apps will hide their windows when closed, the window focus will be on Finder.
+# \     So an `application_hidden` event is added to handle this situation.
 yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/refocus_window.sh '$white_list|$extra_list'"
+yabai -m signal --add event=application_hidden action="$HOME/.config/yabai/refocus_window.sh 'Finder'"
 
 # Sketchybar
 yabai -m signal --add event=window_created      action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_window_created"
