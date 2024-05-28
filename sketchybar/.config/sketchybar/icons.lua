@@ -1,5 +1,6 @@
 return {
   aqi = "􀴿",
+  apple = "􀣺",
   cpu = "􀫥",
   clipboard = "􀉄",
 
@@ -38,7 +39,6 @@ return {
 
   -- plus = "􀅼 ",
   -- loading = "􀖇 ",
-  -- apple = "􀣺 ",
   -- line = "􀝷 ",
   -- gear = "􀍟 ",
   -- bookmark = "􀉟 ",

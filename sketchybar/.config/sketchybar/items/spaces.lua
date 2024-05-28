@@ -139,7 +139,7 @@ local function update_space_app(env)
   local icon_line = ""
   local no_app = true
   for app, count in pairs(env.INFO.apps) do
-    if app ~= "GrabIt" then
+    if app ~= "GrabIt" and app ~= "HSTracker" then
       no_app = false
       local icon = app_icons[app] or app_icons["Default"]
       icon_line = icon_line .. icon

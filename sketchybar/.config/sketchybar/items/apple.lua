@@ -5,12 +5,14 @@ local apple_config = {
   position = "left",
   icon = {
     string = icons.aqi,
-    font = { style = "Black", size = 13.0 },
+    font = { style = "Black", size = 15.0 },
     color = colors.stardust,
+    background = { color = colors.almost_transparent }
   },
   label = { drawing = false },
-  -- padding_left  = 10,
+  padding_left  = settings.item_padding,
   padding_right = 10,
+  y_offset = 2,
 
   click_script = "$CONFIG_DIR/helpers/menus/bin/menus -s 0",
 }
