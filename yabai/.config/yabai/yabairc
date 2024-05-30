@@ -90,7 +90,7 @@ function create_regex_string() {
 # -------- Fields
 # -----------------------------------
 white_list_array=(
-  kitty Code
+  kitty Code Obsidian
   Safari Arc 'Google Chrome'
 )
 white_list=$(create_regex_string "${white_list_array[@]}")
