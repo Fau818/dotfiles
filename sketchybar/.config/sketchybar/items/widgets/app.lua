@@ -76,20 +76,13 @@ local event_listener = sbar.add("item", "app.event_listener", { drawing = false,
 -- ========== Functions
 -- =============================================
 local function update_app_status(env)
-  local app_list = { "qq", "wechat", "mail" }
-  for _, app_name in ipairs(app_list) do
-    if app_name == "mail" then
-      sbar.exec([[osascript -e 'tell application "Mail" to return the unread count of inbox']], function(result)
-        local label = result:sub(1, -2)
+  local app_list = { ["qq"] = "com.tencent.qq", ["wechat"] = "com.tencent.xinWeChat", ["mail"] = "com.apple.mail" }
+  for app_name, app_bundle_id in pairs(app_list) do
+      sbar.exec(([[lsappinfo info -only StatusLabel "%s"]]):format(app_bundle_id), function(result)
+        -- local label = result:sub(1, -2)
+        local label = result:match("%d+") or "0"
         sbar.set(("app.%s"):format(app_name), { label = label })
       end)
-    else
-      sbar.exec(([[lsappinfo -all list | grep "%s" | egrep -o "\"StatusLabel\"=\{ \"label\"=\"?(.*?)\"? \}" | sed 's/\"StatusLabel\"={ \"label\"=\(.*\) }/\1/g']]):format(app_name), function(result)
-        local label = result:sub(1, -2)
-        label = label:match("%d+") or 0
-        sbar.set(("app.%s"):format(app_name), { label = label })
-      end)
-    end
   end
 
 end
