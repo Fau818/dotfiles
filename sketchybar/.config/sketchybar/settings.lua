@@ -13,6 +13,7 @@ return {
     text      = "SF Pro",  -- Used for text
     numbers   = "SF Pro",  -- Used for numbers
     nerd_font = "Liga SFMono Nerd Font",
+    nerd_font_alternative = "VictorMono Nerd Font Mono",
     style_map = {
       Ultralight = "Ultralight",
       Thin       = "Thin",

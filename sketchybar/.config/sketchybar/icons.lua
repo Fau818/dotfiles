@@ -24,9 +24,10 @@ return {
   media = { back = "􀊊", play_pause = "􀊈", forward = "􀊌" },
 
   app = {  -- Nerd Font
-    qq     = "󰘅",
-    wechat = "󰘑",
-    mail   = "󰇮",
+    qq      = "󰘅",
+    wechat  = "󰘑",
+    mail    = "󰇮",
+    discord = "",
   },
 
   yabai = {

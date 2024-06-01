@@ -31,14 +31,14 @@ command -v zoxide &> /dev/null && eval "$(zoxide init zsh --cmd j)"
 # -----------------------------------
 if (command -v yazi && ! command -v __yazi) &> /dev/null; then
   function __yazi() {
-    tmp="$(mktemp -t "yazi-cwd.XXXXX")"
-    yazi --cwd-file="$tmp"
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
     if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
       cd -- "$cwd"
     fi
     rm -f -- "$tmp"
   }
-  alias yazi=__yazi
+  alias yazi=__yazi f=__yazi
 fi
 
 

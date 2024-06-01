@@ -17,6 +17,7 @@ tree
 wakatime-cli
 wget
 yazi
+poppler
 zoxide
 
 # Neovim

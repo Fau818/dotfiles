@@ -29,9 +29,10 @@ return {
   },
 
   app = {
-    qq     = 0xFF87AEEB,
-    wechat = 0xFF5ECD72,
-    mail   = 0xFF5595DB,
+    qq      = 0xFF87AEEB,
+    wechat  = 0xFF5ECD72,
+    mail    = 0xFF5595DB,
+    discord = 0xFF7C8BEA,
   },
 
   yabai = {
