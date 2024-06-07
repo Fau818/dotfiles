@@ -33,8 +33,8 @@ local media_title_config = {
     color = colors.with_alpha(colors.green, 0.85),
     padding_left = 2 * settings.item_padding,
     y_offset = 7,
-    width = 85,
-    max_chars = 12,
+    width = 100,
+    max_chars = 9,
   },
 }
 
@@ -51,8 +51,8 @@ local media_artist_config = {
     color = colors.with_alpha(colors.blue, 0.90),
     padding_left = 2 * settings.item_padding,
     y_offset = -7,
-    width = 85,
-    max_chars = 15,
+    width = 100,
+    max_chars = 12,
   },
   -- background = { color = colors.red },
 }
