@@ -28,7 +28,9 @@ function ___pip_get_config_file_path() {
 # Official Source
 function __pip_set_official_source() {
   local pip_conf_file=$(___pip_get_config_file_path)
-  echo '# Official Source' > "$pip_conf_file"
+  echo '# Official Source' > "$pip_conf_file" && \
+  echo '[global]' > "$pip_conf_file" && \
+  echo 'break-system-packages = true' >> "$pip_conf_file"
 }
 
 # Tsinghua Source
@@ -37,7 +39,8 @@ function __pip_set_tsinghua_source() {
 
   echo '[global]' > "$pip_conf_file" && \
   echo 'index-url = https://pypi.tuna.tsinghua.edu.cn/simple' >> "$pip_conf_file" && \
-  echo 'trusted-host = pypi.tuna.tsinghua.edu.cn' >> "$pip_conf_file"
+  echo 'trusted-host = pypi.tuna.tsinghua.edu.cn' >> "$pip_conf_file" && \
+  echo 'break-system-packages = true' >> "$pip_conf_file"
 }
 
 # Aliyun Source
@@ -46,7 +49,8 @@ function __pip_set_aliyun_source() {
 
   echo '[global]' > "$pip_conf_file" && \
   echo 'index-url = http://mirrors.aliyun.com/pypi/simple' >> "$pip_conf_file" && \
-  echo 'trusted-host = mirrors.aliyun.com' >> "$pip_conf_file"
+  echo 'trusted-host = mirrors.aliyun.com' >> "$pip_conf_file" && \
+  echo 'break-system-packages = true' >> "$pip_conf_file"
 }
 
 

@@ -63,7 +63,8 @@ config=(
   active_window_opacity 1.0
   normal_window_opacity 0.9
 
-  window_animation_duration 0.0
+  # window_animation_duration 0.1
+  # window_animation_easing ease_out_cubic
 
   insert_feedback_color 0xFFD75F5F
 )
@@ -90,7 +91,7 @@ function create_regex_string() {
 # -------- Fields
 # -----------------------------------
 white_list_array=(
-  kitty Code Obsidian
+  kitty Code Obsidian Neovide
   Safari Arc 'Google Chrome'
 )
 white_list=$(create_regex_string "${white_list_array[@]}")
