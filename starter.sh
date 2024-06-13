@@ -33,8 +33,6 @@ function __brew_install_packages() {
 
     brew install zoxide yazi lazygit
 
-    brew install zerotier-one # Zerotier
-
     brew install lua make ripgrep node yarn
     brew install xclip
     brew install neovim
