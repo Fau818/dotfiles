@@ -16,7 +16,7 @@ function vpn() {
   # With parameters
   if [ "$1" = 'start' ]; then __vpn_start; return 0
   elif [ "$1" = 'stop' ]; then __vpn_stop; return 0
-  else echo_yellow 'Invalid parameter, use auto toggle.'
+  elif [ -n "$1" ]; then echo_red 'Invalid parameter, use auto toggle.'
   fi
 
   # Auto toggle
@@ -44,6 +44,8 @@ if [ "$(uname)" = 'Linux' ]; then
     local tool_pid=$(pgrep -x "$tool_name")
     ([ -n "$tool_pid" ] && sudo kill "$tool_pid" && echo_yellow "$tool_name has stopped!" && vpn stop) || echo_yellow 'No running process Found!'
   }
+
+  function restartClash() { stopClash && startClash; }
 fi
 
 

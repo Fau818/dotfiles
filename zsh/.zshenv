@@ -77,6 +77,8 @@ export LESSHISTFILE="$XDG_CACHE_HOME/less_history"
 # Npm
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/config"
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
+# Gem
+export GEM_HOME="$XDG_DATA_HOME/gem"
 # Git
 export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/.gitconfig"
 # Starship
@@ -85,7 +87,5 @@ export STARSHIP_CONFIG="$ZDOTDIR/starship.toml"
 export TLDR_CACHE_DIR="$XDG_DATA_HOME/tldr"
 # Wakatime
 export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
-# Wget
-export WGET_HSTS_FILE="$XDG_CACHE_HOME/wget-hsts"
 # Zoxide
 export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"

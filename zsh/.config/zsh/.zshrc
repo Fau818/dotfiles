@@ -17,6 +17,7 @@ fi
 # -----------------------------------
 alias sudo='sudo -E '
 alias mv='mv -v'
+alias wget="wget --hsts-file=$XDG_CACHE_HOME/.wget-hsts"
 alias ctaz='tar -zcvf' xtaz='tar -zxvf'
 alias gcmm='git commit -m' gcmmd='gcmm "$(DATE)"'
 

@@ -3,6 +3,9 @@
 # Checking for memory leaks in Hammerspoon.
 mem_usage=$(ps -o rss= -p $(pgrep Hammerspoon))
 if [ "$mem_usage" -gt $((200 * 1024)) ]; then
-  osascript -e 'tell application "Hammerspoon" to quit'
-  open -a Hammerspoon
+  # osascript -e 'tell application "Hammerspoon" to quit'
+  # open -a Hammerspoon
+
+  # Send to Notification Center
+  osascript -e 'display notification "Hammerspoon is using too much memory." with title "Hammerspoon"'
 fi
