@@ -45,7 +45,11 @@ if [ "$(uname)" = 'Linux' ]; then
     ([ -n "$tool_pid" ] && sudo kill "$tool_pid" && echo_yellow "$tool_name has stopped!" && vpn stop) || echo_yellow 'No running process Found!'
   }
 
-  function restartClash() { stopClash && startClash; }
+  function restartClash() {
+    stopClash &> /dev/null && echo_yellow "Stopped Clash" || echo_red "Failed to stop Clash"
+    sleep 1
+    startClash &> /dev/null && echo_yellow "Started Clash" || echo_red "Failed to start Clash"
+  }
 fi
 
 
