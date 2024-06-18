@@ -12,7 +12,7 @@ local media_cover_config = {
   position = "e",
   updates = true,
   drawing = false,
-  padding_left = 50,
+  padding_left = 45,
   background = { color = colors.transparent, image = { string = "media.artwork", scale = 0.9 } },
   label = { drawing = false },
   icon  = { drawing = false },
@@ -34,7 +34,7 @@ local media_title_config = {
     padding_left = 2 * settings.item_padding,
     y_offset = 7,
     width = 100,
-    max_chars = 9,
+    max_chars = 8,
   },
 }
 
@@ -52,7 +52,7 @@ local media_artist_config = {
     padding_left = 2 * settings.item_padding,
     y_offset = -7,
     width = 100,
-    max_chars = 12,
+    max_chars = 11,
   },
   -- background = { color = colors.red },
 }

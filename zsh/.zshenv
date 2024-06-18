@@ -89,3 +89,10 @@ export TLDR_CACHE_DIR="$XDG_DATA_HOME/tldr"
 export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
 # Zoxide
 export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
+
+
+
+# =============================================
+# ======== TEST
+# =============================================
+export FZF_DEFAULT_COMMAND='fd --type f --exclude Library'
