@@ -93,6 +93,7 @@ function create_regex_string() {
 white_list_array=(
   kitty Code Obsidian Neovide
   Safari Arc 'Google Chrome'
+  'Microsoft Word'
 )
 white_list=$(create_regex_string "${white_list_array[@]}")
 

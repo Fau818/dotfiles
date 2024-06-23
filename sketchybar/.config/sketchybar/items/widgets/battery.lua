@@ -43,7 +43,7 @@ local function update_battery_info(env)
     if charging then icon = icons.battery.charging
     elseif found then
       if percent >= 85 then icon = icons.battery._100
-      elseif percent > 60 then icon = icons.battery._75; color = colors.battery.normal
+      elseif percent > 65 then icon = icons.battery._75; color = colors.battery.health
       elseif percent > 35 then icon = icons.battery._50; color = colors.battery.normal
       elseif percent > 15 then icon = icons.battery._25; color = colors.battery.death
       else icon = icons.battery._0; color = colors.battery.death

@@ -23,7 +23,33 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 # -----------------------------------
 # -------- Zoxide
 # -----------------------------------
-command -v zoxide &> /dev/null && eval "$(zoxide init zsh --cmd j)"
+if command -v zoxide &> /dev/null; then
+  # ==================== Init Zoxide ====================
+  eval "$(zoxide init zsh --cmd j)"
+
+  # ==================== Enhance Zoxide ====================
+  _ZOXIDE_ECHO=true  # Set to `false` to disable echo
+  _ZOXIDE_INDEX=1; _ZOXIDE_LAST_QUERY=""; _ZOXIDE_DIRS=()
+  function j() {
+    # Query
+    local query="$*"
+    if [[ -n "$query" ]]; then
+      if [[ ${_ZOXIDE_LAST_QUERY} != "$query" ]]; then
+        _ZOXIDE_INDEX=1; _ZOXIDE_LAST_QUERY="$query"
+        # NOTE: `$query` cannot be passed directly since it will be treated as a single argument. (Use `"$@"`)
+        IFS=$'\n' && _ZOXIDE_DIRS=($(zoxide query --list "$@")) && unset IFS
+      fi
+    fi
+
+    # Jump
+    if [[ ${#_ZOXIDE_DIRS[@]} == 0 ]]; then echo_red 'zoxide: no directory found.'
+    else
+      [[ "$_ZOXIDE_ECHO" == true ]] && echo "$_ZOXIDE_INDEX/${#_ZOXIDE_DIRS[@]}" "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}"
+      cd "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}" || echo_red "zoxide: failed to ${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}."
+      _ZOXIDE_INDEX=$((_ZOXIDE_INDEX % ${#_ZOXIDE_DIRS[@]} + 1))
+    fi
+  }
+fi
 
 
 # -----------------------------------
