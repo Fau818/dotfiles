@@ -1,6 +1,5 @@
 local colors   = require("colors")
 
-
 sbar.bar({
   color        = colors.bar.bg,
   border_color = colors.bar.border,
