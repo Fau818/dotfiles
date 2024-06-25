@@ -40,7 +40,7 @@ local maximum = {
 ---Move and resize window
 ---@param position table {x, y, w, h}
 local function _move_and_resize_window(position)
-  local special_app_list = { ["System Settings"] = true, ["Quantumult X"] = true, ["Arc"] = false }
+  local special_app_list = { ["System Settings"] = true, ["Reminders"] = true, ["Quantumult X"] = true, ["Arc"] = false }
   local window = hs.window.focusedWindow()
   if window then
     local is_standard = window:isStandard()
