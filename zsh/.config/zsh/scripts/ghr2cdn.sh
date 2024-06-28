@@ -17,7 +17,7 @@ convert_to_jsdelivr() {
   IFS='/' read -r -a parts <<< "$url_no_protocol"
 
   # Ensure the URL has enough parts
-  if [ ${#parts[@]} -lt 4 ]; then
+  if [[ ${#parts[@]} -lt 4 ]]; then
     echo "Error: URL must include user, repository, branch, and file path."
     exit 1
   fi
@@ -38,7 +38,7 @@ convert_to_jsdelivr() {
 }
 
 # Main script starts here
-if [ "$#" -ne 1 ]; then
+if [[ "$#" -ne 1 ]]; then
   echo "Usage: $0 <github_raw_url>"
   exit 1
 fi

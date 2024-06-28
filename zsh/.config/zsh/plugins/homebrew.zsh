@@ -8,8 +8,8 @@
 export HOMEBREW_NO_AUTO_UPDATE=1
 
 # Make sure the `brew` command is available on Linux
-if [ "$(uname)" = 'Linux' ] && ! command -v brew &> /dev/null; then
-  [ -d '/home/linuxbrew' ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [[ "$(uname)" == 'Linux' ]] && ! command -v brew &> /dev/null; then
+  [[ -d '/home/linuxbrew' ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 command -v brew &> /dev/null && export HOMEBREW_PREFIX="$(brew --prefix)"
 
@@ -17,10 +17,10 @@ command -v brew &> /dev/null && export HOMEBREW_PREFIX="$(brew --prefix)"
 # -----------------------------------
 # -------- Optional Package
 # -----------------------------------
-if [ -v HOMEBREW_PREFIX ]; then
-  [ -d "$HOMEBREW_PREFIX/opt/llvm" ]        && PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
-  [ -d "$HOMEBREW_PREFIX/opt/make" ]        && PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
-  [ -d "$HOMEBREW_PREFIX/opt/openjdk" ]     && PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
+if [[ -v HOMEBREW_PREFIX ]]; then
+  [[ -d "$HOMEBREW_PREFIX/opt/llvm" ]]    && PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
+  [[ -d "$HOMEBREW_PREFIX/opt/make" ]]    && PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
+  [[ -d "$HOMEBREW_PREFIX/opt/openjdk" ]] && PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
 fi
 
 
@@ -48,7 +48,7 @@ HOMEBREW_ALIYUN_BOTTLE_DOMAIN='https://mirrors.aliyun.com/homebrew/homebrew-bott
 function ___homebrew_auto_set_bottle_domain() {
   # Get repository url and force end with `.git`
   local homebrew_repo_url="$(git -C "$(brew --repo)" remote get-url origin)"
-  [[ $homebrew_repo_url != *.git ]] && homebrew_repo_url="$homebrew_repo_url.git"
+  [[ "$homebrew_repo_url" != *.git ]] && homebrew_repo_url="$homebrew_repo_url.git"
   # Determine repository type
   if [[ "$homebrew_repo_url" == "$HOMEBREW_OFFICIAL_BREW_GIT_REMOTE" ]]; then unset HOMEBREW_API_DOMAIN HOMEBREW_BOTTLE_DOMAIN
   elif [[ "$homebrew_repo_url" == "$HOMEBREW_TSINGHUA_BREW_GIT_REMOTE" ]]; then
@@ -62,7 +62,7 @@ function ___homebrew_auto_set_bottle_domain() {
 }
 
 if command -v brew &> /dev/null; then
-  [ ! -v HOMEBREW_PREFIX ] && export HOMEBREW_PREFIX="$(brew --prefix)"
+  [[ ! -v HOMEBREW_PREFIX ]] && export HOMEBREW_PREFIX="$(brew --prefix)"
   # Set bottle domain
   ___homebrew_auto_set_bottle_domain
   # Completion

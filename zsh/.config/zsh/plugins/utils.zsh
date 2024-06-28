@@ -5,7 +5,7 @@
 # -------- MISC
 # -----------------------------------
 # Kitty
-[ "$TERM" = 'xterm-kitty' ] && alias kssh='kitty +kitten ssh'
+[[ "$TERM" == 'xterm-kitty' ]] && alias kssh='kitty +kitten ssh'
 # Rsync
 command -v rsync &> /dev/null && alias frsync='rsync -razvhP'
 # Mysql
@@ -55,6 +55,7 @@ fi
 # -----------------------------------
 # -------- Yazi
 # -----------------------------------
+# SEE: https://yazi-rs.github.io/docs/quick-start#shell-wrapper
 if (command -v yazi && ! command -v __yazi) &> /dev/null; then
   function __yazi() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
@@ -100,16 +101,17 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
   # Stow for installed binaries automatically
   function auto_stow() {
     typeset -A configs=(
-      [clangd]="clangd"
-      [git]="git"
-      [github-copilot]="nvim"
-      [kaggle]="kaggle"
-      [lazygit]="lazygit"
-      [sketchybar]="sketchybar"
-      [ssh]="ssh"
-      [wakatime]="wakatime-cli"
-      [yazi]="yazi"
-      [zsh]="zsh"
+      [clangd]='clangd'
+      [git]='git'
+      [github-copilot]='nvim'
+      [kaggle]='kaggle'
+      [kitty]='kitty'
+      [lazygit]='lazygit'
+      [sketchybar]='sketchybar'
+      [ssh]='ssh'
+      [wakatime]='wakatime-cli'
+      [yazi]='yazi'
+      [zsh]='zsh'
     )
 
     local config

@@ -41,7 +41,7 @@ zinit ice depth=1; zinit snippet OMZL::history.zsh
 zinit ice wait lucid depth=1; zinit snippet OMZL::key-bindings.zsh
 zinit ice depth=1; zinit snippet OMZL::theme-and-appearance.zsh
 
-zinit ice wait lucid depth=1 atload"unalias grv g ghh"; zinit snippet OMZP::git
+zinit ice wait lucid depth=1 atload'unalias grv g ghh'; zinit snippet OMZP::git
 
 
 # -----------------------------------
@@ -62,4 +62,4 @@ zinit light romkatv/powerlevel10k
 zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
 zinit ice depth=1; zinit light zdharma-continuum/fast-syntax-highlighting
 zinit ice wait lucid depth=1; zinit light MichaelAquilina/zsh-you-should-use
-zinit ice wait lucid depth=1 blockf atload"zicompinit; zicdreplay"; zinit light zsh-users/zsh-completions
+zinit ice wait lucid depth=1 blockf atload'zicompinit; zicdreplay'; zinit light zsh-users/zsh-completions

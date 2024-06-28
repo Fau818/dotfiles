@@ -14,17 +14,17 @@ function __vpn_stop() {
 }
 function vpn() {
   # With parameters
-  if [ "$1" = 'start' ]; then __vpn_start; return 0
-  elif [ "$1" = 'stop' ]; then __vpn_stop; return 0
-  elif [ -n "$1" ]; then echo_red 'Invalid parameter, use auto toggle.'
+  if [[ "$1" == 'start' ]]; then __vpn_start; return 0
+  elif [[ "$1" == 'stop' ]]; then __vpn_stop; return 0
+  elif [[ -n "$1" ]]; then echo_red 'Invalid parameter, use auto toggle.'
   fi
 
   # Auto toggle
-  [ ! -v https_proxy ] && __vpn_start || __vpn_stop
+  [[ ! -v https_proxy ]] && __vpn_start || __vpn_stop
 }
 
 # Quick Start VPN on Linux
-if [ "$(uname)" = 'Linux' ]; then
+if [[ "$(uname)" == 'Linux' ]]; then
   function startClash() {
     local tool_name="$(command -v mihomo &> /dev/null && echo 'mihomo' || echo 'clash')"
     # Check `clash` command
@@ -42,13 +42,13 @@ if [ "$(uname)" = 'Linux' ]; then
     (! command -v "$tool_name" &> /dev/null) && echo_red 'Not found: `clash/mihomo` command' && return 1
     # Find the running clash process and kill it with sudo permission.
     local tool_pid=$(pgrep -x "$tool_name")
-    ([ -n "$tool_pid" ] && sudo kill "$tool_pid" && echo_yellow "$tool_name has stopped!" && vpn stop) || echo_yellow 'No running process Found!'
+    ([[ -n "$tool_pid" ]] && sudo kill "$tool_pid" && echo_yellow "$tool_name has stopped!" && vpn stop) || echo_yellow 'No running process Found!'
   }
 
   function restartClash() {
-    stopClash &> /dev/null && echo_yellow "Stopped Clash" || echo_red "Failed to stop Clash"
+    stopClash &> /dev/null && echo_yellow 'Stopped Clash' || echo_red 'Failed to stop Clash'
     sleep 1
-    startClash &> /dev/null && echo_yellow "Started Clash" || echo_red "Failed to start Clash"
+    startClash &> /dev/null && echo_yellow 'Started Clash' || echo_red 'Failed to start Clash'
   }
 fi
 
@@ -58,8 +58,8 @@ fi
 # -----------------------------------
 function _auto_start_vpn() {
   local tool_name="$(command -v mihomo &> /dev/null && echo 'mihomo' || echo 'clash')"
-  if [ "$(uname)" = 'Darwin' ]; then pgrep -i "$tool_name" &> /dev/null && vpn start
-  elif [ "$(uname)" = 'Linux' ]; then pgrep -x "$tool_name" &> /dev/null && vpn start
+  if [[ "$(uname)" == 'Darwin' ]]; then pgrep -i "$tool_name" &> /dev/null && vpn start
+  elif [[ "$(uname)" == 'Linux' ]]; then pgrep -x "$tool_name" &> /dev/null && vpn start
   else echo_red 'Not supported: Unknown OS, auto start VPN failed.'
   fi
 }

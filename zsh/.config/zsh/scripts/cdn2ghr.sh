@@ -1,7 +1,7 @@
 #!/bin/bash
 
 jsdelivr_url=$1
-if [ -z "$jsdelivr_url" ]; then
+if [[ -z "$jsdelivr_url" ]]; then
   echo "Usage: $0 <jsdelivr-url>"
   exit 1
 fi

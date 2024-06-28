@@ -22,25 +22,25 @@ export HISTFILE="$ZDOTDIR/.zsh_history"
 # -----------------------------------
 # -------- Shell and Terminal
 # -----------------------------------
-[ ! -v SHELL ] && export SHELL=$(which zsh)
+[[ ! -v SHELL ]] && export SHELL=$(which zsh)
 
 # Kitty terminal
-[ -v KITTY_PID ] && export TERM='xterm-kitty'
-[ "$(uname)" = 'Linux' ] && command -v kitty &> /dev/null && export TERM='xterm-kitty'
+[[ -v KITTY_PID ]] && export TERM='xterm-kitty'
+[[ "$(uname)" == 'Linux' ]] && command -v kitty &> /dev/null && export TERM='xterm-kitty'
 # Xterm
-([ ! -v TERM ] || [ "$TERM" = 'xterm' ]) && export TERM='xterm-256color'
+[[ ! -v TERM || "$TERM" == 'xterm' ]] && export TERM='xterm-256color'
 
 # Language
-export LANG='en_US.UTF-8' LC_ALL='en_US.UTF-8' LC_CTYPE='en_US.UTF-8'
+[[ ! -v LANG ]] &&  export LANG='en_US.UTF-8' LC_ALL='en_US.UTF-8' LC_CTYPE='en_US.UTF-8'
 
 
 # -----------------------------------
 # -------- Personal Preference
 # -----------------------------------
 # Dotfile path
-export DOTFILE_PATH=$([ "$(uname)" = 'Darwin' ] && echo "$HOME/Documents/Fau/dotfiles" || echo "$XDG_CONFIG_HOME/dotfiles")
+export DOTFILE_PATH=$([[ "$(uname)" == 'Darwin' ]] && echo "$HOME/Documents/Fau/dotfiles" || echo "$XDG_CONFIG_HOME/dotfiles")
 # ICLOUD
-[ "$(uname)" = 'Darwin' ] && export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+[[ "$(uname)" == 'Darwin' ]] && export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 # OpenAI
 export OPENAI_API_PATH="$DOTFILE_PATH/private/openai"
 
