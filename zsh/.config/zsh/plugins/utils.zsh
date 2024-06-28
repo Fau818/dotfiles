@@ -42,7 +42,7 @@ if command -v zoxide &> /dev/null; then
     fi
 
     # Jump
-    if [[ ${#_ZOXIDE_DIRS[@]} == 0 ]]; then echo_red 'zoxide: no directory found.'
+    if [[ ${#_ZOXIDE_DIRS[@]} -eq 0 ]]; then echo_red 'zoxide: no directory found.'
     else
       [[ "$_ZOXIDE_ECHO" == true ]] && echo "$_ZOXIDE_INDEX/${#_ZOXIDE_DIRS[@]}" "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}"
       cd "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}" || echo_red "zoxide: failed to ${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}."
