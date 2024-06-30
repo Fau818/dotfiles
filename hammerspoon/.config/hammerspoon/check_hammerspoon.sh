@@ -9,5 +9,7 @@ if [[ $mem_usage -gt 200 ]]; then
   # Send to Notification Center
   osascript -e 'display notification "Hammerspoon is using too much memory." with title "Hammerspoon"'
   # Restart
-  pkill Hammerspoon && sleep 1 && open -a Hammerspoon
+  pkill Hammerspoon
+  while pgrep -x Hammerspoon &> /dev/null; do sleep 1; done
+  open -a Hammerspoon
 fi
