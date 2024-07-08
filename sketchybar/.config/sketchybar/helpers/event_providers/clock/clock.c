@@ -3,8 +3,6 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-static int last_day = -1;
-
 int main(int argc, char** argv) {
   float update_freq;
   if (argc < 3 || (sscanf(argv[2], "%f", &update_freq) != 1)) {
@@ -19,7 +17,8 @@ int main(int argc, char** argv) {
   const char* format = "%H:%M:%S";
   char time_buffer[64];
   char message_buffer[sizeof(time_buffer) + 64];
-  for (;;) {
+  int last_day = -1;
+  while (true) {
     struct timeval tv; gettimeofday(&tv, NULL);
     time_t current_time = tv.tv_sec;
     struct tm *local_time = localtime(&current_time);

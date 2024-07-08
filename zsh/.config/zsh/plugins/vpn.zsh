@@ -58,7 +58,7 @@ fi
 # -----------------------------------
 function _auto_start_vpn() {
   local tool_name="$(command -v mihomo &> /dev/null && echo 'mihomo' || echo 'clash')"
-  if [[ "$(uname)" == 'Darwin' ]]; then pgrep -i "$tool_name" &> /dev/null && vpn start
+  if [[ "$(uname)" == 'Darwin' ]]; then ;  # pgrep -i "$tool_name" &> /dev/null && vpn start
   elif [[ "$(uname)" == 'Linux' ]]; then pgrep -x "$tool_name" &> /dev/null && vpn start
   else echo_red 'Not supported: Unknown OS, auto start VPN failed.'
   fi
