@@ -146,7 +146,7 @@ yabai -m signal --add event=application_visible action="command -v sketchybar &>
 # ======== Border
 # =============================================
 # brew tap FelixKratz/formulae && brew install borders
-borders active_color=0xFF9999FF inactive_color=0xFF494D64 width=5.5 blacklist="HSTracker,Screen Studio" &
+borders active_color=0xFF9999FF inactive_color=0xFF494D64 width=5.5 blacklist="HSTracker,Screen Studio,CleanMyMac X" &
 
 
 
