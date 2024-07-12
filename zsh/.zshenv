@@ -95,4 +95,4 @@ export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
 # =============================================
 # ======== TEST
 # =============================================
-export FZF_DEFAULT_COMMAND='fd --type f --exclude Library'
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden'

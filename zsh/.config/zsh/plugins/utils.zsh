@@ -102,6 +102,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
   function auto_stow() {
     typeset -A configs=(
       [clangd]='clangd'
+      [fd]='fd'
       [git]='git'
       [github-copilot]='nvim'
       [kaggle]='kaggle'
