@@ -29,7 +29,7 @@ if command -v zoxide &> /dev/null; then
 
   # ==================== Enhance Zoxide ====================
   _ZOXIDE_ECHO=true  # Set to `false` to disable echo
-  _ZOXIDE_INDEX=1; _ZOXIDE_LAST_QUERY=""; _ZOXIDE_DIRS=()
+  _ZOXIDE_SHOULD=""; _ZOXIDE_INDEX=1; _ZOXIDE_LAST_QUERY=""; _ZOXIDE_DIRS=()
   function j() {
     # Query
     local query="$*"
@@ -44,9 +44,11 @@ if command -v zoxide &> /dev/null; then
     # Jump
     if [[ ${#_ZOXIDE_DIRS[@]} -eq 0 ]]; then echo_red 'zoxide: no directory found.'
     else
+      [[ "$(pwd)" != "$_ZOXIDE_SHOULD" ]] && _ZOXIDE_INDEX=1;  # Reset index if the current directory has changed
       [[ "$_ZOXIDE_ECHO" == true ]] && echo "$_ZOXIDE_INDEX/${#_ZOXIDE_DIRS[@]}" "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}"
       cd "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}" || echo_red "zoxide: failed to ${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}."
       _ZOXIDE_INDEX=$((_ZOXIDE_INDEX % ${#_ZOXIDE_DIRS[@]} + 1))
+      _ZOXIDE_SHOULD="$(pwd)"
     fi
   }
 fi
