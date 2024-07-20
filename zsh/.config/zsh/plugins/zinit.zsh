@@ -41,7 +41,7 @@ zinit ice depth=1; zinit snippet OMZL::history.zsh
 zinit ice wait lucid depth=1; zinit snippet OMZL::key-bindings.zsh
 zinit ice depth=1; zinit snippet OMZL::theme-and-appearance.zsh
 
-zinit ice wait lucid depth=1 atload'unalias grv g ghh'; zinit snippet OMZP::git
+zinit ice wait lucid depth=1 atload'unalias g grv ghh'; zinit snippet OMZP::git
 
 
 # -----------------------------------
@@ -57,7 +57,7 @@ zinit ice wait lucid depth=1 atload'unalias grv g ghh'; zinit snippet OMZP::git
 # else zinit ice depth=1; zinit light romkatv/powerlevel10k
 # fi
 # CASE 3: Use `powerlevel10k`.
-zinit light romkatv/powerlevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
 zinit ice depth=1; zinit light zdharma-continuum/fast-syntax-highlighting
