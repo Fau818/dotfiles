@@ -15,3 +15,9 @@ sbar.add("bracket", "widgets.group1", { "widgets.group1.padding", "widgets.batte
 sbar.add("item", "widgets.group2.padding", { position = "right", width = 2 * settings.group_padding })
 require("items.widgets.app")
 sbar.add("bracket", "widgets.group2", { "widgets.group2.padding", "app.qq", "app.wechat", "app.mail" }, braket_config)
+
+
+-- -----------------------------------
+-- -------- End
+-- -----------------------------------
+sbar.add("item", "widgets.end.padding", { position = "right", width = 2 * settings.group_padding })
