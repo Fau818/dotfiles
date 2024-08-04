@@ -2,7 +2,7 @@
 # NOTE: can combined with tmTheme (sublime colorshceme file) for preview code highlight
 syntect_theme = "~/.config/yazi/tokyonight_moon_fau.tmTheme"
 
-cwd = { fg = "#828bb8", italic = true }
+cwd = { fg = "#828bb8", italic = true, bold = true }
 
 # Hovered
 hovered         = { bg = "#2f334d" }

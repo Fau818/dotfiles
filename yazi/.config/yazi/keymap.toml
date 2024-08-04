@@ -2,8 +2,9 @@
 # ======== Custom Keymaps
 # =============================================
 [[manager.prepend_keymap]]
-on  = [ "T" ]
-run = "plugin --sync max-preview"
+on   = "T"
+run  = "plugin --sync max-preview"
+desc = "Maximize or restore preview"
 
 
 [[manager.prepend_keymap]]
@@ -13,8 +14,15 @@ desc = "Paste into the hovered directory or CWD"
 
 
 [[manager.prepend_keymap]]
-on  = [ "<C-p>" ]
-run = "plugin --sync hide-preview"
+on   = "<C-p>"
+run  = "plugin --sync hide-preview"
+desc = "Hide or show preview"
+
+
+[[manager.prepend_keymap]]
+on   = "F"
+run  = "plugin jump-to-char"
+desc = "Jump to char"
 
 
 [[manager.prepend_keymap]]
