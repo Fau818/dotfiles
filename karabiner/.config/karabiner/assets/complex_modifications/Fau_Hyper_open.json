@@ -496,6 +496,16 @@
 				},
 
 				{
+					"description": "<CTRL><FN> := <FN>",
+					"type": "basic",
+					"from": {
+						"key_code": "fn",
+						"modifiers": { "mandatory": [ "control" ], "optional": [ "caps_lock", "fn" ] }
+					},
+					"to": [ { "key_code": "fn" } ]
+				},
+
+				{
 					"description": "<FN>d := open Discord",
 					"type": "basic",
 					"conditions": [ { "type": "variable_if", "name": "alone_fn", "value": false } ],

@@ -2275,6 +2275,27 @@
                                 "type": "basic"
                             },
                             {
+                                "description": "<CTRL><FN> := <FN>",
+                                "from": {
+                                    "key_code": "fn",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ],
+                                        "optional": [
+                                            "caps_lock",
+                                            "fn"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "fn"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
                                 "conditions": [
                                     {
                                         "name": "alone_fn",

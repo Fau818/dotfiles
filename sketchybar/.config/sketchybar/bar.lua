@@ -14,6 +14,7 @@ sbar.bar({
   padding_left  = 10,
   padding_right = 10,
 
+  display = "main",
   topmost = "window",  -- Set to `window` to avoid sketchybar being covered by windows.
   sticky  = true,
 

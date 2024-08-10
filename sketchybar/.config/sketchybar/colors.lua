@@ -16,7 +16,7 @@ return {
   blue        = 0xFF8AADF4,
   cyan        = 0xFF74C7EC,
 
-  bar = { bg = 0x00000000, border = 0xFFFF0000 },
+  bar = { bg = 0xFF111111, border = 0xFFFF0000 },
   popup = { bg = 0xFF2E2E2E, border = 0xFF9999FF },
   border_color = 0xFFFF0000,  -- 0x3DE0E1E1
 
