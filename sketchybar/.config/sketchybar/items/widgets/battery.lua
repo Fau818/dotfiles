@@ -40,7 +40,7 @@ local function update_battery_info(env)
     local found, _, percent = batt_info:find("(%d+)%%")
     if found then percent = tonumber(percent); label = ("%d%%"):format(percent) end
 
-    if charging then icon = icons.battery.charging
+    if charging then icon = icons.battery.charging; color = found and percent < 50 and colors.battery.normal or colors.battery.health
     elseif found then
       if percent >= 85 then icon = icons.battery._100
       elseif percent > 65 then icon = icons.battery._75; color = colors.battery.health
