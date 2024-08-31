@@ -33,7 +33,7 @@ if [[ "$(uname)" == 'Linux' ]]; then
     # NOTE: The `sudo echo -n` is necessray since nohup will be suspended if no sudo permission.
     (pgrep -x "$tool_name" &> /dev/null && echo_yellow "$tool_name is already running!") || (sudo echo -n && sudo nohup "$(which $tool_name)" > /dev/null &)
     # Start VPN
-    vpn start
+    # vpn start
   }
 
   function stopClash() {
@@ -56,10 +56,10 @@ fi
 # -----------------------------------
 # -------- Autostart
 # -----------------------------------
-function _auto_start_vpn() {
-  local tool_name="$(command -v mihomo &> /dev/null && echo 'mihomo' || echo 'clash')"
-  if [[ "$(uname)" == 'Darwin' ]]; then ;  # pgrep -i "$tool_name" &> /dev/null && vpn start
-  elif [[ "$(uname)" == 'Linux' ]]; then pgrep -x "$tool_name" &> /dev/null && vpn start
-  else echo_red 'Not supported: Unknown OS, auto start VPN failed.'
-  fi
-}
+# function _auto_start_vpn() {
+#   local tool_name="$(command -v mihomo &> /dev/null && echo 'mihomo' || echo 'clash')"
+#   if [[ "$(uname)" == 'Darwin' ]]; then ;  # pgrep -i "$tool_name" &> /dev/null && vpn start
+#   elif [[ "$(uname)" == 'Linux' ]]; then pgrep -x "$tool_name" &> /dev/null && vpn start
+#   else echo_red 'Not supported: Unknown OS, auto start VPN failed.'
+#   fi
+# }
