@@ -86,76 +86,76 @@
 
 
 		{
-			"description": "<R_CTRL><NUMBER> := <F_NUMBER>",
+			"description": "<R_CTRL><NUMBER> := <R_CTRL><R_SHIFT><NUMBER>",
 			"manipulators": [
 				{
-					"description": "<R_CTRL>1 := <F1>",
+					"description": "<R_CTRL>1 := <R_CTRL><R_SHIFT><1>",
 					"type": "basic",
 					"from": { "key_code": "1", "modifiers": { "mandatory": [ "right_control" ], "optional": [ "any" ] } },
-					"to": [ { "key_code": "f1" } ]
+					"to": [ { "key_code": "1", "modifiers": [ "right_control", "right_shift" ] } ]
 				},
 
 				{
-					"description": "<R_CTRL>2 := <F2>",
+					"description": "<R_CTRL>2 := <R_CTRL><R_SHIFT><2>",
 					"type": "basic",
 					"from": { "key_code": "2", "modifiers": { "mandatory": [ "right_control" ], "optional": [ "any" ] } },
-					"to": [ { "key_code": "f2" } ]
+					"to": [ { "key_code": "2", "modifiers": [ "right_control", "right_shift" ] } ]
 				},
 
 				{
-					"description": "<R_CTRL>3 := <F3>",
+					"description": "<R_CTRL>3 := <R_CTRL><R_SHIFT><3>",
 					"type": "basic",
 					"from": { "key_code": "3", "modifiers": { "mandatory": [ "right_control" ], "optional": [ "any" ] } },
-					"to": [ { "key_code": "f3" } ]
+					"to": [ { "key_code": "3", "modifiers": [ "right_control", "right_shift" ] } ]
 				},
 
 				{
-					"description": "<R_CTRL>4 := <F4>",
+					"description": "<R_CTRL>4 := <R_CTRL><R_SHIFT><4>",
 					"type": "basic",
 					"from": { "key_code": "4", "modifiers": { "mandatory": [ "right_control" ], "optional": [ "any" ] } },
-					"to": [ { "key_code": "f4" } ]
+					"to": [ { "key_code": "4", "modifiers": [ "right_control", "right_shift" ] } ]
 				},
 
 				{
-					"description": "<R_CTRL>5 := <F5>",
+					"description": "<R_CTRL>5 := <R_CTRL><R_SHIFT><5>",
 					"type": "basic",
 					"from": { "key_code": "5", "modifiers": { "mandatory": [ "right_control" ], "optional": [ "any" ] } },
-					"to": [ { "key_code": "f5" } ]
+					"to": [ { "key_code": "5", "modifiers": [ "right_control", "right_shift" ] } ]
 				},
 
 				{
-					"description": "<R_CTRL>6 := <F6>",
+					"description": "<R_CTRL>6 := <R_CTRL><R_SHIFT><6>",
 					"type": "basic",
 					"from": { "key_code": "6", "modifiers": { "mandatory": [ "right_control" ], "optional": [ "any" ] } },
-					"to": [ { "key_code": "f6" } ]
+					"to": [ { "key_code": "6", "modifiers": [ "right_control", "right_shift" ] } ]
 				},
 
 				{
-					"description": "<R_CTRL>7 := <F7>",
+					"description": "<R_CTRL>7 := <R_CTRL><R_SHIFT><7>",
 					"type": "basic",
 					"from": { "key_code": "7", "modifiers": { "mandatory": [ "right_control" ], "optional": [ "any" ] } },
-					"to": [ { "key_code": "f7" } ]
+					"to": [ { "key_code": "7", "modifiers": [ "right_control", "right_shift" ] } ]
 				},
 
 				{
-					"description": "<R_CTRL>8 := <F8>",
+					"description": "<R_CTRL>8 := <R_CTRL><R_SHIFT><8>",
 					"type": "basic",
 					"from": { "key_code": "8", "modifiers": { "mandatory": [ "right_control" ], "optional": [ "any" ] } },
-					"to": [ { "key_code": "f8" } ]
+					"to": [ { "key_code": "8", "modifiers": [ "right_control", "right_shift" ] } ]
 				},
 
 				{
-					"description": "<R_CTRL>9 := <F9>",
+					"description": "<R_CTRL>9 := <R_CTRL><R_SHIFT><9>",
 					"type": "basic",
 					"from": { "key_code": "9", "modifiers": { "mandatory": [ "right_control" ], "optional": [ "any" ] } },
-					"to": [ { "key_code": "f9" } ]
+					"to": [ { "key_code": "9", "modifiers": [ "right_control", "right_shift" ] } ]
 				},
 
 				{
-					"description": "<R_CTRL>0 := <F10>",
+					"description": "<R_CTRL>0 := <R_CTRL><R_SHIFT><0>",
 					"type": "basic",
 					"from": { "key_code": "0", "modifiers": { "mandatory": [ "right_control" ], "optional": [ "any" ] } },
-					"to": [ { "key_code": "f10" } ]
+					"to": [ { "key_code": "0", "modifiers": [ "right_control", "right_shift" ] } ]
 				}
 			]
 		},
