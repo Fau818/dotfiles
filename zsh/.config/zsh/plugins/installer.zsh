@@ -44,7 +44,7 @@ function __nerd_font_installer() {
     # Install SF Mono Nerd Font
     brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized && brew install font-sf-mono-nerd-font-ligaturized
     # Install Victor Mono Nerd Font
-    brew tap homebrew/cask-fonts && brew install font-victor-mono-nerd-font
+    brew install font-victor-mono-nerd-font
   elif [[ "$(uname)" == 'Linux' ]]; then
     # NOTE: This script isn't tested; maybe `VictorMono` doesn't work. [Solution: move them to fonts folder]
     echo_blue 'Running Linux installation...'

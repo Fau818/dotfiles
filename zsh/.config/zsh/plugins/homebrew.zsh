@@ -7,10 +7,15 @@
 # Disable AUTO_UPDATE
 export HOMEBREW_NO_AUTO_UPDATE=1
 
-# Make sure the `brew` command is available on Linux
-if [[ "$(uname)" == 'Linux' ]] && ! command -v brew &> /dev/null; then
-  [[ -d '/home/linuxbrew' ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# Make sure the `brew` command is available on Linux and Mac (Apple Chip)
+if ! command -v brew &> /dev/null; then
+  function ___homebrew_init() {
+    local prefix=$([[ "$(uname)" == 'Linux' ]] && echo '/home/linuxbrew/.linuxbrew' || echo '/opt/homebrew')
+    [[ -d "$prefix" ]] && eval "$("$prefix/bin/brew" shellenv)"
+  }
+  ___homebrew_init
 fi
+
 command -v brew &> /dev/null && export HOMEBREW_PREFIX="$(brew --prefix)"
 
 

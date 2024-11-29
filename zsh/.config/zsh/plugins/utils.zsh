@@ -95,6 +95,9 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
     # Execute
     [[ ! -v DOTFILE_PATH ]] && (DOTFILE_PATH=$([[ "$(uname)" == 'Darwin' ]] && echo "$HOME/Documents/Fau/dotfiles" || echo "${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles"))
     for name in "${pkgs[@]}"; do
+      # CASE: For `ssh`, soft link `.ssh/config`
+      [[ "$name" == 'ssh' ]] && [[ ! -d "$HOME/.ssh" ]] && mkdir "$HOME/.ssh"
+
       local dotfile_dir=$([[ -d "$DOTFILE_PATH/private/$name" ]] && echo "$DOTFILE_PATH/private" || echo "$DOTFILE_PATH")
       stow --dir="$dotfile_dir" --target="$HOME" --ignore='.DS_Store' "${opts[@]}" "$name"
     done
