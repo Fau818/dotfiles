@@ -1,8 +1,13 @@
 -- =============================================
 -- ========== Helper
 -- =============================================
--- Run the clock binary to update the clock.
-sbar.exec("killall clock &> /dev/null; $CONFIG_DIR/helpers/event_providers/clock/bin/clock clock_update 1.0")
+-- Determine the architecture dynamically
+local arch = io.popen("uname -m"):read("*l")
+local suffix = (arch == "arm64") and "arm" or "x86"
+-- Construct the binary path and process name
+local clock_binary = string.format("$CONFIG_DIR/helpers/event_providers/clock/bin/clock_%s", suffix)
+-- Kill the specific clock process and run it
+sbar.exec(string.format("pkill -f '%s' &> /dev/null; %s clock_update 1.0", clock_binary, clock_binary))
 
 
 
