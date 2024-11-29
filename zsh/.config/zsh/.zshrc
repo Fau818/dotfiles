@@ -45,6 +45,9 @@ source "$ZPLUGINDIR/installer.zsh"
 source "$ZPLUGINDIR/zinit.zsh"
 
 
+setopt interactive_comments  # TEST
+
+
 # -----------------------------------
 # -------- Goto Home if Login Shell
 # -----------------------------------
