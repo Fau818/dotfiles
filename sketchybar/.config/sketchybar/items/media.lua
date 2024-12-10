@@ -2,6 +2,7 @@
 -- ========== General
 -- =============================================
 local whitelist = { ["Spotify"] = true, ["Music"] = true }
+local configs = require("configs")
 
 
 
@@ -12,7 +13,7 @@ local media_cover_config = {
   position = "e",
   updates = true,
   drawing = false,
-  padding_left = 45,
+  padding_left = configs.media_offset,
   background = { color = colors.transparent, image = { string = "media.artwork", scale = 0.9 } },
   label = { drawing = false },
   icon  = { drawing = false },

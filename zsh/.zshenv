@@ -50,6 +50,13 @@ export OPENAI_API_PATH="$DOTFILE_PATH/private/openai"
 # ======== Software
 # =============================================
 # -----------------------------------
+# -------- Homebrew
+# -----------------------------------
+# Disable AUTO_UPDATE
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+
+# -----------------------------------
 # -------- Python
 # -----------------------------------
 export IPYTHONDIR="$XDG_CACHE_HOME/ipython"
