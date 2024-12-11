@@ -18,10 +18,10 @@ require("items.yabai")
 
 -- NOTE: Show `Amphetamine`
 sbar.add("alias", "Amphetamine", {
-  position = "q",
+  position = "center",
   alias = { update_freq = 1, color = colors.stardust },
-  -- padding_left  = settings.item_padding,
-  padding_right = 75,
+  -- padding_left  = 500,
+  padding_right = 600,
   background = { color = colors.transparent }
 })
 
