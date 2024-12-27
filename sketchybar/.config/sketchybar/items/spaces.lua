@@ -118,6 +118,7 @@ local function update_space(env)
   local space_id = tonumber(env.SID)
   local space = spaces[space_id]
   local selected = env.SELECTED == "true"
+  -- print("Update space: ", space_id, selected)
 
   --- Set space properties.
   if selected then

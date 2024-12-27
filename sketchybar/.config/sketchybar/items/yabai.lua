@@ -53,6 +53,7 @@ end
 
 local function update_yabai_status(env)
   sbar.exec("yabai -m query --windows --window", function(window_info)
+    if type(window_info) ~= "table" then return end  -- No window info.
     local icon, label, color = icons.yabai.error, "ERROR", colors.yabai.error
 
     -- CASE 1: Floating Window
