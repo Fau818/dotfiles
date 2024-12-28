@@ -1,13 +1,6 @@
-# RETURN: if no binary file `brew`, return.
-! command -v brew &> /dev/null && return 0
-
-
 # =============================================
-# ======== Homebrew Installer and Sourcer
+# ========== Constants
 # =============================================
-# -----------------------------------
-# -------- Constants
-# -----------------------------------
 HOMEBREW_OFFICIAL_BREW_GIT_REMOTE='https://github.com/Homebrew/brew.git'
 HOMEBREW_OFFICIAL_CORE_GIT_REMOTE='https://github.com/Homebrew/homebrew-core.git'
 
@@ -22,9 +15,33 @@ HOMEBREW_ALIYUN_API_DOMAIN='https://mirrors.aliyun.com/homebrew-bottles/api'
 HOMEBREW_ALIYUN_BOTTLE_DOMAIN='https://mirrors.aliyun.com/homebrew/homebrew-bottles'
 
 
-# -----------------------------------
-# -------- Initialization
-# -----------------------------------
+
+# =============================================
+# ========== Installer
+# =============================================
+# Official Repository
+function __homebrew_install_from_official_repo() {
+  unset HOMEBREW_BREW_GIT_REMOTE HOMEBREW_CORE_GIT_REMOTE HOMEBREW_API_DOMAIN HOMEBREW_BOTTLE_DOMAIN
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+}
+
+# Aliyun Repository
+function __homebrew_install_from_aliyun_repo() {
+  export HOMEBREW_BREW_GIT_REMOTE="$HOMEBREW_ALIYUN_BREW_GIT_REMOTE"
+  export HOMEBREW_CORE_GIT_REMOTE="$HOMEBREW_ALIYUN_CORE_GIT_REMOTE"
+  export HOMEBREW_API_DOMAIN="$HOMEBREW_ALIYUN_API_DOMAIN"
+  export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_ALIYUN_BOTTLE_DOMAIN"
+  /bin/bash -c "$(curl -fsSL https://gitee.com/ineo6/homebrew-install/raw/master/install.sh)"
+}
+
+
+
+# =============================================
+# ========== Homebrew
+# =============================================
+# RETURN: if no binary file `brew`, return.
+! command -v brew &> /dev/null && return 0
+
 # Auto set bottle domain
 function ___homebrew_auto_set_bottle_domain() {
   # Get repository url and force end with `.git`
@@ -42,26 +59,6 @@ function ___homebrew_auto_set_bottle_domain() {
   fi
 }
 ___homebrew_auto_set_bottle_domain
-
-
-# -----------------------------------
-# -------- Installer and Sourcer
-# -----------------------------------
-# ==================== Installer ====================
-# Official Repository
-function __homebrew_install_from_official_repo() {
-  unset HOMEBREW_BREW_GIT_REMOTE HOMEBREW_CORE_GIT_REMOTE HOMEBREW_API_DOMAIN HOMEBREW_BOTTLE_DOMAIN
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-}
-
-# Aliyun Repository
-function __homebrew_install_from_aliyun_repo() {
-  export HOMEBREW_BREW_GIT_REMOTE="$HOMEBREW_ALIYUN_BREW_GIT_REMOTE"
-  export HOMEBREW_CORE_GIT_REMOTE="$HOMEBREW_ALIYUN_CORE_GIT_REMOTE"
-  export HOMEBREW_API_DOMAIN="$HOMEBREW_ALIYUN_API_DOMAIN"
-  export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_ALIYUN_BOTTLE_DOMAIN"
-  /bin/bash -c "$(curl -fsSL https://gitee.com/ineo6/homebrew-install/raw/master/install.sh)"
-}
 
 
 # ==================== Sourcer ====================
