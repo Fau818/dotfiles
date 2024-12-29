@@ -103,3 +103,4 @@ export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
 # ======== TEST
 # =============================================
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden'
+[[ "$(uname)" == 'Darwin' && "$(uname -m)" == 'arm64' ]] && (ps aux | grep X11 &> /dev/null) && export DISPLAY=':0'

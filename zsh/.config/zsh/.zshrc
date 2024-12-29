@@ -45,6 +45,9 @@ source "$ZPLUGINDIR/installer.zsh"
 source "$ZPLUGINDIR/zinit.zsh"
 
 
+# -----------------------------------
+# -------- Test
+# -----------------------------------
 command -v eza &> /dev/null && alias ls="eza --icons --time-style=iso"
 setopt interactive_comments  # TEST
 
