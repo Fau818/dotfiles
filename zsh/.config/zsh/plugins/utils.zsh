@@ -115,6 +115,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
       [kaggle]='kaggle'
       [kitty]='kitty'
       [lazygit]='lazygit'
+      [pip]='python3'
       [sketchybar]='sketchybar'
       [ssh]='ssh'
       [wakatime]='wakatime-cli'

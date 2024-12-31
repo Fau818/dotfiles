@@ -15,7 +15,7 @@ sbar.bar({
   padding_right = 10,
 
   display = "main",
-  topmost = "window",  -- Set to `window` to avoid sketchybar being covered by windows.
+  topmost = false,  -- Set to `window` to avoid sketchybar being covered by windows.
   sticky  = true,
 
   notch_width = 350,
