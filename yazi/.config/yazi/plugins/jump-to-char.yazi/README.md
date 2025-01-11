@@ -7,7 +7,7 @@ https://github.com/yazi-rs/plugins/assets/17523360/aac9341c-b416-4e0c-aaba-889d4
 ## Installation
 
 ```sh
-ya pack -a yazi-rs/plugins#jump-to-char
+ya pack -a yazi-rs/plugins:jump-to-char
 ```
 
 ## Usage
@@ -22,3 +22,7 @@ desc = "Jump to char"
 ```
 
 Make sure the <kbd>f</kbd> key is not used elsewhere.
+
+## License
+
+This plugin is MIT-licensed. For more information check the [LICENSE](LICENSE) file.
