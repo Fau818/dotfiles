@@ -12,6 +12,7 @@ fi
 # =============================================
 # ======== Fau ZSH Preferences
 # =============================================
+setopt interactive_comments
 # -----------------------------------
 # -------- Basic Aliases
 # -----------------------------------
@@ -46,11 +47,8 @@ source "$ZPLUGINDIR/installer.zsh"
 source "$ZPLUGINDIR/zinit.zsh"
 
 
-# -----------------------------------
-# -------- Test
-# -----------------------------------
+# Eza (NOTE: Make sure setup after zinit)
 command -v eza &> /dev/null && alias ls="eza --icons --time-style=iso"
-setopt interactive_comments  # TEST
 
 
 # -----------------------------------

@@ -20,10 +20,10 @@ desc = "Paste into the hovered directory or CWD"
 # ==================== Smart Move ====================
 [[manager.prepend_keymap]]
 on  = "k"
-run = "plugin arrow --args=-1"
+run = "plugin arrow -1"
 [[manager.prepend_keymap]]
 on  = "j"
-run = "plugin arrow --args=1"
+run = "plugin arrow 1"
 
 # [[manager.prepend_keymap]]
 # on  = "K"
@@ -41,10 +41,10 @@ desc = "Create a tab and enter the hovered directory"
 
 [[manager.prepend_keymap]]
 on  = [ "<Up>" ]
-run = "plugin --sync parent-arrow --args=-1"
+run = "plugin --sync parent-arrow -1"
 [[manager.prepend_keymap]]
 on  = [ "<Down>" ]
-run = "plugin --sync parent-arrow --args=1"
+run = "plugin --sync parent-arrow 1"
 
 
 [[manager.prepend_keymap]]
