@@ -41,6 +41,7 @@ export HISTFILE="$ZDOTDIR/.zsh_history"
 export DOTFILE_PATH=$([[ "$(uname)" == 'Darwin' ]] && echo "$HOME/Documents/Fau/dotfiles" || echo "$XDG_CONFIG_HOME/dotfiles")
 # ICLOUD
 [[ "$(uname)" == 'Darwin' ]] && export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+[[ "$(uname)" == 'Darwin' ]] && export IBOOK="$HOME/Library/Mobile Documents/iCloud~com~apple~iBooks"
 # OpenAI
 export OPENAI_API_PATH="$DOTFILE_PATH/private/openai"
 
