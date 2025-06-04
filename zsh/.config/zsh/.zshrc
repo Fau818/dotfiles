@@ -13,6 +13,7 @@ fi
 # ======== Fau ZSH Preferences
 # =============================================
 setopt interactive_comments
+fpath=($ZDOTDIR/completions $fpath)
 # -----------------------------------
 # -------- Basic Aliases
 # -----------------------------------

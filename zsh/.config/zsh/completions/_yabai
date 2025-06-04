@@ -1,0 +1,22 @@
+#compdef yabai
+
+_yabai() {
+  local context state line
+  typeset -A opt_args
+
+  _arguments -C \
+    '(--load-sa)--load-sa[Load the scripting-addition into Dock.app]' \
+    '(--uninstall-sa)--uninstall-sa[Uninstall the scripting-addition (must be run as root)]' \
+    '(--install-service)--install-service[Write a launchd service file to disk]' \
+    '(--uninstall-service)--uninstall-service[Remove a launchd service file from disk]' \
+    '(--start-service)--start-service[Enable, load, and start the launchd service]' \
+    '(--restart-service)--restart-service[Attempt to restart the service instance]' \
+    '(--stop-service)--stop-service[Stop a running instance of the service and unload it]' \
+    '(-m --message)'{-m,--message}'[Send message to a running instance of yabai]:message:' \
+    '(-c --config)'{-c,--config}'[Use the specified configuration file]:config file:_files' \
+    '(-V --verbose)'{-V,--verbose}'[Output debug information to stdout]' \
+    '(-v --version)'{-v,--version}'[Print version to stdout and exit]' \
+    '(-h --help)'{-h,--help}'[Print options to stdout and exit]'
+}
+
+_yabai "$@"

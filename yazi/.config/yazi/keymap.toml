@@ -1,27 +1,27 @@
 # ==================== Preview ====================
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "T"
 run  = "plugin max-preview"
 desc = "Maximize or restore preview"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<C-p>"
 run  = "plugin hide-preview"
 desc = "Hide or show preview"
 
 
 # ==================== Smart Paste ====================
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "p"
 run  = "plugin smart-paste"
 desc = "Paste into the hovered directory or CWD"
 
 
 # ==================== Smart Move ====================
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on  = "k"
 run = "plugin arrow -1"
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on  = "j"
 run = "plugin arrow 1"
 
@@ -34,20 +34,20 @@ run = "plugin arrow 1"
 
 
 # ==================== Smart Tab ====================
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "t"
 run  = "plugin smart-tab"
 desc = "Create a tab and enter the hovered directory"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on  = [ "<Up>" ]
 run = "plugin --sync parent-arrow -1"
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on  = [ "<Down>" ]
 run = "plugin --sync parent-arrow 1"
 
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "F"
 run  = "plugin jump-to-char"
 desc = "Jump to char"
