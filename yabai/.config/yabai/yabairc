@@ -155,7 +155,7 @@ borders_black_list_array=(
 )
 borders_black_list=$(IFS=,; echo "${borders_black_list_array[*]}")
 
-borders active_color=0xFFFF966C inactive_color=0xFF494D64 width=6 style=uniform hidpi=true blacklist="$borders_black_list" &
+borders active_color=0xFFFF966C inactive_color=0xFF494D64 width=6 style=uniform blacklist="$borders_black_list" &
 
 
 
