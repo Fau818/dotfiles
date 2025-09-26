@@ -16,12 +16,12 @@ Fau_hs = {}
 -- ========== Load Extension
 -- =============================================
 --- stackline
-local stackline = require("stackline")
-if ({os.execute("uname -m | grep -q arm64")})[3] == 0 then
-  stackline:init({ paths = { yabai = "/opt/homebrew/bin/yabai" } })
-else
-  stackline:init()
-end
+-- local stackline = require("stackline")
+-- if ({os.execute("uname -m | grep -q arm64")})[3] == 0 then
+--   stackline:init({ paths = { yabai = "/opt/homebrew/bin/yabai" } })
+-- else
+--   stackline:init()
+-- end
 
 --- yabai
 -- require("yabai")
