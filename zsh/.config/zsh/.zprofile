@@ -31,3 +31,10 @@ if command -v nvim &> /dev/null; then
   # Mason binaries
   PATH="$XDG_DATA_HOME/nvim/mason/bin:$PATH"
 fi
+
+
+
+# =============================================
+# ========== Rust
+# =============================================
+if command -v rustup &> /dev/null; then PATH="$CARGO_HOME/bin:$PATH"; fi

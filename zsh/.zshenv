@@ -68,18 +68,13 @@ export PIP_CACHE_DIR="$XDG_CACHE_HOME/pip"
 
 
 # -----------------------------------
-# -------- Lunarvim
-# -----------------------------------
-PATH="$HOME/.local/bin:$PATH"
-
-
-# -----------------------------------
 # -------- MISC
 # -----------------------------------
 # Cpp
 export CPPFLAGS_FAU='-std=c++17 -O2 -DCODE_Fau'
-# Cargo
+# Rust
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 # Docker (FIXME: not working)
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 # Less

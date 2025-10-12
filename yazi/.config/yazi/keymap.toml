@@ -1,3 +1,13 @@
+# ==================== Fuzzy Finder (Swaped zoxide and fzf default keymappings) ====================
+[[mgr.prepend_keymap]]
+on  = "z"
+run = "plugin zoxide"
+
+[[mgr.prepend_keymap]]
+on  = "Z"
+run = "plugin fzf"
+
+
 # ==================== Quick Move ====================
 [[mgr.prepend_keymap]]
 on  = "K"
