@@ -1,8 +1,10 @@
 # vim: ft=gitignore
 
 **/.DS_Store
+**/nohup.out
+
+**/.cache
 **/.vscode
 **/.idea
 **/__pycache__
 **/node_modules
-**/nohup.out

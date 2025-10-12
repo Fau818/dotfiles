@@ -1,9 +1,21 @@
+.DS_Store
+
 .git/
 .vscode/
 .idea/
+.Trashes/
+
+.cache/
+.docker/
+
 __pycache__/
+node_modules/
 
-.DS_Store
-
-Library/
 Applications/
+Desktop/
+Documents/
+Downloads/
+Library/
+Movies/
+Music/
+Pictures/
