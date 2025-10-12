@@ -78,6 +78,8 @@ PATH="$HOME/.local/bin:$PATH"
 # -----------------------------------
 # Cpp
 export CPPFLAGS_FAU='-std=c++17 -O2 -DCODE_Fau'
+# Cargo
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
 # Docker (FIXME: not working)
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 # Less

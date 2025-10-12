@@ -1,13 +1,23 @@
+# ==================== Quick Move ====================
+[[mgr.prepend_keymap]]
+on  = "K"
+run = "plugin arrow -3"
+
+[[mgr.prepend_keymap]]
+on  = "J"
+run = "plugin arrow 3"
+
+
 # ==================== Preview ====================
 [[mgr.prepend_keymap]]
 on   = "T"
-run  = "plugin max-preview"
+run  = "plugin toggle-pane max-preview"
 desc = "Maximize or restore preview"
 
 [[mgr.prepend_keymap]]
 on   = "<C-p>"
-run  = "plugin hide-preview"
-desc = "Hide or show preview"
+run  = "plugin toggle-pane min-preview"
+desc = "Show or hide the preview pane"
 
 
 # ==================== Smart Paste ====================
@@ -15,22 +25,6 @@ desc = "Hide or show preview"
 on   = "p"
 run  = "plugin smart-paste"
 desc = "Paste into the hovered directory or CWD"
-
-
-# ==================== Smart Move ====================
-[[mgr.prepend_keymap]]
-on  = "k"
-run = "plugin arrow -1"
-[[mgr.prepend_keymap]]
-on  = "j"
-run = "plugin arrow 1"
-
-# [[manager.prepend_keymap]]
-# on  = "K"
-# run = "plugin parent-arrow --args=-1"
-# [[manager.prepend_keymap]]
-# on  = "J"
-# run = "plugin parent-arrow --args=1"
 
 
 # ==================== Smart Tab ====================
@@ -53,13 +47,7 @@ run  = "plugin jump-to-char"
 desc = "Jump to char"
 
 
-
-# ==================== TEST ====================
-# [[manager.prepend_keymap]]
-# on   = "l"
-# run  = "plugin smart-enter"
-# desc = "Enter the child directory, or open the file"
-# [[manager.prepend_keymap]]
-# on   = "2"
-# run  = "plugin smart-switch --args=1"
-# desc = "Switch or create tab 2"
+# ==================== Preview ====================
+[[mgr.prepend_keymap]]
+on = "<Space>"
+run = 'shell -- qlmanage -p "$@"'

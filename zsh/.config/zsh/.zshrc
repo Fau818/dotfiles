@@ -14,6 +14,7 @@ fi
 # =============================================
 setopt interactive_comments
 fpath=($ZDOTDIR/completions $fpath)
+[[ -d "$HOME/.docker/completions/" ]] && fpath=($HOME/.docker/completions $fpath)  # Docker completion
 # -----------------------------------
 # -------- Basic Aliases
 # -----------------------------------

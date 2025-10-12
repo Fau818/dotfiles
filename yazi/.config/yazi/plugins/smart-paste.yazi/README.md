@@ -1,13 +1,13 @@
-# jump-to-char.yazi
+# smart-paste.yazi
 
-Vim-like `f<char>`, jump to the next file whose name starts with `<char>`.
+Paste files into the hovered directory or to the CWD if hovering over a file.
 
-https://github.com/yazi-rs/plugins/assets/17523360/aac9341c-b416-4e0c-aaba-889d48389869
+https://github.com/user-attachments/assets/b3f6348e-abbe-42fe-9a67-a96e68f11255
 
 ## Installation
 
 ```sh
-ya pkg add yazi-rs/plugins:jump-to-char
+ya pkg add yazi-rs/plugins:smart-paste
 ```
 
 ## Usage
@@ -16,9 +16,9 @@ Add this to your `~/.config/yazi/keymap.toml`:
 
 ```toml
 [[mgr.prepend_keymap]]
-on   = "f"
-run  = "plugin jump-to-char"
-desc = "Jump to char"
+on   = "p"
+run  = "plugin smart-paste"
+desc = "Paste into the hovered directory or CWD"
 ```
 
 Note that, the keybindings above are just examples, please tune them up as needed to ensure they don't conflict with your other commands/plugins.

@@ -114,6 +114,8 @@ yabai -m rule --add app!="$white_list" manage=off
 yabai -m rule --add app="^Arc$" title="^Space.*$" manage=off
 # Disable in Arc Preference
 yabai -m rule --add app="^Arc$" title="^Fau$" manage=off
+# TEST: Disable Unknown Title in Arc
+yabai -m rule --add app="^Arc$" title="^$" manage=off
 # Disable in Safari Preference (maybe `can-resize` is another way to do this)
 yabai -m rule --add app="^Safari$" title="General|Tabs|AutoFill|Passwords|Search|Security|Privacy|Websites|Profiles|Extensions|Advanced|Developer|Feature Flags" manage=off
 # NOTE: Restore to the old version behavior (< 0.7)

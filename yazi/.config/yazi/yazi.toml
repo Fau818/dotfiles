@@ -22,3 +22,16 @@ max_height = 1920
 
 [flavor]
 dark = "tokyo-night"
+
+
+
+# ==================== Git ====================
+[[plugin.prepend_fetchers]]
+id   = "git"
+name = "*"
+run  = "git"
+
+[[plugin.prepend_fetchers]]
+id   = "git"
+name = "*/"
+run  = "git"

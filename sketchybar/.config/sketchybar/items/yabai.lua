@@ -76,7 +76,7 @@ local function update_yabai_status(env)
             set_yabai_status(icon, label, color, window_info)
           else  -- CASE 4: Multiple window stacking
             sbar.exec("yabai -m query --windows --window stack.last", function(stack_info)
-              local last_stack_index = stack_info["stack-index"]
+              local last_stack_index = stack_info["stack-index"] or "0"
               icon, label, color = icons.yabai.stack, ("[%d/%d]"):format(stack_index, last_stack_index), colors.yabai.stack
               set_yabai_status(icon, label, color, window_info)
             end)
