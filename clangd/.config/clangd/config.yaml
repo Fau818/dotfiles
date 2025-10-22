@@ -8,8 +8,8 @@ CompileFlags:  # Tweak the parse settings
     - -std=c++17
     - -DCODE_Fau
 
-  Compiler: /usr/local/opt/llvm/bin/clang++  # Change argv[0] of compile flags to `clang++`
-  # Compiler: /opt/homebrew/opt/llvm/bin/clang++
+  # Compiler: /usr/local/opt/llvm/bin/clang++  # Change argv[0] of compile flags to `clang++`
+  Compiler: /opt/homebrew/opt/llvm/bin/clang++
 
 Diagnostics:
   Suppress:

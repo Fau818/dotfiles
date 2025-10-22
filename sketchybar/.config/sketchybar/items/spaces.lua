@@ -137,6 +137,7 @@ end
 ---Update app icons in space.
 ---@param env table Environment variables.
 local function update_space_app(env)
+  if env.INFO.space == nil then return end
   local icon_line = ""
   local no_app = true
   for app, count in pairs(env.INFO.apps) do

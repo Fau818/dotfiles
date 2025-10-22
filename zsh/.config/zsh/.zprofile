@@ -9,7 +9,7 @@ if ! command -v brew &> /dev/null; then
     [[ -d "$prefix" ]] && eval "$("$prefix/bin/brew" shellenv)"
   }
   ___homebrew_init
-else # eval "$(brew shellenv)"
+# else eval "$(brew shellenv)"
 fi
 
 
