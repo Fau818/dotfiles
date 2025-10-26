@@ -50,7 +50,10 @@ source "$ZPLUGINDIR/zinit.zsh"
 
 
 # Eza (NOTE: Make sure setup after zinit)
-command -v eza &> /dev/null && alias ls="eza --icons --time-style=iso"
+command -v eza &> /dev/null && alias ls='eza --icons --time-style=iso'
+
+# Ripgrep
+command -v rg &> /dev/null && alias rg="rg --ignore-file '$XDG_CONFIG_HOME/fd/ignore'"
 
 
 # -----------------------------------

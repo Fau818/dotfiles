@@ -72,6 +72,7 @@ export PIP_CACHE_DIR="$XDG_CACHE_HOME/pip"
 # -----------------------------------
 # Cpp
 export CPPFLAGS_FAU='-std=c++17 -O2 -DCODE_Fau'
+export CPLUS_INCLUDE_PATH="$XDG_CONFIG_HOME/clangd/include"
 # Rust
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"

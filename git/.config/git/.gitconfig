@@ -4,7 +4,7 @@
   name = Fau
   email = zhangyuFau@gmail.com
 [core]
-  excludesfile = ~/.config/git/gitignore_global
+  excludesFile = ~/.config/git/ignore
   editor = nvim
   ignorecase = false
 [commit]
