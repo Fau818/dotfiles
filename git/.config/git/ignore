@@ -1,21 +1,8 @@
+# macOS
 .DS_Store
-.Trashes/
+.Trash/
 
-.git/
-.idea/
-.vscode/
-
-.cache/
-.local/
-
-.venv/
-__pycache__/
-
-build/
-dist/
-target/
-node_modules/
-
+# macOS User Folders
 /Applications/
 /Library/
 /Movies/
@@ -24,3 +11,34 @@ node_modules/
 /Music/
 /Pictures/
 /Public/
+
+
+# Git and IDEs and Caches
+.git/
+.idea/
+.vscode/
+.cache/
+
+
+# Python
+.venv/
+__pycache__/
+
+
+# Java
+bin/
+build/
+dist/
+target/
+
+
+# Node.js
+node_modules/
+
+
+# $HOME/.local/
+/.local/
+# $HOME/.docker/
+/.docker/
+# $XDG_CONFIG_HOME/raycast/
+.config/raycast/
