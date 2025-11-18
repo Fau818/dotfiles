@@ -38,7 +38,7 @@ zinit ice wait lucid depth=1; zinit snippet OMZL::completion.zsh
 zinit ice depth=1; zinit snippet OMZL::directories.zsh
 zinit ice wait lucid depth=1; zinit snippet OMZL::grep.zsh
 zinit ice depth=1; zinit snippet OMZL::history.zsh
-zinit ice wait lucid depth=1; zinit snippet OMZL::key-bindings.zsh
+zinit ice lucid depth=1 atload"bindkey -r '^R'; bindkey -r '^S'"; zinit snippet OMZL::key-bindings.zsh
 zinit ice depth=1; zinit snippet OMZL::theme-and-appearance.zsh
 
 zinit ice wait lucid depth=1 atload'unalias g grv ghh'; zinit snippet OMZP::git
@@ -59,7 +59,10 @@ zinit ice wait lucid depth=1 atload'unalias g grv ghh'; zinit snippet OMZP::git
 # CASE 3: Use `powerlevel10k`.
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
-zinit ice depth=1; zinit light zdharma-continuum/fast-syntax-highlighting
 zinit ice wait lucid depth=1; zinit light MichaelAquilina/zsh-you-should-use
+zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
+zinit ice lucid depth=1 atload"ZSH_FZF_HISTORY_SEARCH_BIND='^R'; ZSH_FZF_HISTORY_SEARCH_END_OF_LINE=true"; zinit light joshskidmore/zsh-fzf-history-search
+
 zinit ice wait lucid depth=1 blockf atload'zicompinit; zicdreplay'; zinit light zsh-users/zsh-completions
+
+zinit ice depth=1; zinit light zdharma-continuum/fast-syntax-highlighting

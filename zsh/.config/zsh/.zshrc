@@ -55,6 +55,9 @@ command -v eza &> /dev/null && alias ls='eza --icons --time-style=iso'
 # Ripgrep
 command -v rg &> /dev/null && alias rg="rg --ignore-file '$XDG_CONFIG_HOME/git/ignore'"
 
+# Npm
+command -v npm &> /dev/null && source <(npm completion)
+
 
 # -----------------------------------
 # -------- Goto Home if Login Shell

@@ -1,5 +1,5 @@
-# NOTE: For MacOS, you should run `ln -s ~/.config/clangd ~/Library/Preferences/clangd`
-# \ (before running please make sure the directory `~/Library/Preferences/clangd` does not exist)
+# IMPO: For MacOS, you should run `ln -s ~/.config/clangd ~/Library/Preferences/clangd`
+# \     (Before running please make sure the directory `~/Library/Preferences/clangd` does not exist)
 
 CompileFlags:  # Tweak the parse settings
   Add:
@@ -11,11 +11,34 @@ CompileFlags:  # Tweak the parse settings
   # Compiler: /usr/local/opt/llvm/bin/clang++  # Change argv[0] of compile flags to `clang++`
   Compiler: /opt/homebrew/opt/llvm/bin/clang++
 
+
 Diagnostics:
   Suppress:
     - shift-op-parentheses
   # ClangTidy:
   #   Add: "*"
 
+
+Completion:
+  AllScopes: true
+  ArgumentLists: None  # Value: None | OpenDelimiter | Delimiters | FullPlaceholders
+  HeaderInsertion: Never  # Value: IWYU | Never
+  CodePatterns: All  # Value: All | None
+
+
+InlayHints:
+  Enabled: true
+  ParameterNames: true
+  DeducedTypes: true
+  Designators: true
+  DefaultArguments: true
+  BlockEnd: false
+  # TypeNameLimit: 24  # Use default.
+
+
 Hover:
   ShowAKA: true
+
+
+# Documentation:
+#   CommentFormat: Doxygen

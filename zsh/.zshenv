@@ -70,23 +70,29 @@ export PIP_CACHE_DIR="$XDG_CACHE_HOME/pip"
 # -----------------------------------
 # -------- MISC
 # -----------------------------------
+# Claude
+export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
+# Codex
+export CODEX_HOME="$XDG_CONFIG_HOME/codex"
+# Codium
+export CODEIUM_HOME="$XDG_CONFIG_HOME/codeium"
 # Cpp
 export CPPFLAGS_FAU='-std=c++17 -O2 -DCODE_Fau'
 export CPLUS_INCLUDE_PATH="$XDG_CONFIG_HOME/clangd/include"
-# Rust
-export CARGO_HOME="$XDG_DATA_HOME/cargo"
-export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 # Docker (FIXME: not working)
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+# Gem
+export GEM_HOME="$XDG_DATA_HOME/gem"
+# Git
+export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/.gitconfig"
 # Less
 export LESSHISTFILE="$XDG_CACHE_HOME/less_history"
 # Npm
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/config"
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
-# Gem
-export GEM_HOME="$XDG_DATA_HOME/gem"
-# Git
-export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/.gitconfig"
+# Rust
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 # Starship
 export STARSHIP_CONFIG="$ZDOTDIR/starship.toml"
 # TLDR
