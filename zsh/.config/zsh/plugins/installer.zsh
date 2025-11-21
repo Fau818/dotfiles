@@ -5,18 +5,6 @@
 # -------- Installer for Linux
 # -----------------------------------
 if [[ "$(uname)" == 'Linux' ]]; then
-  # Apt source
-  function __apt_set_aliyun_source() {
-    local file_path='/etc/apt/sources.list'
-    sudo mv $file_path '/etc/apt/sources.list.bak'
-    sudo touch $file_path
-    sudo sh -c "echo 'deb http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse'           >  '$file_path'"
-    sudo sh -c "echo 'deb http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse'  >> '$file_path'"
-    sudo sh -c "echo 'deb http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse'   >> '$file_path'"
-    sudo sh -c "echo 'deb http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse'  >> '$file_path'"
-    sudo sh -c "echo 'deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse' >> '$file_path'"
-  }
-
   # Utils Installer
   function __utils_installer() {
     brew install bat btop fzf lazygit neofetch tldr tree yazi zoxide
