@@ -49,6 +49,14 @@ source "$ZPLUGINDIR/installer.zsh"
 source "$ZPLUGINDIR/zinit.zsh"
 
 
+# Docker
+if command -v docker &> /dev/null; then
+  dockerExecZsh() {
+    if [ -z "$1" ]; then echo "Usage: dockerExecZsh <container-name-or-id>"; return 1; fi
+    docker exec --env TERM=$TERM -it "$1" zsh -l
+  }
+fi
+
 # Eza (NOTE: Make sure setup after zinit)
 command -v eza &> /dev/null && alias ls='eza --icons --time-style=iso'
 

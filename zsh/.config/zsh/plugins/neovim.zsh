@@ -9,10 +9,9 @@ else
       # Clone neovim config
       git clone --depth=1 https://github.com/Fau818/nvim-config.git "${XDG_CONFIG_HOME:-$HOME/.config}/nvim"
       # Install dependencies on Linux
-      [[ "$(uname)" == 'Linux' ]] && sudo apt-get install -y language-pack-en-base kitty xclip gcc
+      [[ "$(uname)" == 'Linux' ]] && sudo apt-get install -y sudo curl git language-pack-en-base zsh stow kitty-terminfo rsync xclip build-essential
       # Install dependencies
-      brew install lua fd make node yarn ripgrep yazi lazygit
-      brew install neovim
+      brew install zoxide yazi lazygit lua ripgrep fd neovim
     else echo_red 'Not found: `brew` command'
     fi
   }

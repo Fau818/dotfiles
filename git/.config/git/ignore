@@ -42,3 +42,7 @@ node_modules/
 /.docker/
 # $XDG_CONFIG_HOME/raycast/
 .config/raycast/
+
+
+# Claude
+.claude/
