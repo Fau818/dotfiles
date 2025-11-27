@@ -40,6 +40,10 @@ node_modules/
 /.local/
 # $HOME/.docker/
 /.docker/
+# $HOME/.orbstack/
+/.orbstack/
+# $HOME/OrbStack/
+/OrbStack/
 # $XDG_CONFIG_HOME/raycast/
 .config/raycast/
 

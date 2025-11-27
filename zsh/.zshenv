@@ -81,6 +81,8 @@ export CPPFLAGS_FAU='-std=c++17 -O2 -DCODE_Fau'
 export CPLUS_INCLUDE_PATH="$XDG_CONFIG_HOME/clangd/include"
 # Docker (FIXME: not working)
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+# Fzf
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden'
 # Gem
 export GEM_HOME="$XDG_DATA_HOME/gem"
 # Git
@@ -107,5 +109,6 @@ export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
 # =============================================
 # ======== TEST
 # =============================================
-export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden'
-[[ "$(uname)" == 'Darwin' && "$(uname -m)" == 'arm64' ]] && (ps aux | grep X11 &> /dev/null) && export DISPLAY=':0'
+# [[ "$(uname)" == 'Darwin' && "$(uname -m)" == 'arm64' ]] && (ps aux | grep X11 &> /dev/null) && export DISPLAY=':0'
+
+export XAUTHORITY="$XDG_CACHE_HOME/Xauthority"

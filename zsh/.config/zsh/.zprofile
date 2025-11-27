@@ -1,7 +1,6 @@
 PATH="$HOME/.local/bin:$PATH"
-# =============================================
-# ========== Homebrew
-# =============================================
+
+# ==================== Homebrew ====================
 # ---------- Initialization
 if ! command -v brew &> /dev/null; then
   # Make sure the `brew` command is available on Linux and Mac (Apple Chip)
@@ -22,10 +21,7 @@ if [[ -v HOMEBREW_PREFIX ]]; then
 fi
 
 
-
-# =============================================
-# ========== Neovim
-# =============================================
+# ==================== Neovim ====================
 if command -v nvim &> /dev/null; then
   export VIM_CONFIG="$XDG_CONFIG_HOME/nvim"
   export EDITOR='nvim' VISUAL='nvim'
@@ -34,8 +30,9 @@ if command -v nvim &> /dev/null; then
 fi
 
 
-
-# =============================================
-# ========== Rust
-# =============================================
+# ==================== Rust ====================
 if command -v rustup &> /dev/null; then PATH="$CARGO_HOME/bin:$PATH"; fi
+
+
+# ==================== Orbstack ====================
+[[ -f "$HOME/.orbstack/shell/init.zsh" ]] && source "$HOME/.orbstack/shell/init.zsh" 2> /dev/null

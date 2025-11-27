@@ -1,0 +1,13 @@
+#compdef dzsh
+
+_dzsh() {
+  local containers
+  # Get only container names
+  containers=(${(f)"$(docker ps -a --format "{{.Names}}")"})
+
+  # If no containers found, return
+  [[ $#containers -eq 0 ]] && return 1
+
+  # Use compadd to show completions - this will work on the first tab press
+  compadd -Q -a containers
+}

@@ -29,6 +29,6 @@ function __zsh_init_fau() {
 # -----------------------------------
 function __brew_install_packages() {
   if [[ "$(uname)" == 'Linux' ]]; then
-    brew install zoxide yazi lazygit lua ripgrep fd neovim
+    brew install file yazi zoxide lazygit lua ripgrep fd neovim
   fi
 }

@@ -5,17 +5,15 @@
 # -------- Installer for Linux
 # -----------------------------------
 if [[ "$(uname)" == 'Linux' ]]; then
-  # Utils Installer
-  function __utils_installer() {
-    brew install bat btop fzf lazygit neofetch tldr tree yazi zoxide
-    sudo apt-get install -y rsync stow wget
-  }
-
   # Docker
   alias __docker_installer='curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh && rm ./get-docker.sh'
+
   # Miniconda
-  alias __miniconda_installer='curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o miniconda_installer.sh && \
-  bash ./miniconda_installer.sh && rm ./miniconda_installer.sh'
+  function __miniconda_installer() {
+    local arch=$(uname -m)
+    local url="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-${arch}.sh"
+    curl -o miniconda_installer.sh "$url" && bash miniconda_installer.sh && rm miniconda_installer.sh
+  }
   # alias __fix_opencv_error='sudo apt-get install -y libgl1-mesa-glx libglib2.0-0'
 fi
 

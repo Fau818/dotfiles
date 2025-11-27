@@ -51,8 +51,8 @@ source "$ZPLUGINDIR/zinit.zsh"
 
 # Docker
 if command -v docker &> /dev/null; then
-  dockerExecZsh() {
-    if [ -z "$1" ]; then echo "Usage: dockerExecZsh <container-name-or-id>"; return 1; fi
+  dzsh() {
+    [[ -z "$1" ]] && echo "Usage: dzsh <container-name-or-id>" && return 1
     docker exec --env TERM=$TERM -it "$1" zsh -l
   }
 fi
