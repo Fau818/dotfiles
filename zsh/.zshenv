@@ -42,6 +42,7 @@ export DOTFILE_PATH=$([[ "$(uname)" == 'Darwin' ]] && echo "$HOME/Documents/Fau/
 # ICLOUD
 [[ "$(uname)" == 'Darwin' ]] && export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 [[ "$(uname)" == 'Darwin' ]] && export IBOOK="$HOME/Library/Mobile Documents/iCloud~com~apple~iBooks"
+[[ "$(uname)" == 'Darwin' ]] && export IOBSIDIAN="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Phoenix"
 # OpenAI
 export OPENAI_API_PATH="$DOTFILE_PATH/private/openai"
 
