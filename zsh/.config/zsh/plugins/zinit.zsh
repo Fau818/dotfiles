@@ -4,7 +4,8 @@
 # -----------------------------------
 # -------- Zinit Installer
 # -----------------------------------
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+ZINIT_ROOT="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
+ZINIT_HOME="${ZINIT_ROOT}/zinit.git"
 if [[ ! -f "$ZINIT_HOME/zinit.zsh" ]]; then
   print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
   command mkdir -p "$(dirname $ZINIT_HOME)" && command chmod g-rwX "$(dirname $ZINIT_HOME)"
@@ -29,16 +30,12 @@ autoload -Uz _zinit
 # -----------------------------------
 # -------- OMZ Migration
 # -----------------------------------
-# For OMZ completion
-HYPHEN_INSENSITIVE='true'
-COMPLETION_WAITING_DOTS='true'
-
-zinit ice wait lucid depth=1; zinit snippet OMZL::clipboard.zsh
-zinit ice wait lucid depth=1; zinit snippet OMZL::completion.zsh
+zinit ice depth=1 wait lucid; zinit snippet OMZL::clipboard.zsh
+zinit ice depth=1 wait lucid atinit'COMPLETION_WAITING_DOTS=true; HYPHEN_INSENSITIVE=true'; zinit snippet OMZL::completion.zsh
 zinit ice depth=1; zinit snippet OMZL::directories.zsh
-zinit ice wait lucid depth=1; zinit snippet OMZL::grep.zsh
+zinit ice depth=1 wait lucid; zinit snippet OMZL::grep.zsh
 zinit ice depth=1; zinit snippet OMZL::history.zsh
-zinit ice lucid depth=1 atload"bindkey -r '^R'; bindkey -r '^S'"; zinit snippet OMZL::key-bindings.zsh
+zinit ice depth=1 atload"bindkey -r '^R'; bindkey -r '^S'"; zinit snippet OMZL::key-bindings.zsh
 zinit ice depth=1; zinit snippet OMZL::theme-and-appearance.zsh
 
 zinit ice wait lucid depth=1 atload'unalias g grv ghh'; zinit snippet OMZP::git
@@ -58,11 +55,11 @@ zinit ice wait lucid depth=1 atload'unalias g grv ghh'; zinit snippet OMZP::git
 # fi
 # CASE 3: Use `powerlevel10k`.
 zinit ice depth=1; zinit light romkatv/powerlevel10k
+zinit ice depth=1; zinit light zdharma-continuum/fast-syntax-highlighting
 
-zinit ice wait lucid depth=1; zinit light MichaelAquilina/zsh-you-should-use
+zinit ice depth=1 wait lucid; zinit light MichaelAquilina/zsh-you-should-use
+
 zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
 zinit ice lucid wait"0a" from"gh-r" as"program" atload'eval "$(mcfly init zsh)"; export MCFLY_KEY_SCHEME=vim'; zinit light cantino/mcfly
 
-zinit ice wait lucid depth=1 blockf atload'zicompinit; zicdreplay'; zinit light zsh-users/zsh-completions
-
-zinit ice depth=1; zinit light zdharma-continuum/fast-syntax-highlighting
+zinit ice depth=1 wait lucid blockf atload'zicompinit; zicdreplay'; zinit light zsh-users/zsh-completions
