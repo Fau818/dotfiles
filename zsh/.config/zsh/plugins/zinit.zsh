@@ -61,7 +61,7 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 zinit ice wait lucid depth=1; zinit light MichaelAquilina/zsh-you-should-use
 zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
-zinit ice lucid depth=1 atload"ZSH_FZF_HISTORY_SEARCH_BIND='^R'; ZSH_FZF_HISTORY_SEARCH_END_OF_LINE=true"; zinit light joshskidmore/zsh-fzf-history-search
+zinit ice lucid wait"0a" from"gh-r" as"program" atload'eval "$(mcfly init zsh)"; export MCFLY_KEY_SCHEME=vim'; zinit light cantino/mcfly
 
 zinit ice wait lucid depth=1 blockf atload'zicompinit; zicdreplay'; zinit light zsh-users/zsh-completions
 

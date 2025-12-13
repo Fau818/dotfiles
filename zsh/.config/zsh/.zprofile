@@ -32,6 +32,7 @@ fi
 
 # ==================== Rust ====================
 if command -v rustup &> /dev/null; then PATH="$CARGO_HOME/bin:$PATH"; fi
+if command -v gem &> /dev/null; then PATH="$XDG_DATA_HOME/gem/bin:$PATH"; fi
 
 
 # ==================== Orbstack ====================
