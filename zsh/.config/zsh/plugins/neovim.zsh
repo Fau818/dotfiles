@@ -12,7 +12,7 @@ else
       [[ "$(uname)" == 'Linux' ]] && sudo apt-get install -y sudo curl git language-pack-en-base zsh stow kitty-terminfo rsync xclip build-essential
       # Install dependencies
       brew install zoxide yazi lazygit lua ripgrep fd neovim
-    else echo_red 'Not found: `brew` command'
+    else echo_error 'Not found: `brew` command'
     fi
   }
 fi

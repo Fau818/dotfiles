@@ -46,11 +46,11 @@ if command -v zoxide &> /dev/null; then
     fi
 
     # Jump
-    if [[ ${#_ZOXIDE_DIRS[@]} -eq 0 ]]; then echo_red 'zoxide: no directory found.'
+    if [[ ${#_ZOXIDE_DIRS[@]} -eq 0 ]]; then echo_error 'zoxide: no directory found.'
     else
       [[ "$(pwd)" != "$_ZOXIDE_SHOULD" ]] && _ZOXIDE_INDEX=1;  # Reset index if the current directory has changed
       [[ "$_ZOXIDE_ECHO" == true ]] && echo "$_ZOXIDE_INDEX/${#_ZOXIDE_DIRS[@]}" "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}"
-      cd "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}" || echo_red "zoxide: failed to ${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}."
+      cd "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}" || echo_error "zoxide: failed to ${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}."
       _ZOXIDE_INDEX=$((_ZOXIDE_INDEX % ${#_ZOXIDE_DIRS[@]} + 1))
       _ZOXIDE_SHOULD="$(pwd)"
     fi
@@ -86,7 +86,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
     for arg in "$@"; do
       if [[ "$arg" == -* ]]; then
         # EXIT: Invalid format
-        [[ ! -z "$pkgs" ]] && echo_red "ERROR: Format should be [option ...] [-D|-S|-R] package ..." && return 0
+        [[ ! -z "$pkgs" ]] && echo_error "ERROR: Format should be [option ...] [-D|-S|-R] package ..." && return 0
         opts+=("$arg")
       else pkgs+=("$arg")
       fi
@@ -132,7 +132,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
       local binary=${configs[$config]}
       if command -v "$binary" &> /dev/null; then
         __stow "$config"
-        echo_blue "Stowed configuration for '$config'."
+        echo_ok "Stowed configuration for '$config'."
       fi
     done
   }

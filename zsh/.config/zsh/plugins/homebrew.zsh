@@ -55,7 +55,7 @@ function ___homebrew_auto_set_bottle_domain() {
   elif [[ "$homebrew_repo_url" == "$HOMEBREW_ALIYUN_BREW_GIT_REMOTE" ]]; then
     export HOMEBREW_API_DOMAIN="$HOMEBREW_ALIYUN_API_DOMAIN"
     export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_ALIYUN_BOTTLE_DOMAIN"
-  else echo_yellow 'Unknown homebrew repo url, please set `HOMEBREW_BOTTLE_DOMAIN` manually.'
+  else echo_warn 'Unknown homebrew repo url, please set `HOMEBREW_BOTTLE_DOMAIN` manually.'
   fi
 }
 ___homebrew_auto_set_bottle_domain
@@ -68,7 +68,7 @@ function __homebrew_set_official_source() {
     git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_OFFICIAL_BREW_GIT_REMOTE"
     # Set bottle domain
     ___homebrew_auto_set_bottle_domain
-  else echo_red 'Not found: `brew` command'
+  else echo_error 'Not found: `brew` command'
   fi
 }
 
@@ -78,7 +78,7 @@ function __homebrew_set_tsinghua_source() {
     git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_TSINGHUA_BREW_GIT_REMOTE"
     # Set bottle domain
     ___homebrew_auto_set_bottle_domain
-  else echo_red 'Not found: `brew` command'
+  else echo_error 'Not found: `brew` command'
   fi
 }
 
@@ -88,6 +88,6 @@ function __homebrew_set_aliyun_source() {
     git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_ALIYUN_BREW_GIT_REMOTE"
     # Set bottle domain
     ___homebrew_auto_set_bottle_domain
-  else echo_red 'Not found: `brew` command'
+  else echo_error 'Not found: `brew` command'
   fi
 }

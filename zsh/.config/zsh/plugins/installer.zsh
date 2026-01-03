@@ -24,16 +24,16 @@ fi
 function __nerd_font_installer() {
   if [[ "$(uname)" == 'Darwin' ]]; then
     # Check dependency
-    (! command -v brew) && echo_red 'Homebrew is not installed.' && return 1
+    (! command -v brew) && echo_error 'Homebrew is not installed.' && return 1
 
-    echo_blue 'Running Mac installation...'
+    echo_info 'Running Mac installation...'
     # Install SF Mono Nerd Font
     brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized && brew install font-sf-mono-nerd-font-ligaturized
     # Install Victor Mono Nerd Font
     brew install font-victor-mono-nerd-font
   elif [[ "$(uname)" == 'Linux' ]]; then
     # NOTE: This script isn't tested; maybe `VictorMono` doesn't work. [Solution: move them to fonts folder]
-    echo_blue 'Running Linux installation...'
+    echo_info 'Running Linux installation...'
 
     local font_path="$HOME/.local/share/fonts"
     [[ ! -d "$font_path" ]] && mkdir -p "$font_path"
@@ -43,7 +43,7 @@ function __nerd_font_installer() {
     # Install Victor Mono Nerd Font
     brew tap homebrew/linux-fonts && brew install homebrew/linux-fonts/font-victor-mono-nerd-font
   else
-    echo_red "Unsupported operating system: $OSTYPE"
+    echo_error "Unsupported operating system: $OSTYPE"
     return 1
   fi
 }
