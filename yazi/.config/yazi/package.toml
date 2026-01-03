@@ -1,44 +1,44 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "2301ff8"
+rev = "03cdd4b"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
-rev = "2301ff8"
+rev = "03cdd4b"
 hash = "ce67445ebb1bf3d97b8e44f50904b2c5"
 
 [[plugin.deps]]
 use = "llanosrocas/githead"
-rev = "76fe4b8"
-hash = "10c3bc6cd6f3223e18f2483320a9e24a"
+rev = "71dabe4"
+hash = "73d2758775276ae7d824b43e53d0b350"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "2301ff8"
+rev = "03cdd4b"
 hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "2301ff8"
+rev = "03cdd4b"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-paste"
-rev = "2301ff8"
+rev = "03cdd4b"
 hash = "75fd60b2df7115e0a6ca31a6a804d320"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "2301ff8"
-hash = "27ca02f49fd236b5cc7bf03c243859fe"
+rev = "03cdd4b"
+hash = "36a484acf6a0a0219c543ccb4cee218f"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:types"
-rev = "2301ff8"
-hash = "1e047e1b13b5e3fc6ab1f5d0d04a14e2"
+rev = "03cdd4b"
+hash = "a3564fe0d051557df2a191ca0b212c2d"
 
 [[flavor.deps]]
 use = "BennyOe/tokyo-night"
-rev = "5f56364"
-hash = "c0bf69ad2c44005892d586e9693993c6"
+rev = "8e6296f"
+hash = "d9da921c3bd37ba32ee27a8a7a40461f"

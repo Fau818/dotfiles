@@ -1,0 +1,25 @@
+/* .monaco-editor .view-lines {
+  font-family: "SF Mono", monospace;
+} */
+
+/* Italic */
+.mtki {
+  font-family: "VictorMono Nerd Font Mono", monospace;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+/* Bold */
+.mtkb {
+  font-family: "SF Mono", monospace;
+  font-weight: bold;
+}
+
+/* Bold Italic */
+.mtki.mtkb {
+  font-family: "SF Mono", monospace;
+  font-style: italic;
+  font-weight: normal;
+  letter-spacing: 0;
+}

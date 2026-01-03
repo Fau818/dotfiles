@@ -21,7 +21,7 @@ Diagnostics:
 
 Completion:
   AllScopes: true
-  ArgumentLists: None  # Value: None | OpenDelimiter | Delimiters | FullPlaceholders
+  ArgumentLists: Delimiters  # Value: None | OpenDelimiter | Delimiters | FullPlaceholders
   HeaderInsertion: Never  # Value: IWYU | Never
   CodePatterns: All  # Value: All | None
 

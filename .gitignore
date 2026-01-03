@@ -7,6 +7,17 @@ karabiner/.config/karabiner/automatic_backups
 # Lazygit
 lazygit/.config/lazygit/state.yml
 
+# Yazi
+yazi/.config/yazi/plugins/full-border.yazi/
+yazi/.config/yazi/plugins/jump-to-char.yazi/
+yazi/.config/yazi/plugins/githead.yazi/
+yazi/.config/yazi/plugins/smart-enter.yazi/
+yazi/.config/yazi/plugins/toggle-pane.yazi/
+yazi/.config/yazi/plugins/smart-paste.yazi/
+yazi/.config/yazi/plugins/git.yazi/
+yazi/.config/yazi/plugins/types.yazi/
+yazi/.config/yazi/flavors/tokyo-night.yazi/
+
 # Zsh
 zsh/.config/zsh/.zcompcache/
 zsh/.config/zsh/.zcompdump*

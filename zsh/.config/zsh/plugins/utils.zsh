@@ -111,6 +111,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
   function auto_stow() {
     typeset -A configs=(
       [clangd]='clangd'
+      [claude]='claude'
       [fd]='fd'
       [git]='git'
       [github-copilot]='nvim'
@@ -120,6 +121,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
       [pip]='python3'
       [sketchybar]='sketchybar'
       [ssh]='ssh'
+      [vscode]='code'
       [wakatime]='wakatime-cli'
       [yazi]='yazi'
       [zsh]='zsh'
