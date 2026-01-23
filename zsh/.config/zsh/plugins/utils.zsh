@@ -112,6 +112,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
     typeset -A configs=(
       [clangd]='clangd'
       [claude]='claude'
+      [ccstatusline]='claude'
       [fd]='fd'
       [git]='git'
       [github-copilot]='nvim'
@@ -120,12 +121,14 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
       [karabiner]='karabiner_cli'
       [kitty]='kitty'
       [lazygit]='lazygit'
+      [nvim]='nvim'
       [pip]='python3'
       [sketchybar]='sketchybar'
       [ssh]='ssh'
       [vscode]='code'
       [wakatime]='wakatime-cli'
       [yazi]='yazi'
+      [yabai]='yabai'
       [zsh]='zsh'
     )
 

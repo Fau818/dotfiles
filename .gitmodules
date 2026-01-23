@@ -4,3 +4,10 @@
 	branch = main
 	update = merge
 	shallow = true
+
+[submodule "nvim"]
+	path = nvim/.config/nvim
+	url = git@github.com:Fau818/nvim-config.git
+	branch = main
+	update = merge
+	shallow = true

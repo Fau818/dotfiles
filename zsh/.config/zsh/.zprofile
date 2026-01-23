@@ -9,7 +9,7 @@ if ! command -v brew &> /dev/null; then
     [[ -d "$prefix" ]] && eval "$("$prefix/bin/brew" shellenv)"
   }
   ___homebrew_init
-# else eval "$(brew shellenv)"
+else eval "$(brew shellenv)"  # Please enable this for setting env variables like `HOMEBREW_PREFIX`.
 fi
 
 
@@ -37,3 +37,7 @@ if command -v gem &> /dev/null; then PATH="$XDG_DATA_HOME/gem/bin:$PATH"; fi
 
 # ==================== Orbstack ====================
 [[ -f "$HOME/.orbstack/shell/init.zsh" ]] && source "$HOME/.orbstack/shell/init.zsh" 2> /dev/null
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :

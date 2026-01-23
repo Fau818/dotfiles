@@ -5,6 +5,13 @@
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
 
+# NOTE: If want to control the behavior of yabai accourding to different display,
+# \     the following code can be used to get the current display UUID and set the top.
+# CURRENT_UUID=$(yabai -m query --displays --display | jq -r '.uuid')
+# MACBOOK_PRO_UUID="854FB78A-A53A-8D8D-D474-F36834839112"
+# TOP_PADDING=$([[ "$CURRENT_UUID" == "$MACBOOK_PRO_UUID" ]] && echo 0 || echo 32)
+# TOP_PADDING=32
+
 
 # =============================================
 # ======== Configuration
@@ -43,7 +50,7 @@ config=(
   mouse_follows_focus off
 
   debug_output off
-  external_bar all:32:0
+  external_bar all:$TOP_PADDING:0
 
 
   # -----------------------------------

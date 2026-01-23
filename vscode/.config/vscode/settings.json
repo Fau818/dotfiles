@@ -27,11 +27,18 @@
   "C_Cpp.inlayHints.referenceOperator.enabled": true,
   "C_Cpp.inlayHints.referenceOperator.showSpace": true,
   "C_Cpp.intelliSenseEngine": "disabled",
+
+  "[lua]": { "editor.defaultFormatter": "sumneko.lua" },
   "Lua.hint.enable": true,
   "Lua.hint.setType": true,
-  "Lua.window.statusBar": false,
-  "[lua]": { "editor.defaultFormatter": "sumneko.lua" },
+  "Lua.codeLens.enable": true,
+  "Lua.completion.keywordSnippet": "Disable",
+  "Lua.completion.displayContext": 5,
+  "Lua.hint.awaitPropagate": true,
+  "Lua.type.inferParamType": true,
+
   "diffEditor.codeLens": true,
+
   "editor.acceptSuggestionOnEnter": "off",
   "editor.aiStats.enabled": true,
   "editor.autoIndentOnPaste": true,
@@ -54,34 +61,43 @@
   "editor.tabCompletion": "on",
   "editor.tabSize": 2,
   "editor.wordWrapColumn": 200,
-  "emmet.syntaxProfiles": {},
+
   "files.autoGuessEncoding": true,
   "files.autoSave": "onFocusChange",
   "files.exclude": { "**/__pycache__": true },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+
   "github.copilot.enable": { "plaintext": true, "scminput": true, "markdown": true },
-  "github.copilot.nextEditSuggestions.enabled": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.chat.generateTests.codeLens": true,
+  "github.copilot.chat.githubMcpServer.enabled": true,
+  "github.copilot.chat.languageContext.typescript.enabled": true,
+  "github.copilot.chat.languageContext.typescript.includeDocumentation": true,
+  "github.copilot.chat.languageContext.fix.typescript.enabled": true,
+  "github.copilot.chat.languageContext.inline.typescript.enabled": true,
+
   "html.format.indentHandlebars": true,
   "html.format.templating": true,
+
   "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
   "javascript.inlayHints.parameterTypes.enabled": true,
   "javascript.inlayHints.variableTypes.enabled": true,
   "javascript.suggest.completeFunctionCalls": true,
+
   "notebook.lineNumbers": "on",
-  "notebook.outline.showCodeCells": true,
-  "problems.showCurrentInStatus": true,
+
   "python.analysis.autoImportCompletions": true,
   "python.analysis.cacheLSPData": true,
   "python.analysis.completeFunctionParens": true,
   "python.analysis.enableAsyncProgram": true,
   "python.analysis.inlayHints.pytestParameters": true,
   "python.analysis.inlayHints.variableTypes": true,
-  "remote.extensionKind": { "GitHub.copilot": ["ui"], "github.copilot-chat": ["ui"] },
+
   "search.showLineNumbers": true,
   "search.smartCase": true,
-  "security.workspace.trust.untrustedFiles": "open",
+
   "terminal.integrated.enableVisualBell": true,
   "terminal.integrated.fontSize": 14,
   "terminal.integrated.macOptionIsMeta": true,
@@ -92,17 +108,24 @@
   "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
   "typescript.inlayHints.variableTypes.enabled": true,
   "typescript.suggest.completeFunctionCalls": true,
+
   "vscode-neovim.compositeTimeout": 750,
-  "vscode_custom_css.imports": ["file:///${HOME}/.config/vscode/multi_fonts.css"],
+
+  "vscode_custom_css.imports": ["file:///${env:HOME:~}/.config/vscode/multi_fonts.css"],
+
   "workbench.editor.mouseBackForwardToNavigate": false,
   "workbench.editorLargeFileConfirmation": 1,
   "workbench.list.multiSelectModifier": "alt",
   "workbench.list.smoothScrolling": true,
   "workbench.trustedDomains.promptInTrustedWorkspace": true,
+
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
+
   "search.useGlobalIgnoreFiles": true,
+
+  "problems.showCurrentInStatus": true,
 
   /* NEW */
 }

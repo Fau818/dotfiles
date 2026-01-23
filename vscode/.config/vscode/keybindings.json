@@ -572,5 +572,12 @@
     "command": "-workbench.action.zoomReset"
   },
 
+  /* Escape to close suggestion widget */
+  {
+    "key": "escape",
+    "command": "hideSuggestWidget",
+    "when": "suggestWidgetVisible && editorTextFocus"
+  }
+
   /* NEW */
 ]

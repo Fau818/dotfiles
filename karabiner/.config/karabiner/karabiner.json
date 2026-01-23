@@ -9,7 +9,7 @@
                 },
                 "rules": [
                     {
-                        "description": "<R_CMD> := <HYPER> and <R_OPT> := <HHYPER>",
+                        "description": "<FN> := <FN> with sticky and <FN> Open",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -18,113 +18,111 @@
                                         "value": false
                                     }
                                 ],
-                                "description": "<R_CMD> := <HYPER> with sticky",
+                                "description": "<FN> := <FN> with sticky",
                                 "from": {
-                                    "key_code": "right_command",
+                                    "key_code": "fn",
                                     "modifiers": {
                                         "mandatory": [],
-                                        "optional": ["any"]
+                                        "optional": ["caps_lock", "fn"]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "right_command",
-                                        "lazy": true,
-                                        "modifiers": ["left_control", "left_shift", "left_option"]
+                                        "key_code": "fn",
+                                        "lazy": true
                                     }
                                 ],
-                                "to_if_alone": [
-                                    { "sticky_modifier": { "right_command": "toggle" } },
-                                    { "sticky_modifier": { "left_control": "toggle" } },
-                                    { "sticky_modifier": { "left_shift": "toggle" } },
-                                    { "sticky_modifier": { "left_option": "toggle" } }
-                                ],
+                                "to_if_alone": [{ "sticky_modifier": { "fn": "toggle" } }],
+                                "to_if_held_down": [{ "key_code": "fn" }],
                                 "type": "basic"
                             },
                             {
-                                "conditions": [
-                                    {
-                                        "type": "event_changed_if",
-                                        "value": false
-                                    }
-                                ],
-                                "description": "<R_OPT> := <HHYPER> with sticky",
+                                "description": "<FN>a := open WhatsApp",
                                 "from": {
-                                    "key_code": "right_option",
+                                    "key_code": "a",
                                     "modifiers": {
-                                        "mandatory": [],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_option",
-                                        "lazy": true,
-                                        "modifiers": ["left_control", "left_shift", "left_command"]
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    { "sticky_modifier": { "right_option": "toggle" } },
-                                    { "sticky_modifier": { "left_control": "toggle" } },
-                                    { "sticky_modifier": { "left_shift": "toggle" } },
-                                    { "sticky_modifier": { "left_command": "toggle" } }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "type": "event_changed_if",
-                                        "value": false
-                                    }
-                                ],
-                                "description": "Revise <R_CMD><BK> := <L_CMD><BK>",
-                                "from": {
-                                    "key_code": "delete_or_backspace",
-                                    "modifiers": {
-                                        "mandatory": ["right_command", "left_control", "left_shift", "left_option"],
+                                        "mandatory": ["fn"],
                                         "optional": ["caps_lock"]
                                     }
                                 },
                                 "to": [
-                                    {
-                                        "key_code": "delete_or_backspace",
-                                        "modifiers": ["left_command"]
-                                    }
+                                    { "key_code": "vk_none" },
+                                    { "shell_command": "open -a WhatsApp" }
                                 ],
                                 "type": "basic"
                             },
                             {
-                                "description": "Revise <R_CMD>/<R_OPT>, := <NONE>",
+                                "description": "<FN>a := open Messages",
                                 "from": {
-                                    "key_code": "comma",
+                                    "key_code": "s",
                                     "modifiers": {
-                                        "mandatory": ["shift", "control", "option", "command"],
-                                        "optional": ["any"]
+                                        "mandatory": ["fn"],
+                                        "optional": ["caps_lock"]
                                     }
                                 },
                                 "to": [
-                                    {
-                                        "halt": true,
-                                        "key_code": "vk_none"
-                                    }
+                                    { "key_code": "vk_none" },
+                                    { "shell_command": "open -a Messages" }
                                 ],
                                 "type": "basic"
                             },
                             {
-                                "description": "Revise <R_CMD>/<R_OPT>. := <NONE>",
+                                "description": "<FN>d := open Discord",
                                 "from": {
-                                    "key_code": "period",
+                                    "key_code": "d",
                                     "modifiers": {
-                                        "mandatory": ["shift", "control", "option", "command"],
-                                        "optional": ["any"]
+                                        "mandatory": ["fn"],
+                                        "optional": ["caps_lock"]
                                     }
                                 },
                                 "to": [
-                                    {
-                                        "halt": true,
-                                        "key_code": "vk_none"
+                                    { "key_code": "vk_none" },
+                                    { "shell_command": "open -a Discord" }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<FN>q := open QQ",
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "mandatory": ["fn"],
+                                        "optional": ["caps_lock"]
                                     }
+                                },
+                                "to": [
+                                    { "key_code": "vk_none" },
+                                    { "shell_command": "open -a QQ" }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<FN>t := open Telegram",
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": ["fn"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "vk_none" },
+                                    { "shell_command": "open -a Telegram || open -a Telegram\\ Lite" }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "<FN>w := open WeChat",
+                                "from": {
+                                    "key_code": "w",
+                                    "modifiers": {
+                                        "mandatory": ["fn"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "vk_none" },
+                                    { "shell_command": "open -a WeChat" }
                                 ],
                                 "type": "basic"
                             }
@@ -133,6 +131,21 @@
                     {
                         "description": "<HYPER> and <HHYPER> Open",
                         "manipulators": [
+                            {
+                                "description": "<HYPER><SPACE> := Play Music",
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": {
+                                        "mandatory": ["right_command", "left_control", "left_shift", "left_option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "vk_none" },
+                                    { "shell_command": "osascript -e 'tell application \"Music\" to playpause'" }
+                                ],
+                                "type": "basic"
+                            },
                             {
                                 "description": "<HYPER>b := open Bob",
                                 "from": {
@@ -346,7 +359,7 @@
                         ]
                     },
                     {
-                        "description": "<FN> := <FN> with sticky and <FN> Open",
+                        "description": "<R_CMD> := <HYPER> and <R_OPT> := <HHYPER>",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -355,96 +368,113 @@
                                         "value": false
                                     }
                                 ],
-                                "description": "<FN> := <FN> with sticky",
+                                "description": "<R_CMD> := <HYPER> with sticky",
                                 "from": {
-                                    "key_code": "fn",
+                                    "key_code": "right_command",
                                     "modifiers": {
                                         "mandatory": [],
-                                        "optional": ["caps_lock", "fn"]
+                                        "optional": ["any"]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "fn",
-                                        "lazy": true
+                                        "key_code": "right_command",
+                                        "lazy": true,
+                                        "modifiers": ["left_control", "left_shift", "left_option"]
                                     }
                                 ],
-                                "to_if_alone": [{ "sticky_modifier": { "fn": "toggle" } }],
-                                "to_if_held_down": [{ "key_code": "fn" }],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "<FN>a := open WhatsApp",
-                                "from": {
-                                    "key_code": "a",
-                                    "modifiers": {
-                                        "mandatory": ["fn"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [
-                                    { "key_code": "vk_none" },
-                                    { "shell_command": "open -a WhatsApp" }
+                                "to_if_alone": [
+                                    { "sticky_modifier": { "right_command": "toggle" } },
+                                    { "sticky_modifier": { "left_control": "toggle" } },
+                                    { "sticky_modifier": { "left_shift": "toggle" } },
+                                    { "sticky_modifier": { "left_option": "toggle" } }
                                 ],
                                 "type": "basic"
                             },
                             {
-                                "description": "<FN>d := open Discord",
+                                "conditions": [
+                                    {
+                                        "type": "event_changed_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "<R_OPT> := <HHYPER> with sticky",
                                 "from": {
-                                    "key_code": "d",
+                                    "key_code": "right_option",
                                     "modifiers": {
-                                        "mandatory": ["fn"],
-                                        "optional": ["caps_lock"]
+                                        "mandatory": [],
+                                        "optional": ["any"]
                                     }
                                 },
                                 "to": [
-                                    { "key_code": "vk_none" },
-                                    { "shell_command": "open -a Discord" }
+                                    {
+                                        "key_code": "right_option",
+                                        "lazy": true,
+                                        "modifiers": ["left_control", "left_shift", "left_command"]
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    { "sticky_modifier": { "right_option": "toggle" } },
+                                    { "sticky_modifier": { "left_control": "toggle" } },
+                                    { "sticky_modifier": { "left_shift": "toggle" } },
+                                    { "sticky_modifier": { "left_command": "toggle" } }
                                 ],
                                 "type": "basic"
                             },
                             {
-                                "description": "<FN>q := open QQ",
+                                "conditions": [
+                                    {
+                                        "type": "event_changed_if",
+                                        "value": false
+                                    }
+                                ],
+                                "description": "Revise <R_CMD><BK> := <L_CMD><BK>",
                                 "from": {
-                                    "key_code": "q",
+                                    "key_code": "delete_or_backspace",
                                     "modifiers": {
-                                        "mandatory": ["fn"],
+                                        "mandatory": ["right_command", "left_control", "left_shift", "left_option"],
                                         "optional": ["caps_lock"]
                                     }
                                 },
                                 "to": [
-                                    { "key_code": "vk_none" },
-                                    { "shell_command": "open -a QQ" }
+                                    {
+                                        "key_code": "delete_or_backspace",
+                                        "modifiers": ["left_command"]
+                                    }
                                 ],
                                 "type": "basic"
                             },
                             {
-                                "description": "<FN>t := open Telegram",
+                                "description": "Revise <R_CMD>/<R_OPT>, := <NONE>",
                                 "from": {
-                                    "key_code": "t",
+                                    "key_code": "comma",
                                     "modifiers": {
-                                        "mandatory": ["fn"],
-                                        "optional": ["caps_lock"]
+                                        "mandatory": ["shift", "control", "option", "command"],
+                                        "optional": ["any"]
                                     }
                                 },
                                 "to": [
-                                    { "key_code": "vk_none" },
-                                    { "shell_command": "open -a Telegram\\ Lite" }
+                                    {
+                                        "halt": true,
+                                        "key_code": "vk_none"
+                                    }
                                 ],
                                 "type": "basic"
                             },
                             {
-                                "description": "<FN>w := open WeChat",
+                                "description": "Revise <R_CMD>/<R_OPT>. := <NONE>",
                                 "from": {
-                                    "key_code": "w",
+                                    "key_code": "period",
                                     "modifiers": {
-                                        "mandatory": ["fn"],
-                                        "optional": ["caps_lock"]
+                                        "mandatory": ["shift", "control", "option", "command"],
+                                        "optional": ["any"]
                                     }
                                 },
                                 "to": [
-                                    { "key_code": "vk_none" },
-                                    { "shell_command": "open -a WeChat" }
+                                    {
+                                        "halt": true,
+                                        "key_code": "vk_none"
+                                    }
                                 ],
                                 "type": "basic"
                             }

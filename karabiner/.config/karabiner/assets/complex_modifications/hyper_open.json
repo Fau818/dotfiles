@@ -53,6 +53,13 @@
       "description": "<HYPER> and <HHYPER> Open",
       "manipulators": [
         {
+          "description": "<HYPER><SPACE> := Play Music",
+          "type": "basic",
+          "from": { "key_code": "spacebar", "modifiers": { "mandatory": ["right_command", "left_control", "left_shift", "left_option"], "optional": ["caps_lock"] } },
+          "to": [{ "key_code": "vk_none" }, { "shell_command": "osascript -e 'tell application \"Music\" to playpause'" }]
+        },
+
+        {
           "description": "<HYPER>b := open Bob",
           "type": "basic",
           "from": { "key_code": "b", "modifiers": { "mandatory": ["right_command", "left_control", "left_shift", "left_option"], "optional": ["caps_lock"] } },
@@ -176,6 +183,13 @@
         },
 
         {
+          "description": "<FN>a := open Messages",
+          "type": "basic",
+          "from": { "key_code": "s", "modifiers": { "mandatory": ["fn"], "optional": ["caps_lock"] } },
+          "to": [{ "key_code": "vk_none" }, { "shell_command": "open -a Messages" }]
+        },
+
+        {
           "description": "<FN>d := open Discord",
           "type": "basic",
           "from": { "key_code": "d", "modifiers": { "mandatory": ["fn"], "optional": ["caps_lock"] } },
@@ -193,7 +207,7 @@
           "description": "<FN>t := open Telegram",
           "type": "basic",
           "from": { "key_code": "t", "modifiers": { "mandatory": ["fn"], "optional": ["caps_lock"] } },
-          "to": [{ "key_code": "vk_none" }, { "shell_command": "open -a Telegram\\ Lite" }]
+          "to": [{ "key_code": "vk_none" }, { "shell_command": "open -a Telegram || open -a Telegram\\ Lite" }]
         },
 
         {
