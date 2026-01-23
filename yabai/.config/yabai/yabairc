@@ -50,7 +50,7 @@ config=(
   mouse_follows_focus off
 
   debug_output off
-  external_bar all:$TOP_PADDING:0
+  external_bar all:32:0
 
 
   # -----------------------------------
@@ -139,6 +139,10 @@ yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/destroy
 # \     So an `application_hidden` event is added to handle this situation.
 yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/refocus_window.sh '$white_list|$extra_list'"
 yabai -m signal --add event=application_hidden action="$HOME/.config/yabai/refocus_window.sh 'Finder'"
+
+# TODO: Setup
+# Stackline - refresh on window focus to update stack indicators after swap
+# yabai -m signal --add event=window_focused action="command -v hs &> /dev/null && hs -c 'if stackline then stackline:refresh() end'"
 
 # Sketchybar
 yabai -m signal --add event=window_created      action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_window_created"

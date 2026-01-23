@@ -24,6 +24,16 @@ max_height = 1920
 dark = "tokyo-night"
 
 
+[plugin]
+prepend_previewers = [
+{ url = "/Users/*/Documents/Fau/Movies/**", run = "noop" },
+{ url = "/Users/*/Library/Mobile Documents/com~apple~CloudDocs/Documents/Fau/Movies/**", run = "noop" },
+]
+
+prepend_preloaders = [
+{ url = "/Users/*/Documents/**", run = "noop" },
+{ url = "/Users/*/Library/Mobile Documents/com~apple~CloudDocs/Documents/**", run = "noop" },
+]
 
 # ==================== Git ====================
 [[plugin.prepend_fetchers]]
@@ -35,3 +45,17 @@ run  = "git"
 id   = "git"
 name = "*/"
 run  = "git"
+
+
+# ==================== Miem-ext ====================
+[[plugin.prepend_fetchers]]
+id   = "mime"
+url  = "local://*"
+run  = "mime-ext.local"
+prio = "high"
+
+[[plugin.prepend_fetchers]]
+id   = "mime"
+url  = "remote://*"
+run  = "mime-ext.remote"
+prio = "high"
