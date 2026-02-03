@@ -63,16 +63,6 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 
 
 # -----------------------------------
-# -------- Python
-# -----------------------------------
-export IPYTHONDIR="$XDG_CACHE_HOME/ipython"
-export KAGGLE_CONFIG_DIR="$XDG_CONFIG_HOME/kaggle"
-export CLEARML_CONFIG_FILE="$XDG_CONFIG_HOME/clearml/clearml.conf"
-export MPLCONFIGDIR="$XDG_CACHE_HOME/matplotlib"
-export PIP_CACHE_DIR="$XDG_CACHE_HOME/pip"
-
-
-# -----------------------------------
 # -------- MISC
 # -----------------------------------
 # Claude
@@ -93,17 +83,24 @@ export GEM_HOME="$XDG_DATA_HOME/gem"
 # Git
 export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/.gitconfig"
 # Less
-export LESSHISTFILE="$XDG_CACHE_HOME/less_history"
+export LESSHISTFILE="$XDG_STATE_HOME/less_history"
 # Npm
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/config"
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
+# Python
+export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
+export IPYTHONDIR="$XDG_DATA_HOME/ipython"
+export PIP_CACHE_DIR="$XDG_CACHE_HOME/pip"
+export MPLCONFIGDIR="$XDG_CACHE_HOME/matplotlib"
+export KAGGLE_CONFIG_DIR="$XDG_CONFIG_HOME/kaggle"
+export CLEARML_CONFIG_FILE="$XDG_CONFIG_HOME/clearml/clearml.conf"
 # Rust
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 # Starship
 export STARSHIP_CONFIG="$ZDOTDIR/starship.toml"
 # TLDR
-export TLDR_CACHE_DIR="$XDG_DATA_HOME/tldr"
+export TLDR_CACHE_DIR="$XDG_CACHE_HOME/tldr"
 # Wakatime
 export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
 # Zoxide

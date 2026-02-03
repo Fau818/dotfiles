@@ -1,11 +1,11 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "e07bf41"
+rev = "230b9c6"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
-rev = "e07bf41"
+rev = "230b9c6"
 hash = "ce67445ebb1bf3d97b8e44f50904b2c5"
 
 [[plugin.deps]]
@@ -15,32 +15,32 @@ hash = "41dc37a724b2afd21da4f1ea6c1182d8"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "e07bf41"
+rev = "230b9c6"
 hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "e07bf41"
+rev = "230b9c6"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-paste"
-rev = "e07bf41"
+rev = "230b9c6"
 hash = "75fd60b2df7115e0a6ca31a6a804d320"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "e07bf41"
+rev = "230b9c6"
 hash = "270915fa8282a19908449530ff66f7e2"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:types"
-rev = "e07bf41"
-hash = "204d77f3890fc8b0eb1efb081ed400c0"
+rev = "230b9c6"
+hash = "83b5b82b595c39a660bf2b170987e5e7"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mime-ext"
-rev = "e07bf41"
+rev = "230b9c6"
 hash = "7b7dc677b58371da6fc63e4fcd134651"
 
 [[flavor.deps]]
