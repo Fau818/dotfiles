@@ -113,4 +113,4 @@ export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
 # =============================================
 # [[ "$(uname)" == 'Darwin' && "$(uname -m)" == 'arm64' ]] && (ps aux | grep X11 &> /dev/null) && export DISPLAY=':0'
 
-export XAUTHORITY="$XDG_CACHE_HOME/Xauthority"
+# export XAUTHORITY="$XDG_CACHE_HOME/Xauthority"  # IMPO: It's for routing x11 file.
