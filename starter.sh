@@ -45,12 +45,11 @@ __dotfile_pull() {
 # -------- ZSH Init
 # -----------------------------------
 __zsh_init() {
-  # Detect stow
+  # Auto-install stow if missing
   if ! command -v stow &> /dev/null; then
-    __error "stow command not found! Please install stow first."
-    __info "  macOS: brew install stow"
-    __info "  Ubuntu: sudo apt install stow"
-    return 1
+    __info "Installing stow..."
+    [[ "$(uname)" == 'Darwin' ]] && brew install stow || sudo apt install -y stow
+    command -v stow &> /dev/null && __ok "stow installed successfully." || { __error "Failed to install stow!"; return 1; }
   fi
 
   __info "Stowing zsh configuration..."

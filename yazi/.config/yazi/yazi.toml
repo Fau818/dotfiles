@@ -26,6 +26,7 @@ dark = "tokyo-night"
 
 [plugin]
 prepend_previewers = [
+{ url = "**/Movies/**", run = "noop" },
 { url = "/Users/*/Documents/Fau/Movies/**", run = "noop" },
 { url = "/Users/*/Library/Mobile Documents/com~apple~CloudDocs/Documents/Fau/Movies/**", run = "noop" },
 ]
