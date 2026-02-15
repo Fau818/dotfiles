@@ -21,7 +21,7 @@ HOMEBREW_ALIYUN_BOTTLE_DOMAIN='https://mirrors.aliyun.com/homebrew/homebrew-bott
 # =============================================
 # Install Homebrew (default: official source)
 function __homebrew_install() {
-  echo_info "Select Homebrew installation source:"
+  echo "Select Homebrew installation source:"
   echo "1) Official - https://github.com/Homebrew (default)"
   echo "2) Aliyun Mirror - https://mirrors.aliyun.com"
   read -r "choice?Please enter your choice (default is official): "
@@ -72,36 +72,40 @@ function ___homebrew_auto_set_bottle_domain() {
   else echo_warn 'Unknown homebrew repo url, please set `HOMEBREW_BOTTLE_DOMAIN` manually.'
   fi
 }
-___homebrew_auto_set_bottle_domain
+# ___homebrew_auto_set_bottle_domain  # TEST: Should be removed?
 
 
 # ==================== Sourcer ====================
-# Official Source
-function __homebrew_set_official_source() {
-  if command -v brew &> /dev/null; then
-    git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_OFFICIAL_BREW_GIT_REMOTE"
-    # Set bottle domain
-    ___homebrew_auto_set_bottle_domain
-  else echo_error 'Not found: `brew` command'
-  fi
-}
+# Switch Homebrew source (default: official)
+function __homebrew_set_source() {
+  ! command -v brew &> /dev/null && { echo_error 'Not found: `brew` command'; return 1; }
 
-# Tsinghua Source
-function __homebrew_set_tsinghua_source() {
-  if command -v brew &> /dev/null; then
-    git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_TSINGHUA_BREW_GIT_REMOTE"
-    # Set bottle domain
-    ___homebrew_auto_set_bottle_domain
-  else echo_error 'Not found: `brew` command'
-  fi
-}
+  echo "Select Homebrew source:"
+  echo "1) Official - https://github.com/Homebrew (default)"
+  echo "2) Tsinghua Mirror - https://mirrors.tuna.tsinghua.edu.cn"
+  echo "3) Aliyun Mirror - https://mirrors.aliyun.com"
+  read -r "choice?Enter your choice (default is 1): "
+  choice="${choice:-1}"
 
-# Aliyun Source
-function __homebrew_set_aliyun_source() {
-  if command -v brew &> /dev/null; then
-    git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_ALIYUN_BREW_GIT_REMOTE"
-    # Set bottle domain
-    ___homebrew_auto_set_bottle_domain
-  else echo_error 'Not found: `brew` command'
-  fi
+  case "$choice" in
+    1)
+      echo_info "Switching to official source..."
+      git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_OFFICIAL_BREW_GIT_REMOTE"
+      ;;
+    2)
+      echo_info "Switching to Tsinghua mirror..."
+      git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_TSINGHUA_BREW_GIT_REMOTE"
+      ;;
+    3)
+      echo_info "Switching to Aliyun mirror..."
+      git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_ALIYUN_BREW_GIT_REMOTE"
+      ;;
+    *)
+      echo_error "Invalid choice: $choice. Please run again and select 1, 2, or 3."
+      return 1
+      ;;
+  esac
+
+  # Set bottle domain
+  ___homebrew_auto_set_bottle_domain
 }
