@@ -19,19 +19,33 @@ HOMEBREW_ALIYUN_BOTTLE_DOMAIN='https://mirrors.aliyun.com/homebrew/homebrew-bott
 # =============================================
 # ========== Installer
 # =============================================
-# Official Repository
-function __homebrew_install_from_official_repo() {
-  unset HOMEBREW_BREW_GIT_REMOTE HOMEBREW_CORE_GIT_REMOTE HOMEBREW_API_DOMAIN HOMEBREW_BOTTLE_DOMAIN
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-}
+# Install Homebrew (default: official source)
+function __homebrew_install() {
+  echo_info "Select Homebrew installation source:"
+  echo "1) Official - https://github.com/Homebrew (default)"
+  echo "2) Aliyun Mirror - https://mirrors.aliyun.com"
+  read -r "choice?Please enter your choice (default is official): "
+  choice="${choice:-1}"
 
-# Aliyun Repository
-function __homebrew_install_from_aliyun_repo() {
-  export HOMEBREW_BREW_GIT_REMOTE="$HOMEBREW_ALIYUN_BREW_GIT_REMOTE"
-  export HOMEBREW_CORE_GIT_REMOTE="$HOMEBREW_ALIYUN_CORE_GIT_REMOTE"
-  export HOMEBREW_API_DOMAIN="$HOMEBREW_ALIYUN_API_DOMAIN"
-  export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_ALIYUN_BOTTLE_DOMAIN"
-  /bin/bash -c "$(curl -fsSL https://gitee.com/ineo6/homebrew-install/raw/master/install.sh)"
+  case "$choice" in
+    1)
+      echo_info "Installing from official source..."
+      unset HOMEBREW_BREW_GIT_REMOTE HOMEBREW_CORE_GIT_REMOTE HOMEBREW_API_DOMAIN HOMEBREW_BOTTLE_DOMAIN
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      ;;
+    2)
+      echo_info "Installing from Aliyun mirror..."
+      export HOMEBREW_BREW_GIT_REMOTE="$HOMEBREW_ALIYUN_BREW_GIT_REMOTE"
+      export HOMEBREW_CORE_GIT_REMOTE="$HOMEBREW_ALIYUN_CORE_GIT_REMOTE"
+      export HOMEBREW_API_DOMAIN="$HOMEBREW_ALIYUN_API_DOMAIN"
+      export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_ALIYUN_BOTTLE_DOMAIN"
+      /bin/bash -c "$(curl -fsSL https://gitee.com/ineo6/homebrew-install/raw/master/install.sh)"
+      ;;
+    *)
+      echo_error "Invalid choice: $choice. Please run again and select 1 or 2."
+      return 1
+      ;;
+  esac
 }
 
 
