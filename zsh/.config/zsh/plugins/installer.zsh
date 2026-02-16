@@ -39,7 +39,7 @@ function __nerd_font_installer() {
     [[ ! -d "$font_path" ]] && mkdir -p "$font_path"
     # Install SF Mono Nerd Font
     git clone --depth=1 https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git && \
-    mv "./SFMono-Nerd-Font-Ligaturized/*.otf" "$font_path" && rm -rf ./SFMono-Nerd-Font-Ligaturized
+    mv ./SFMono-Nerd-Font-Ligaturized/*.otf "$font_path" && rm -rf ./SFMono-Nerd-Font-Ligaturized
     # Install Victor Mono Nerd Font
     brew tap homebrew/linux-fonts && brew install homebrew/linux-fonts/font-victor-mono-nerd-font
   else

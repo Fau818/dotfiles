@@ -23,11 +23,11 @@ export HISTFILE="$ZDOTDIR/.zsh_history"
 # -----------------------------------
 # -------- Shell and Terminal
 # -----------------------------------
-[[ ! -v SHELL ]] && export SHELL=$(which zsh)
+[[ ! -v SHELL ]] && export SHELL=$(command -v zsh)
 
 # Kitty terminal
 [[ -v KITTY_PID ]] && export TERM='xterm-kitty'
-[[ "$(uname)" == 'Linux' ]] && command -v kitty &> /dev/null && export TERM='xterm-kitty'
+
 # Xterm
 [[ ! -v TERM || "$TERM" == 'xterm' ]] && export TERM='xterm-256color'
 

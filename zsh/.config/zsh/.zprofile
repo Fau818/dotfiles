@@ -1,3 +1,5 @@
+source "$ZPLUGINDIR/colorful_print.zsh"
+
 PATH="$HOME/.local/bin:$PATH"
 
 # ==================== Homebrew ====================
@@ -32,12 +34,12 @@ fi
 
 # ==================== Rust ====================
 if command -v rustup &> /dev/null; then PATH="$CARGO_HOME/bin:$PATH"; fi
-if command -v gem &> /dev/null; then PATH="$XDG_DATA_HOME/gem/bin:$PATH"; fi
 
+# ==================== Gem ====================
+if command -v gem &> /dev/null; then PATH="$XDG_DATA_HOME/gem/bin:$PATH"; fi
 
 # ==================== Orbstack ====================
 [[ -f "$HOME/.orbstack/shell/init.zsh" ]] && source "$HOME/.orbstack/shell/init.zsh" 2> /dev/null
 
-# Added by OrbStack: command-line tools and integration
-# This won't be added again if you remove it.
-source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+# ==================== VPN Auto Start (Linux Only) ====================
+[[ "$(uname)" == 'Linux' ]] && source "$ZPLUGINDIR/vpn.zsh" && _auto_start_vpn

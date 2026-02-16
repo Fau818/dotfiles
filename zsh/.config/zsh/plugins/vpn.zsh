@@ -5,22 +5,25 @@
 
 # ==================== VPN Settings ====================
 proxy_port=7890
-function __vpn_start() {
+function __vpn_set_proxy() {
   # export https_proxy=http://127.0.0.1:$proxy_port http_proxy=http://127.0.0.1:$proxy_port all_proxy=socks5://127.0.0.1:$proxy_port
   export https_proxy=socks5h://127.0.0.1:$proxy_port http_proxy=socks5h://127.0.0.1:$proxy_port all_proxy=socks5h://127.0.0.1:$proxy_port
+}
+function _vpn_start() {
+  __vpn_set_proxy
   echo_info 'VPN is enabled.'
 }
-function __vpn_stop() {
+function _vpn_stop() {
   unset https_proxy http_proxy all_proxy
   echo_info 'VPN is disabled.'
 }
 
 function vpn() {
   # With parameters
-  if [[ "$1" == 'start' ]]; then __vpn_start
-  elif [[ "$1" == 'stop' ]]; then __vpn_stop
+  if [[ "$1" == 'start' ]]; then _vpn_start
+  elif [[ "$1" == 'stop' ]]; then _vpn_stop
   elif [[ -n "$1" ]]; then echo_error "Invalid parameter: $1. Usage: vpn [start|stop]" && return 1
-  else [[ ! -v https_proxy ]] && __vpn_start || __vpn_stop
+  else [[ ! -v https_proxy ]] && _vpn_start || _vpn_stop
   fi
 }
 
@@ -70,19 +73,14 @@ function ___clash_is_running() {
 function ___tun_is_active() { ip link show type tun 2>/dev/null | grep -q 'state UP'; }
 
 function _auto_start_vpn() {
-  # CASE1: SSH tunnel is listening.
-  if ___ssh_tunnel_listening; then
+  if ___ssh_tunnel_listening; then  # CASE1: SSH tunnel
     echo_info "SSH tunnel is listening on port $proxy_port, auto start VPN."
-    __vpn_start
+    _vpn_start
     return 0
-
-  # CASE2: Clash is running.
-  elif ___clash_is_running; then
+  elif ___clash_is_running; then  # CASE2: Clash
     if ___tun_is_active; then echo_info "Clash TUN mode is active, no proxy needed."
-    else echo_info "Clash is running, auto start VPN." && __vpn_start
+    else echo_info "Clash is running, auto start VPN." && _vpn_start
     fi
     return 0
   fi
 }
-
-_auto_start_vpn

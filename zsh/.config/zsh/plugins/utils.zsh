@@ -11,7 +11,7 @@ command -v rsync &> /dev/null && alias frsync='rsync -razvhP'
 # Mysql
 command -v mysql &> /dev/null && alias mysqlStart='mysql.server start' mysqlStop='mysql.server stop'
 # Thefuck
-command -v thefuck &> /dev/null && eval $(thefuck --alias) && alias ff=fuck
+command -v thefuck &> /dev/null && eval "$(thefuck --alias)" && alias ff=fuck
 # Yabai
 alias yabai_sudo='echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai > /dev/null'
 
@@ -86,16 +86,16 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
     for arg in "$@"; do
       if [[ "$arg" == -* ]]; then
         # EXIT: Invalid format
-        [[ ! -z "$pkgs" ]] && echo_error "ERROR: Format should be [option ...] [-D|-S|-R] package ..." && return 0
+        (( ${#pkgs[@]} > 0 )) && echo_error "ERROR: Format should be [option ...] [-D|-S|-R] package ..." && return 0
         opts+=("$arg")
       else pkgs+=("$arg")
       fi
     done
     # EXIT: Empty packages
-    [[ -z "$pkgs" ]] && (stow --help || return 0)
+    (( ${#pkgs[@]} == 0 )) && { stow --help; return 0; }
 
     # Execute
-    [[ ! -v DOTFILE_PATH ]] && (DOTFILE_PATH=$([[ "$(uname)" == 'Darwin' ]] && echo "$HOME/Documents/Fau/dotfiles" || echo "${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles"))
+    [[ ! -v DOTFILE_PATH ]] && { DOTFILE_PATH=$([[ "$(uname)" == 'Darwin' ]] && echo "$HOME/Documents/Fau/dotfiles" || echo "${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles"); }
     for name in "${pkgs[@]}"; do
       # CASE: For `ssh`, soft link `.ssh/config`
       [[ "$name" == 'ssh' ]] && [[ ! -d "$HOME/.ssh" ]] && mkdir "$HOME/.ssh"
