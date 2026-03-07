@@ -3,6 +3,7 @@
 # =============================================
 if command -v nvim &> /dev/null; then
   alias vim=nvim
+  export SUDO_EDITOR="$(which nvim)"
 else
   function __neovim_installer() {
     if command -v brew &> /dev/null; then
