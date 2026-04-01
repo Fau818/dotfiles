@@ -2,29 +2,6 @@
 # ======== Utils
 # =============================================
 # -----------------------------------
-# -------- MISC
-# -----------------------------------
-# Kitty
-[[ "$TERM" == 'xterm-kitty' ]] && alias kssh='kitty +kitten ssh'
-# Rsync
-command -v rsync &> /dev/null && alias frsync='rsync -razvhP'
-# Mysql
-command -v mysql &> /dev/null && alias mysqlStart='mysql.server start' mysqlStop='mysql.server stop'
-# Thefuck
-command -v thefuck &> /dev/null && eval "$(thefuck --alias)" && alias ff=fuck
-# Yabai
-alias yabai_sudo='echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai > /dev/null'
-
-
-# -----------------------------------
-# -------- Docker
-# -----------------------------------
-# Allow option-stacking for docker completion
-zstyle ':completion:*:*:docker:*' option-stacking yes
-zstyle ':completion:*:*:docker-*:*' option-stacking yes
-
-
-# -----------------------------------
 # -------- Zoxide
 # -----------------------------------
 if command -v zoxide &> /dev/null; then
