@@ -23,7 +23,10 @@ if command -v zoxide &> /dev/null; then
     fi
 
     # Jump
-    if [[ ${#_ZOXIDE_DIRS[@]} -eq 0 ]]; then echo_error 'zoxide: no directory found.'
+    if [[ ${#_ZOXIDE_DIRS[@]} -eq 0 ]]; then
+      # Fallback: fzf with query as initial input
+      local result
+      result=$(FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --query='$query'" zoxide query -i) && cd "$result"
     else
       [[ "$(pwd)" != "$_ZOXIDE_SHOULD" ]] && _ZOXIDE_INDEX=1;  # Reset index if the current directory has changed
       [[ "$_ZOXIDE_ECHO" == true ]] && echo "$_ZOXIDE_INDEX/${#_ZOXIDE_DIRS[@]}" "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}"
