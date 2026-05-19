@@ -38,25 +38,25 @@ prepend_preloaders = [
 
 # ==================== Git ====================
 [[plugin.prepend_fetchers]]
-id   = "git"
-name = "*"
-run  = "git"
+url   = "*"
+run   = "git"
+group = "git"
 
 [[plugin.prepend_fetchers]]
-id   = "git"
-name = "*/"
-run  = "git"
+url   = "*/"
+run   = "git"
+group = "git"
 
 
 # ==================== Miem-ext ====================
 [[plugin.prepend_fetchers]]
-id   = "mime"
-url  = "local://*"
-run  = "mime-ext.local"
-prio = "high"
+group = "mime"
+url   = "local://*"
+run   = "mime-ext.local"
+prio  = "high"
 
 [[plugin.prepend_fetchers]]
-id   = "mime"
-url  = "remote://*"
-run  = "mime-ext.remote"
-prio = "high"
+group = "mime"
+url   = "remote://*"
+run   = "mime-ext.remote"
+prio  = "high"
