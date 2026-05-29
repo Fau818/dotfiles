@@ -99,7 +99,7 @@ function create_regex_string() {
 # -----------------------------------
 white_list_array=(
   kitty Code Obsidian Neovide
-  Safari Arc 'Google Chrome'
+  Safari Arc Dia 'Google Chrome'
   'Microsoft Word'
 )
 white_list=$(create_regex_string "${white_list_array[@]}")
@@ -117,6 +117,8 @@ extra_list=$(create_regex_string "${extra_list_array[@]}")
 # -------- Apply Rule
 # -----------------------------------
 yabai -m rule --add app!="$white_list" manage=off
+# NOTE: Arc will be unmanaged after quitting native fullscreen, set it to manage to avoid this issue.
+yabai -m rule --add app="^Arc$" manage=on
 # Disable in Little Arc
 yabai -m rule --add app="^Arc$" title="^Space.*$" manage=off
 # Disable in Arc Preference

@@ -98,6 +98,10 @@ end
 -- Space Window Observer
 local space_window_observer = sbar.add("item", space_window_observer_config)
 
+-- Space State Observer.
+-- Drives active/inactive state for all space items. See subscribe block below.
+local space_state_observer = sbar.add("item", { drawing = false, updates = true })
+
 -- Space Indicator
 local space_indicator = sbar.add("item", space_indicator_config)
 
@@ -110,27 +114,30 @@ local space_indicator = sbar.add("item", space_indicator_config)
 -- -------- Space
 -- -----------------------------------
 
----Set space properties based on its type.
----@param env table Environment variables.
-local function update_space(env)
-  --- Get space and selected status.
-  assert(env.SID ~= nil, "SID is nil")
-  local space_id = tonumber(env.SID)
-  local space = spaces[space_id]
-  local selected = env.SELECTED == "true"
-  -- print("Update space: ", space_id, selected)
+---Set a space to active state (highlighted with type-colored background).
+---@param space table Sketchybar space item handle.
+---@param color number Background color.
+local function set_active(space, color)
+  sbar.animate("tanh", 5, function()
+    space:set({
+      icon = { highlight = true },
+      label = { highlight = true },
+      background = { color = color },
+    })
+  end)
+end
 
-  --- Set space properties.
-  if selected then
-    -- CASE 1: Space is selected.
-    sbar.exec("yabai -m query --spaces --space | jq -r '.type'", function(result)
-      local space_type = result:sub(1, -2)
-      local space_color = colors.yabai[space_type] or colors.yabai.error
-      sbar.animate("tanh", 5, function() space:set({ icon = { highlight = selected }, label = { highlight = selected }, background = { color = space_color } }) end)
-    end)
-  else  -- CASE 2: Space is not selected.
-    sbar.animate("tanh", 5, function() space:set({ icon = { highlight = selected }, label = { highlight = selected }, background = { color = colors.almost_transparent } }) end)
-  end
+
+---Set a space to inactive state (un-highlighted, transparent background).
+---@param space table Sketchybar space item handle.
+local function set_inactive(space)
+  sbar.animate("tanh", 5, function()
+    space:set({
+      icon = { highlight = false },
+      label = { highlight = false },
+      background = { color = colors.almost_transparent },
+    })
+  end)
 end
 
 
@@ -138,18 +145,22 @@ end
 ---@param env table Environment variables.
 local function update_space_app(env)
   if env.INFO.space == nil then return end
+  -- `spaces` only contains items 1..10; guard against extra spaces created beyond that.
+  local space = spaces[env.INFO.space]
+  if space == nil then return end
   local icon_line = ""
   local no_app = true
-  for app, count in pairs(env.INFO.apps) do
-    if app ~= "GrabIt" and app ~= "HSTracker" then
+  for app, _ in pairs(env.INFO.apps) do
+    local app_name = string.lower(app)
+    if app_name ~= "grabit" then
       no_app = false
-      local icon = app_icons[app] or app_icons["Default"]
+      local icon = app_icons[app] or app_icons["default"]
       icon_line = icon_line .. icon
     end
   end
 
   if no_app then icon_line = "—" end
-  sbar.animate("tanh", 10, function() spaces[env.INFO.space]:set({ label = icon_line }) end)
+  sbar.animate("tanh", 10, function() space:set({ label = icon_line }) end)
 end
 
 
@@ -234,9 +245,6 @@ end
 -- -----------------------------------
 for i = 1, 10, 1 do
   local space = spaces[i]
-
-  -- space_change, skhd_space_type_changed, yabai_loaded: Update space.
-  space:subscribe({ "forced", "space_change", "skhd_space_type_changed", "yabai_loaded" }, update_space)
   -- mouse.clicked: Trigger click space funtion.
   space:subscribe("mouse.clicked", click_space)
   -- mouse.exited: Hide space thumbnail.
@@ -247,11 +255,42 @@ end
 -- -----------------------------------
 -- -------- Space Window Observer
 -- -----------------------------------
--- NOTE: Sketchybar does not capture all windows, the `yabai_window_created` and `yabai_application_visable` events are used for additional cases.
--- yabai_window_created, yabai_application_visable: Update app icons in space.
-space_window_observer:subscribe({ "yabai_window_created", "yabai_application_visable" }, trigger_space_windows_change_event)
+-- NOTE: Sketchybar does not capture all windows, the `yabai_window_created` and `yabai_application_visible` events are used for additional cases.
+-- yabai_window_created, yabai_application_visible: Update app icons in space.
+space_window_observer:subscribe({ "yabai_window_created", "yabai_application_visible" }, trigger_space_windows_change_event)
 -- space_windows_change: Update app icons in space.
 space_window_observer:subscribe("space_windows_change", update_space_app)
+
+
+-- -----------------------------------
+-- -------- Space State Observer
+-- -----------------------------------
+--- Track active space index and type to update space item states accordingly.
+local last_idx, last_type = nil, nil
+space_state_observer:subscribe({ "forced", "space_change", "skhd_space_type_changed", "yabai_loaded" }, function()
+  sbar.exec("yabai -m query --spaces --space", function(focused)
+    if type(focused) ~= "table" then return end
+    local new_idx, new_type = focused.index, focused.type
+    local color = colors.yabai[new_type] or colors.yabai.error
+
+    if last_idx == nil then
+      -- CASE1: Initialization
+      for i = 1, 10 do
+        local s = spaces[i]
+        if s then if i == new_idx then set_active(s, color) else set_inactive(s) end end
+      end
+    elseif last_idx ~= new_idx then
+      -- CASE2: Active space changed. Set old to inactive, new to active.
+      if spaces[last_idx] then set_inactive(spaces[last_idx]) end
+      if spaces[new_idx]  then set_active(spaces[new_idx], color) end
+    elseif last_type ~= new_type then
+      -- CASE3: Same active space, but type changed. Update bg color.
+      sbar.animate("tanh", 5, function() spaces[new_idx]:set({ background = { color = color } }) end)
+    end
+
+    last_idx, last_type = new_idx, new_type
+  end)
+end)
 
 
 -- -----------------------------------
