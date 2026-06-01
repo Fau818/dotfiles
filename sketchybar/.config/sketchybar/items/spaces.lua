@@ -154,7 +154,7 @@ local function update_space_app(env)
     local app_name = string.lower(app)
     if app_name ~= "grabit" then
       no_app = false
-      local icon = app_icons[app] or app_icons["default"]
+      local icon = app_icons[app_name] or app_icons["default"]
       icon_line = icon_line .. icon
     end
   end
