@@ -6,6 +6,7 @@ git
 bat
 btop
 fzf
+git-delta
 jq
 lazygit
 macos-trash

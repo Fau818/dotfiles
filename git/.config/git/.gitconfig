@@ -9,3 +9,26 @@
   ignorecase = false
 [commit]
   verbose = true
+[delta]
+  true-color   = always
+  line-numbers = true
+  syntax-theme = tokyonight_moon
+
+  # Show the enclosing function above each hunk
+  hunk-header-style            = line-number syntax bold
+  hunk-header-decoration-style = "#3b4261" box
+  hunk-header-line-number-style = "#737aa2"
+
+  # Based on tokyonight.nvim extras (extras/delta/tokyonight_moon.gitconfig),
+  # with darker line backgrounds so comments (#717CBD) stay >= 3:1 readable.
+  minus-style                   = syntax "#3a2230"
+  minus-non-emph-style          = syntax "#3a2230"
+  minus-emph-style              = syntax "#6b2e43"
+  minus-empty-line-marker-style = syntax "#3a2230"
+  line-numbers-minus-style      = "#e26a75"
+  plus-style                    = syntax "#233844"
+  plus-non-emph-style           = syntax "#233844"
+  plus-emph-style               = syntax "#305f6f"
+  plus-empty-line-marker-style  = syntax "#233844"
+  line-numbers-plus-style       = "#b8db87"
+  line-numbers-zero-style       = "#3b4261"

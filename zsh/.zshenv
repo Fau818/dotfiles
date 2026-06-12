@@ -58,8 +58,9 @@ export OPENAI_API_PATH="$DOTFILE_PATH/private/openai"
 # -----------------------------------
 # -------- Homebrew
 # -----------------------------------
-# Disable AUTO_UPDATE
 export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1
+export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
 
 
 # -----------------------------------

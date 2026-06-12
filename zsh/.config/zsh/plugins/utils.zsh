@@ -90,6 +90,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
   # Stow for installed binaries automatically
   function auto_stow() {
     typeset -A configs=(
+      [bat]='bat'
       [clangd]='clangd'
       [claude]='claude'
       [ccstatusline]='claude'

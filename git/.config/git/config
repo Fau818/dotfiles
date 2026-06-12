@@ -1,0 +1,4 @@
+# Standard XDG path read by tools like delta that ignore GIT_CONFIG_GLOBAL.
+# Git itself reads .gitconfig directly (GIT_CONFIG_GLOBAL in zsh/.zshenv).
+[include]
+  path = .gitconfig

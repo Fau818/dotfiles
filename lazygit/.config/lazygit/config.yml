@@ -4,3 +4,13 @@ gui:
   # One of: '2' | '3' | empty string (default)
   # If empty, do not show icons.
   nerdFontsVersion: "3"
+  # Width of the side panel as a fraction of the screen (default: 0.3333)
+  sidePanelWidth: 0.25
+  # Stack staged/unstaged diff panels top/bottom ("vertical" = the split line
+  # is vertical-stacked), so the side panel keeps its width — the default
+  # side-by-side split squeezes it to ~1/6 on wide screens.
+  mainPanelSplitMode: vertical
+git:
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never --side-by-side
