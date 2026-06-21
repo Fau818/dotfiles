@@ -11,6 +11,12 @@
         "merge": true
       },
       {
+        "id": "0d09be30-80aa-4b66-b18c-5fd84cd26d3d",
+        "type": "custom-text",
+        "customText": " ",
+        "merge": true
+      },
+      {
         "id": "3",
         "type": "output-style",
         "color": "yellow",
@@ -37,9 +43,21 @@
         "merge": true
       },
       {
+        "id": "8d908870-cbf7-4cf9-9bb6-6f2d7b8c1169",
+        "type": "custom-text",
+        "customText": " ",
+        "merge": true
+      },
+      {
         "id": "1ce48005-456b-4ffb-933c-2f36ecf4a59c",
         "type": "git-status",
         "color": "brightBlue",
+        "merge": true
+      },
+      {
+        "id": "c9a148cf-ad6c-4bfb-ba89-f1d23082aa38",
+        "type": "custom-text",
+        "customText": " ",
         "merge": true
       },
       {
@@ -53,17 +71,17 @@
         "color": "brightBlack",
         "rawValue": true,
         "metadata": {
-          "display": "progress-short"
+          "display": "slider"
         }
       }
     ],
     []
   ],
-  "flexMode": "full-minus-40",
+  "flexMode": "full-until-compact",
   "compactThreshold": 60,
   "colorLevel": 2,
   "defaultSeparator": "|",
-  "defaultPadding": " ",
+  "defaultPadding": "",
   "inheritSeparatorColors": false,
   "globalBold": false,
   "gitCacheTtlSeconds": 5,
@@ -81,5 +99,9 @@
     "theme": "nord-aurora",
     "autoAlign": false,
     "continueThemeAcrossLines": false
+  },
+  "installation": {
+    "method": "auto-update",
+    "packageManager": "npm"
   }
 }
