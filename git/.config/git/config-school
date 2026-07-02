@@ -1,0 +1,8 @@
+# vim: ft=gitconfig
+[user]
+  name = Phoenix
+  email = zhang.y85@northeastern.edu
+  signingkey = ~/.ssh/neu.pub
+
+[core]
+  sshCommand = "ssh -i ~/.ssh/neu.pub -o IdentitiesOnly=yes"

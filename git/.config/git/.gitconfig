@@ -1,7 +1,7 @@
 [init]
   defaultBranch = main
 [user]
-  name = Fau
+  name = Phoenix
   email = zhangyuFau@gmail.com
 [core]
   excludesFile = ~/.config/git/ignore
@@ -32,3 +32,6 @@
   plus-empty-line-marker-style  = syntax "#233844"
   line-numbers-plus-style       = "#b8db87"
   line-numbers-zero-style       = "#3b4261"
+
+[includeIf "gitdir:~/Documents/Fau/projects/school/"]
+  path = ~/.config/git/config-school
