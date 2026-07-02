@@ -95,7 +95,7 @@ export PIP_CACHE_DIR="$XDG_CACHE_HOME/pip"
 export MPLCONFIGDIR="$XDG_CACHE_HOME/matplotlib"
 export KAGGLE_CONFIG_DIR="$XDG_CONFIG_HOME/kaggle"
 export CLEARML_CONFIG_FILE="$XDG_CONFIG_HOME/clearml/clearml.conf"
-export UV_PYTHON='3.13'
+export UV_PYTHON=$([[ "$(uname)" == 'Darwin' ]] && echo '3.12' || echo '3.13')
 # Rust
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"

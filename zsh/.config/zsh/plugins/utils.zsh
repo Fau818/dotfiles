@@ -98,7 +98,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
       [git]='git'
       [github-copilot]='nvim'
       [hammerspoon]='hs'
-      [kaggle]='kaggle'
+      [kaggle]='conda'
       [karabiner]='karabiner_cli'
       [kitty]='kitty'
       [lazygit]='lazygit'
