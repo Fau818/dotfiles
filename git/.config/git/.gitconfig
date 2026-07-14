@@ -3,12 +3,21 @@
 [user]
   name = Phoenix
   email = zhangyuFau@gmail.com
+	signingkey = ~/.ssh/1password.pub
 [core]
   excludesFile = ~/.config/git/ignore
   editor = nvim
   ignorecase = false
+  bigFileThreshold = 1m
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 [commit]
   verbose = true
+	gpgsign = true
+[tag]
+  gpgsign = true
 [delta]
   true-color   = always
   line-numbers = true

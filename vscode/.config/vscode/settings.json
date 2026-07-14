@@ -8,14 +8,15 @@
         "support.function.builtin",
         "storage.modifier.static",
         "storage.type.struct",
-        "constant.language",
+        "constant.language"
       ], "settings": { "fontStyle": "italic" } },
       { "scope": [
         "keyword.control.import",
+        "keyword.control.flow",
         "keyword.operator",
         // "entity.name.function",
         "support.function.any-method",
-        "support.function.library",
+        "support.function.library"
       ], "settings": { "fontStyle": "" } }
       // { "scope": "support.function.builtin.python", "settings": { "foreground": "#FAB387" } }
     ]
@@ -70,7 +71,7 @@
   "files.trimTrailingWhitespace": true,
 
   "github.copilot.enable": { "plaintext": true, "scminput": true, "markdown": true },
-  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.nextEditSuggestions.enabled": false,
   "github.copilot.chat.generateTests.codeLens": true,
   "github.copilot.chat.githubMcpServer.enabled": true,
   "github.copilot.chat.languageContext.typescript.enabled": true,
@@ -126,6 +127,21 @@
   "search.useGlobalIgnoreFiles": true,
 
   "problems.showCurrentInStatus": true,
+  "python.analysis.inlayHints.callArgumentNames": "partial",
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.autoFormatStrings": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "[python]": {
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.defaultColorDecorators": "never",
+    "editor.formatOnType": true,
+    "editor.wordBasedSuggestions": "off"
+  },
+  "notebook.editorOptionsCustomizations": {
+    "editor.tabSize": 4,
+    "editor.indentSize": 4,
+    "editor.insertSpaces": true
+  }
 
   /* NEW */
 }

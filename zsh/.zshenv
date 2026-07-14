@@ -72,6 +72,8 @@ export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
 export CODEX_HOME="$XDG_CONFIG_HOME/codex"
 # Codium
 export CODEIUM_HOME="$XDG_CONFIG_HOME/codeium"
+# Copilot
+export COPILOT_HOME="$XDG_CONFIG_HOME/copilot"
 # Cpp
 export CPPFLAGS_FAU='-std=c++17 -O2 -DCODE_Fau'
 export CPLUS_INCLUDE_PATH="$XDG_CONFIG_HOME/clangd/include"
@@ -85,6 +87,8 @@ export GEM_HOME="$XDG_DATA_HOME/gem"
 export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/.gitconfig"
 # Less
 export LESSHISTFILE="$XDG_STATE_HOME/less_history"
+# Netrc
+export NETRC="$XDG_CONFIG_HOME/netrc/netrc"
 # Npm
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/config"
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
@@ -95,7 +99,7 @@ export PIP_CACHE_DIR="$XDG_CACHE_HOME/pip"
 export MPLCONFIGDIR="$XDG_CACHE_HOME/matplotlib"
 export KAGGLE_CONFIG_DIR="$XDG_CONFIG_HOME/kaggle"
 export CLEARML_CONFIG_FILE="$XDG_CONFIG_HOME/clearml/clearml.conf"
-export UV_PYTHON=$([[ "$(uname)" == 'Darwin' ]] && echo '3.12' || echo '3.13')
+export WANDB_CONFIG_DIR="$XDG_CONFIG_HOME/wandb"
 # Rust
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"

@@ -106,6 +106,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
       [pip]='python3'
       [sketchybar]='sketchybar'
       [ssh]='ssh'
+      [uv]='uv'
       [vscode]='code'
       [wakatime]='wakatime-cli'
       [yazi]='yazi'

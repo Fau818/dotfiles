@@ -75,3 +75,27 @@ fi
 # -------- Aliases
 # -----------------------------------
 command -v conda &> /dev/null && alias dl='conda activate dl'
+
+
+# -----------------------------------
+# -------- Conda Auto Env
+# -----------------------------------
+source "$ZPLUGINDIR/conda_auto_env.zsh"
+
+
+# =============================================
+# ========== UV
+# =============================================
+if command -v uv &> /dev/null; then
+  uv() {
+    if [ -n "$UV_PROJECT_ENVIRONMENT" ]; then
+      command uv "$@"
+      return
+    fi
+
+    if [ -n "$CONDA_PREFIX" ] && [ "$CONDA_DEFAULT_ENV" != "base" ]; then UV_PROJECT_ENVIRONMENT="$CONDA_PREFIX" command uv "$@"
+    elif [ -n "$VIRTUAL_ENV" ]; then UV_PROJECT_ENVIRONMENT="$VIRTUAL_ENV" command uv "$@"
+    else command uv "$@"
+    fi
+  }
+fi
