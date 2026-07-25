@@ -24,6 +24,7 @@
 .venv
 __pycache__/
 *.egg-info/
+wandb_logs/
 
 
 # Java
