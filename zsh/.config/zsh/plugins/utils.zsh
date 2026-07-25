@@ -102,6 +102,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
       [karabiner]='karabiner_cli'
       [kitty]='kitty'
       [lazygit]='lazygit'
+      [netrc]='python3'
       [nvim]='nvim'
       [pip]='python3'
       [sketchybar]='sketchybar'
