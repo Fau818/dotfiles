@@ -72,6 +72,8 @@ export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
 export CODEX_HOME="$XDG_CONFIG_HOME/codex"
 # Codium
 export CODEIUM_HOME="$XDG_CONFIG_HOME/codeium"
+# Conda
+export CONDA_AUTO_ENVS_CONF="$DOTFILE_PATH/private/conda/conda_auto_envs.conf"
 # Copilot
 export COPILOT_HOME="$XDG_CONFIG_HOME/copilot"
 # Cpp
