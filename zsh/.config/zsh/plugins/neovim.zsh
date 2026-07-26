@@ -2,8 +2,16 @@
 # ======== Neovim
 # =============================================
 if command -v nvim &> /dev/null; then
-  alias vim=nvim
-  export SUDO_EDITOR="$(which nvim)"
+  export SUDO_EDITOR="$(whence -p nvim)"
+
+  # NOTE: cwd-on-exit, like `utils.zsh`'s yazi wrapper; `NVIM_CWD_FILE` is read by an autocmd in `lua/fau/autocmd.lua`.
+  function __nvim() {
+    local tmp="$(mktemp -t "nvim-cwd.XXXXXX")"
+    NVIM_CWD_FILE="$tmp" command nvim "$@"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$(pwd -P)" ]; then cd -- "$cwd"; fi
+    rm -f -- "$tmp"
+  }
+  alias vim=__nvim nvim=__nvim
 else
   function __neovim_installer() {
     if command -v brew &> /dev/null; then

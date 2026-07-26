@@ -46,9 +46,8 @@ if (command -v yazi && ! command -v __yazi) &> /dev/null; then
   function __yazi() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
     yazi "$@" --cwd-file="$tmp"
-    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-      cd -- "$cwd"
-    fi
+    # `--cwd-file` resolves symlinks even with no nav; diff vs `pwd -P`, not `$PWD`, or it collapses the symlink.
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$(pwd -P)" ]; then cd -- "$cwd"; fi
     rm -f -- "$tmp"
   }
   alias yazi=__yazi f=__yazi
