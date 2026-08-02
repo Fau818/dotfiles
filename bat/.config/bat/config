@@ -1,1 +1,3 @@
 --theme="tokyonight_moon"
+# Comments are bold italic in the theme; bat never emits italic unless this is set
+--italic-text=always

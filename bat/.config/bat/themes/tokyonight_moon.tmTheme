@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
@@ -50,9 +51,9 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>Italics - Comments, Storage, Keyword Flow, Vue attributes, Decorators</string>
+			<string>Italics - Storage, Keyword Flow, Vue attributes, Decorators (comment handled by the Comment rule below)</string>
 			<key>scope</key>
-			<string>comment, meta.var.expr storage.type, keyword.control.flow, meta.directive.vue punctuation.separator.key-value.html, meta.directive.vue entity.other.attribute-name.html, tag.decorator.js entity.name.tag.js, tag.decorator.js punctuation.definition.tag.js, storage.modifier</string>
+			<string>meta.var.expr storage.type, keyword.control.flow, meta.directive.vue punctuation.separator.key-value.html, meta.directive.vue entity.other.attribute-name.html, tag.decorator.js entity.name.tag.js, tag.decorator.js punctuation.definition.tag.js, storage.modifier</string>
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
@@ -66,6 +67,8 @@
 			<string>comment, comment.block.documentation, punctuation.definition.comment</string>
 			<key>settings</key>
 			<dict>
+				<key>fontStyle</key>
+				<string>bold italic</string>
 				<key>foreground</key>
 				<string>#717CBD</string>
 			</dict>
