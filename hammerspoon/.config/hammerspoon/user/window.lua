@@ -1,9 +1,9 @@
--- =============================================
--- ========== Window Management
--- =============================================
--- -----------------------------------
--- -------- Configuration
--- -----------------------------------
+-- ════════════════════════════════════════════════════════════
+-- ════════════════════ Window Management ═════════════════════
+-- ════════════════════════════════════════════════════════════
+
+-- ══════════════════════ Configuration ═══════════════════════
+
 local screen = hs.screen.mainScreen()
 local screen_frame = screen:frame()
 local gap = 8
@@ -11,9 +11,8 @@ local top = 32
 hs.window.animationDuration = -1  -- Disable animation
 
 
--- -----------------------------------
--- -------- Layouts
--- -----------------------------------
+-- ═════════════════════════ Layouts ══════════════════════════
+
 local left_half = {
   x = screen_frame.x + gap,
   y = screen_frame.y + gap + top,
@@ -34,9 +33,8 @@ local maximum = {
 }
 
 
--- -----------------------------------
--- -------- Functions
--- -----------------------------------
+-- ════════════════════════ Functions ═════════════════════════
+
 ---Move and resize window
 ---@param position table {x, y, w, h}
 local function _move_and_resize_window(position)
@@ -80,9 +78,8 @@ local function move_window_to_right_half() _move_and_resize_window(right_half) e
 local function maximize_window() _move_and_resize_window(maximum) end
 
 
--- -----------------------------------
--- -------- Return
--- -----------------------------------
+-- ══════════════════════════ Return ══════════════════════════
+
 return {
   move_window_to_left_half = move_window_to_left_half,
   move_window_to_right_half = move_window_to_right_half,

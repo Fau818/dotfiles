@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
 
-# ==================== Checking for memory leaks in Hammerspoon ====================
+
+# ═════════ Checking for memory leaks in Hammerspoon ═════════
+
 hammerspoon_pid=$(pgrep -x Hammerspoon)
 [[ -z "$hammerspoon_pid" ]] && exit 0
 
