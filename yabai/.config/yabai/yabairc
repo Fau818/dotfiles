@@ -13,13 +13,12 @@ sudo yabai --load-sa
 # TOP_PADDING=32
 
 
-# =============================================
-# ======== Configuration
-# =============================================
+# ════════════════════════════════════════════════════════════
+# ══════════════════════ Configuration ═══════════════════════
+# ════════════════════════════════════════════════════════════
+
 config=(
-  # -----------------------------------
-  # -------- Space
-  # -----------------------------------
+  # ─── Space ────────────────────────────────────────────────
   # values: `bsp` | `float` | `stack`
   layout stack
 
@@ -35,9 +34,7 @@ config=(
   split_type auto
 
 
-  # -----------------------------------
-  # -------- Mouse
-  # -----------------------------------
+  # ─── Mouse ────────────────────────────────────────────────
   mouse_modifier fn
   # set modifier + left-click drag to move window
   mouse_action1 move
@@ -53,9 +50,7 @@ config=(
   external_bar all:32:0
 
 
-  # -----------------------------------
-  # -------- Window
-  # -----------------------------------
+  # ─── Window ───────────────────────────────────────────────
   window_origin_display default
   window_zoom_persist on
   window_shadow float
@@ -79,13 +74,12 @@ config=(
 yabai -m config "${config[@]}"
 
 
+# ════════════════════════════════════════════════════════════
+# ═══════════════════════════ Rule ═══════════════════════════
+# ════════════════════════════════════════════════════════════
 
-# =============================================
-# ======== Rule
-# =============================================
-# -----------------------------------
-# -------- Utils
-# -----------------------------------
+# ══════════════════════════ Utils ═══════════════════════════
+
 function create_regex_string() {
   local array=("$@") regex_string=""
   for element in "${array[@]}"; do regex_string+="^${element}$|"; done
@@ -94,9 +88,8 @@ function create_regex_string() {
 }
 
 
-# -----------------------------------
-# -------- Fields
-# -----------------------------------
+# ══════════════════════════ Fields ══════════════════════════
+
 white_list_array=(
   kitty Code Obsidian Neovide
   Safari Arc Dia 'Google Chrome'
@@ -113,9 +106,8 @@ extra_list_array=(
 extra_list=$(create_regex_string "${extra_list_array[@]}")
 
 
-# -----------------------------------
-# -------- Apply Rule
-# -----------------------------------
+# ════════════════════════ Apply Rule ════════════════════════
+
 yabai -m rule --add app!="$white_list" manage=off
 # NOTE: Arc will be unmanaged after quitting native fullscreen, set it to manage to avoid this issue.
 yabai -m rule --add app="^Arc$" manage=on
@@ -131,10 +123,10 @@ yabai -m rule --add app="^Safari$" title="General|Tabs|AutoFill|Passwords|Search
 yabai -m rule --apply
 
 
+# ════════════════════════════════════════════════════════════
+# ══════════════════════════ Signal ══════════════════════════
+# ════════════════════════════════════════════════════════════
 
-# =============================================
-# ======== Signal
-# =============================================
 # Refocus window when window is destroyed
 yabai -m signal --add event=window_destroyed action="$HOME/.config/yabai/destroy_space_if_no_window.sh"
 # NOTE: Since some apps will hide their windows when closed, the window focus will be on Finder.
@@ -157,9 +149,10 @@ yabai -m signal --add event=application_visible action="command -v sketchybar &>
 # yabai -m signal --add event=application_hidden  action="command -v sketchybar &> /dev/null && sketchybar --trigger yabai_application_hidden"
 
 
-# =============================================
-# ======== Border
-# =============================================
+# ════════════════════════════════════════════════════════════
+# ══════════════════════════ Border ══════════════════════════
+# ════════════════════════════════════════════════════════════
+
 # brew tap FelixKratz/formulae && brew install borders
 borders_black_list_array=(
   CleanMyMac X
@@ -173,9 +166,9 @@ borders_black_list=$(IFS=,; echo "${borders_black_list_array[*]}")
 borders active_color=0xFFFF966C inactive_color=0xFF494D64 width=6 style=uniform blacklist="$borders_black_list" &
 
 
+# ════════════════════════════════════════════════════════════
+# ═══════════════════════════ END ════════════════════════════
+# ════════════════════════════════════════════════════════════
 
-# =============================================
-# ======== END
-# =============================================
 command -v sketchybar &> /dev/null && sketchybar --trigger yabai_loaded
 echo "yabai configuration loaded.."

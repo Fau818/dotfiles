@@ -4,16 +4,19 @@
 # WINKEY4: lctrl + rshift + lalt + fn
 # WINKEY5: rshift
 
-###################
-##### MICS
-###################
+
+# ════════════════════════════════════════════════════════════
+# ═══════════════════════════ MICS ═══════════════════════════
+# ════════════════════════════════════════════════════════════
+
 # Restart yabai (WINKEY4)
 lctrl + rshift + lalt + fn - r : yabai --restart-service
 
 
-###################
-##### Window
-###################
+# ════════════════════════════════════════════════════════════
+# ══════════════════════════ Window ══════════════════════════
+# ════════════════════════════════════════════════════════════
+
 # Focus window (WINKEY1)
 rshift + lalt - h : yabai -m window --focus west  || yabai -m window --focus stack.prev || yabai -m window --focus stack.last
 rshift + lalt - j : yabai -m window --focus south || yabai -m window --focus stack.next || yabai -m window --focus stack.first
@@ -57,10 +60,10 @@ rshift + lalt - t : yabai -m window --toggle split; command -v sketchybar &> /de
 rshift + lalt - space : yabai -m window --toggle pip; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
 
 
+# ════════════════════════════════════════════════════════════
+# ══════════════════════════ Space ═══════════════════════════
+# ════════════════════════════════════════════════════════════
 
-###################
-##### Space
-###################
 # Create/Destroy space (WINKEY2)
 lctrl + rshift + lalt - c : yabai -m space --create && yabai -m window --space last --focus
 lctrl + rshift + lalt - d : yabai -m space --destroy
@@ -111,9 +114,10 @@ lctrl + rshift + lalt + fn - 9 : yabai -m window --space  9 --focus
 lctrl + rshift + lalt + fn - 0 : yabai -m window --space 10 --focus
 
 
-###################
-##### Display
-###################
+# ════════════════════════════════════════════════════════════
+# ═════════════════════════ Display ══════════════════════════
+# ════════════════════════════════════════════════════════════
+
 # # Focus display focused before the current one (so you can alternate)
 # yabai -m display --focus recent
 # # Focus previous display by arrangement index
@@ -122,9 +126,10 @@ lctrl + rshift + lalt + fn - 0 : yabai -m window --space 10 --focus
 # yabai -m display --focus next
 
 
-###################
-##### Hammerspoon
-###################
+# ════════════════════════════════════════════════════════════
+# ═══════════════════════ Hammerspoon ════════════════════════
+# ════════════════════════════════════════════════════════════
+
 # Manage window (WINKEY1)
 rshift + lalt - 1 : hs -c "Fau_hs.window.center_window(0.6)"
 rshift + lalt - 2 : hs -c "Fau_hs.window.center_window(0.85)"
