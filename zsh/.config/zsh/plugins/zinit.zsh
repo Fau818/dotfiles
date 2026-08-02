@@ -1,9 +1,9 @@
-# =============================================
-# ======== Zinit
-# =============================================
-# -----------------------------------
-# -------- Zinit Installer
-# -----------------------------------
+# ════════════════════════════════════════════════════════════
+# ══════════════════════════ Zinit ═══════════════════════════
+# ════════════════════════════════════════════════════════════
+
+# ═════════════════════ Zinit Installer ══════════════════════
+
 ZINIT_ROOT="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
 ZINIT_HOME="${ZINIT_ROOT}/zinit.git"
 if [[ ! -f "$ZINIT_HOME/zinit.zsh" ]]; then
@@ -27,9 +27,8 @@ autoload -Uz _zinit
 #   zdharma-continuum/zinit-annex-rust
 
 
-# -----------------------------------
-# -------- OMZ Migration
-# -----------------------------------
+# ══════════════════════ OMZ Migration ═══════════════════════
+
 zinit ice depth=1 wait lucid; zinit snippet OMZL::clipboard.zsh
 zinit ice depth=1 wait lucid atinit'COMPLETION_WAITING_DOTS=true; HYPHEN_INSENSITIVE=true'; zinit snippet OMZL::completion.zsh
 zinit ice depth=1; zinit snippet OMZL::directories.zsh
@@ -41,9 +40,8 @@ zinit ice depth=1; zinit snippet OMZL::theme-and-appearance.zsh
 zinit ice wait lucid depth=1 atload'unalias g grv ghh'; zinit snippet OMZP::git
 
 
-# -----------------------------------
-# -------- Zinit Plugins
-# -----------------------------------
+# ══════════════════════ Zinit Plugins ═══════════════════════
+
 # CASE 1: Use `startship`.
 # zinit ice as"command" from"gh-r" \
 #           atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \

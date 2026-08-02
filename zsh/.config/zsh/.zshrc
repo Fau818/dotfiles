@@ -1,6 +1,7 @@
-# =============================================
-# ======== Powerlevel10k Instant Prompt
-# =============================================
+# ════════════════════════════════════════════════════════════
+# ═══════════════ Powerlevel10k Instant Prompt ═══════════════
+# ════════════════════════════════════════════════════════════
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -8,16 +9,17 @@ fi
 [[ ! -f "${ZDOTDIR:-$HOME}/.p10k.zsh" ]] || source "${ZDOTDIR:-$HOME}/.p10k.zsh"
 
 
+# ════════════════════════════════════════════════════════════
+# ═══════════════════ Fau ZSH Preferences ════════════════════
+# ════════════════════════════════════════════════════════════
 
-# =============================================
-# ======== Fau ZSH Preferences
-# =============================================
 setopt interactive_comments
 fpath=($ZDOTDIR/completions $fpath)
 [[ -d "$HOME/.docker/completions/" ]] && fpath=($HOME/.docker/completions $fpath)  # Docker completion
-# -----------------------------------
-# -------- Basic Aliases
-# -----------------------------------
+
+
+# ══════════════════════ Basic Aliases ═══════════════════════
+
 alias sudo='sudo -E '
 alias vi='vi -i NONE'
 alias mv='mv -v'
@@ -26,16 +28,14 @@ alias ctaz='tar -zcvf' xtaz='tar -zxvf'
 alias gcmm='git commit -m' gcmmd='gcmm "$(date)"'
 
 
-# -----------------------------------
-# -------- Scripts
-# -----------------------------------
+# ═════════════════════════ Scripts ══════════════════════════
+
 alias ghr2cdn="$ZSCRIPTDIR/ghr2cdn.sh"
 alias cdn2ghr="$ZSCRIPTDIR/cdn2ghr.sh"
 
 
-# -----------------------------------
-# -------- Plugins
-# -----------------------------------
+# ═════════════════════════ Plugins ══════════════════════════
+
 source "$ZPLUGINDIR/colorful_print.zsh"
 source "$ZPLUGINDIR/vpn.zsh"
 
@@ -83,7 +83,6 @@ command -v rg &> /dev/null && alias rg="rg --ignore-file '$XDG_CONFIG_HOME/git/i
 command -v npm &> /dev/null && source <(npm completion)
 
 
-# -----------------------------------
-# -------- Goto Home if Login Shell
-# -----------------------------------
+# ═════════════════ Goto Home if Login Shell ═════════════════
+
 [[ "$(uname)" == 'Linux' && "$SHLVL" -eq 1 ]] && cd ~ || true

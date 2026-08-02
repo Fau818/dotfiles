@@ -1,6 +1,5 @@
-# =============================================
-# ======== Colorful Print
-# =============================================
+# ══════════════════════ Colorful Print ══════════════════════
+
 [[ -n "$_COLORFUL_PRINT_LOADED" ]] && return
 _COLORFUL_PRINT_LOADED=1
 
@@ -14,9 +13,8 @@ function echo_cyan()   { echo "\e[96m$*\e[0m" }
 function echo_white()  { echo "\e[97m$*\e[0m" }
 
 
-# =============================================
-# ======== Status Print
-# =============================================
+# ═══════════════════════ Status Print ═══════════════════════
+
 function echo_info()  { echo "\e[1;34m[INFO]\e[0m $*" }
 function echo_ok()    { echo "\e[1;32m[OK]\e[0m $*" }
 function echo_warn()  { echo "\e[1;33m[WARN]\e[0m $*" }

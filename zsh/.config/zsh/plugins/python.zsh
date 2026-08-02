@@ -1,9 +1,8 @@
-# =============================================
-# ======== Python
-# =============================================
-# -----------------------------------
-# -------- Aliases
-# -----------------------------------
+# ════════════════════════════════════════════════════════════
+# ══════════════════════════ Python ══════════════════════════
+# ════════════════════════════════════════════════════════════
+
+# ─── Aliases ────────────────────────────────────────────────
 alias python=python3 pip=pip3
 
 alias pipUpgrade="pip3 list -o | cut -d ' ' -f 1 | tail -n +3 | xargs pip3 install -U"
@@ -12,9 +11,7 @@ alias pipUpgradeFautools='pip3 install -U fau-tools -i https://pypi.org/simple'
 alias pipia='pip3 install -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com'
 
 
-# -----------------------------------
-# -------- Pip Source
-# -----------------------------------
+# ─── Pip Source ─────────────────────────────────────────────
 # Acquire pip config file path utility
 function ___pip_get_config_file_path() {
   # Make sure the config file exists
@@ -52,13 +49,11 @@ function __pip_set_aliyun_source() {
 }
 
 
+# ════════════════════════════════════════════════════════════
+# ══════════════════════════ Conda ═══════════════════════════
+# ════════════════════════════════════════════════════════════
 
-# =============================================
-# ======== Conda
-# =============================================
-# -----------------------------------
-# -------- Initialization
-# -----------------------------------
+# ─── Initialization ─────────────────────────────────────────
 if [[ "$(uname)" == 'Darwin' && -d "$HOMEBREW_PREFIX/Caskroom/miniconda" ]]; then export CONDA_ROOT="$HOMEBREW_PREFIX/Caskroom/miniconda/base"
 elif [[ "$(uname)" == 'Linux' ]]; then
   if   [[ -d "$HOME/miniconda3" ]];          then export CONDA_ROOT="$HOME/miniconda3"
@@ -71,21 +66,36 @@ fi
 [[ -v CONDA_ROOT ]] && [[ -f "$CONDA_ROOT/etc/profile.d/conda.sh" ]] && source "$CONDA_ROOT/etc/profile.d/conda.sh"
 
 
-# -----------------------------------
-# -------- Aliases
-# -----------------------------------
+# ─── Home Directory Cleanup ─────────────────────────────────
+# Relocate conda-anaconda-tos's hardcoded ~/.conda/tos writes.
+function __conda_tidy_home() {
+  local stray="$HOME/.conda" dest="${CONDA_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}/conda}"
+  [[ -n "$HOME" && -n "$dest" ]] || return 0
+  [[ -L "$stray" ]] && { rm -f "$stray"; return 0 }  # (dangling) symlink: nothing real inside
+  [[ -d "$stray" ]] || return 0                      # absent, or a stray plain file: leave it be
+  mkdir -p "$dest" && cp -R "$stray/." "$dest/" && rm -rf "$stray"
+}
+__conda_tidy_home
+
+# Wrap conda so a stray ~/.conda never outlives the command that created it
+if (( $+functions[conda] )) && [[ "$functions[conda]" != *__conda_wrapped* ]]; then
+  functions[__conda_wrapped]=$functions[conda]
+  conda() { __conda_wrapped "$@"; local ret=$?; __conda_tidy_home; return $ret }
+fi
+
+
+# ─── Aliases ────────────────────────────────────────────────
 command -v conda &> /dev/null && alias dl='conda activate dl'
 
 
-# -----------------------------------
-# -------- Conda Auto Env
-# -----------------------------------
+# ─── Conda Auto Env ─────────────────────────────────────────
 source "$ZPLUGINDIR/conda_auto_env.zsh"
 
 
-# =============================================
-# ========== UV
-# =============================================
+# ════════════════════════════════════════════════════════════
+# ════════════════════════════ UV ════════════════════════════
+# ════════════════════════════════════════════════════════════
+
 if command -v uv &> /dev/null; then
   uv() {
     if [ -n "$UV_PROJECT_ENVIRONMENT" ]; then

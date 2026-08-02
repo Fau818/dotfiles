@@ -1,14 +1,15 @@
-# =============================================
-# ======== Utils
-# =============================================
-# -----------------------------------
-# -------- Zoxide
-# -----------------------------------
+# ════════════════════════════════════════════════════════════
+# ══════════════════════════ Utils ═══════════════════════════
+# ════════════════════════════════════════════════════════════
+
+# ══════════════════════════ Zoxide ══════════════════════════
+
 if command -v zoxide &> /dev/null; then
-  # ==================== Init Zoxide ====================
+  # ─── Init Zoxide ──────────────────────────────────────────
   eval "$(zoxide init zsh --cmd j)"
 
-  # ==================== Enhance Zoxide ====================
+
+  # ─── Enhance Zoxide ───────────────────────────────────────
   _ZOXIDE_ECHO=true  # Set to `false` to disable echo
   _ZOXIDE_SHOULD=""; _ZOXIDE_INDEX=1; _ZOXIDE_LAST_QUERY=""; _ZOXIDE_DIRS=()
   function j() {
@@ -38,9 +39,8 @@ if command -v zoxide &> /dev/null; then
 fi
 
 
-# -----------------------------------
-# -------- Yazi
-# -----------------------------------
+# ═══════════════════════════ Yazi ═══════════════════════════
+
 # SEE: https://yazi-rs.github.io/docs/quick-start#shell-wrapper
 if (command -v yazi && ! command -v __yazi) &> /dev/null; then
   function __yazi() {
@@ -54,9 +54,8 @@ if (command -v yazi && ! command -v __yazi) &> /dev/null; then
 fi
 
 
-# -----------------------------------
-# -------- Stow
-# -----------------------------------
+# ═══════════════════════════ Stow ═══════════════════════════
+
 if (command -v stow && ! command -v __stow) &> /dev/null; then
   # Refactor stow
   function __stow() {

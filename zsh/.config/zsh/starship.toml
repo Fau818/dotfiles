@@ -2,10 +2,8 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 
+# ══════════════════════════ Prompt ══════════════════════════
 
-# ====================
-# ===== Prompt
-# ====================
 # Configure the format of the prompt.
 format = "$all"
 # Timeout for starship to scan files (in milliseconds).

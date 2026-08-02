@@ -1,6 +1,7 @@
-# =============================================
-# ========== Constants
-# =============================================
+# ════════════════════════════════════════════════════════════
+# ════════════════════════ Constants ═════════════════════════
+# ════════════════════════════════════════════════════════════
+
 HOMEBREW_OFFICIAL_BREW_GIT_REMOTE='https://github.com/Homebrew/brew.git'
 HOMEBREW_OFFICIAL_CORE_GIT_REMOTE='https://github.com/Homebrew/homebrew-core.git'
 
@@ -15,10 +16,10 @@ HOMEBREW_ALIYUN_API_DOMAIN='https://mirrors.aliyun.com/homebrew-bottles/api'
 HOMEBREW_ALIYUN_BOTTLE_DOMAIN='https://mirrors.aliyun.com/homebrew/homebrew-bottles'
 
 
+# ════════════════════════════════════════════════════════════
+# ════════════════════════ Installer ═════════════════════════
+# ════════════════════════════════════════════════════════════
 
-# =============================================
-# ========== Installer
-# =============================================
 # Install Homebrew (default: official source)
 function __homebrew_install() {
   echo "Select Homebrew installation source:"
@@ -49,14 +50,15 @@ function __homebrew_install() {
 }
 
 
+# ════════════════════════════════════════════════════════════
+# ═════════════════════════ Homebrew ═════════════════════════
+# ════════════════════════════════════════════════════════════
 
-# =============================================
-# ========== Homebrew
-# =============================================
 # RETURN: if no binary file `brew`, return.
 ! command -v brew &> /dev/null && return 0
 
-# Auto set bottle domain
+
+# ─── Auto set bottle domain ─────────────────────────────────
 function ___homebrew_auto_set_bottle_domain() {
   # Get repository url and force end with `.git`
   local homebrew_repo_url="$(git -C "$(brew --repo)" remote get-url origin)"
@@ -75,7 +77,7 @@ function ___homebrew_auto_set_bottle_domain() {
 # ___homebrew_auto_set_bottle_domain  # TEST: Should be removed?
 
 
-# ==================== Sourcer ====================
+# ─── Sourcer ────────────────────────────────────────────────
 # Switch Homebrew source (default: official)
 function __homebrew_set_source() {
   ! command -v brew &> /dev/null && { echo_error 'Not found: `brew` command'; return 1; }

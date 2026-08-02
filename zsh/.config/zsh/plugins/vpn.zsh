@@ -1,9 +1,12 @@
-# =============================================
-# ======== VPN (Linux Only)
-# =============================================
+# ════════════════════════════════════════════════════════════
+# ═════════════════════ VPN (Linux Only) ═════════════════════
+# ════════════════════════════════════════════════════════════
+
 [[ "$(uname)" == 'Linux' ]] || return
 
-# ==================== VPN Settings ====================
+
+# ═══════════════════════ VPN Settings ═══════════════════════
+
 proxy_port=7890
 function __vpn_set_proxy() {
   # export https_proxy=http://127.0.0.1:$proxy_port http_proxy=http://127.0.0.1:$proxy_port all_proxy=socks5://127.0.0.1:$proxy_port
@@ -28,8 +31,9 @@ function vpn() {
 }
 
 
-# ==================== VPN Control Functions ====================
-# ---------- Quick Start Clash on Linux
+# ══════════════════ VPN Control Functions ═══════════════════
+
+# ─── Quick Start Clash on Linux ─────────────────────────────
 function __get_clash_tool_name() {
   if command -v mihomo &> /dev/null; then echo 'mihomo'
   elif command -v clash &> /dev/null; then echo 'clash'
@@ -60,9 +64,8 @@ function restartClash() {
 }
 
 
-# -----------------------------------
-# -------- Autostart
-# -----------------------------------
+# ════════════════════════ Autostart ═════════════════════════
+
 function ___ssh_tunnel_listening() { ss -tlnp 2>/dev/null | grep -q ":$proxy_port "; }
 
 function ___clash_is_running() {
