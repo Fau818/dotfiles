@@ -1,6 +1,5 @@
--- =============================================
--- ========== General
--- =============================================
+-- ═════════════════════════ General ══════════════════════════
+
 local yabai_types = {
   floating = "Float",  -- Floating window
   float    = "FLOAT",  -- Float Type
@@ -9,10 +8,8 @@ local yabai_types = {
 }
 
 
+-- ══════════════════════════ Config ══════════════════════════
 
--- =============================================
--- ========== Config
--- =============================================
 local yabai_config = {
   position = "left",
   display = "active",
@@ -31,20 +28,16 @@ local yabai_config = {
 }
 
 
+-- ══════════════════════════ Setup ═══════════════════════════
 
--- =============================================
--- ========== Setup
--- =============================================
 local yabai = sbar.add("item", "yabai", yabai_config)
 
 
 -- yabai:subscribe({ "forced" }, function(env) yabai:set({ label = "Loading..." }) end)
 
 
+-- ════════════════════════ Functions ═════════════════════════
 
--- =============================================
--- ========== Functions
--- =============================================
 local function set_yabai_status(icon, label, color, window_info)
   if window_info["has-parent-zoom"] then label = ("%s(ZP)"):format(label); color = colors.yabai.special end
   -- [[ "$(echo $window_info | jq -r '."has-parent-zoom"')" == 'true' ]] && label+='(ZP)' && color="$SPECIAL_STATUS"
@@ -88,8 +81,6 @@ local function update_yabai_status(env)
 end
 
 
+-- ════════════════════════ Listeners ═════════════════════════
 
--- =============================================
--- ========== Listeners
--- =============================================
 yabai:subscribe({ "forced", "space_change", "skhd_space_type_changed", "skhd_window_type_changed", "yabai_loaded", "yabai_window_focused" }, update_yabai_status)

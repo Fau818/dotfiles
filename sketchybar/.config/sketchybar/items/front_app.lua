@@ -1,6 +1,5 @@
--- =============================================
--- ========== Config
--- =============================================
+-- ══════════════════════════ Config ══════════════════════════
+
 local front_app_config = {
   position = "left",
   display = "active",
@@ -13,17 +12,12 @@ local front_app_config = {
 }
 
 
+-- ══════════════════════════ Setup ═══════════════════════════
 
--- =============================================
--- ========== Setup
--- =============================================
 local front_app = sbar.add("item", "front_app", front_app_config)
 
 
-
--- =============================================
--- ========== Functions
--- =============================================
+-- ════════════════════════ Functions ═════════════════════════
 
 ---Update the front app icon and label.
 ---@param env table Environment variables.
@@ -45,10 +39,8 @@ end
 local function trigger_swap_menus_and_spaces_event(env) sbar.trigger("swap_menus_and_spaces") end
 
 
+-- ════════════════════════ Listeners ═════════════════════════
 
--- =============================================
--- ========== Listeners
--- =============================================
 -- front_app_switched: Update the front app icon and label.
 front_app:subscribe({ "front_app_switched" }, update_front_app)
 -- mouse.clicked: Display the app menu.

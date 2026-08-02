@@ -1,14 +1,11 @@
--- =============================================
--- ========== General
--- =============================================
+-- ═════════════════════════ General ══════════════════════════
+
 local max_items = 15
 local menu_items = {}
 
 
+-- ══════════════════════════ Config ══════════════════════════
 
--- =============================================
--- ========== Config
--- =============================================
 local menu_configs = {}
 for i = 1, max_items, 1 do
   menu_configs[i] = {
@@ -27,13 +24,9 @@ for i = 1, max_items, 1 do
 end
 
 
+-- ══════════════════════════ Setup ═══════════════════════════
 
--- =============================================
--- ========== Setup
--- =============================================
--- -----------------------------------
--- -------- Menu Items
--- -----------------------------------
+-- ─── Menu Items ─────────────────────────────────────────────
 for i = 1, max_items, 1 do
   local menu = sbar.add("item", "menu." .. i, menu_configs[i])
   menu_items[i] = menu
@@ -41,23 +34,16 @@ end
 sbar.add("bracket", { "/menu\\..*/" }, { background = { color = colors.almost_transparent } })
 
 
--- -----------------------------------
--- -------- Menu Padding
--- -----------------------------------
+-- ─── Menu Padding ───────────────────────────────────────────
 local menu_padding = sbar.add("item", "menu.padding", { drawing = false, width = 2 * settings.group_padding })
 
 
--- -----------------------------------
--- -------- Menu Watcher and Swaper
--- -----------------------------------
+-- ─── Menu Watcher and Swaper ────────────────────────────────
 local menu_watcher    = sbar.add("item", { drawing = false, updates = false })
 local space_menu_swaper = sbar.add("item", { drawing = false, updates = true })
 
 
-
--- =============================================
--- ========== Functions
--- =============================================
+-- ════════════════════════ Functions ═════════════════════════
 
 ---Update menus.
 ---@param env table Environment variables.
@@ -94,9 +80,8 @@ local function toggle_menus_and_spaces(env)
 end
 
 
--- =============================================
--- ========== Listeners
--- =============================================
+-- ════════════════════════ Listeners ═════════════════════════
+
 -- front_app_switched: Update menus.
 menu_watcher:subscribe("front_app_switched", update_menus)
 -- swap_menus_and_spaces: Swap menus and spaces.

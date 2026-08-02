@@ -1,7 +1,8 @@
 -- NOTE: Not used.
--- =============================================
--- ========== Config
--- =============================================
+
+
+-- ══════════════════════════ Config ══════════════════════════
+
 local bluetooth_config = {
   position = "right",
   icon = {
@@ -18,18 +19,14 @@ local bluetooth_config = {
 }
 
 
+-- ══════════════════════════ Setup ═══════════════════════════
 
--- =============================================
--- ========== Setup
--- =============================================
 local bluetooth = sbar.add("item", "widgets.bluetooth", bluetooth_config)
 sbar.add("item", "widgets.bluetooth.padding", { position = "right", width = settings.group_padding })
 
 
+-- ════════════════════════ Functions ═════════════════════════
 
--- =============================================
--- ========== Functions
--- =============================================
 local function update_bluetooth_status(env)
   sbar.exec("blueutil -p", function(result)
     local bluetooth_on = tonumber(result) == 1
@@ -50,10 +47,8 @@ local function click_bluetooth(env)
 end
 
 
+-- ════════════════════════ Listeners ═════════════════════════
 
--- =============================================
--- ========== Listeners
--- =============================================
 -- forced, bluetooth_status: Update bluetooth status.
 bluetooth:subscribe({ "forced", "bluetooth_status" }, update_bluetooth_status)
 -- mouse.clicked: Toggle bluetooth status or open bluetooth preference pane.

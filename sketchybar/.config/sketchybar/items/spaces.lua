@@ -1,6 +1,7 @@
--- =============================================
--- ========== General
--- =============================================
+-- ════════════════════════════════════════════════════════════
+-- ═════════════════════════ General ══════════════════════════
+-- ════════════════════════════════════════════════════════════
+
 local app_icons = require("helpers.app_icons")
 local space_icons = { "􀀺", "􀀼", "􀀾", "􀁀", "􀁂", "􀁄", "􀁆", "􀁈", "􀁊", "􀓵" }
 
@@ -8,15 +9,15 @@ local spaces       = {}  -- Used to store space items.
 local space_popups = {}  -- Used to store space popup items.
 
 
+-- ════════════════════════════════════════════════════════════
+-- ══════════════════════════ Config ══════════════════════════
+-- ════════════════════════════════════════════════════════════
 
--- =============================================
--- ========== Config
--- =============================================
 local function _get_space_name(index) return ("space.%s"):format(index) end
 
--- -----------------------------------
--- -------- Space
--- -----------------------------------
+
+-- ══════════════════════════ Space ═══════════════════════════
+
 local space_config = {}
 local space_popup_config = {}
 for i = 1, 10, 1 do
@@ -47,15 +48,13 @@ for i = 1, 10, 1 do
 end
 
 
--- -----------------------------------
--- -------- Space Window Observer
--- -----------------------------------
+-- ══════════════════ Space Window Observer ═══════════════════
+
 local space_window_observer_config = { drawing = false, updates = true }
 
 
--- -----------------------------------
--- -------- Space Indicator
--- -----------------------------------
+-- ═════════════════════ Space Indicator ══════════════════════
+
 local space_indicator_config = {
   position = "left",
   display = "active",
@@ -79,10 +78,10 @@ local space_indicator_config = {
 }
 
 
+-- ════════════════════════════════════════════════════════════
+-- ══════════════════════════ Setup ═══════════════════════════
+-- ════════════════════════════════════════════════════════════
 
--- =============================================
--- ========== Setup
--- =============================================
 -- Space Items
 for i = 1, 10, 1 do
   local space = sbar.add("space", _get_space_name(i), space_config[i])
@@ -106,13 +105,11 @@ local space_state_observer = sbar.add("item", { drawing = false, updates = true 
 local space_indicator = sbar.add("item", space_indicator_config)
 
 
+-- ════════════════════════════════════════════════════════════
+-- ════════════════════════ Functions ═════════════════════════
+-- ════════════════════════════════════════════════════════════
 
--- =============================================
--- ========== Functions
--- =============================================
--- -----------------------------------
--- -------- Space
--- -----------------------------------
+-- ══════════════════════════ Space ═══════════════════════════
 
 ---Set a space to active state (highlighted with type-colored background).
 ---@param space table Sketchybar space item handle.
@@ -185,9 +182,7 @@ local function click_space(env)
 end
 
 
--- -----------------------------------
--- -------- Triggers
--- -----------------------------------
+-- ═════════════════════════ Triggers ═════════════════════════
 
 ---Trigger `space_windows_change` event.
 ---@param env table Environment variables.
@@ -202,9 +197,7 @@ end
 local function trigger_swap_menus_and_spaces_event(env) sbar.trigger("swap_menus_and_spaces") end
 
 
--- -----------------------------------
--- -------- Space Indicator
--- -----------------------------------
+-- ═════════════════════ Space Indicator ══════════════════════
 
 ---Expand space indicator.
 ---@param env table Environment variables.
@@ -236,13 +229,12 @@ local function toggle_indicator(env)
 end
 
 
+-- ════════════════════════════════════════════════════════════
+-- ════════════════════════ Listeners ═════════════════════════
+-- ════════════════════════════════════════════════════════════
 
--- =============================================
--- ========== Listeners
--- =============================================
--- -----------------------------------
--- -------- Space
--- -----------------------------------
+-- ══════════════════════════ Space ═══════════════════════════
+
 for i = 1, 10, 1 do
   local space = spaces[i]
   -- mouse.clicked: Trigger click space funtion.
@@ -252,9 +244,8 @@ for i = 1, 10, 1 do
 end
 
 
--- -----------------------------------
--- -------- Space Window Observer
--- -----------------------------------
+-- ══════════════════ Space Window Observer ═══════════════════
+
 -- NOTE: Sketchybar does not capture all windows, the `yabai_window_created` and `yabai_application_visible` events are used for additional cases.
 -- yabai_window_created, yabai_application_visible: Update app icons in space.
 space_window_observer:subscribe({ "yabai_window_created", "yabai_application_visible" }, trigger_space_windows_change_event)
@@ -262,9 +253,8 @@ space_window_observer:subscribe({ "yabai_window_created", "yabai_application_vis
 space_window_observer:subscribe("space_windows_change", update_space_app)
 
 
--- -----------------------------------
--- -------- Space State Observer
--- -----------------------------------
+-- ═══════════════════ Space State Observer ═══════════════════
+
 --- Track active space index and type to update space item states accordingly.
 local last_idx, last_type = nil, nil
 space_state_observer:subscribe({ "forced", "space_change", "skhd_space_type_changed", "yabai_loaded" }, function()
@@ -293,9 +283,8 @@ space_state_observer:subscribe({ "forced", "space_change", "skhd_space_type_chan
 end)
 
 
--- -----------------------------------
--- -------- Space Indicator
--- -----------------------------------
+-- ═════════════════════ Space Indicator ══════════════════════
+
 -- swap_menus_and_spaces: Toogle indicator icon and label.
 space_indicator:subscribe("swap_menus_and_spaces", toggle_indicator)
 -- mouse.entered: Expand indicator.

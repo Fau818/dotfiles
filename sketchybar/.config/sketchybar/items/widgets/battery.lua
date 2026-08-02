@@ -1,6 +1,5 @@
--- =============================================
--- ========== Config
--- =============================================
+-- ══════════════════════════ Config ══════════════════════════
+
 local battery_config = {
   position = "right",
   update_freq = 60,
@@ -15,19 +14,14 @@ local battery_config = {
 }
 
 
+-- ══════════════════════════ Setup ═══════════════════════════
 
--- =============================================
--- ========== Setup
--- =============================================
 local battery = sbar.add("item", "widgets.battery", battery_config)
 -- Padding
 sbar.add("item", "widgets.battery.padding", { position = "right", width = settings.group_padding })
 
 
-
--- =============================================
--- ========== Functions
--- =============================================
+-- ════════════════════════ Functions ═════════════════════════
 
 ---Update battery information
 ---@param env table Environment variables.
@@ -56,9 +50,7 @@ local function update_battery_info(env)
 end
 
 
+-- ════════════════════════ Listeners ═════════════════════════
 
--- =============================================
--- ========== Listeners
--- =============================================
 -- routine, system_woke, power_source_change: Update battery info.
 battery:subscribe({ "routine", "system_woke", "power_source_change" }, update_battery_info)

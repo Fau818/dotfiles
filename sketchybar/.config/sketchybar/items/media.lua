@@ -1,14 +1,11 @@
--- =============================================
--- ========== General
--- =============================================
+-- ═════════════════════════ General ══════════════════════════
+
 local whitelist = { ["Spotify"] = true, ["Music"] = true }
 local configs = require("configs")
 
 
+-- ══════════════════════════ Config ══════════════════════════
 
--- =============================================
--- ========== Config
--- =============================================
 local media_cover_config = {
   position = "e",
   updates = true,
@@ -59,18 +56,14 @@ local media_artist_config = {
 }
 
 
+-- ══════════════════════════ Setup ═══════════════════════════
 
--- =============================================
--- ========== Setup
--- =============================================
 local media_cover  = sbar.add("item", "media.cover", media_cover_config)
 local media_title  = sbar.add("item", "media.title", media_title_config)
 local media_artist = sbar.add("item", "media.artist", media_artist_config)
 
 
--- -----------------------------------
--- -------- Popup Menus
--- -----------------------------------
+-- ─── Popup Menus ────────────────────────────────────────────
 -- sbar.add("item", {
 --   position = "popup." .. media_cover.name,
 --   icon = { string = icons.media.back },
@@ -91,10 +84,7 @@ local media_artist = sbar.add("item", "media.artist", media_artist_config)
 -- })
 
 
-
--- =============================================
--- ========== Functions
--- =============================================
+-- ════════════════════════ Functions ═════════════════════════
 
 ---Update media status.
 ---@param env table Evirnoment variables.
@@ -118,10 +108,8 @@ local function toggle_media_popup_window(env) media_cover:set({ popup = { drawin
 local function collapse_media_popup_window(env) media_cover:set({ popup = { drawing = false } }) end
 
 
+-- ════════════════════════ Listeners ═════════════════════════
 
--- =============================================
--- ========== Listeners
--- =============================================
 -- media_change: Update media state.
 media_cover:subscribe("media_change", update_media_status)
 -- -- mouse.clicked: Toggle popup.

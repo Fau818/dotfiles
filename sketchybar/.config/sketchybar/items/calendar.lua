@@ -1,6 +1,5 @@
--- =============================================
--- ========== Helper
--- =============================================
+-- ══════════════════════════ Helper ══════════════════════════
+
 -- Determine the architecture dynamically
 local arch = io.popen("uname -m"):read("*l")
 local suffix = (arch == "arm64") and "arm" or "x86"
@@ -10,10 +9,8 @@ local clock_binary = string.format("$CONFIG_DIR/helpers/event_providers/clock/bi
 sbar.exec(string.format("pkill -f '%s' &> /dev/null; %s clock_update 1.0", clock_binary, clock_binary))
 
 
+-- ══════════════════════════ Config ══════════════════════════
 
--- =============================================
--- ========== Config
--- =============================================
 local calendar_config = {
   position = "right",
   icon = {
@@ -31,19 +28,15 @@ local calendar_config = {
 }
 
 
+-- ══════════════════════════ Setup ═══════════════════════════
 
--- =============================================
--- ========== Setup
--- =============================================
 local calendar = sbar.add("item", "calendar", calendar_config)
 -- Padding item required because of bracket
 sbar.add("item", { position = "right", width = settings.group_padding })
 
 
+-- ════════════════════════ Listeners ═════════════════════════
 
--- =============================================
--- ========== Listeners
--- =============================================
 -- forced: Update the calender and clock.
 calendar:subscribe({ "forced" }, function(env) calendar:set({ icon = os.date(("%s %s %s"):format(icons.calendar, os.date("%a %b"), tonumber(os.date("%d")))), label = "Loading..." }) end)
 -- system_woke: Update the calender.

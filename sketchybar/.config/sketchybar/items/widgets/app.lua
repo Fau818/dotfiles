@@ -1,6 +1,5 @@
--- =============================================
--- ========== Config
--- =============================================
+-- ══════════════════════════ Config ══════════════════════════
+
 local qq_config = {
   position = "right",
   click_script = "open -a 'QQ'",
@@ -80,10 +79,8 @@ local discord_config = {
 }
 
 
+-- ══════════════════════════ Setup ═══════════════════════════
 
--- =============================================
--- ========== Setup
--- =============================================
 local discord = sbar.add("item", "app.discord", discord_config)
 local mail    = sbar.add("item", "app.mail", mail_config)
 local wechat  = sbar.add("item", "app.wechat", wechat_config)
@@ -92,10 +89,8 @@ local qq      = sbar.add("item", "app.qq", qq_config)
 local event_listener = sbar.add("item", "app.event_listener", { drawing = false, updates = true, update_freq = 30 })
 
 
+-- ════════════════════════ Functions ═════════════════════════
 
--- =============================================
--- ========== Functions
--- =============================================
 local function update_app_status(env)
   local app_list = {
     ["qq"] = "com.tencent.qq",
@@ -113,8 +108,6 @@ local function update_app_status(env)
 end
 
 
+-- ════════════════════════ Listeners ═════════════════════════
 
--- =============================================
--- ========== Listeners
--- =============================================
 event_listener:subscribe({ "forced", "routine" }, update_app_status)

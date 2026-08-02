@@ -1,14 +1,11 @@
--- =============================================
--- ========== General
--- =============================================
+-- ═════════════════════════ General ══════════════════════════
+
 local popup_width = 150
 local percent_width = { full = 35, regular = 30 }
 
 
+-- ══════════════════════════ Config ══════════════════════════
 
--- =============================================
--- ========== Config
--- =============================================
 local volume_percent_config = {
   position = "right",
   icon = { drawing = false },
@@ -56,10 +53,8 @@ local volume_slider_config = {
 }
 
 
+-- ══════════════════════════ Setup ═══════════════════════════
 
--- =============================================
--- ========== Setup
--- =============================================
 local volume_percent = sbar.add("item", "widgets.volume.percent", volume_percent_config)
 local volume_icon    = sbar.add("item", "widgets.volume.icon", volume_icon_config)
 local volume_bracket = sbar.add("bracket", "widgets.volume.bracket", { volume_icon.name, volume_percent.name }, { popup = { align = "center" } })
@@ -67,10 +62,8 @@ local volume_slider  = sbar.add("slider", popup_width, volume_slider_config)
 sbar.add("item", "widgets.volume.padding", { position = "right", width = settings.group_padding })
 
 
+-- ════════════════════════ Functions ═════════════════════════
 
--- =============================================
--- ========== Functions
--- =============================================
 local function change_volume(env)
   local volume, icon = tonumber(env.INFO), icons.volume.error
   if volume > 66 then icon = icons.volume._100
@@ -138,10 +131,8 @@ local function click_volume(env)
 end
 
 
+-- ════════════════════════ Listeners ═════════════════════════
 
--- =============================================
--- ========== Listeners
--- =============================================
 volume_bracket:subscribe("volume_change", change_volume)
 -- BUG: Cannot subscribe "mouse.clicked" on `volume_bracket`. (No effect)
 volume_icon:subscribe("mouse.clicked", click_volume)

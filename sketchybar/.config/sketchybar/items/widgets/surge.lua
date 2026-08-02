@@ -1,6 +1,5 @@
--- =============================================
--- ========== Config
--- =============================================
+-- ══════════════════════════ Config ══════════════════════════
+
 local surge_config = {
   position = "right",
   alias = {
@@ -13,18 +12,14 @@ local surge_config = {
 }
 
 
+-- ══════════════════════════ Setup ═══════════════════════════
 
--- =============================================
--- ========== Setup
--- =============================================
 local surge = sbar.add("alias", "Surge", surge_config)
 sbar.add("item", "widgets.surge.padding", { position = "right", width = 2 * settings.group_padding })
 
 
+-- ════════════════════════ Functions ═════════════════════════
 
--- =============================================
--- ========== Functions
--- =============================================
 local function click_surge(env)
   if env.BUTTON == 'left' then sbar.exec([[open -a "Surge"]])
   elseif env.BUTTON == 'right' then sbar.exec([[open -a "Surge Dashboard"]])
@@ -32,9 +27,7 @@ local function click_surge(env)
 end
 
 
+-- ════════════════════════ Listeners ═════════════════════════
 
--- =============================================
--- ========== Listeners
--- =============================================
 -- mouse.clicked: Open Surge or Surge Dashboard.
 surge:subscribe("mouse.clicked", click_surge)
