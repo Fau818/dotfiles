@@ -11,6 +11,7 @@ gui:
   # side-by-side split squeezes it to ~1/6 on wide screens.
   mainPanelSplitMode: vertical
 git:
+  overrideGpg: true
   pagers:
     - colorArg: always
       pager: delta --paging=never --side-by-side
