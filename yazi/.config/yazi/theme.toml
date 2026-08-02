@@ -1,4 +1,9 @@
+# tokyonight-moon is a local flavor made of two symlinks:
+#   flavor.toml -> ../tokyo-night.yazi/flavor.toml   (UI colors, upstream, kept up to date by `ya pkg upgrade`)
+#   tmtheme.xml -> ../../../../../bat/.config/bat/themes/tokyonight_moon.tmTheme   (syntax colors, shared with bat)
+# A flavor always uses its own tmtheme.xml and ignores [mgr] syntect_theme, so
+# overriding just the syntax theme has to be done with this symlink indirection.
+
 [flavor]
-use = "tokyo-night"
-# For Yazi 0.4 and above
-dark = "tokyo-night"
+use  = "tokyonight-moon"
+dark = "tokyonight-moon"

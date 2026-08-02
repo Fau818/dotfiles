@@ -1,4 +1,4 @@
-# ==================== Fuzzy Finder (Swaped zoxide and fzf default keymappings) ====================
+# ─── Fuzzy Finder (Swaped zoxide and fzf default keymappings) ───
 [[mgr.prepend_keymap]]
 on  = "z"
 run = "plugin zoxide"
@@ -8,7 +8,7 @@ on  = "Z"
 run = "plugin fzf"
 
 
-# ==================== Quick Move ====================
+# ─── Quick Move ─────────────────────────────────────────────
 [[mgr.prepend_keymap]]
 on  = "K"
 run = "plugin arrow -3"
@@ -18,7 +18,7 @@ on  = "J"
 run = "plugin arrow 3"
 
 
-# ==================== Preview ====================
+# ─── Preview ────────────────────────────────────────────────
 [[mgr.prepend_keymap]]
 on   = "T"
 run  = "plugin toggle-pane max-preview"
@@ -30,14 +30,14 @@ run  = "plugin toggle-pane min-preview"
 desc = "Show or hide the preview pane"
 
 
-# ==================== Smart Paste ====================
+# ─── Smart Paste ────────────────────────────────────────────
 [[mgr.prepend_keymap]]
 on   = "p"
 run  = "plugin smart-paste"
 desc = "Paste into the hovered directory or CWD"
 
 
-# ==================== Smart Tab ====================
+# ─── Smart Tab ──────────────────────────────────────────────
 [[mgr.prepend_keymap]]
 on   = "t"
 run  = "plugin smart-tab"
@@ -57,7 +57,7 @@ run  = "plugin jump-to-char"
 desc = "Jump to char"
 
 
-# ==================== Preview ====================
+# ─── Preview ────────────────────────────────────────────────
 [[mgr.prepend_keymap]]
 on = "<Space>"
 run = 'shell -- qlmanage -p "$@"'

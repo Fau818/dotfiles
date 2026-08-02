@@ -33,7 +33,8 @@ prepend_preloaders = [
 { url = "/Users/*/Library/Mobile Documents/com~apple~CloudDocs/Documents/**", run = "noop" },
 ]
 
-# ==================== Git ====================
+
+# ─── Git ────────────────────────────────────────────────────
 [[plugin.prepend_fetchers]]
 url   = "*"
 run   = "git"
@@ -45,7 +46,7 @@ run   = "git"
 group = "git"
 
 
-# ==================== Miem-ext ====================
+# ─── Miem-ext ───────────────────────────────────────────────
 [[plugin.prepend_fetchers]]
 group = "mime"
 url   = "local://*"

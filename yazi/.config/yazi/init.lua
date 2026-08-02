@@ -18,10 +18,8 @@ function Status:name()
 end
 
 
+-- ═════════════════ Show User/Group of Files ═════════════════
 
--- =============================================
--- ========== Show User/Group of Files
--- =============================================
 Status:children_add(function()
   local h = cx.active.current.hovered
   if h == nil or ya.target_family() ~= "unix" then
@@ -37,10 +35,8 @@ Status:children_add(function()
 end, 500, Status.RIGHT)
 
 
+-- ════════════════ Show Username and Hostname ════════════════
 
--- =============================================
--- ========== Show Username and Hostname
--- =============================================
 Header:children_add(function()
   if ya.target_family() ~= "unix" then
     return ui.Line {}
@@ -49,10 +45,8 @@ Header:children_add(function()
 end, 500, Header.LEFT)
 
 
+-- ═════════════ Show size_and_mtime in linemode ══════════════
 
--- =============================================
--- ========== Show size_and_mtime in linemode
--- =============================================
 function Linemode:size_and_mtime()
   local time = math.floor(self._file.cha.mtime or 0)
   local label
