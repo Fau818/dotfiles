@@ -87,7 +87,7 @@ export COPILOT_HOME="$XDG_CONFIG_HOME/copilot"
 export CPPFLAGS_FAU='-std=c++17 -O2 -DCODE_Fau'
 export CPLUS_INCLUDE_PATH="$XDG_CONFIG_HOME/clangd/include"
 
-# ┄┄┄ Docker (FIXME: not working)
+# ┄┄┄ Docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 
 # ┄┄┄ Fzf

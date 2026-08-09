@@ -1,5 +1,5 @@
 return {
-  almost_transparent = 0x0D000000,  -- BUG: For triggering click events
+  almost_transparent = 0x01000000,  -- HACK: Invisible but still rasterized, unlike `transparent` which alpha == 0 skips drawing.
   transparent = 0x00000000,
   black       = 0xFF181926,
   gray        = 0xFF939AB7,

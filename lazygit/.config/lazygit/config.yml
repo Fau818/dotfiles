@@ -12,6 +12,6 @@ gui:
   mainPanelSplitMode: vertical
 git:
   overrideGpg: true
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --paging=never --side-by-side
+      command: delta --paging=never --side-by-side
