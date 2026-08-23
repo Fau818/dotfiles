@@ -26,7 +26,8 @@ function vpn() {
   if [[ "$1" == 'start' ]]; then _vpn_start
   elif [[ "$1" == 'stop' ]]; then _vpn_stop
   elif [[ -n "$1" ]]; then echo_error "Invalid parameter: $1. Usage: vpn [start|stop]" && return 1
-  else [[ ! -v https_proxy ]] && _vpn_start || _vpn_stop
+  elif [[ ! -v https_proxy ]]; then _vpn_start
+  else _vpn_stop
   fi
 }
 

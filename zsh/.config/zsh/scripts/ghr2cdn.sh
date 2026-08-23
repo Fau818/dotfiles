@@ -28,7 +28,6 @@ convert_to_jsdelivr() {
   branch="${parts[2]}"
 
   # Reconstruct the file path
-  file_path="${parts[@]:3}"
   file_path=$(IFS='/'; echo "${parts[*]:3}")
 
   # Construct the jsDelivr URL

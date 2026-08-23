@@ -1,13 +1,17 @@
-# Hammerspoon
+# ─── Hammerspoon ────────────────────────────────────────────
 hammerspoon/.config/hammerspoon/Spoons/EmmyLua.spoon/annotations/
 
-# Karabiner
+
+# ─── Karabiner ──────────────────────────────────────────────
 karabiner/.config/karabiner/automatic_backups
 
-# Lazygit
-lazygit/.config/lazygit/state.yml
 
-# Yazi
+# ─── Lazygit ────────────────────────────────────────────────
+lazygit/.config/lazygit/state.yml
+lazygit/.config/lazygit/github_pull_requests.json
+
+
+# ─── Yazi ───────────────────────────────────────────────────
 yazi/.config/yazi/flavors/tokyo-night.yazi
 
 yazi/.config/yazi/plugins/full-border.yazi
@@ -20,7 +24,8 @@ yazi/.config/yazi/plugins/smart-paste.yazi
 yazi/.config/yazi/plugins/toggle-pane.yazi
 yazi/.config/yazi/plugins/types.yazi
 
-# Zsh
+
+# ─── Zsh ────────────────────────────────────────────────────
 zsh/.config/zsh/.zcompcache/
 zsh/.config/zsh/.zcompdump*
 zsh/.config/zsh/.zsh_sessions/

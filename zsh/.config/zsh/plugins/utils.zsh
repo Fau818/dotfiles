@@ -6,7 +6,7 @@
 
 if command -v zoxide &> /dev/null; then
   # ─── Init Zoxide ──────────────────────────────────────────
-  eval "$(zoxide init zsh --cmd j)"
+  cached_eval zoxide init zsh --cmd j
 
 
   # ─── Enhance Zoxide ───────────────────────────────────────
@@ -74,13 +74,19 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
 
     # Execute
     [[ ! -v DOTFILE_PATH ]] && { DOTFILE_PATH=$([[ "$(uname)" == 'Darwin' ]] && echo "$HOME/Documents/Fau/dotfiles" || echo "${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles"); }
+
+    local ret=0
     for name in "${pkgs[@]}"; do
-      # CASE: For `ssh`, soft link `.ssh/config`
-      [[ "$name" == 'ssh' ]] && [[ ! -d "$HOME/.ssh" ]] && mkdir "$HOME/.ssh"
+      # NOTE: Some packages require a directory to exist before stowing.
+      [[ "$name" == 'ssh' ]] && [[ ! -d "$HOME/.ssh" ]] && mkdir -p "$HOME/.ssh"
+      [[ "$name" == 'claude' ]] && [[ ! -d "${XDG_CONFIG_HOME:-$HOME/.config}/claude" ]] && mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/claude"
 
       local dotfile_dir=$([[ -d "$DOTFILE_PATH/private/$name" ]] && echo "$DOTFILE_PATH/private" || echo "$DOTFILE_PATH")
-      stow --dir="$dotfile_dir" --target="$HOME" --ignore='.DS_Store' "${opts[@]}" "$name"
+      # CASE: Skipped a package is absent from this checkout, e.g. `private` is not initialized.
+      [[ -d "$dotfile_dir/$name" ]] || { echo_warn "Skipped '$name': no such package in $dotfile_dir."; ret=1; continue }
+      stow --dir="$dotfile_dir" --target="$HOME" --ignore='.DS_Store' "${opts[@]}" "$name" || ret=1
     done
+    return $ret
   }
   alias stow=__stow
 
@@ -116,10 +122,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
     local config
     for config in "${(@k)configs}"; do
       local binary=${configs[$config]}
-      if command -v "$binary" &> /dev/null; then
-        __stow "$config"
-        echo_ok "Stowed configuration for '$config'."
-      fi
+      if command -v "$binary" &> /dev/null; then __stow "$config" && echo_ok "Stowed configuration for '$config'."; fi
     done
   }
 fi

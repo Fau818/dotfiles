@@ -42,6 +42,7 @@ zinit ice wait lucid depth=1 atload'unalias g grv ghh'; zinit snippet OMZP::git
 
 # ══════════════════════ Zinit Plugins ═══════════════════════
 
+# ─── Theme ──────────────────────────────────────────────────
 # CASE 1: Use `startship`.
 # zinit ice as"command" from"gh-r" \
 #           atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
@@ -55,6 +56,8 @@ zinit ice wait lucid depth=1 atload'unalias g grv ghh'; zinit snippet OMZP::git
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit ice depth=1; zinit light zdharma-continuum/fast-syntax-highlighting
 
+
+# ─── General ────────────────────────────────────────────────
 zinit ice depth=1 wait lucid; zinit light MichaelAquilina/zsh-you-should-use
 
 zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions

@@ -14,7 +14,7 @@ fi
 # ════════════════════════════════════════════════════════════
 
 setopt interactive_comments
-fpath=($ZDOTDIR/completions $fpath)
+fpath=($ZDOTDIR/completions $ZCACHEDIR/completions $fpath)
 [[ -d "$HOME/.docker/completions/" ]] && fpath=($HOME/.docker/completions $fpath)  # Docker completion
 
 
@@ -37,10 +37,12 @@ alias cdn2ghr="$ZSCRIPTDIR/cdn2ghr.sh"
 # ═════════════════════════ Plugins ══════════════════════════
 
 source "$ZPLUGINDIR/colorful_print.zsh"
+source "$ZPLUGINDIR/cache.zsh"
 source "$ZPLUGINDIR/vpn.zsh"
 
 source "$ZPLUGINDIR/homebrew.zsh"
 source "$ZPLUGINDIR/neovim.zsh"
+source "$ZPLUGINDIR/ssh.zsh"
 
 source "$ZPLUGINDIR/utils.zsh"
 source "$ZPLUGINDIR/python.zsh"
@@ -48,8 +50,6 @@ source "$ZPLUGINDIR/installer.zsh"
 
 source "$ZPLUGINDIR/zinit.zsh"
 
-# Uv
-command -v uv &> /dev/null && eval "$(uv generate-shell-completion zsh)"
 # Kitty
 [[ "$TERM" == 'xterm-kitty' ]] && alias kssh='kitty +kitten ssh'
 # Rsync
@@ -79,8 +79,21 @@ command -v eza &> /dev/null && alias ls='eza --icons --time-style=iso'
 # Ripgrep
 command -v rg &> /dev/null && alias rg="rg --ignore-file '$XDG_CONFIG_HOME/git/ignore'"
 
-# Npm
-command -v npm &> /dev/null && source <(npm completion)
+
+# ═══════════════════════ Completions ════════════════════════
+
+# NOTE: Generated into `$ZCACHEDIR/completions` on first use and refreshed whenever the tool itself is upgraded.
+
+# ┄┄┄ Npm
+# cached_eval npm completion  # NOTE: ZSH ships with npm completion.
+
+# ┄┄┄ Python
+cached_compdef ruff ruff generate-shell-completion zsh
+cached_compdef uv uv generate-shell-completion zsh
+
+# ┄┄┄ Rust
+cached_compdef cargo rustup completions zsh cargo
+cached_compdef rustup rustup completions zsh rustup
 
 
 # ═════════════════ Goto Home if Login Shell ═════════════════

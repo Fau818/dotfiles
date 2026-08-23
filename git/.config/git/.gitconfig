@@ -9,12 +9,14 @@
   editor = nvim
   ignorecase = false
   bigFileThreshold = 1m
+[status]
+  submoduleSummary = true
+[pull]
+  rebase = true
 [gpg]
   format = ssh
 [gpg "ssh"]
   program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
-[pull]
-  rebase = true
 [commit]
   verbose = true
 	gpgsign = true

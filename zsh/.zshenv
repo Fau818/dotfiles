@@ -2,7 +2,7 @@
 # ══════════════════════════ Basic ═══════════════════════════
 # ════════════════════════════════════════════════════════════
 
-skip_global_compinit=1   # Skip Ubuntu global compinit
+skip_global_compinit=1   # NOTE: Skips Ubuntu's global compinit; it is `/etc/zshrc` that reads this.
 
 
 # ─── XDG Base Directory ─────────────────────────────────────
@@ -16,6 +16,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZPLUGINDIR="$ZDOTDIR/plugins"
 export ZSCRIPTDIR="$ZDOTDIR/scripts"
+export ZCACHEDIR="$XDG_CACHE_HOME/zsh"
 export HISTFILE="$ZDOTDIR/.zsh_history"
 
 
@@ -128,6 +129,9 @@ export WANDB_CONFIG_DIR="$XDG_CONFIG_HOME/wandb"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 
+# ┄┄┄ Shuck
+export SHUCK_CONFIG_HOME="$XDG_CONFIG_HOME/nvim/configuration"
+
 # ┄┄┄ Starship
 export STARSHIP_CONFIG="$ZDOTDIR/starship.toml"
 
@@ -139,12 +143,3 @@ export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
 
 # ┄┄┄ Zoxide
 export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
-
-
-# ════════════════════════════════════════════════════════════
-# ═══════════════════════════ TEST ═══════════════════════════
-# ════════════════════════════════════════════════════════════
-
-# [[ "$(uname)" == 'Darwin' && "$(uname -m)" == 'arm64' ]] && (ps aux | grep X11 &> /dev/null) && export DISPLAY=':0'
-
-# export XAUTHORITY="$XDG_CACHE_HOME/Xauthority"  # IMPO: It's for routing x11 file.
