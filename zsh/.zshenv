@@ -115,6 +115,7 @@ export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
 export IPYTHONDIR="$XDG_DATA_HOME/ipython"
 export PIP_CACHE_DIR="$XDG_CACHE_HOME/pip"
 export UV_PROJECT_ENVIRONMENT='venv.nosync'
+export PYPI_TOKEN_CMD='bash $$DOTFILE_PATH/private/pypi/api_token'
 
 export MPLCONFIGDIR="$XDG_CACHE_HOME/matplotlib"
 export KAGGLE_CONFIG_DIR="$XDG_CONFIG_HOME/kaggle"
