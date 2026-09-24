@@ -72,10 +72,8 @@ export CODEX_HOME="$XDG_CONFIG_HOME/codex"
 export CODEIUM_HOME="$XDG_CONFIG_HOME/codeium"
 
 # ┄┄┄ Conda
-export CONDA_AUTO_ENVS_CONF="$DOTFILE_PATH/private/conda/conda_auto_envs.conf"
+export CONDA_AUTO_ENVS_CONF="$DOTFILE_PATH/private/data/conda_auto_envs.conf"
 export CONDA_HOME="$XDG_CONFIG_HOME/conda"  # NOTE: This is not a standard conda variable, but a custom one for this setup.
-export CONDA_PKGS_DIRS="$XDG_CACHE_HOME/conda/pkgs"
-export CONDA_ENVS_DIRS="$XDG_DATA_HOME/conda/envs"
 export CONDARC="$CONDA_HOME/condarc"
 export CONDATOS="$CONDA_HOME/tos"
 export CONDA_ANACONDA_ANON_USAGE=false

@@ -1,3 +1,8 @@
+# ─── Conda ──────────────────────────────────────────────────
+!conda/.config/conda/condarc
+conda/.config/conda/*
+
+
 # ─── Hammerspoon ────────────────────────────────────────────
 hammerspoon/.config/hammerspoon/Spoons/EmmyLua.spoon/annotations/
 

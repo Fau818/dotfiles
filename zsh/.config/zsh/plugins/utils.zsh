@@ -96,8 +96,9 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
     typeset -A configs=(
       [bat]='bat'
       [clangd]='clangd'
-      [claude]='claude'
       [ccstatusline]='claude'
+      [claude]='claude'
+      [conda]='conda'
       [fd]='fd'
       [git]='git'
       [github-copilot]='nvim'
