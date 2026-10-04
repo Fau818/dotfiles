@@ -572,12 +572,77 @@
     "command": "-workbench.action.zoomReset"
   },
 
-  /* Escape to close suggestion widget */
+  /* Toggle Completion Menu */
+  {
+    "key": "ctrl+space",
+    "command": "hideSuggestWidget",
+    "when": "suggestWidgetVisible  && editorTextFocus && neovim.mode == insert"
+  },
+  {
+    "key": "ctrl+space",
+    "command": "editor.action.triggerSuggest",
+    "when": "!suggestWidgetVisible && editorTextFocus && neovim.mode == insert"
+  },
+
+  /* Notebook */
   {
     "key": "escape",
-    "command": "hideSuggestWidget",
-    "when": "suggestWidgetVisible && editorTextFocus"
-  }
+    "command": "-notebook.cell.quitEdit",
+    "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "notebook.cell.quitEdit",
+    "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused"
+  },
+
+  /* NES */
+  {
+    "key": "ctrl+y",
+    "command": "editor.action.inlineSuggest.trigger",
+    "when": "editorTextFocus && !inlineSuggestionVisible && !inlineEditIsVisible"
+  },
+  {
+    "key": "ctrl+y",
+    "command": "editor.action.inlineSuggest.commit",
+    "when": "editorTextFocus && (inlineSuggestionVisible || inlineEditIsVisible) && !tabShouldJumpToInlineEdit"
+  },
+  {
+    "key": "ctrl+y",
+    "command": "editor.action.inlineSuggest.jump",
+    "when": "editorTextFocus && inlineEditIsVisible && tabShouldJumpToInlineEdit"
+  },
+  {
+    "key": "escape",
+    "command": "editor.action.inlineSuggest.hide",
+    "when": "editorTextFocus && inlineEditIsVisible"
+  },
+
+  /* Terminal */
+  {
+    "key": "ctrl+t",
+    "command": "workbench.action.terminal.toggleTerminal",
+    "when": "terminalFocus"
+  },
+
+  /* Sidebar */
+  {
+    "key": "ctrl+.",
+    "command": "claude-vscode.focus",
+    "when": "editorTextFocus && !config.claudeCode.useTerminal"
+  },
+  {
+    "key": "ctrl+.",
+    "command": "claude-vscode.blur",
+    "when": "!config.claudeCode.useTerminal && !editorTextFocus"
+  },
+
+  /* File Explorer */
+  {
+    "key": "space e",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
 
   /* NEW */
 ]

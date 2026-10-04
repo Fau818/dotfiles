@@ -1,3 +1,7 @@
+-- IMPO: The `Surge` window is missing from `sketchybar --query default_menu_items`, so the alias
+-- \     re-scans every window each second, and SketchyBar <= 2.24.0 leaks the list on every scan.
+
+
 -- ══════════════════════════ Config ══════════════════════════
 
 local surge_config = {

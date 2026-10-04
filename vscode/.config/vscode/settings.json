@@ -70,8 +70,8 @@
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
 
-  "github.copilot.enable": { "plaintext": true, "scminput": true, "markdown": true },
-  "github.copilot.nextEditSuggestions.enabled": false,
+  "github.copilot.enable": { "*": true, "plaintext": true, "markdown": true, "scminput": true },
+  "github.copilot.nextEditSuggestions.enabled": true,
   "github.copilot.chat.generateTests.codeLens": true,
   "github.copilot.chat.githubMcpServer.enabled": true,
   "github.copilot.chat.languageContext.typescript.enabled": true,

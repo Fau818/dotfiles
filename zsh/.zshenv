@@ -56,7 +56,6 @@ export OPENAI_API_PATH="$DOTFILE_PATH/private/openai"
 # ┄┄┄ Homebrew
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1
-export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
 
 # ┄┄┄ Anaconda
 export ANACONDA_CONFIG_TOML="$XDG_CONFIG_HOME/anaconda/config.toml"
