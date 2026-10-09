@@ -37,5 +37,5 @@ function cached_compdef() {
   [[ -s "$file" && ! "$bin" -nt "$file" ]] && return 0
 
   mkdir -p "${file:h}" && "$@" > "$file" || { rm -f "$file"; return 1 }
-  rm -f "${ZDOTDIR:-$HOME}"/.zcompdump*(N)  # compinit trusts its dump (`-C`), so drop it.
+  rm -f "${ZDOTDIR:-$HOME}"/.zcompdump*(N)  # compinit only notices added or removed files, not a changed `#compdef`, so drop its dump.
 }

@@ -97,6 +97,10 @@ export GEM_HOME="$XDG_DATA_HOME/gem"
 # ┄┄┄ Git
 export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/.gitconfig"
 
+# ┄┄┄ Google
+export BOTO_CONFIG="$HOME/.config/boto/config"
+export CLOUDSDK_PYTHON_SITEPACKAGES=1
+
 # ┄┄┄ Less
 export LESSHISTFILE="$XDG_STATE_HOME/less_history"
 

@@ -63,4 +63,5 @@ zinit ice depth=1 wait lucid; zinit light MichaelAquilina/zsh-you-should-use
 zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
 zinit ice lucid wait"0a" from"gh-r" as"program" atload'eval "$(mcfly init zsh)"; export MCFLY_KEY_SCHEME=vim'; zinit light cantino/mcfly
 
-zinit ice depth=1 lucid blockf atload'zicompinit; zicdreplay'; zinit light zsh-users/zsh-completions
+# NOTE: No `blockf`: let the plugin add its `src` to `$fpath`, since zinit symlinks completions only on first clone.
+zinit ice depth=1 lucid atload'zicompinit; zicdreplay'; zinit light zsh-users/zsh-completions
