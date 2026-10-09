@@ -21,6 +21,7 @@ local volume_percent_config = {
 
 local volume_icon_config = {
   position = "right",
+  padding_left = 2 * settings.group_padding,
   icon = {
     string = icons.volume._100,
     font = { style = "Black", size = 12.5 },
