@@ -12,6 +12,9 @@
 	update = merge
 	shallow = true
 
-; [submodule "hammerspoon/.config/hammerspoon/stackline"]
-; 	path = hammerspoon/.config/hammerspoon/stackline
-; 	url = git@github.com:Fau818/stackline.git
+[submodule "stackline"]
+	path = hammerspoon/.config/hammerspoon/stackline
+	url = git@github.com:Fau818/stackline.git
+	branch = main
+	update = merge
+	shallow = true
