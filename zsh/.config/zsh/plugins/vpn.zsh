@@ -47,7 +47,7 @@ function startClash() {
   # Start clash (NOTE: if you copied this code, you should use `sudo -E` instead of `sudo` else the config file will be missing.)
   # NOTE: The `sudo echo -n` is necessary since nohup will be suspended if no sudo permission.
   if pgrep -x "$tool_name" &> /dev/null; then echo_warn "$tool_name is already running!"
-  else sudo echo -n && sudo nohup "$(which "$tool_name")" &> /dev/null &
+  else sudo echo -n && sudo nohup "$commands[$tool_name]" &> /dev/null &
   fi
 }
 

@@ -30,6 +30,7 @@ fi
 if command -v nvim &> /dev/null; then
   export VIM_CONFIG="$XDG_CONFIG_HOME/nvim"
   export EDITOR='nvim' VISUAL='nvim'
+  export SUDO_EDITOR="$(whence -p nvim)"
   # Mason binaries
   PATH="$XDG_DATA_HOME/nvim/mason/bin:$PATH"
 fi
@@ -53,3 +54,9 @@ if command -v gem &> /dev/null; then PATH="$XDG_DATA_HOME/gem/bin:$PATH"; fi
 # ═══════════════ VPN Auto Start (Linux Only) ════════════════
 
 [[ "$(uname)" == 'Linux' ]] && source "$ZPLUGINDIR/vpn.zsh" && _auto_start_vpn
+
+
+# ═════════════════════ Deduplicate PATH ═════════════════════
+
+# NOTE: Nested login shells re-add entries; `-U` is per name: `path` dedups array edits, `PATH` scalar ones (`brew shellenv`, OrbStack).
+typeset -U path PATH

@@ -15,7 +15,6 @@ fi
 
 setopt interactive_comments
 fpath=($ZDOTDIR/completions $ZCACHEDIR/completions $fpath)
-[[ -d "$HOME/.docker/completions/" ]] && fpath=($HOME/.docker/completions $fpath)  # Docker completion
 
 
 # ══════════════════════ Basic Aliases ═══════════════════════
@@ -59,7 +58,7 @@ command -v mysql &> /dev/null && alias mysqlStart='mysql.server start' mysqlStop
 # Thefuck
 command -v thefuck &> /dev/null && eval "$(thefuck --alias)" && alias ff=fuck
 # Yabai
-alias yabai_sudo='echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai > /dev/null'
+alias yabai_sudo='echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 "${commands[yabai]}" | cut -d " " -f 1) ${commands[yabai]} --load-sa" | sudo tee /private/etc/sudoers.d/yabai > /dev/null'
 
 # Docker
 if command -v docker &> /dev/null; then
@@ -98,8 +97,3 @@ cached_compdef uv uv generate-shell-completion zsh
 # ┄┄┄ Rust
 cached_compdef cargo rustup completions zsh cargo
 cached_compdef rustup rustup completions zsh rustup
-
-
-# ═════════════════ Goto Home if Login Shell ═════════════════
-
-[[ "$(uname)" == 'Linux' && "$SHLVL" -eq 1 ]] && cd ~ || true

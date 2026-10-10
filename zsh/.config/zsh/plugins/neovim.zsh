@@ -3,8 +3,6 @@
 # ════════════════════════════════════════════════════════════
 
 if command -v nvim &> /dev/null; then
-  export SUDO_EDITOR="$(whence -p nvim)"
-
   # # NOTE: cwd-on-exit, like `utils.zsh`'s yazi wrapper; `NVIM_CWD_FILE` is read by an autocmd in `lua/fau/autocmd.lua`.
   # function __nvim() {
   #   local tmp="$(mktemp -t "nvim-cwd.XXXXXX")"
