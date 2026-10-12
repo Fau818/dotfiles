@@ -1,8 +1,8 @@
-# macOS
+# ─── macOS ──────────────────────────────────────────────────
 .DS_Store
 .Trash/
 
-# macOS User Folders
+# ─── macOS User Folders ─────────────────────────────────────
 /Applications/
 /Library/
 /Movies/
@@ -12,44 +12,52 @@
 /Pictures/
 /Public/
 
+# ─── Claude ─────────────────────────────────────────────────
+.claude/
+CLAUDE.md
 
-# Git and IDEs and Caches
+
+# ─── Git and IDEs and Caches ────────────────────────────────
 .git/
 .idea/
 .vscode/
+.vscode-server/
+.vscode-shared/
 .cache/
 
 
-# Python
+# ─── Python ─────────────────────────────────────────────────
 .venv
 __pycache__/
 *.egg-info/
 wandb_logs/
 
 
-# Java
+# ─── Java ───────────────────────────────────────────────────
 bin/
 build/
 dist/
 target/
 
 
-# Node.js
+# ─── Node.js ────────────────────────────────────────────────
 node_modules/
 
 
-# $HOME/.local/
+# ─── Other ──────────────────────────────────────────────────
+# ┄┄┄ $HOME/.../
 /.local/
-# $HOME/.docker/
-/.docker/
-# $HOME/.orbstack/
 /.orbstack/
-# $HOME/OrbStack/
 /OrbStack/
-# $XDG_CONFIG_HOME/raycast/
+
+# ┄┄┄ $XDG_CONFIG_HOME/.../
+.config/claude/
+.config/copilot/
+.config/docker/
+.config/gcloud/
+.config/github-copilot/
+.config/hammerspoon/Spoons/
 .config/raycast/
-
-
-# Claude
-.claude/
-CLAUDE.md
+.config/wakatime/
+.config/yazi/flavors/
+.config/yazi/plugins/
