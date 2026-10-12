@@ -19,7 +19,7 @@ fpath=($ZDOTDIR/completions $ZCACHEDIR/completions $fpath)
 
 # ══════════════════════ Basic Aliases ═══════════════════════
 
-alias sudo='sudo -E '
+# alias sudo='sudo -E '
 alias vi='vi -i NONE'
 alias mv='mv -v'
 alias wget="wget --hsts-file=$XDG_CACHE_HOME/.wget-hsts"
@@ -85,7 +85,7 @@ command -v rg &> /dev/null && alias rg="rg --ignore-file '$XDG_CONFIG_HOME/git/i
 
 # ┄┄┄ Google
 # NOTE: A bash-style script without a `#compdef` header, so it is sourced after compinit rather than autoloaded from `$fpath`.
-(( $+commands[gcloud] )) && source "${commands[gcloud]:A:h:h}/completion.zsh.inc"
+(( $+commands[gcloud] )) && () { [[ -r $1 ]] && source $1 } ${commands[gcloud]:A:h:h}/completion.zsh.inc
 
 # ┄┄┄ Npm
 # cached_eval npm completion  # NOTE: ZSH ships with npm completion.

@@ -25,13 +25,24 @@ rshift + lalt - l : yabai -m window --focus east  || yabai -m window --focus sta
 rshift + lalt - p : yabai -m window --focus stack.prev || yabai -m window --focus stack.last
 rshift + lalt - n : yabai -m window --focus stack.next || yabai -m window --focus stack.first
 
+# Focus the N-th window of the stack (WINKEY3)
+rshift + lalt + fn - 1 : yabai -m window --focus stack.1
+rshift + lalt + fn - 2 : yabai -m window --focus stack.2
+rshift + lalt + fn - 3 : yabai -m window --focus stack.3
+rshift + lalt + fn - 4 : yabai -m window --focus stack.4
+rshift + lalt + fn - 5 : yabai -m window --focus stack.5
+rshift + lalt + fn - 6 : yabai -m window --focus stack.6
+rshift + lalt + fn - 7 : yabai -m window --focus stack.7
+rshift + lalt + fn - 8 : yabai -m window --focus stack.8
+rshift + lalt + fn - 9 : yabai -m window --focus stack.9
+
 # Swap window (WINKEY2|WINKEY3)
 lctrl + rshift + lalt - h : yabai -m window --swap west
 lctrl + rshift + lalt - j : yabai -m window --swap south
 lctrl + rshift + lalt - k : yabai -m window --swap north
 lctrl + rshift + lalt - l : yabai -m window --swap east
-rshift + lalt + fn - p : yabai -m window --swap stack.prev && yabai -m window --focus stack.prev
-rshift + lalt + fn - n : yabai -m window --swap stack.next && yabai -m window --focus stack.next
+rshift + lalt + fn - p : id=$(yabai -m query --windows id --window | jq '.id'); { yabai -m window --swap stack.prev || yabai -m window --swap stack.last; } && yabai -m window --focus "$id"
+rshift + lalt + fn - n : id=$(yabai -m query --windows id --window | jq '.id'); { yabai -m window --swap stack.next || yabai -m window --swap stack.first; } && yabai -m window --focus "$id"
 
 # Resize window (WINKEY5)
 rshift - h : yabai -m window --resize left:-20:0  || yabai -m window --resize right:-20:0
@@ -52,10 +63,14 @@ rshift + lalt + fn - k : ($HOME/.config/yabai/stack.sh north) && sketchybar --tr
 rshift + lalt + fn - l : ($HOME/.config/yabai/stack.sh east)  && sketchybar --trigger skhd_window_type_changed
 
 # Toggle window layout (WINKEY1)
-rshift + lalt - f : yabai -m window --toggle float; [ $(yabai -m query --windows --window | jq '.["is-floating"]') = 'true' ] && hs -c "Fau_hs.window.center_window(0.6)"; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
-rshift + lalt - s : yabai -m window --toggle float; [ $(yabai -m query --windows --window | jq '.["is-floating"]') = 'true' ] && hs -c "Fau_hs.window.center_window(0.6)"; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
-# rshift + lalt - s : [ $(yabai -m query --windows --window | jq '.["is-floating"]') = 'true' ] && yabai -m window --toggle float; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
+rshift + lalt - f : yabai -m window --toggle float; [ $(yabai -m query --windows is-floating --window | jq '.["is-floating"]') = 'true' ] && hs -c "Fau_hs.window.center_window(0.6)"; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
+rshift + lalt - s : yabai -m window --toggle float; [ $(yabai -m query --windows is-floating --window | jq '.["is-floating"]') = 'true' ] && hs -c "Fau_hs.window.center_window(0.6)"; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
+# rshift + lalt - s : [ $(yabai -m query --windows is-floating --window | jq '.["is-floating"]') = 'true' ] && yabai -m window --toggle float; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
 rshift + lalt - e : yabai -m window --toggle zoom-parent; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
+# TEST: Show/hide the Music scratchpad (rule in yabairc); launch Music when it has no window yet
+rshift + lalt - m : yabai -m window --toggle music || open -a Music
+# TEST: Fill the screen ignoring padding, without native fullscreen (yabai >= 7.1.2)
+rshift + lalt - z : yabai -m window --toggle windowed-fullscreen; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
 rshift + lalt - t : yabai -m window --toggle split; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
 rshift + lalt - space : yabai -m window --toggle pip; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
 
@@ -69,9 +84,9 @@ lctrl + rshift + lalt - c : yabai -m space --create && yabai -m window --space l
 lctrl + rshift + lalt - d : yabai -m space --destroy
 
 # Toggle space layout (WINKEY2)
-lctrl + rshift + lalt - b : [ "$(yabai -m query --spaces --space | jq -r '.type')" = "bsp" ] && yabai -m space --layout stack || yabai -m space --layout bsp  ; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_space_type_changed
-lctrl + rshift + lalt - s : [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ] && yabai -m space --layout bsp || yabai -m space --layout stack; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_space_type_changed
-lctrl + rshift + lalt - f : [ "$(yabai -m query --spaces --space | jq -r '.type')" = "float" ] && yabai -m space --layout bsp || yabai -m space --layout float; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_space_type_changed
+lctrl + rshift + lalt - b : [ "$(yabai -m query --spaces type --space | jq -r '.type')" = "bsp" ] && yabai -m space --layout stack || yabai -m space --layout bsp  ; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_space_type_changed
+lctrl + rshift + lalt - s : [ "$(yabai -m query --spaces type --space | jq -r '.type')" = "stack" ] && yabai -m space --layout bsp || yabai -m space --layout stack; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_space_type_changed
+lctrl + rshift + lalt - f : [ "$(yabai -m query --spaces type --space | jq -r '.type')" = "float" ] && yabai -m space --layout bsp || yabai -m space --layout float; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_space_type_changed
 
 # Rotate and mirror space (WINKEY2)
 lctrl + rshift + lalt - z : yabai -m space --rotate 270
