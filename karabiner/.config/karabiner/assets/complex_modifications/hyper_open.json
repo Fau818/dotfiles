@@ -171,8 +171,7 @@
           "conditions": [{ "type": "event_changed_if", "value": false }],
           "from": { "key_code": "fn", "modifiers": { "mandatory": [], "optional": ["caps_lock", "fn"] } },
           "to": [{ "key_code": "fn", "lazy": true }],
-          "to_if_alone": [{ "sticky_modifier": { "fn": "toggle" } }],
-          "to_if_held_down": [{ "key_code": "fn" }]
+          "to_if_alone": [{ "sticky_modifier": { "fn": "toggle" } }]
         },
 
         {
@@ -183,7 +182,7 @@
         },
 
         {
-          "description": "<FN>a := open Messages",
+          "description": "<FN>s := open Messages",
           "type": "basic",
           "from": { "key_code": "s", "modifiers": { "mandatory": ["fn"], "optional": ["caps_lock"] } },
           "to": [{ "key_code": "vk_none" }, { "shell_command": "open -a Messages" }]

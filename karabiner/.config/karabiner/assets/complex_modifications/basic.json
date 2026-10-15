@@ -27,6 +27,7 @@
           "type": "basic",
           "conditions": [{ "type": "event_changed_if", "value": false }],
           "from": { "key_code": "caps_lock", "modifiers": { "mandatory": [], "optional": ["any"] } },
+          "parameters": { "basic.to_if_alone_timeout_milliseconds": 250 },
           "to": [{ "key_code": "right_control", "lazy": true }],
           "to_if_alone": [{ "key_code": "escape" }]
         },
@@ -146,7 +147,7 @@
       "description": "Better <L_CMD> and Fix Touch ID Key",
       "manipulators": [
         {
-          "description": "Alone<L_CMD> = <LEFT_HYPER><UP>(Mission Control)",
+          "description": "Alone<L_CMD> := <LEFT_HYPER><UP>(Mission Control)",
           "type": "basic",
           "conditions": [{ "type": "event_changed_if", "value": false }],
           "from": { "key_code": "left_command", "modifiers": { "mandatory": [], "optional": ["caps_lock"] } },
@@ -192,6 +193,14 @@
           "type": "basic",
           "conditions": [{ "type": "event_changed_if", "value": false }],
           "from": { "key_code": "grave_accent_and_tilde", "modifiers": { "mandatory": ["left_shift"], "optional": ["caps_lock"] } },
+          "to": [{ "key_code": "fn", "modifiers": ["right_shift", "left_option"], "lazy": true }],
+          "to_if_alone": [{ "key_code": "grave_accent_and_tilde", "modifiers": ["left_shift"] }]
+        },
+        {
+          "description": "~<L_SHIFT> := <WINKEY3>(<FN><WINKEY1>)",
+          "type": "basic",
+          "conditions": [{ "type": "event_changed_if", "value": false }],
+          "from": { "key_code": "left_shift", "modifiers": { "mandatory": ["right_shift", "left_option"], "optional": ["caps_lock"] } },
           "to": [{ "key_code": "fn", "modifiers": ["right_shift", "left_option"], "lazy": true }]
         },
 
@@ -214,6 +223,13 @@
           "type": "basic",
           "conditions": [{ "type": "event_changed_if", "value": false }],
           "from": { "key_code": "escape", "modifiers": { "mandatory": ["left_shift"], "optional": ["caps_lock"] } },
+          "to": [{ "key_code": "fn", "modifiers": ["right_shift", "left_control", "left_option"], "lazy": true }]
+        },
+        {
+          "description": "<ESC><L_SHIFT> := <WINKEY4>(<FN><WINKEY2>)",
+          "type": "basic",
+          "conditions": [{ "type": "event_changed_if", "value": false }],
+          "from": { "key_code": "left_shift", "modifiers": { "mandatory": ["right_shift", "left_control", "left_option"], "optional": ["caps_lock"] } },
           "to": [{ "key_code": "fn", "modifiers": ["right_shift", "left_control", "left_option"], "lazy": true }]
         }
       ]
