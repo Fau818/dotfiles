@@ -615,7 +615,7 @@
   {
     "key": "escape",
     "command": "editor.action.inlineSuggest.hide",
-    "when": "editorTextFocus && inlineEditIsVisible"
+    "when": "editorTextFocus && inlineEditIsVisible && neovim.mode == normal"
   },
 
   /* Terminal */
