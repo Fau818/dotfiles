@@ -21,16 +21,16 @@ export HISTFILE="$ZDOTDIR/.zsh_history"
 
 
 # ─── Shell and Terminal ─────────────────────────────────────
-[[ ! -v SHELL ]] && export SHELL=$(command -v zsh)
+[[ -z "$SHELL" ]] && export SHELL=$(command -v zsh)
 
 # ┄┄┄ Kitty terminal
 [[ -v KITTY_PID ]] && export TERM='xterm-kitty'
 
 # ┄┄┄ Xterm
-[[ ! -v TERM || "$TERM" == 'xterm' ]] && export TERM='xterm-256color'
+[[ -z "$TERM" || "$TERM" == 'xterm' ]] && export TERM='xterm-256color'
 
 # ┄┄┄ Language
-[[ ! -v LANG ]] &&  export LANG='en_US.UTF-8' LC_ALL='en_US.UTF-8' LC_CTYPE='en_US.UTF-8'
+[[ -z "$LANG" ]] &&  export LANG='en_US.UTF-8' LC_ALL='en_US.UTF-8' LC_CTYPE='en_US.UTF-8'
 
 
 # ─── Personal Preference ────────────────────────────────────
@@ -47,6 +47,9 @@ fi
 
 # ┄┄┄ OpenAI
 export OPENAI_API_PATH="$DOTFILE_PATH/private/openai"
+
+# ┄┄┄ Civitai (read-only API key, for model downloads)
+[[ -r "$DOTFILE_PATH/private/civitai/.config/civitai/api_token" ]] && export CIVITAI_TOKEN="$(<"$DOTFILE_PATH/private/civitai/.config/civitai/api_token")"
 
 
 # ════════════════════════════════════════════════════════════
