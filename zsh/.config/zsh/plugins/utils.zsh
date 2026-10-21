@@ -84,7 +84,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
       local dotfile_dir=$([[ -d "$DOTFILE_PATH/private/$name" ]] && echo "$DOTFILE_PATH/private" || echo "$DOTFILE_PATH")
       # CASE: Skipped a package is absent from this checkout, e.g. `private` is not initialized.
       [[ -d "$dotfile_dir/$name" ]] || { echo_warn "Skipped '$name': no such package in $dotfile_dir."; ret=1; continue }
-      stow --dir="$dotfile_dir" --target="$HOME" --ignore='.DS_Store' "${opts[@]}" "$name" || ret=1
+      stow --dir="$dotfile_dir" --target="$HOME" --ignore='\.DS_Store' --ignore='\.claude' "${opts[@]}" "$name" || ret=1
     done
     return $ret
   }
