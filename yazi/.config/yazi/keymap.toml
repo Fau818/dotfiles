@@ -54,3 +54,16 @@ desc = "Jump to char"
 [[mgr.prepend_keymap]]
 on = "<Space>"
 run = 'shell -- qlmanage -p "$@"'
+
+
+# ─── Help ───────────────────────────────────────────────────
+# Default: `<F1>` or `~`
+[[mgr.prepend_keymap]]
+on   = "?"
+run  = "help"
+desc = "Open help"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "?" ]
+run  = "help"
+desc = "Open help"
