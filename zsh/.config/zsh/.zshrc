@@ -17,14 +17,30 @@ setopt interactive_comments
 fpath=($ZDOTDIR/completions $ZCACHEDIR/completions $fpath)
 
 
-# ══════════════════════ Basic Aliases ═══════════════════════
+# ═════════════════════════ Aliases ══════════════════════════
 
+# ─── Basic ──────────────────────────────────────────────────
 # alias sudo='sudo -E '
 alias vi='vi -i NONE'
 alias mv='mv -v'
 alias wget="wget --hsts-file=$XDG_CACHE_HOME/.wget-hsts"
 alias ctaz='tar -zcvf' xtaz='tar -zxvf'
 alias gcmm='git commit -m' gcmmd='gcmm "$(date)"'
+
+
+# ─── Tools ──────────────────────────────────────────────────
+# ┄┄┄ Kitty
+[[ "$TERM" == 'xterm-kitty' ]] && alias kssh='kitty +kitten ssh'
+# ┄┄┄ Rsync
+command -v rsync &> /dev/null && alias frsync='rsync -razvhP'
+# ┄┄┄ Mysql
+command -v mysql &> /dev/null && alias mysqlStart='mysql.server start' mysqlStop='mysql.server stop'
+# ┄┄┄ Thefuck
+command -v thefuck &> /dev/null && eval "$(thefuck --alias)" && alias ff=fuck
+# ┄┄┄ Yabai
+command -v yabai &> /dev/null && alias yabai_sudo='echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 "${commands[yabai]}" | cut -d " " -f 1) ${commands[yabai]} --load-sa" | sudo tee /private/etc/sudoers.d/yabai > /dev/null'
+# ┄┄┄ Ripgrep
+command -v rg &> /dev/null && alias rg="rg --ignore-file '$XDG_CONFIG_HOME/git/ignore'"
 
 
 # ═════════════════════════ Scripts ══════════════════════════
@@ -35,60 +51,37 @@ alias cdn2ghr="$ZSCRIPTDIR/cdn2ghr.sh"
 
 # ═════════════════════════ Plugins ══════════════════════════
 
+# ─── Core ───────────────────────────────────────────────────
 source "$ZPLUGINDIR/colorful_print.zsh"
 source "$ZPLUGINDIR/cache.zsh"
 source "$ZPLUGINDIR/vpn.zsh"
+source "$ZPLUGINDIR/bash.zsh"
 
+
+# ─── Tools ──────────────────────────────────────────────────
 source "$ZPLUGINDIR/homebrew.zsh"
 source "$ZPLUGINDIR/neovim.zsh"
 source "$ZPLUGINDIR/ssh.zsh"
-
-source "$ZPLUGINDIR/utils.zsh"
+source "$ZPLUGINDIR/docker.zsh"
 source "$ZPLUGINDIR/python.zsh"
-source "$ZPLUGINDIR/installer.zsh"
+source "$ZPLUGINDIR/utils.zsh"
 
+
+# ─── Zinit ──────────────────────────────────────────────────
 source "$ZPLUGINDIR/zinit.zsh"
 
-# Kitty
-[[ "$TERM" == 'xterm-kitty' ]] && alias kssh='kitty +kitten ssh'
-# Rsync
-command -v rsync &> /dev/null && alias frsync='rsync -razvhP'
-# Mysql
-command -v mysql &> /dev/null && alias mysqlStart='mysql.server start' mysqlStop='mysql.server stop'
-# Thefuck
-command -v thefuck &> /dev/null && eval "$(thefuck --alias)" && alias ff=fuck
-# Yabai
-alias yabai_sudo='echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 "${commands[yabai]}" | cut -d " " -f 1) ${commands[yabai]} --load-sa" | sudo tee /private/etc/sudoers.d/yabai > /dev/null'
 
-# Docker
-if command -v docker &> /dev/null; then
-  # Allow option-stacking for docker completion
-  zstyle ':completion:*:*:docker:*' option-stacking yes
-  zstyle ':completion:*:*:docker-*:*' option-stacking yes
+# ─── After Zinit ────────────────────────────────────────────
+# NOTE: For plugins whose completions need compinit, which runs in zinit.
+source "$ZPLUGINDIR/gcloud.zsh"
 
-  dzsh() {
-    [[ -z "$1" ]] && echo "Usage: dzsh <container-name-or-id>" && return 1
-    docker exec --env TERM=$TERM -it "$1" zsh -l
-  }
-fi
-
-# Eza (NOTE: Make sure setup after zinit)
+# Eza (NOTE: After zinit, or OMZL::theme-and-appearance.zsh overrides ls.)
 command -v eza &> /dev/null && alias ls='eza --icons --time-style=iso'
-
-# Ripgrep
-command -v rg &> /dev/null && alias rg="rg --ignore-file '$XDG_CONFIG_HOME/git/ignore'"
 
 
 # ═══════════════════════ Completions ════════════════════════
 
 # NOTE: Generated into `$ZCACHEDIR/completions` on first use and refreshed whenever the tool itself is upgraded.
-
-# ┄┄┄ Google
-# NOTE: A bash-style script without a `#compdef` header, so it is sourced after compinit rather than autoloaded from `$fpath`.
-(( $+commands[gcloud] )) && () { [[ -r $1 ]] && source $1 } ${commands[gcloud]:A:h:h}/completion.zsh.inc
-
-# ┄┄┄ Npm
-# cached_eval npm completion  # NOTE: ZSH ships with npm completion.
 
 # ┄┄┄ Python
 cached_compdef ruff ruff generate-shell-completion zsh
