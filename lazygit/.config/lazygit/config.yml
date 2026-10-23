@@ -15,3 +15,27 @@ git:
   diffRenderers:
     - colorArg: always
       command: delta --paging=never --side-by-side
+# Commit finished work while the rest of the index (e.g. a half-reviewed
+# staging) stays exactly as it is. Both act on the selected file or folder.
+customCommands:
+  - key: "b"
+    context: "files"
+    description: "Commit only the selected path, keeping the rest of the index"
+    # A pathspec commit takes the path's working-tree content and leaves every
+    # other staged change alone.
+    command: "git commit -- {{.SelectedPath | quote}}"
+    output: terminal
+  - key: "B"
+    context: "files"
+    description: "Pick hunks of the selected path to commit, keeping the rest of the index"
+    command: |
+      idx="$(git rev-parse --absolute-git-dir)/index.batch"
+      trap 'rm -f "$idx"' EXIT
+      # Pick hunks into a temporary index that starts at HEAD, and commit only that.
+      GIT_INDEX_FILE="$idx" git read-tree HEAD &&
+      GIT_INDEX_FILE="$idx" git add -p -- {{.SelectedPath | quote}} &&
+      GIT_INDEX_FILE="$idx" git commit &&
+      # Replay the commit onto the real index, or the hunks it took from the
+      # unstaged side would show up as staged reversals.
+      git diff --binary HEAD~ HEAD | git apply --cached --3way
+    output: terminal
