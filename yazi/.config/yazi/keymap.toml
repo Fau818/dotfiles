@@ -11,11 +11,11 @@ run = "plugin fzf"
 # ─── Quick Move ─────────────────────────────────────────────
 [[mgr.prepend_keymap]]
 on  = "K"
-run = "plugin arrow -3"
+run = "arrow -3"
 
 [[mgr.prepend_keymap]]
 on  = "J"
-run = "plugin arrow 3"
+run = "arrow 3"
 
 
 # ─── Preview ────────────────────────────────────────────────
@@ -42,13 +42,6 @@ desc = "Paste into the hovered directory or CWD"
 on   = "t"
 run  = "plugin smart-tab"
 desc = "Create a tab and enter the hovered directory"
-
-[[mgr.prepend_keymap]]
-on  = [ "<Up>" ]
-run = "plugin --sync parent-arrow -1"
-[[mgr.prepend_keymap]]
-on  = [ "<Down>" ]
-run = "plugin --sync parent-arrow 1"
 
 
 [[mgr.prepend_keymap]]
