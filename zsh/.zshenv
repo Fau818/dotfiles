@@ -6,7 +6,7 @@
 # │                          Basic                           │
 # └──────────────────────────────────────────────────────────┘
 
-skip_global_compinit=1   # NOTE: Skips Ubuntu's global compinit; it is `/etc/zshrc` that reads this.
+skip_global_compinit=1   # NOTE: Skips Ubuntu's global compinit; it is `/etc/zsh/zshrc` that reads this.
 
 
 # ─── XDG Base Directory ─────────────────────────────────────

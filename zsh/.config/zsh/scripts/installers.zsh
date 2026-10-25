@@ -5,14 +5,15 @@
 # Run by `pinstall`, and by `starter.sh` on a new machine:
 #   zsh installers.zsh --list     the installers for this platform, one `<name>\t<description>` per line
 #   zsh installers.zsh NAME...    run them in order; returns 1 if any failed
-# IMPO: Linux means Ubuntu here; elsewhere the apt steps are skipped.
+# With `INSTALLER_LOG_DIR` set, as `starter.sh` does, the tools' own output goes to logs there instead of the screen.
+# IMPO: Linux means Ubuntu here; the apt steps are skipped where there's no `apt-get`.
 
 CONFIG_DIR=${0:A:h:h}  # This zsh config, wherever it is linked from
 source "$CONFIG_DIR/plugins/colorful_print.zsh"
 
 
 # ─── Registry ───────────────────────────────────────────────
-# Name -> `platform|description`; the platform is all, linux or macos.
+# Name -> `platform|description`; the platform is all, linux or macos. `__install_<name>` runs one, and returns 1 if it fails.
 typeset -A INSTALLERS=(
   [homebrew]='all|Homebrew itself (official source; offers the Aliyun mirror if that fails)'
   [neovim]='all|Neovim and nvim-config, with fzf, ripgrep, fd, lazygit, git-delta, eza, zoxide'
@@ -27,7 +28,48 @@ typeset -A INSTALLERS=(
 # │                     Helper Functions                     │
 # └──────────────────────────────────────────────────────────┘
 
-# IMPO: `starter.sh` keeps bash copies of `__ask`, `__as_root` and `__apt_install`; change both together.
+# IMPO: `starter.sh` keeps bash copies of `__progress`, `__quiet`, `__ask`, `__as_root` and `__apt_install`;
+# \     change both together. Only this `__quiet` runs without a log directory, for `pinstall`.
+
+
+# ─── Quiet Runs ─────────────────────────────────────────────
+# Draw the last 3 lines of the log `$1`, dimmed, then move the cursor back to the first, so the next draw replaces them.
+# NOTE: A line keeps only what follows its last `\r`, as a terminal shows a redrawn progress line; tabs become spaces
+# \     and lines are cut at 70 columns, since one that wraps would throw off the redraw.
+function __progress() {
+  tail -c 2000 "$1" 2> /dev/null | awk '
+    { sub(/\r+$/, ""); gsub(/\t/, " "); n = split($0, part, "\r"); $0 = part[n] }
+    NF { last[++count] = $0 }
+    END {
+      first = count > 3 ? count - 2 : 1
+      for (i = first; i < first + 3; i++) printf "\r\033[K  \033[2m%.70s\033[0m\n", last[i]
+      printf "\033[3A"
+    }'
+}
+
+# Run a command without input; returns its status. With `INSTALLER_LOG_DIR` set, its output goes to the log `$1` there,
+# and shows only on failure; without it, as in a plain `pinstall`, the output shows as usual.
+# NOTE: What it runs can't wait unseen for input: stdin is empty, git and ssh can't prompt, and `__as_root` uses `sudo -n`.
+function __quiet() {
+  local log="$INSTALLER_LOG_DIR/$1.log" ret=0 pid; shift
+  local -x GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND="${GIT_SSH_COMMAND:-ssh} -o BatchMode=yes"
+  # RETURN: No log directory, so nothing to keep quiet.
+  [[ -n "$INSTALLER_LOG_DIR" ]] || { "$@" < /dev/null; return }
+
+  if [[ -t 1 ]]; then
+    # NOTE: On a terminal, its last lines stay on screen as progress while it runs. As a job started with `&`, it
+    # \     ignores Ctrl-C, so Ctrl-C stops the whole run here, or apt could go on unseen and keep its lock.
+    "$@" < /dev/null > "$log" 2>&1 &
+    pid=$!
+    trap 'printf "\e[J"; kill -TERM 0' INT
+    while kill -0 "$pid" 2> /dev/null; do __progress "$log"; sleep 0.2; done
+    trap - INT
+    printf '\e[J'; wait "$pid" || ret=$?
+  else "$@" < /dev/null > "$log" 2>&1 || ret=$?
+  fi
+  (( ret == 0 )) || { echo "  Last lines of $(echo_hl "$log"):"; tail -n 10 "$log" | sed 's/^/    /' }
+  return "$ret"
+}
 
 
 # ─── Questions ──────────────────────────────────────────────
@@ -51,10 +93,11 @@ function __ask() {
 # ─── Privileges ─────────────────────────────────────────────
 # Run a command as root: directly when already root (e.g. in Docker), else through sudo.
 # Returns 1 without running it when neither is possible.
+# NOTE: `sudo -n` fails rather than ask, since this may run hidden in a log; callers ask first with `sudo -v`.
 function __as_root() {
   if (( EUID == 0 )); then "$@"
-  elif (( $+commands[sudo] )); then sudo "$@"
-  else echo_warn "Skipped $(echo_hl "$*"): it needs root, and sudo isn't available."; return 1
+  elif (( $+commands[sudo] )); then sudo -n "$@"
+  else echo_warn "Skipped $(echo_hl "$*"): it needs root, and $(echo_hl 'sudo') isn't available."; return 1
   fi
 }
 
@@ -66,13 +109,18 @@ function __apt_install() {
 
   local pkg
   local -a missing=()
-  for pkg in "$@"; do dpkg -s "$pkg" &> /dev/null || missing+=("$pkg"); done
+  # NOTE: Not `dpkg -s`, which also passes a removed package that left its config files.
+  for pkg in "$@"; do [[ "$(dpkg-query -W -f='${db:Status-Status}' "$pkg" 2> /dev/null)" == 'installed' ]] || missing+=("$pkg"); done
   (( ${#missing} )) || return 0
-  (( EUID == 0 || $+commands[sudo] )) || { echo_warn "Skipped $(echo_hl "${missing[*]}"): apt needs root, and sudo isn't available."; return 1 }
+  (( EUID == 0 || $+commands[sudo] )) || { echo_warn "Skipped $(echo_hl "${missing[*]}"): $(echo_hl 'apt') needs root, and $(echo_hl 'sudo') isn't available."; return 1 }
 
-  echo_info "Installing $(echo_hl "${missing[*]}") with apt..."
-  __as_root apt-get update -qq && __as_root env DEBIAN_FRONTEND=noninteractive apt-get install -y "${missing[@]}" && return 0
-  echo_warn "Could not install $(echo_hl "${missing[*]}") with apt."; return 1
+  echo_info "Installing $(echo_hl "${missing[*]}") with $(echo_hl 'apt') ..."
+  # NOTE: sudo asks here, in the open: `__as_root` then uses `sudo -n`, as a prompt behind `__quiet` could go unseen.
+  (( EUID == 0 )) || sudo -v || { echo_warn "Skipped $(echo_hl "${missing[*]}"): $(echo_hl 'sudo') failed."; return 1 }
+  # NOTE: `starter.sh` passes this once it has updated, so apt doesn't update twice.
+  if [[ -z "$__APT_UPDATED" ]]; then __quiet apt-update __as_root apt-get update && __APT_UPDATED=1; fi
+  [[ -n "$__APT_UPDATED" ]] && __quiet "apt-$1" __as_root env DEBIAN_FRONTEND=noninteractive apt-get install -y "${missing[@]}" && return 0
+  echo_warn "Could not install $(echo_hl "${missing[*]}") with $(echo_hl 'apt')."; return 1
 }
 
 # Put Homebrew on PATH if it's installed but not loaded yet, e.g. right after installing it.
@@ -88,25 +136,25 @@ function __load_brew() {
 
 # Install Homebrew formulae that aren't installed yet.
 function __brew_install() {
-  __load_brew || { echo_error "Homebrew is not installed; run $(echo_hl 'pinstall homebrew') first."; return 1 }
+  __load_brew || { echo_error "$(echo_hl 'Homebrew') is not installed; run $(echo_hl 'pinstall homebrew') first."; return 1 }
 
   local formula
   local -a formulae=(${(u)@}) installed=(${(f)"$(brew list --formula -1)"}) missing=()  # Unique: the tool groups overlap
   for formula in $formulae; do (( ${installed[(Ie)$formula]} )) || missing+=("$formula"); done
   (( ${#missing} )) || { echo_ok "Already installed: $(echo_hl "${formulae[*]}")"; return 0 }
 
-  echo_info "Installing $(echo_hl "${missing[*]}") with Homebrew..."
+  echo_info "Installing $(echo_hl "${missing[*]}") with $(echo_hl 'Homebrew') ..."
   # NOTE: Homebrew 7 asks before installing by default; this installer was already chosen, so don't ask twice.
-  HOMEBREW_NO_ASK=1 brew install "${missing[@]}"
+  __quiet "brew-$1" env HOMEBREW_NO_ASK=1 brew install "${missing[@]}"
 }
 
 
 # ─── Downloads ──────────────────────────────────────────────
-# Download a script and run it with bash; fails when either step does.
+# Download the script at `$2` and run it with bash, its output in the log `$1`; fails when either step does.
 function __run_remote() {
   local script
-  script=$(curl -fsSL "$1") || { echo_error "Could not download $(echo_hl "$1")"; return 1 }
-  /bin/bash -c "$script"
+  script=$(curl -fsSL "$2") || { echo_error "Could not download $(echo_hl "$2")"; return 1 }
+  __quiet "$1" /bin/bash -c "$script"
 }
 
 
@@ -115,22 +163,24 @@ function __run_remote() {
 # └──────────────────────────────────────────────────────────┘
 
 # ─── Sources ────────────────────────────────────────────────
+# Run Homebrew's installer from the official source; returns its status.
 function __homebrew_official() {
   unset HOMEBREW_BREW_GIT_REMOTE HOMEBREW_CORE_GIT_REMOTE HOMEBREW_API_DOMAIN HOMEBREW_BOTTLE_DOMAIN
-  __run_remote https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  __run_remote homebrew https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 }
 
+# Run Homebrew's installer through the Aliyun mirror; returns its status.
 function __homebrew_aliyun() {
   # NOTE: The mirror's addresses live in `plugins/homebrew.zsh`, which stops right after them while brew is missing.
   source "$CONFIG_DIR/plugins/homebrew.zsh"
   export HOMEBREW_BREW_GIT_REMOTE="$HOMEBREW_ALIYUN_BREW_GIT_REMOTE" HOMEBREW_CORE_GIT_REMOTE="$HOMEBREW_ALIYUN_CORE_GIT_REMOTE"
   export HOMEBREW_API_DOMAIN="$HOMEBREW_ALIYUN_API_DOMAIN" HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_ALIYUN_BOTTLE_DOMAIN"
-  __run_remote https://gitee.com/ineo6/homebrew-install/raw/master/install.sh
+  __run_remote homebrew-aliyun https://gitee.com/ineo6/homebrew-install/raw/master/install.sh
 }
 
 
 # ─── Installer ──────────────────────────────────────────────
-# Same container check as Homebrew's installer, which only lets root install inside one.
+# Whether this runs in a container, by the same check as Homebrew's installer, which only lets root install inside one.
 function __in_container() {
   [[ -f /.dockerenv || -f /run/.containerenv ]] && return 0
   grep -qE 'azpl_job|actions_job|docker|garden|kubepods' /proc/1/cgroup 2> /dev/null
@@ -138,31 +188,38 @@ function __in_container() {
 
 function __install_homebrew() {
   # RETURN: Already installed.
-  __load_brew && { echo_ok "Homebrew is already installed at $(echo_hl "$(brew --prefix)")."; return 0 }
+  __load_brew && { echo_ok "$(echo_hl 'Homebrew') is already installed at $(echo_hl "$(brew --prefix)")."; return 0 }
 
   if [[ "$(uname)" == 'Linux' ]]; then
     # NOTE: Homebrew's own installer refuses root outside containers, and needs root or sudo for /home/linuxbrew.
     if (( EUID == 0 )) && ! __in_container; then
-      echo_error 'Homebrew cannot be installed as root outside a container; run this as a normal user with sudo.'; return 1
+      echo_error "$(echo_hl 'Homebrew') cannot be installed as root outside a container; run this as a normal user with $(echo_hl 'sudo')."; return 1
     fi
-    (( EUID == 0 || $+commands[sudo] )) || [[ -w /home/linuxbrew ]] || { echo_error "Homebrew on Linux needs root or sudo to create $(echo_hl /home/linuxbrew)."; return 1 }
+    (( EUID == 0 || $+commands[sudo] )) || [[ -w /home/linuxbrew ]] || { echo_error "$(echo_hl 'Homebrew') on Linux needs root or $(echo_hl 'sudo') to create $(echo_hl /home/linuxbrew)."; return 1 }
 
-    # The build tools Homebrew asks for on Linux; only these, so no second gcc from `brew install gcc`.
+    # The build tools Homebrew asks for on Linux, less git and curl, which fetched these dotfiles already;
+    # only these, so no second gcc from `brew install gcc`.
     # NOTE: Homebrew installs without them, so going on is fine when apt can't (it says why).
-    __apt_install build-essential procps curl file git
+    __apt_install build-essential procps file
   fi
 
-  echo_info 'Installing Homebrew from the official source...'
+  # NOTE: It runs non-interactively, as it was chosen already: no RETURN prompt, and `sudo -n` on the sudo asked for here
+  # \     (not needed when /home/linuxbrew is writable).
+  (( EUID == 0 )) || [[ -w /home/linuxbrew ]] || sudo -v || { echo_error "Installing $(echo_hl 'Homebrew') needs $(echo_hl 'sudo')."; return 1 }
+  export NONINTERACTIVE=1
+
+  echo_info "Installing $(echo_hl 'Homebrew') from the official source; it takes a few minutes ..."
   if ! __homebrew_official; then
     echo_warn 'Installing from the official source failed.'
-    __ask 'Retry with the Aliyun mirror?' y || return 1
-    echo_info 'Installing Homebrew from the Aliyun mirror...'
-    __homebrew_aliyun || { echo_error 'Installing Homebrew failed.'; return 1 }
+    __ask "Retry with the $(echo_hl 'Aliyun') mirror?" y || return 1
+    echo_info "Installing $(echo_hl 'Homebrew') from the $(echo_hl 'Aliyun') mirror ..."
+    __homebrew_aliyun || { echo_error "Installing $(echo_hl 'Homebrew') failed."; return 1 }
   fi
 
-  __load_brew || { echo_error "Homebrew seems installed, but $(echo_hl 'brew') cannot be found."; return 1 }
-  echo_ok "Homebrew installed at $(echo_hl "$(brew --prefix)")."
-  echo_info "Skip Homebrew's $(echo_hl 'Next steps') above: the zsh config already loads it."
+  __load_brew || { echo_error "$(echo_hl 'Homebrew') seems installed, but $(echo_hl 'brew') cannot be found."; return 1 }
+  echo_ok "$(echo_hl 'Homebrew') installed at $(echo_hl "$(brew --prefix)"); run $(echo_hl 'exec zsh -l') to load it."
+  # NOTE: Its Next steps add `brew shellenv` to `.zprofile`, which is the dotfiles' own and loads Homebrew already.
+  [[ -n "$INSTALLER_LOG_DIR" ]] || echo_info "Skip Homebrew's $(echo_hl 'Next steps') above: the zsh config already loads it."
 }
 
 
@@ -183,8 +240,8 @@ function __install_neovim() {
   local config="${XDG_CONFIG_HOME:-$HOME/.config}/nvim"
   if [[ -e "$config" ]]; then echo_ok "Neovim config already exists at $(echo_hl "$config"), left as is."
   else
-    echo_info "Cloning $(echo_hl 'nvim-config') into $(echo_hl "$config")..."
-    git clone --depth=1 https://github.com/Fau818/nvim-config.git "$config" || return 1
+    echo_info "Cloning $(echo_hl 'nvim-config') into $(echo_hl "$config") ..."
+    __quiet nvim-config git clone --depth=1 https://github.com/Fau818/nvim-config.git "$config" || return 1
   fi
 }
 
@@ -205,15 +262,17 @@ function __install_yazi() { __brew_install yazi zoxide bat ripgrep fd "${CLI_TOO
 # ─── Docker ─────────────────────────────────────────────────
 function __install_docker() {
   # RETURN: Already installed.
-  (( $+commands[docker] )) && { echo_ok "Docker is already installed: $(docker --version)"; return 0 }
-  (( EUID == 0 || $+commands[sudo] )) || { echo_error 'Installing Docker needs root or sudo.'; return 1 }
+  (( $+commands[docker] )) && { echo_ok "$(echo_hl 'Docker') is already installed: $(docker --version)"; return 0 }
+  (( EUID == 0 || $+commands[sudo] )) || { echo_error "Installing $(echo_hl 'Docker') needs root or $(echo_hl 'sudo')."; return 1 }
+  (( EUID == 0 )) || sudo -v || return 1  # NOTE: Asked here, in the open, as `__as_root` then uses `sudo -n`
 
   local script
   script=$(mktemp) || return 1
   {
-    curl -fsSL https://get.docker.com -o "$script" && __as_root sh "$script" || return 1
+    echo_info "Installing $(echo_hl 'Docker Engine') ..."
+    curl -fsSL https://get.docker.com -o "$script" && __quiet docker __as_root sh "$script" || return 1
   } always { rm -f "$script" }
-  echo_ok "Docker installed: $(docker --version)"
+  echo_ok "$(echo_hl 'Docker') installed: $(docker --version)"
 }
 
 
@@ -222,18 +281,19 @@ function __install_miniconda() {
   # RETURN: Already in one of the places `plugins/python.zsh` looks for conda on Linux.
   local dir
   for dir in "$HOME/miniconda3" "$HOME/.local/miniconda3" "${XDG_DATA_HOME:-$HOME/.local/share}/miniconda3" /usr/local/miniconda3; do
-    [[ -d "$dir" ]] && { echo_ok "Miniconda is already installed at $(echo_hl "$dir")."; return 0 }
+    [[ -d "$dir" ]] && { echo_ok "$(echo_hl 'Miniconda') is already installed at $(echo_hl "$dir")."; return 0 }
   done
 
   local prefix="$HOME/.local/miniconda3" script
   # NOTE: The Miniconda installer refuses to run unless its file name ends in `.sh`.
   script=$(mktemp --suffix=.sh) || return 1
   {
+    echo_info "Installing $(echo_hl 'Miniconda') into $(echo_hl "$prefix") ..."
     curl -fsSL -o "$script" "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-$(uname -m).sh" || return 1
     # NOTE: Batch mode skips `conda init`, which would append to the dotfiles' .zshrc; `python.zsh` loads conda itself.
-    bash "$script" -b -p "$prefix" || return 1
+    __quiet miniconda bash "$script" -b -p "$prefix" || return 1
   } always { rm -f "$script" }
-  echo_ok "Miniconda installed at $(echo_hl "$prefix"); open a new shell to use $(echo_hl 'conda')."
+  echo_ok "$(echo_hl 'Miniconda') installed at $(echo_hl "$prefix"); run $(echo_hl 'exec zsh -l') to use $(echo_hl 'conda')."
 }
 
 

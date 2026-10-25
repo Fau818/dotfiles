@@ -14,7 +14,7 @@ if ! command -v brew &> /dev/null; then
   # Make sure the `brew` command is available on Linux and Mac (Apple Chip)
   function ___homebrew_init() {
     local prefix=$([[ "$(uname)" == 'Linux' ]] && echo /home/linuxbrew/.linuxbrew || echo /opt/homebrew)
-    [[ -d "$prefix" ]] && eval "$("$prefix/bin/brew" shellenv)"
+    [[ -x "$prefix/bin/brew" ]] && eval "$("$prefix/bin/brew" shellenv)"
   }
   ___homebrew_init
 else eval "$(brew shellenv)"  # Please enable this for setting env variables like `HOMEBREW_PREFIX`.

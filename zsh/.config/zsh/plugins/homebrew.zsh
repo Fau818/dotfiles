@@ -47,11 +47,11 @@ function __homebrew_set_source() {
 
   case "$choice" in
     1)
-      echo_info 'Switching to official source...'
+      echo_info 'Switching to official source ...'
       git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_OFFICIAL_BREW_GIT_REMOTE"
       ;;
     2)
-      echo_info 'Switching to Aliyun mirror...'
+      echo_info 'Switching to Aliyun mirror ...'
       git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_ALIYUN_BREW_GIT_REMOTE"
       ;;
     *)
