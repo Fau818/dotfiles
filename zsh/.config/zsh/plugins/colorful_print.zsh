@@ -15,6 +15,7 @@ function echo_white()  { echo "\e[97m$*\e[0m" }
 
 # ═══════════════════════ Status Print ═══════════════════════
 
+# IMPO: `starter.sh` keeps bash copies of these five; change both together.
 function echo_info()  { echo "\e[1;34m[INFO]\e[0m $*" }
 function echo_ok()    { echo "\e[1;32m[OK]\e[0m $*" }
 function echo_warn()  { echo "\e[1;33m[WARN]\e[0m $*" }

@@ -6,11 +6,25 @@
 # ║                Phoenix's Dotfiles Starter                ║
 # ╚══════════════════════════════════════════════════════════╝
 
+# Sets up a new machine with these dotfiles. Its questions all come first, so the rest can run unattended.
+#
 # Usage:
 #   curl https://starter.phoenix818.cloud | bash
 #   curl https://starter.phoenix818.cloud | bash -s -- --help
 # Without the domain:
 #   curl -fsSL https://raw.githubusercontent.com/Fau818/dotfiles/main/starter.sh | bash
+#
+# A full setup (`--zsh`, the default) runs these steps, one function each, under "Setup Steps" below:
+#   0. `check_clt`      macOS: the Command Line Tools, which git comes with
+#   1. `ask_tools`      which tools to install: Homebrew, yazi, neovim, node
+#   2. `ask_sudo`       the sudo password, if a later step needs it
+#   3. `ensure_git`     Linux: git, installed with apt when it's missing
+#   4. `pull_dotfiles`  clone the dotfiles, or update the clone
+#   5. `install_base`   Linux: missing base packages and the en_US.UTF-8 locale
+#   6. `link_zsh`       link the zsh config into $HOME
+#   7. `install_tools`  run the installers chosen in step 1, from `installers.zsh`
+#   8. `start_zsh`      start zsh once quietly for its plugins, then hand over to it
+# The tools' own output goes to logs, with its last lines as progress; nothing out of sight waits for input.
 # IMPO: Linux means Ubuntu here; other systems get the dotfiles and zsh links only, no packages or tools.
 
 set -e
@@ -19,80 +33,53 @@ set -e
 [[ "$(umask)" == 0000 ]] && umask 022
 
 
-# ─── Constants ──────────────────────────────────────────────
-# IMPO: Fixed, as `DOTFILE_PATH` in `.zshenv` is, which the zsh config relies on; change both together.
+# ┌──────────────────────────────────────────────────────────┐
+# │                         Settings                         │
+# └──────────────────────────────────────────────────────────┘
+
+# IMPO: The same fixed path as `DOTFILE_PATH` in `.zshenv`, which the zsh config relies on; change both together.
 DOTFILE_PATH="$([[ "$(uname)" == 'Darwin' ]] && echo "$HOME/Documents/Fau/dotfiles" || echo "$HOME/.config/dotfiles")"
 REPO_URL='https://github.com/Fau818/dotfiles.git'
-# NOTE: Noisy output goes to logs here, so the screen keeps to this script's messages.
+# The tools' own output goes to logs here, so the screen keeps to this script's messages.
 INSTALLER_LOG_DIR="${INSTALLER_LOG_DIR:-$(mktemp -d "${TMPDIR:-/tmp}/starter.XXXXXX")}"
+
+TOOLS=()        # The installers chosen in step 1, in order
+TOOLS_FAILED=0  # Set to 1 in step 7 when one of them failed
 
 
 # ┌──────────────────────────────────────────────────────────┐
-# │                     Helper Functions                     │
+# │                         Helpers                          │
 # └──────────────────────────────────────────────────────────┘
 
-# ─── Output ─────────────────────────────────────────────────
-__info()  { echo -e "\033[1;34m[INFO]\033[0m $1"; }
-__ok()    { echo -e "\033[1;32m[OK]\033[0m $1"; }
-__warn()  { echo -e "\033[1;33m[WARN]\033[0m $1"; }
-__error() { echo -e "\033[1;31m[ERROR]\033[0m $1"; }
-__hl()    { echo -e "\033[96m$*\033[0m"; }  # For names inside messages: packages, commands, paths
+# IMPO: `installers.zsh` keeps zsh copies of `ask`, `as_root`, `sudo_ready`, `progress`, `quiet` and `apt_install`;
+# \     change both together.
 
-# The greeting at the start of a full setup.
-__banner() { echo -e "\n  \033[1;95m✦ Phoenix's Dotfiles Starter\033[0m\n  \033[2mdotfiles → zsh → Homebrew and tools (asks first)\033[0m\n"; }
 
-# Draw the last 5 lines of the log `$1`, dimmed, then move the cursor back to the first, so the next draw replaces them.
-# NOTE: A line keeps only what follows its last `\r`, as a terminal shows a redrawn progress line; tabs become spaces
-# \     and lines are cut at 70 columns, since one that wraps would throw off the redraw.
-__progress() {
-  tail -c 2000 "$1" 2> /dev/null | awk -v n=5 '
-    { sub(/\r+$/, ""); gsub(/\t/, " "); parts = split($0, part, "\r"); $0 = part[parts] }
-    NF { last[++count] = $0 }
-    END {
-      first = count > n ? count - n + 1 : 1
-      for (i = first; i < first + n; i++) printf "\r\033[K  \033[2m%.70s\033[0m\n", last[i]
-      printf "\033[%dA", n
-    }'
-}
-
-# Run a command with its output in the log `$1`; returns its status, and on failure shows the log's last lines.
-# NOTE: What it runs can't wait unseen for input: stdin is empty, git and ssh can't prompt, and `__as_root` uses `sudo -n`.
-__quiet() {
-  local log="$INSTALLER_LOG_DIR/$1.log" ret=0 pid; shift
-  local -x GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND="${GIT_SSH_COMMAND:-ssh} -o BatchMode=yes"
-  if [[ -t 1 ]]; then
-    # NOTE: On a terminal, its last lines stay on screen as progress while it runs. As a job started with `&`, it
-    # \     ignores Ctrl-C, so Ctrl-C stops the whole run here, or apt could go on unseen and keep its lock.
-    "$@" < /dev/null > "$log" 2>&1 &
-    pid=$!
-    trap 'printf "\033[J"; kill -TERM 0' INT
-    while kill -0 "$pid" 2> /dev/null; do __progress "$log"; sleep 0.2; done
-    trap - INT
-    printf '\033[J'; wait "$pid" || ret=$?
-  else "$@" < /dev/null > "$log" 2>&1 || ret=$?
-  fi
-  (( ret == 0 )) || { echo "  Last lines of $(__hl "$log"):"; tail -n 10 "$log" | sed 's/^/    /'; }
-  return "$ret"
-}
+# ─── Messages ───────────────────────────────────────────────
+# IMPO: Copies of the five in `plugins/colorful_print.zsh`; change both together.
+echo_info()  { echo -e "\033[1;34m[INFO]\033[0m $*"; }
+echo_ok()    { echo -e "\033[1;32m[OK]\033[0m $*"; }
+echo_warn()  { echo -e "\033[1;33m[WARN]\033[0m $*"; }
+echo_error() { echo -e "\033[1;31m[ERROR]\033[0m $*"; }
+echo_hl()    { echo -e "\033[96m$*\033[0m"; }  # For names inside messages: packages, commands, paths
 
 
 # ─── Checks ─────────────────────────────────────────────────
-__has() { command -v "$1" &> /dev/null; }
-
-# Whether Homebrew is installed, even when it isn't on PATH yet.
-__has_brew() { __has brew || [[ -x /opt/homebrew/bin/brew || -x /home/linuxbrew/.linuxbrew/bin/brew ]]; }
-
-# Whether this is Ubuntu, the only Linux the package and tool steps are written for.
-__is_ubuntu() { grep -qs '^ID=ubuntu$' /etc/os-release; }
-
-# Whether the en_US.UTF-8 locale exists.
-__has_en_us() { locale -a 2> /dev/null | grep -qiE '^en_US\.utf-?8$'; }
+# Yes/no checks; each returns 0 for yes.
+has()       { command -v "$1" &> /dev/null; }
+has_en_us() { locale -a 2> /dev/null | grep -qiE '^en_US\.utf-?8$'; }
+# Ubuntu is the only Linux the package and tool steps are written for.
+is_ubuntu() { grep -qs '^ID=ubuntu$' /etc/os-release; }
+# Homebrew counts even when it isn't on PATH yet.
+has_brew()  { has brew || [[ -x /opt/homebrew/bin/brew || -x /home/linuxbrew/.linuxbrew/bin/brew ]]; }
 
 
 # ─── Questions ──────────────────────────────────────────────
-# Ask a yes/no question; returns 0 for yes.
-# $2 is the default (y or n) for an empty reply. With no terminal the answer is no, unless `INSTALLER_YES=1` says yes to all.
-__ask() {
+# Ask the yes/no question `$1`; returns 0 for yes.
+# - `$2` is the answer to an empty reply: `y`, or `n` (the default).
+# - With `INSTALLER_YES=1`, the answer is yes, and nothing is asked.
+# - With no terminal, the answer is no.
+ask() {
   local question=$1 default=${2:-n} hint='[y/N]' reply
   [[ "$default" == 'y' ]] && hint='[Y/n]'
 
@@ -105,210 +92,284 @@ __ask() {
 }
 
 
-# ─── Privileges ─────────────────────────────────────────────
-# Run a command as root: directly when already root (e.g. in Docker), else through sudo.
-# Returns 1 without running it when neither is possible.
-# NOTE: `sudo -n` fails rather than ask, since this may run hidden in a log; callers ask first with `sudo -v`.
-__as_root() {
+# ─── Root ───────────────────────────────────────────────────
+# Run a command as root; returns its status.
+# - Already root (e.g. in Docker): runs it directly.
+# - With sudo: through `sudo -n`, which fails rather than ask, since this may run out of sight in a log.
+#   Call `sudo_ready` first, where a password prompt can be seen.
+# - Without sudo: says so, and returns 1 without running it.
+as_root() {
   if (( EUID == 0 )); then "$@"
-  elif __has sudo; then sudo -n "$@"
-  else __warn "Skipped $(__hl "$*"): it needs root, and $(__hl 'sudo') isn't available."; return 1
+  elif has sudo; then sudo -n "$@"
+  else echo_warn "Skipped $(echo_hl "$*"): it needs root, and $(echo_hl 'sudo') isn't available."; return 1
   fi
 }
 
+# Make sure `as_root` can use sudo from here on; returns 1 if sudo fails.
+# - sudo needs no password (a NOPASSWD rule, or a password entered a moment ago): nothing to do.
+# - Otherwise: asks for the password now.
+# NOTE: Not `sudo -v` alone: that asks whenever any sudoers rule wants a password, even beside a NOPASSWD
+# \     rule, as on Ubuntu cloud images (the `sudo` group's rule plus cloud-init's NOPASSWD one).
+sudo_ready() { sudo -n true 2> /dev/null || sudo -v; }
 
-# ─── Packages ───────────────────────────────────────────────
-# Install apt packages that aren't installed yet; returns 1, after saying why, when that isn't possible here or apt fails.
-__apt_install() {
-  __has apt-get || { __warn "Skipped $(__hl "$*"): there's no $(__hl 'apt-get') here."; return 1; }
+
+# ─── Quiet Runs ─────────────────────────────────────────────
+# Draw the last 5 lines of the log `$1`, dimmed, then put the cursor back on the first, for the next draw to replace.
+# - A line shows only what follows its last `\r`, as a terminal shows a progress line that redraws itself.
+# - Terminal codes (colors, cursor moves) are dropped, tabs become spaces, and lines are cut at 70 columns:
+#   each of these could throw the redraw off.
+progress() {
+  tail -c 2000 "$1" 2> /dev/null | awk -v n=5 '
+    { sub(/\r+$/, ""); gsub(/\033\[[0-9;?]*[A-Za-z]/, ""); gsub(/\t/, " "); parts = split($0, part, "\r"); $0 = part[parts] }
+    NF { last[++count] = $0 }
+    END {
+      first = count > n ? count - n + 1 : 1
+      for (i = first; i < first + n; i++) printf "\r\033[K  \033[2m%.70s\033[0m\n", last[i]
+      printf "\033[%dA", n
+    }'
+}
+
+# Run a command with its output in the log `$1`; returns its status.
+# - On a terminal, its last lines show as progress while it runs (see `progress`).
+# - On failure, the log's last 10 lines are printed.
+# - It never waits for input out of sight: stdin is empty, git and ssh can't prompt, and `as_root` uses `sudo -n`.
+# - Ctrl-C stops the whole run.
+quiet() {
+  local log="$INSTALLER_LOG_DIR/$1.log" ret=0 pid; shift
+  local -x GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND="${GIT_SSH_COMMAND:-ssh} -o BatchMode=yes"
+
+  if [[ -t 1 ]]; then
+    "$@" < /dev/null > "$log" 2>&1 &
+    pid=$!
+    # NOTE: A job started with `&` ignores Ctrl-C, so the trap stops the whole run itself;
+    # \     otherwise apt could go on unseen and keep its lock.
+    trap 'printf "\033[J"; kill -TERM 0' INT
+    while kill -0 "$pid" 2> /dev/null; do progress "$log"; sleep 0.2; done
+    trap - INT
+    printf '\033[J'; wait "$pid" || ret=$?
+  else "$@" < /dev/null > "$log" 2>&1 || ret=$?
+  fi
+
+  (( ret == 0 )) || { echo "  Last lines of $(echo_hl "$log"):"; tail -n 10 "$log" | sed 's/^/    /'; }
+  return "$ret"
+}
+
+
+# ─── Apt ────────────────────────────────────────────────────
+# Install the apt packages in `$@` that aren't installed yet; returns 1, after saying why, when it can't.
+# 1. Nothing missing: done.
+# 2. Needs root: skipped when there is neither root nor sudo, or sudo fails.
+# 3. `apt-get update`, once per run.
+# 4. A dpkg left half-done, e.g. by Ctrl-C, is finished.
+# 5. `apt-get install`.
+# All of it runs quietly, and apt waits up to 5 minutes for another apt, such as a fresh VM's unattended upgrades.
+apt_install() {
+  has apt-get || { echo_warn "Skipped $(echo_hl "$*"): there's no $(echo_hl 'apt-get') here."; return 1; }
 
   local pkg missing=()
   # NOTE: Not `dpkg -s`, which also passes a removed package that left its config files.
   for pkg in "$@"; do [[ "$(dpkg-query -W -f='${db:Status-Status}' "$pkg" 2> /dev/null)" == 'installed' ]] || missing+=("$pkg"); done
   (( ${#missing[@]} == 0 )) && return 0
-  (( EUID == 0 )) || __has sudo || { __warn "Skipped $(__hl "${missing[*]}"): $(__hl 'apt') needs root, and $(__hl 'sudo') isn't available."; return 1; }
+  (( EUID == 0 )) || has sudo || { echo_warn "Skipped $(echo_hl "${missing[*]}"): $(echo_hl 'apt') needs root, and $(echo_hl 'sudo') isn't available."; return 1; }
 
-  __info "Installing $(__hl "${missing[*]}") with $(__hl 'apt') ..."
-  # NOTE: sudo asks here, in the open: `__as_root` then uses `sudo -n`, as a prompt behind `__quiet` could go unseen.
-  (( EUID == 0 )) || sudo -v || { __warn "Skipped $(__hl "${missing[*]}"): $(__hl 'sudo') failed."; return 1; }
-  # NOTE: `__tool_init` passes it on, so the installers don't update again.
-  if [[ -z "${__APT_UPDATED-}" ]]; then __quiet apt-update __as_root apt-get update && __APT_UPDATED=1; fi
-  [[ -n "${__APT_UPDATED-}" ]] && __quiet "apt-$1" __as_root env DEBIAN_FRONTEND=noninteractive apt-get install -y "${missing[@]}" && return 0
-  __warn "Could not install $(__hl "${missing[*]}") with $(__hl 'apt')."; return 1
+  echo_info "Installing $(echo_hl "${missing[*]}") with $(echo_hl 'apt') ..."
+  (( EUID == 0 )) || sudo_ready || { echo_warn "Skipped $(echo_hl "${missing[*]}"): $(echo_hl 'sudo') failed."; return 1; }
+  # NOTE: `INSTALLER_APT_UPDATED` remembers the update, and step 7 passes it on to the installers.
+  if [[ "${INSTALLER_APT_UPDATED-}" != 1 ]]; then quiet apt-update as_root apt-get -o DPkg::Lock::Timeout=300 update && INSTALLER_APT_UPDATED=1; fi
+  # NOTE: A dpkg left half-done (e.g. by Ctrl-C) blocks every install until it's finished: `dpkg --configure -a`
+  # \     finishes an interrupted run, and `apt-get -f install` adds any dependencies it still lacks.
+  if [[ -n "$(dpkg --audit 2> /dev/null)" ]]; then
+    quiet dpkg-repair as_root env DEBIAN_FRONTEND=noninteractive sh -c 'dpkg --configure -a; apt-get -o DPkg::Lock::Timeout=300 -f install -y' || true
+  fi
+  [[ "${INSTALLER_APT_UPDATED-}" == 1 ]] && quiet "apt-$1" as_root env DEBIAN_FRONTEND=noninteractive apt-get -o DPkg::Lock::Timeout=300 install -y "${missing[@]}" && return 0
+  echo_warn "Could not install $(echo_hl "${missing[*]}") with $(echo_hl 'apt')."; return 1
 }
 
 
 # ┌──────────────────────────────────────────────────────────┐
-# │                      Dotfile Puller                      │
+# │                       Setup Steps                        │
 # └──────────────────────────────────────────────────────────┘
 
-# Make sure git works, installing it with apt on Linux when that's possible; returns 1 when it doesn't.
-__ensure_git() {
-  if [[ "$(uname)" == 'Darwin' ]]; then
-    # NOTE: macOS ships a `git` stub that only offers to install the Command Line Tools.
-    xcode-select -p &> /dev/null && return 0
-    xcode-select --install
-    __error "Install the $(__hl 'Command Line Tools') (a dialog just opened), then run this script again."; return 1
-  fi
-  __has git && return 0
-  __apt_install git || { __error "Install $(__hl 'git'), then run this script again."; return 1; }
-}
-
-# Clone the dotfiles, or bring an existing clone up to date; returns 1 for a folder that isn't a clone.
-__dotfile_pull() {
-  # CASE: Missing, or empty (what an interrupted clone can leave behind).
-  if [[ -z "$(ls -A "$DOTFILE_PATH" 2> /dev/null)" ]]; then
-    __info "Cloning dotfiles to $(__hl "$DOTFILE_PATH") ..."
-    __quiet dotfiles git clone --depth 1 "$REPO_URL" "$DOTFILE_PATH" || { __error "Could not clone $(__hl "$REPO_URL")."; return 1; }
-    __ok 'Dotfiles cloned successfully.'
-  elif [[ -e "$DOTFILE_PATH/.git" ]]; then
-    __info "Updating the dotfiles at $(__hl "$DOTFILE_PATH") ..."
-    # NOTE: Fast-forward only, whatever `pull.rebase` says: git refuses rather than touch local changes.
-    __quiet dotfiles git -C "$DOTFILE_PATH" pull --ff-only --no-rebase && __ok 'Dotfiles are up to date.' ||
-      __warn "Could not update $(__hl "$DOTFILE_PATH"); going on with what is there."
-  else
-    __error "$(__hl "$DOTFILE_PATH") exists but isn't a git clone; move it away, then run this script again."; return 1
-  fi
+# ─── 0. Command Line Tools ──────────────────────────────────
+# Make sure the Command Line Tools are installed on macOS, as git comes with them; returns 1 when they aren't.
+# - It runs before any question: when they're missing, it opens their installer, and the run stops here.
+# - `has git` can't tell, since the stock `git` is a stub that only offers that install.
+check_clt() {
+  [[ "$(uname)" == 'Darwin' ]] || return 0
+  xcode-select -p &> /dev/null && return 0
+  xcode-select --install
+  echo_error "Install the $(echo_hl 'Command Line Tools') (a dialog just opened), then run this script again."; return 1
 }
 
 
-# ┌──────────────────────────────────────────────────────────┐
-# │                      Base Packages                       │
-# └──────────────────────────────────────────────────────────┘
+# ─── 1. Questions ───────────────────────────────────────────
+# Ask which tools to install, all before anything runs, so the rest needs no one; adds the chosen installers to `TOOLS`.
+# - Only on macOS and Ubuntu; elsewhere nothing is asked.
+# - Homebrew, when it's missing: without it, there are no tools, so a no ends the questions.
+# - yazi, then neovim.
+# - node, only after a yes to neovim and when it's missing; its default is no, as it's big.
+ask_tools() {
+  [[ "$(uname)" == 'Darwin' ]] || is_ubuntu || return 0
 
-# Set `BASE_MISSING` to the small packages the zsh setup expects but this machine lacks (Ubuntu only).
-__base_check() {
-  BASE_MISSING=()
-  __is_ubuntu || return 0
-
-  local cmd
-  for cmd in curl zsh stow rsync; do __has "$cmd" || BASE_MISSING+=("$cmd"); done
-  infocmp xterm-kitty &> /dev/null || BASE_MISSING+=(kitty-terminfo)
-  # NOTE: `.zshenv` sets LANG=en_US.UTF-8 when LANG is empty; slim images lack that locale and every command warns.
-  __has_en_us || BASE_MISSING+=(locales)
-}
-
-# Install the missing base packages and the en_US.UTF-8 locale, on Ubuntu only; never fails the setup.
-__base_init() {
-  [[ "$(uname)" == 'Linux' ]] || return 0
-  __is_ubuntu || { __warn 'Not Ubuntu, so skipping packages and tools: only the dotfiles and zsh links are set up.'; return 0; }
-
-  __base_check
-  # NOTE: When apt can't install them, it says why, and the setup goes on without them.
-  if (( ${#BASE_MISSING[@]} )); then __apt_install "${BASE_MISSING[@]}" || true; fi
-  if ! __has_en_us && __has locale-gen; then __quiet locale-gen __as_root locale-gen en_US.UTF-8 || true; fi
-}
-
-
-# ┌──────────────────────────────────────────────────────────┐
-# │                         ZSH Init                         │
-# └──────────────────────────────────────────────────────────┘
-
-# Link `$2` to `$1`, unless it already is; fails on anything else in the way.
-__link() {
-  [[ -L "$2" && "$(readlink "$2")" == "$1" ]] && return 0
-  [[ -e "$2" || -L "$2" ]] && { __error "$(__hl "$2") already exists; back it up, then run this script again."; return 1; }
-  ln -s "$1" "$2"
-}
-
-# Link the zsh config into `$HOME`, with stow when it's installed; fails on anything in the way.
-__zsh_init() {
-  # IMPO: Pre-create `~/.config`, otherwise stow folds it into a single symlink.
-  mkdir -p "$HOME/.config"
-
-  # CASE: Already linked, maybe by `__link` below, whose links stow would refuse as not its own.
-  if [[ "$HOME/.zshenv" -ef "$DOTFILE_PATH/zsh/.zshenv" && "$HOME/.config/zsh" -ef "$DOTFILE_PATH/zsh/.config/zsh" ]]; then
-    __ok 'Zsh configuration is already linked.'; return 0
-  fi
-
-  __info 'Linking zsh configuration ...'
-  if __has stow; then
-    if ! stow --dir="$DOTFILE_PATH" --target="$HOME" --ignore='\.DS_Store' --ignore='\.claude' zsh; then
-      __error "Could not stow $(__hl 'zsh'); back up the conflicting files listed above, then run this script again."
-      return 1
-    fi
-  else
-    # NOTE: Without stow, make the same two links it would (it folds `~/.config/zsh` into one).
-    __link "$DOTFILE_PATH/zsh/.zshenv" "$HOME/.zshenv"
-    __link "$DOTFILE_PATH/zsh/.config/zsh" "$HOME/.config/zsh"
-  fi
-  __ok 'Zsh configuration installed.'
-}
-
-
-# ┌──────────────────────────────────────────────────────────┐
-# │                        Tool Init                         │
-# └──────────────────────────────────────────────────────────┘
-
-# ─── Ask First ──────────────────────────────────────────────
-TOOLS=()        # The installers `__tool_ask` chose, in order, for `__tool_init`
-TOOLS_FAILED=0  # Set to 1 by `__tool_init` when one of them failed
-
-# Ask about Homebrew and the everyday tools from it before anything runs, so the setup then needs no one.
-__tool_ask() {
-  [[ "$(uname)" == 'Darwin' ]] || __is_ubuntu || return 0
-
-  if ! __has_brew; then
-    __ask "Install $(__hl 'Homebrew')? Without it, the tools are skipped." y || return 0
+  if ! has_brew; then
+    ask "Install $(echo_hl 'Homebrew')? Without it, the tools are skipped." y || return 0
     TOOLS+=(homebrew)
   fi
 
-  if __ask "Install $(__hl 'yazi') and its tools?" y; then TOOLS+=(yazi); fi
-  if __ask "Install $(__hl 'neovim') and its tools?" y; then
+  if ask "Install $(echo_hl 'yazi') and its tools?" y; then TOOLS+=(yazi); fi
+  if ask "Install $(echo_hl 'neovim') and its tools?" y; then
     TOOLS+=(neovim)
-    if ! __has node && __ask "Also install $(__hl 'node')? $(__hl 'Copilot') and LSP servers installed through $(__hl 'npm') need it." n; then TOOLS+=(node); fi
+    if ! has node && ask "Also install $(echo_hl 'node')? $(echo_hl 'Copilot') and LSP servers installed through $(echo_hl 'npm') need it." n; then TOOLS+=(node); fi
   fi
 }
 
-# Ask for the sudo password now when a later step needs root, so it doesn't stop the installs.
-__sudo_early() {
-  (( EUID != 0 )) && __has sudo || return 0
-  __base_check
-  (( ${#BASE_MISSING[@]} )) || [[ " ${TOOLS[*]} " == *' homebrew '* ]] || return 0
 
-  __info 'Some steps need root; asking for the sudo password now, so the rest runs unattended.'
-  sudo -v || __warn "Could not get $(__hl 'sudo') now; the steps that need root may ask again."
+# ─── 2. Sudo ────────────────────────────────────────────────
+# Ask for the sudo password now, when a later step needs root, so it can't stop the installs halfway.
+# - Root is needed when git or base packages are missing (steps 3 and 5), and to install Homebrew (step 7).
+# - Nothing is asked when already root, without sudo, or when sudo needs no password.
+ask_sudo() {
+  (( EUID != 0 )) && has sudo || return 0
+  find_missing_base
+  has git && (( ${#BASE_MISSING[@]} == 0 )) && [[ " ${TOOLS[*]} " != *' homebrew '* ]] && return 0
+  sudo -n true 2> /dev/null && return 0
+
+  echo_info 'Some steps need root; asking for the sudo password now, so the rest runs unattended.'
+  sudo -v || echo_warn "Could not get $(echo_hl 'sudo') now; the steps that need root may ask again."
 }
 
 
-# ─── Install ────────────────────────────────────────────────
-# Install what `__tool_ask` chose; the rest is left to `pinstall`.
-__tool_init() {
-  (( ${#TOOLS[@]} )) || return 0
-  __has zsh || { __warn "$(__hl 'zsh') is not installed, so skipping the tools."; return 0; }
+# ─── 3. Git ─────────────────────────────────────────────────
+# Make sure git works, installing it with apt when it's missing; returns 1 when it can't.
+ensure_git() {
+  has git && return 0
+  apt_install git || { echo_error "Install $(echo_hl 'git'), then run this script again."; return 1; }
+}
 
-  # NOTE: Off stdin, which under `curl ... | bash` is the rest of this script; a failed installer doesn't stop the next.
-  # NOTE: Settings go on the command line, not `export`, so the zsh that `__handoff` starts doesn't inherit them;
-  # \     `INSTALLER_LOG_DIR` also has the installers keep their tools' output in logs, as this script does.
-  INSTALLER_LOG_DIR="$INSTALLER_LOG_DIR" __APT_UPDATED="${__APT_UPDATED-}" \
+
+# ─── 4. Dotfiles ────────────────────────────────────────────
+# Clone the dotfiles to `DOTFILE_PATH`, or update the clone there; returns 1 when the clone fails or the path
+# holds something else.
+# - Missing or empty (as an interrupted clone leaves it): a shallow clone.
+# - A clone: a fast-forward pull, whatever `pull.rebase` says, so git refuses rather than touch local changes.
+#   If that fails, the setup goes on with what is there.
+# - Anything else: an error, so nothing gets overwritten.
+pull_dotfiles() {
+  if [[ -z "$(ls -A "$DOTFILE_PATH" 2> /dev/null)" ]]; then
+    echo_info "Cloning dotfiles to $(echo_hl "$DOTFILE_PATH") ..."
+    quiet dotfiles git clone --depth 1 "$REPO_URL" "$DOTFILE_PATH" || { echo_error "Could not clone $(echo_hl "$REPO_URL")."; return 1; }
+    echo_ok 'Dotfiles cloned successfully.'
+  elif [[ -e "$DOTFILE_PATH/.git" ]]; then
+    echo_info "Updating the dotfiles at $(echo_hl "$DOTFILE_PATH") ..."
+    quiet dotfiles git -C "$DOTFILE_PATH" pull --ff-only --no-rebase && echo_ok 'Dotfiles are up to date.' ||
+      echo_warn "Could not update $(echo_hl "$DOTFILE_PATH"); going on with what is there."
+  else
+    echo_error "$(echo_hl "$DOTFILE_PATH") exists but isn't a git clone; move it away, then run this script again."; return 1
+  fi
+}
+
+
+# ─── 5. Base Packages ───────────────────────────────────────
+# Set `BASE_MISSING` to the base packages this machine lacks; empty unless on Ubuntu.
+# - curl, zsh, stow, rsync: missing when their commands are.
+# - kitty-terminfo: so the `TERM=xterm-kitty` that ssh from kitty brings works.
+# - locales: when the en_US.UTF-8 locale is missing. `.zshenv` sets it as LANG when LANG is empty, and ssh from
+#   the Mac sends it, so without it every command warns. `install_base` then makes just that locale.
+find_missing_base() {
+  BASE_MISSING=()
+  is_ubuntu || return 0
+
+  local cmd
+  for cmd in curl zsh stow rsync; do has "$cmd" || BASE_MISSING+=("$cmd"); done
+  infocmp xterm-kitty &> /dev/null || BASE_MISSING+=(kitty-terminfo)
+  has_en_us || BASE_MISSING+=(locales)
+}
+
+# Install the missing base packages and make the en_US.UTF-8 locale; never fails the setup.
+# - Linux other than Ubuntu: skipped, with a warning.
+# - When apt can't install them, it says why, and the setup goes on without them.
+install_base() {
+  [[ "$(uname)" == 'Linux' ]] || return 0
+  is_ubuntu || { echo_warn 'Not Ubuntu, so skipping packages and tools: only the dotfiles and zsh links are set up.'; return 0; }
+
+  find_missing_base
+  if (( ${#BASE_MISSING[@]} )); then apt_install "${BASE_MISSING[@]}" || true; fi
+  if ! has_en_us && has locale-gen; then quiet locale-gen as_root locale-gen en_US.UTF-8 || true; fi
+}
+
+
+# ─── 6. Zsh Links ───────────────────────────────────────────
+# Link `$2` to `$1`, unless it already is; returns 1 when something else is in the way.
+make_link() {
+  [[ -L "$2" && "$(readlink "$2")" == "$1" ]] && return 0
+  [[ -e "$2" || -L "$2" ]] && { echo_error "$(echo_hl "$2") already exists; back it up, then run this script again."; return 1; }
+  ln -s "$1" "$2"
+}
+
+# Link the zsh config into `$HOME`; returns 1 when files are in the way.
+# - Already linked (by stow, or by `make_link`): nothing to do. Stow would refuse the links `make_link` makes.
+# - With stow: `stow zsh`, like the other packages of the dotfiles.
+# - Without stow: the same two links that stow makes, `~/.zshenv` and the whole of `~/.config/zsh`.
+link_zsh() {
+  # IMPO: Pre-create `~/.config`, otherwise stow folds it into a single symlink.
+  mkdir -p "$HOME/.config"
+
+  if [[ "$HOME/.zshenv" -ef "$DOTFILE_PATH/zsh/.zshenv" && "$HOME/.config/zsh" -ef "$DOTFILE_PATH/zsh/.config/zsh" ]]; then
+    echo_ok 'Zsh configuration is already linked.'; return 0
+  fi
+
+  echo_info 'Linking zsh configuration ...'
+  if has stow; then
+    if ! stow --dir="$DOTFILE_PATH" --target="$HOME" --ignore='\.DS_Store' --ignore='\.claude' zsh; then
+      echo_error "Could not stow $(echo_hl 'zsh'); back up the conflicting files listed above, then run this script again."
+      return 1
+    fi
+  else
+    make_link "$DOTFILE_PATH/zsh/.zshenv" "$HOME/.zshenv"
+    make_link "$DOTFILE_PATH/zsh/.config/zsh" "$HOME/.config/zsh"
+  fi
+  echo_ok 'Zsh configuration installed.'
+}
+
+
+# ─── 7. Tools ───────────────────────────────────────────────
+# Run the installers chosen in step 1, in one call to `installers.zsh`; sets `TOOLS_FAILED` when one fails, and
+# never stops the setup.
+# - `INSTALLER_LOG_DIR`: the installers keep their tools' output in this run's logs too.
+# - `INSTALLER_APT_UPDATED`: apt doesn't update again.
+install_tools() {
+  (( ${#TOOLS[@]} )) || return 0
+  has zsh || { echo_warn "$(echo_hl 'zsh') is not installed, so skipping the tools."; return 0; }
+
+  # NOTE: Both go on the command line, not `export`, so the zsh of step 8 doesn't inherit them. stdin is cut off:
+  # \     under `curl ... | bash`, it's the rest of this script.
+  INSTALLER_LOG_DIR="$INSTALLER_LOG_DIR" INSTALLER_APT_UPDATED="${INSTALLER_APT_UPDATED-}" \
     zsh "$DOTFILE_PATH/zsh/.config/zsh/scripts/installers.zsh" "${TOOLS[@]}" < /dev/null || TOOLS_FAILED=1
 }
 
 
-# ┌──────────────────────────────────────────────────────────┐
-# │                         Handoff                          │
-# └──────────────────────────────────────────────────────────┘
+# ─── 8. Hand Over to Zsh ────────────────────────────────────
+# Hand over to zsh; returns only without a terminal, 1 when an installer failed.
+# 1. A first, quiet start: zinit installs its plugins, and `plugins/bash.zsh` sets up `~/.bashrc`.
+# 2. Where the logs are, and `pinstall` for more installers.
+# 3. On a terminal, `exec zsh -l`. Without one (e.g. a Docker build), the run ends, failing if an installer failed.
+start_zsh() {
+  has zsh || { echo_warn "$(echo_hl 'zsh') is not installed, so staying in this shell."; return 0; }
 
-# End in zsh: it's the first start, so zinit installs its plugins and `plugins/bash.zsh` sets up `~/.bashrc`.
-# With no terminal it returns instead, 1 when an installer failed.
-__handoff() {
-  __has zsh || { __warn "$(__hl 'zsh') is not installed, so staying in this shell."; return 0; }
-
-  # NOTE: Start zsh once quietly first, so its first-start downloads stay off the screen. `burst` runs zinit's
-  # \     turbo (`wait`) loads right away, which a plain `exit` would quit before; `+m` leaves the terminal alone.
-  __info 'Installing zsh plugins ...'
-  __quiet zsh-plugins zsh +m -lic '@zinit-scheduler burst' || __warn "$(__hl 'zsh') exited with an error; check it on the next login."
-  __info "More installers later, from $(__hl 'zsh'): $(__hl 'pinstall') lists them. Logs of this run: $(__hl "$INSTALLER_LOG_DIR")"
-  (( TOOLS_FAILED )) && __warn "Some installers failed (see above); $(__hl 'pinstall') can run them again."
+  echo_info 'Installing zsh plugins ...'
+  # NOTE: `burst` runs zinit's turbo (`wait`) loads right away, which a plain `exit` would quit before;
+  # \     `+m` leaves the terminal alone.
+  quiet zsh-plugins zsh +m -lic '@zinit-scheduler burst' || echo_warn "$(echo_hl 'zsh') exited with an error; check it on the next login."
+  echo_info "More installers later, from $(echo_hl 'zsh'): $(echo_hl 'pinstall') lists them. Logs of this run: $(echo_hl "$INSTALLER_LOG_DIR")"
+  (( TOOLS_FAILED )) && echo_warn "Some installers failed (see above); $(echo_hl 'pinstall') can run them again."
 
   if [[ -t 1 ]] && { : < /dev/tty; } 2> /dev/null; then
-    __ok "All done. Starting $(__hl 'zsh') ..."
+    echo_ok "All done. Starting $(echo_hl 'zsh') ..."
     unset INSTALLER_YES  # NOTE: Its answers were for this run, not for later `pinstall`s
     exec zsh -l < /dev/tty
   fi
-  # CASE: No terminal, as in a Docker build, which a failed installer should fail too.
   (( TOOLS_FAILED )) && return 1
-  __ok 'All done.'
+  echo_ok 'All done.'
 }
 
 
@@ -316,8 +377,11 @@ __handoff() {
 # │                        Main Entry                        │
 # └──────────────────────────────────────────────────────────┘
 
-# ─── Help ───────────────────────────────────────────────────
-__show_help() {
+# ─── Banner and Help ────────────────────────────────────────
+# The greeting at the start of a full setup.
+show_banner() { echo -e "\n  \033[1;95m✦ Phoenix's Dotfiles Starter\033[0m\n  \033[2mdotfiles → zsh → Homebrew and tools (asks first)\033[0m\n"; }
+
+show_help() {
   cat << 'EOF'
 Phoenix's Dotfiles Starter
 
@@ -328,7 +392,7 @@ Usage:
 
 Options:
   --help, -h      Show this help message
-  --zsh           Base packages, dotfiles and zsh, then offer Homebrew and tools (default when no args)
+  --zsh           Ask about Homebrew and tools, then set up base packages, dotfiles, zsh and the tools (default)
   --pull          Clone or update the dotfiles only
 
 The dotfiles live at ~/Documents/Fau/dotfiles on macOS and ~/.config/dotfiles on Linux.
@@ -354,38 +418,30 @@ EOF
 
 
 # ─── Main ───────────────────────────────────────────────────
+# Run what the last option asks for: a full setup (`--zsh`, the default), the dotfiles only (`--pull`), or the help.
 main() {
   local action='--zsh' arg
-
   for arg in "$@"; do
     case "$arg" in
       --help|-h|--pull|--zsh) action="$arg" ;;
-      *)
-        __error "Unknown option: $(__hl "$arg")"
-        __show_help
-        exit 1
-        ;;
+      *) echo_error "Unknown option: $(echo_hl "$arg")"; show_help; exit 1 ;;
     esac
   done
 
   case "$action" in
-    --help|-h)
-      __show_help
-      ;;
-    --pull)
-      __ensure_git
-      __dotfile_pull
-      ;;
+    --help|-h) show_help ;;
+    --pull) check_clt; ensure_git; pull_dotfiles ;;
     --zsh)
-      __banner
-      __ensure_git
-      __tool_ask
-      __sudo_early
-      __dotfile_pull
-      __base_init
-      __zsh_init
-      __tool_init
-      __handoff
+      show_banner
+      check_clt
+      ask_tools
+      ask_sudo
+      ensure_git
+      pull_dotfiles
+      install_base
+      link_zsh
+      install_tools
+      start_zsh
       ;;
   esac
 }
