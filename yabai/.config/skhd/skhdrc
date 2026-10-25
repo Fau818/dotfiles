@@ -63,8 +63,8 @@ rshift + lalt + fn - k : ($HOME/.config/yabai/stack.sh north) && sketchybar --tr
 rshift + lalt + fn - l : ($HOME/.config/yabai/stack.sh east)  && sketchybar --trigger skhd_window_type_changed
 
 # Toggle window layout (WINKEY1)
-rshift + lalt - f : yabai -m window --toggle float; [ $(yabai -m query --windows is-floating --window | jq '.["is-floating"]') = 'true' ] && hs -c "Fau_hs.window.center_window(0.6)"; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
-rshift + lalt - s : yabai -m window --toggle float; [ $(yabai -m query --windows is-floating --window | jq '.["is-floating"]') = 'true' ] && hs -c "Fau_hs.window.center_window(0.6)"; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
+rshift + lalt - f : yabai -m window --toggle float; [ $(yabai -m query --windows is-floating --window | jq '.["is-floating"]') = 'true' ] && hs -c "fhs.window.center_window(0.6)"; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
+rshift + lalt - s : yabai -m window --toggle float; [ $(yabai -m query --windows is-floating --window | jq '.["is-floating"]') = 'true' ] && hs -c "fhs.window.center_window(0.6)"; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
 # rshift + lalt - s : [ $(yabai -m query --windows is-floating --window | jq '.["is-floating"]') = 'true' ] && yabai -m window --toggle float; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
 rshift + lalt - e : yabai -m window --toggle zoom-parent; command -v sketchybar &> /dev/null && sketchybar --trigger skhd_window_type_changed
 # TEST: Show/hide the Music scratchpad (rule in yabairc); launch Music when it has no window yet
@@ -146,8 +146,8 @@ lctrl + rshift + lalt + fn - 0 : yabai -m window --space 10 --focus
 # ════════════════════════════════════════════════════════════
 
 # Manage window (WINKEY1)
-rshift + lalt - 1 : hs -c "Fau_hs.window.center_window(0.6)"
-rshift + lalt - 2 : hs -c "Fau_hs.window.center_window(0.85)"
-rshift + lalt - 3 : hs -c "Fau_hs.window.maximize_window()"
-rshift + lalt - q : hs -c "Fau_hs.window.move_window_to_left_half()"
-rshift + lalt - w : hs -c "Fau_hs.window.move_window_to_right_half()"
+rshift + lalt - 1 : hs -c "fhs.window.center_window(0.6)"
+rshift + lalt - 2 : hs -c "fhs.window.center_window(0.85)"
+rshift + lalt - 3 : hs -c "fhs.window.maximize_window()"
+rshift + lalt - q : hs -c "fhs.window.move_window_to_left_half()"
+rshift + lalt - w : hs -c "fhs.window.move_window_to_right_half()"

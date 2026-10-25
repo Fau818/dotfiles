@@ -2,7 +2,7 @@
 --- defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
 
 --- Global Variable
-Fau_hs = {}
+fhs = {}
 
 
 -- ════════════════════════ Load Spoon ════════════════════════
@@ -21,7 +21,7 @@ stackline:init()
 -- require("yabai")
 
 --- window manager
-Fau_hs.window = require("user.window")
+fhs.window = require("user.window")
 
 
 -- ═══════════════════════ Key Binding ════════════════════════
