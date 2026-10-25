@@ -3,7 +3,6 @@
 [user]
   name = Phoenix
   email = zhangyuFau@gmail.com
-	signingkey = ~/.ssh/1password.pub
 [core]
   excludesFile = ~/.config/git/ignore
   editor = nvim
@@ -13,15 +12,10 @@
   submoduleSummary = true
 [pull]
   rebase = true
-[gpg]
-  format = ssh
-[gpg "ssh"]
-  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[include]
+  path = ~/.config/1Password/git-signing.gitconfig
 [commit]
   verbose = true
-	gpgsign = true
-[tag]
-  gpgsign = true
 [delta]
   true-color   = always
   line-numbers = true
