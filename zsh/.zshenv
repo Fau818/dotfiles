@@ -32,6 +32,10 @@ export HISTFILE="$ZDOTDIR/.zsh_history"
 # ┄┄┄ Language
 [[ -z "$LANG" ]] &&  export LANG='en_US.UTF-8' LC_ALL='en_US.UTF-8' LC_CTYPE='en_US.UTF-8'
 
+# ┄┄┄ Umask
+# NOTE: Under OrbStack, `docker exec` (so `dzsh`) starts with umask 000.
+[[ "$(umask)" == 000 ]] && umask 022
+
 
 # ─── Personal Preference ────────────────────────────────────
 # ┄┄┄ Dotfile path
