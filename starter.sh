@@ -85,6 +85,9 @@ __has_brew() { __has brew || [[ -x /opt/homebrew/bin/brew || -x /home/linuxbrew/
 # Whether this is Ubuntu, the only Linux the package and tool steps are written for.
 __is_ubuntu() { grep -qs '^ID=ubuntu$' /etc/os-release; }
 
+# Whether the en_US.UTF-8 locale exists.
+__has_en_us() { locale -a 2> /dev/null | grep -qiE '^en_US\.utf-?8$'; }
+
 
 # ─── Questions ──────────────────────────────────────────────
 # Ask a yes/no question; returns 0 for yes.
@@ -182,10 +185,10 @@ __base_check() {
   for cmd in curl zsh stow rsync; do __has "$cmd" || BASE_MISSING+=("$cmd"); done
   infocmp xterm-kitty &> /dev/null || BASE_MISSING+=(kitty-terminfo)
   # NOTE: `.zshenv` sets LANG=en_US.UTF-8 when LANG is empty; slim images lack that locale and every command warns.
-  locale -a 2> /dev/null | grep -qiE '^en_US\.utf-?8$' || BASE_MISSING+=(language-pack-en-base)
+  __has_en_us || BASE_MISSING+=(locales)
 }
 
-# Install the missing base packages, on Ubuntu only; never fails the setup.
+# Install the missing base packages and the en_US.UTF-8 locale, on Ubuntu only; never fails the setup.
 __base_init() {
   [[ "$(uname)" == 'Linux' ]] || return 0
   __is_ubuntu || { __warn 'Not Ubuntu, so skipping packages and tools: only the dotfiles and zsh links are set up.'; return 0; }
@@ -193,6 +196,7 @@ __base_init() {
   __base_check
   # NOTE: When apt can't install them, it says why, and the setup goes on without them.
   if (( ${#BASE_MISSING[@]} )); then __apt_install "${BASE_MISSING[@]}" || true; fi
+  if ! __has_en_us && __has locale-gen; then __quiet locale-gen __as_root locale-gen en_US.UTF-8 || true; fi
 }
 
 
