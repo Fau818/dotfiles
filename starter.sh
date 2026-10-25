@@ -41,17 +41,17 @@ __hl()    { echo -e "\033[96m$*\033[0m"; }  # For names inside messages: package
 # The greeting at the start of a full setup.
 __banner() { echo -e "\n  \033[1;95m✦ Phoenix's Dotfiles Starter\033[0m\n  \033[2mdotfiles → zsh → Homebrew and tools (asks first)\033[0m\n"; }
 
-# Draw the last 3 lines of the log `$1`, dimmed, then move the cursor back to the first, so the next draw replaces them.
+# Draw the last 5 lines of the log `$1`, dimmed, then move the cursor back to the first, so the next draw replaces them.
 # NOTE: A line keeps only what follows its last `\r`, as a terminal shows a redrawn progress line; tabs become spaces
 # \     and lines are cut at 70 columns, since one that wraps would throw off the redraw.
 __progress() {
-  tail -c 2000 "$1" 2> /dev/null | awk '
-    { sub(/\r+$/, ""); gsub(/\t/, " "); n = split($0, part, "\r"); $0 = part[n] }
+  tail -c 2000 "$1" 2> /dev/null | awk -v n=5 '
+    { sub(/\r+$/, ""); gsub(/\t/, " "); parts = split($0, part, "\r"); $0 = part[parts] }
     NF { last[++count] = $0 }
     END {
-      first = count > 3 ? count - 2 : 1
-      for (i = first; i < first + 3; i++) printf "\r\033[K  \033[2m%.70s\033[0m\n", last[i]
-      printf "\033[3A"
+      first = count > n ? count - n + 1 : 1
+      for (i = first; i < first + n; i++) printf "\r\033[K  \033[2m%.70s\033[0m\n", last[i]
+      printf "\033[%dA", n
     }'
 }
 
