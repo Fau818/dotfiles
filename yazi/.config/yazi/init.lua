@@ -3,7 +3,7 @@
 -- ╚══════════════════════════════════════════════════════════╝
 
 ---@diagnostic disable-next-line: undefined-field
-require("full-border"):setup({ type = ui.Border.ROUNDED })
+require("full-border"):setup { set = "rounded" }
 require("smart-enter"):setup({ open_multi = true })
 require("git"):setup()
 require("mime-ext.local"):setup { fallback_file1 = true }
