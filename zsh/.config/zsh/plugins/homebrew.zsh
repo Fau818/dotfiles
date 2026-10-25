@@ -11,40 +11,6 @@ HOMEBREW_ALIYUN_BOTTLE_DOMAIN='https://mirrors.aliyun.com/homebrew/homebrew-bott
 
 
 # ════════════════════════════════════════════════════════════
-# ════════════════════════ Installer ═════════════════════════
-# ════════════════════════════════════════════════════════════
-
-# Install Homebrew (default: official source)
-function __homebrew_install() {
-  echo "Select Homebrew installation source:"
-  echo "1) Official - https://github.com/Homebrew (default)"
-  echo "2) Aliyun Mirror - https://mirrors.aliyun.com"
-  read -r "choice?Please enter your choice (default is official): "
-  choice="${choice:-1}"
-
-  case "$choice" in
-    1)
-      echo_info "Installing from official source..."
-      unset HOMEBREW_BREW_GIT_REMOTE HOMEBREW_CORE_GIT_REMOTE HOMEBREW_API_DOMAIN HOMEBREW_BOTTLE_DOMAIN
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      ;;
-    2)
-      echo_info "Installing from Aliyun mirror..."
-      export HOMEBREW_BREW_GIT_REMOTE="$HOMEBREW_ALIYUN_BREW_GIT_REMOTE"
-      export HOMEBREW_CORE_GIT_REMOTE="$HOMEBREW_ALIYUN_CORE_GIT_REMOTE"
-      export HOMEBREW_API_DOMAIN="$HOMEBREW_ALIYUN_API_DOMAIN"
-      export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_ALIYUN_BOTTLE_DOMAIN"
-      /bin/bash -c "$(curl -fsSL https://gitee.com/ineo6/homebrew-install/raw/master/install.sh)"
-      ;;
-    *)
-      echo_error "Invalid choice: $choice. Please run again and select 1 or 2."
-      return 1
-      ;;
-  esac
-}
-
-
-# ════════════════════════════════════════════════════════════
 # ═════════════════════════ Homebrew ═════════════════════════
 # ════════════════════════════════════════════════════════════
 
@@ -62,7 +28,7 @@ function ___homebrew_auto_set_bottle_domain() {
   elif [[ "$homebrew_repo_url" == "$HOMEBREW_ALIYUN_BREW_GIT_REMOTE" ]]; then
     export HOMEBREW_API_DOMAIN="$HOMEBREW_ALIYUN_API_DOMAIN"
     export HOMEBREW_BOTTLE_DOMAIN="$HOMEBREW_ALIYUN_BOTTLE_DOMAIN"
-  else echo_warn 'Unknown homebrew repo url, please set `HOMEBREW_BOTTLE_DOMAIN` manually.'
+  else echo_warn "Unknown homebrew repo url, please set $(echo_hl 'HOMEBREW_BOTTLE_DOMAIN') manually."
   fi
 }
 # ___homebrew_auto_set_bottle_domain  # TEST: Should be removed?
@@ -71,25 +37,25 @@ function ___homebrew_auto_set_bottle_domain() {
 # ─── Sourcer ────────────────────────────────────────────────
 # Switch Homebrew source (default: official)
 function __homebrew_set_source() {
-  ! command -v brew &> /dev/null && { echo_error 'Not found: `brew` command'; return 1; }
+  ! command -v brew &> /dev/null && { echo_error "Not found: $(echo_hl 'brew') command"; return 1; }
 
-  echo "Select Homebrew source:"
-  echo "1) Official - https://github.com/Homebrew (default)"
-  echo "2) Aliyun Mirror - https://mirrors.aliyun.com"
-  read -r "choice?Enter your choice (default is 1): "
+  echo 'Select Homebrew source:'
+  echo '1) Official - https://github.com/Homebrew (default)'
+  echo '2) Aliyun Mirror - https://mirrors.aliyun.com'
+  read -r 'choice?Enter your choice (default is 1): '
   choice="${choice:-1}"
 
   case "$choice" in
     1)
-      echo_info "Switching to official source..."
+      echo_info 'Switching to official source...'
       git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_OFFICIAL_BREW_GIT_REMOTE"
       ;;
     2)
-      echo_info "Switching to Aliyun mirror..."
+      echo_info 'Switching to Aliyun mirror...'
       git -C "$(brew --repo)" remote set-url origin "$HOMEBREW_ALIYUN_BREW_GIT_REMOTE"
       ;;
     *)
-      echo_error "Invalid choice: $choice. Please run again and select 1, 2, or 3."
+      echo_error "Invalid choice: $(echo_hl "$choice"). Please run again and select 1 or 2."
       return 1
       ;;
   esac

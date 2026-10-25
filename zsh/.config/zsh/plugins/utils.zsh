@@ -10,13 +10,13 @@ if command -v zoxide &> /dev/null; then
 
 
   # ─── Enhance Zoxide ───────────────────────────────────────
-  _ZOXIDE_ECHO=true  # Set to `false` to disable echo
-  _ZOXIDE_SHOULD=""; _ZOXIDE_INDEX=1; _ZOXIDE_LAST_QUERY=""; _ZOXIDE_DIRS=()
+  _ZOXIDE_ECHO=1  # Set to 0 to disable echo
+  _ZOXIDE_SHOULD=''; _ZOXIDE_INDEX=1; _ZOXIDE_LAST_QUERY=''; _ZOXIDE_DIRS=()
   function j() {
     # Query
     local query="$*"
     if [[ -n "$query" ]]; then
-      if [[ ${_ZOXIDE_LAST_QUERY} != "$query" ]]; then
+      if [[ "${_ZOXIDE_LAST_QUERY}" != "$query" ]]; then
         _ZOXIDE_INDEX=1; _ZOXIDE_LAST_QUERY="$query"
         # NOTE: `$query` cannot be passed directly since it will be treated as a single argument. (Use `"$@"`)
         IFS=$'\n' && _ZOXIDE_DIRS=($(zoxide query --list "$@")) && unset IFS
@@ -30,8 +30,8 @@ if command -v zoxide &> /dev/null; then
       result=$(FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --query='$query'" zoxide query -i) && cd "$result"
     else
       [[ "$(pwd)" != "$_ZOXIDE_SHOULD" ]] && _ZOXIDE_INDEX=1;  # Reset index if the current directory has changed
-      [[ "$_ZOXIDE_ECHO" == true ]] && echo "$_ZOXIDE_INDEX/${#_ZOXIDE_DIRS[@]}" "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}"
-      cd "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}" || echo_error "zoxide: failed to ${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}."
+      (( _ZOXIDE_ECHO )) && echo "$_ZOXIDE_INDEX/${#_ZOXIDE_DIRS[@]}" "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}"
+      cd "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}" || echo_error "zoxide: failed to enter $(echo_hl "${_ZOXIDE_DIRS[$_ZOXIDE_INDEX]}")."
       _ZOXIDE_INDEX=$((_ZOXIDE_INDEX % ${#_ZOXIDE_DIRS[@]} + 1))
       _ZOXIDE_SHOULD="$(pwd)"
     fi
@@ -41,13 +41,13 @@ fi
 
 # ═══════════════════════════ Yazi ═══════════════════════════
 
-# SEE: https://yazi-rs.github.io/docs/quick-start#shell-wrapper
+# SEE: https://yazi-rs.github.io/docs/quick-start#shell-wrapper   (Changed the format)
 if (command -v yazi && ! command -v __yazi) &> /dev/null; then
   function __yazi() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    local tmp="$(mktemp -t 'yazi-cwd.XXXXXX')"
     yazi "$@" --cwd-file="$tmp"
     # `--cwd-file` resolves symlinks even with no nav; diff vs `pwd -P`, not `$PWD`, or it collapses the symlink.
-    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$(pwd -P)" ]; then cd -- "$cwd"; fi
+    if cwd="$(cat -- "$tmp")" && [[ -n "$cwd" && "$cwd" != "$(pwd -P)" ]]; then cd -- "$cwd"; fi
     rm -f -- "$tmp"
   }
   alias yazi=__yazi f=__yazi
@@ -64,7 +64,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
     for arg in "$@"; do
       if [[ "$arg" == -* ]]; then
         # EXIT: Invalid format
-        (( ${#pkgs[@]} > 0 )) && echo_error "ERROR: Format should be [option ...] [-D|-S|-R] package ..." && return 0
+        (( ${#pkgs[@]} > 0 )) && echo_error 'ERROR: Format should be [option ...] [-D|-S|-R] package ...' && return 0
         opts+=("$arg")
       else pkgs+=("$arg")
       fi
@@ -83,10 +83,10 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
 
       local dotfile_dir=$([[ -d "$DOTFILE_PATH/private/$name" ]] && echo "$DOTFILE_PATH/private" || echo "$DOTFILE_PATH")
       # CASE: Skipped a package is absent from this checkout, e.g. `private` is not initialized.
-      [[ -d "$dotfile_dir/$name" ]] || { echo_warn "Skipped '$name': no such package in $dotfile_dir."; ret=1; continue }
+      [[ -d "$dotfile_dir/$name" ]] || { echo_warn "Skipped $(echo_hl "$name"): no such package in $(echo_hl "$dotfile_dir")."; ret=1; continue }
       stow --dir="$dotfile_dir" --target="$HOME" --ignore='\.DS_Store' --ignore='\.claude' "${opts[@]}" "$name" || ret=1
     done
-    return $ret
+    return "$ret"
   }
   alias stow=__stow
 
@@ -108,7 +108,6 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
       [kitty]='kitty'
       [lazygit]='lazygit'
       [netrc]='python3'
-      [nvim]='nvim'
       [pip]='python3'
       [sketchybar]='sketchybar'
       [ssh]='ssh'
@@ -123,7 +122,7 @@ if (command -v stow && ! command -v __stow) &> /dev/null; then
     local config
     for config in "${(@k)configs}"; do
       local binary=${configs[$config]}
-      if command -v "$binary" &> /dev/null; then __stow "$config" && echo_ok "Stowed configuration for '$config'."; fi
+      if command -v "$binary" &> /dev/null; then __stow "$config" && echo_ok "Stowed configuration for $(echo_hl "$config")."; fi
     done
   }
 fi

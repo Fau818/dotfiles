@@ -1,0 +1,14 @@
+#compdef pinstall
+
+_pinstall() {
+  local line
+  local -a installers typed=(${words[2,CURRENT-1]})
+
+  # Offer each installer for this platform once, with its description.
+  for line in ${(f)"$(__pinstall_list)"}; do
+    (( ${typed[(Ie)${line%%$'\t'*}]} )) || installers+=("${line/$'\t'/:}")
+  done
+  _describe -t installers 'installer' installers
+}
+
+_pinstall "$@"

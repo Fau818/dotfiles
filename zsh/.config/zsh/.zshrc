@@ -10,7 +10,7 @@ fi
 
 
 # ════════════════════════════════════════════════════════════
-# ═══════════════════ Fau ZSH Preferences ════════════════════
+# ═════════════════ Phoenix ZSH Preferences ══════════════════
 # ════════════════════════════════════════════════════════════
 
 setopt interactive_comments
@@ -35,18 +35,14 @@ alias gcmm='git commit -m' gcmmd='gcmm "$(date)"'
 command -v rsync &> /dev/null && alias frsync='rsync -razvhP'
 # ┄┄┄ Mysql
 command -v mysql &> /dev/null && alias mysqlStart='mysql.server start' mysqlStop='mysql.server stop'
+# ┄┄┄ Neovim
+command -v nvim &> /dev/null && alias vim=nvim
 # ┄┄┄ Thefuck
 command -v thefuck &> /dev/null && eval "$(thefuck --alias)" && alias ff=fuck
 # ┄┄┄ Yabai
 command -v yabai &> /dev/null && alias yabai_sudo='echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 "${commands[yabai]}" | cut -d " " -f 1) ${commands[yabai]} --load-sa" | sudo tee /private/etc/sudoers.d/yabai > /dev/null'
 # ┄┄┄ Ripgrep
 command -v rg &> /dev/null && alias rg="rg --ignore-file '$XDG_CONFIG_HOME/git/ignore'"
-
-
-# ═════════════════════════ Scripts ══════════════════════════
-
-alias ghr2cdn="$ZSCRIPTDIR/ghr2cdn.sh"
-alias cdn2ghr="$ZSCRIPTDIR/cdn2ghr.sh"
 
 
 # ═════════════════════════ Plugins ══════════════════════════
@@ -60,11 +56,11 @@ source "$ZPLUGINDIR/bash.zsh"
 
 # ─── Tools ──────────────────────────────────────────────────
 source "$ZPLUGINDIR/homebrew.zsh"
-source "$ZPLUGINDIR/neovim.zsh"
 source "$ZPLUGINDIR/ssh.zsh"
 source "$ZPLUGINDIR/docker.zsh"
 source "$ZPLUGINDIR/python.zsh"
 source "$ZPLUGINDIR/utils.zsh"
+source "$ZPLUGINDIR/pinstall.zsh"
 
 
 # ─── Zinit ──────────────────────────────────────────────────
