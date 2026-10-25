@@ -253,11 +253,11 @@ __tool_ask() {
     TOOLS+=(homebrew)
   fi
 
+  if __ask "Install $(__hl 'yazi') and its tools?" y; then TOOLS+=(yazi); fi
   if __ask "Install $(__hl 'neovim') and its tools?" y; then
     TOOLS+=(neovim)
     if ! __has node && __ask "Also install $(__hl 'node')? $(__hl 'Copilot') and LSP servers installed through $(__hl 'npm') need it." n; then TOOLS+=(node); fi
   fi
-  if __ask "Install $(__hl 'yazi') and its tools?" y; then TOOLS+=(yazi); fi
 }
 
 # Ask for the sudo password now when a later step needs root, so it doesn't stop the installs.
