@@ -25,7 +25,7 @@ function vpn() {
   # With parameters
   if [[ "$1" == 'start' ]]; then _vpn_start
   elif [[ "$1" == 'stop' ]]; then _vpn_stop
-  elif [[ -n "$1" ]]; then echo_error "Invalid parameter: $1. Usage: vpn [start|stop]" && return 1
+  elif [[ -n "$1" ]]; then echo_error "Invalid parameter: $(echo_hl "$1"). Usage: vpn [start|stop]" && return 1
   elif [[ ! -v https_proxy ]]; then _vpn_start
   else _vpn_stop
   fi
@@ -38,7 +38,7 @@ function vpn() {
 function __get_clash_tool_name() {
   if command -v mihomo &> /dev/null; then echo 'mihomo'
   elif command -v clash &> /dev/null; then echo 'clash'
-  else echo_error 'Not found: `clash/mihomo` command'; return 1
+  else echo_error "Not found: $(echo_hl 'clash/mihomo') command"; return 1
   fi
 }
 
@@ -46,7 +46,7 @@ function startClash() {
   local tool_name; tool_name="$(__get_clash_tool_name)" || return 1
   # Start clash (NOTE: if you copied this code, you should use `sudo -E` instead of `sudo` else the config file will be missing.)
   # NOTE: The `sudo echo -n` is necessary since nohup will be suspended if no sudo permission.
-  if pgrep -x "$tool_name" &> /dev/null; then echo_warn "$tool_name is already running!"
+  if pgrep -x "$tool_name" &> /dev/null; then echo_warn "$(echo_hl "$tool_name") is already running!"
   else sudo echo -n && sudo nohup "$commands[$tool_name]" &> /dev/null &
   fi
 }
@@ -55,7 +55,7 @@ function stopClash() {
   local tool_name; tool_name="$(__get_clash_tool_name)" || return 1
   # Find the running clash process and kill it with sudo permission.
   local tool_pid=$(pgrep -x "$tool_name")
-  ([[ -n "$tool_pid" ]] && sudo kill "$tool_pid" && echo_ok "$tool_name has stopped!" && vpn stop) || echo_warn 'No running process found!'
+  ([[ -n "$tool_pid" ]] && sudo kill "$tool_pid" && echo_ok "$(echo_hl "$tool_name") has stopped!" && vpn stop) || echo_warn 'No running process found!'
 }
 
 function restartClash() {
@@ -67,23 +67,23 @@ function restartClash() {
 
 # ════════════════════════ Autostart ═════════════════════════
 
-function ___ssh_tunnel_listening() { ss -tlnp 2>/dev/null | grep -q ":$proxy_port "; }
+function ___ssh_tunnel_listening() { ss -tlnp 2> /dev/null | grep -q ":$proxy_port "; }
 
 function ___clash_is_running() {
-  local tool_name; tool_name="$(__get_clash_tool_name &>/dev/null)" || return 1
+  local tool_name; tool_name="$(__get_clash_tool_name &> /dev/null)" || return 1
   pgrep -x "$tool_name" &> /dev/null
 }
 
-function ___tun_is_active() { ip link show type tun 2>/dev/null | grep -q 'state UP'; }
+function ___tun_is_active() { ip link show type tun 2> /dev/null | grep -q 'state UP'; }
 
 function _auto_start_vpn() {
   if ___ssh_tunnel_listening; then  # CASE1: SSH tunnel
-    echo_info "SSH tunnel is listening on port $proxy_port, auto start VPN."
+    echo_info "SSH tunnel is listening on port $(echo_hl "$proxy_port"), auto start VPN."
     _vpn_start
     return 0
   elif ___clash_is_running; then  # CASE2: Clash
-    if ___tun_is_active; then echo_info "Clash TUN mode is active, no proxy needed."
-    else echo_info "Clash is running, auto start VPN." && _vpn_start
+    if ___tun_is_active; then echo_info 'Clash TUN mode is active, no proxy needed.'
+    else echo_info 'Clash is running, auto start VPN.' && _vpn_start
     fi
     return 0
   fi

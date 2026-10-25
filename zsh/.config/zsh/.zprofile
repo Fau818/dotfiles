@@ -9,7 +9,7 @@ PATH="$HOME/.local/bin:$PATH"
 if ! command -v brew &> /dev/null; then
   # Make sure the `brew` command is available on Linux and Mac (Apple Chip)
   function ___homebrew_init() {
-    local prefix=$([[ "$(uname)" == 'Linux' ]] && echo '/home/linuxbrew/.linuxbrew' || echo '/opt/homebrew')
+    local prefix=$([[ "$(uname)" == 'Linux' ]] && echo /home/linuxbrew/.linuxbrew || echo /opt/homebrew)
     [[ -d "$prefix" ]] && eval "$("$prefix/bin/brew" shellenv)"
   }
   ___homebrew_init

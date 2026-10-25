@@ -59,7 +59,7 @@ elif [[ "$(uname)" == 'Linux' ]]; then
   if   [[ -d "$HOME/miniconda3" ]];          then export CONDA_ROOT="$HOME/miniconda3"
   elif [[ -d "$HOME/.local/miniconda3" ]];   then export CONDA_ROOT="$HOME/.local/miniconda3"
   elif [[ -d "$XDG_DATA_HOME/miniconda3" ]]; then export CONDA_ROOT="$XDG_DATA_HOME/miniconda3"
-  elif [[ -d "/usr/local/miniconda3" ]];     then export CONDA_ROOT="/usr/local/miniconda3"
+  elif [[ -d /usr/local/miniconda3 ]];       then export CONDA_ROOT='/usr/local/miniconda3'
   fi
 fi
 
@@ -80,7 +80,7 @@ __conda_tidy_home
 # Wrap conda so a stray ~/.conda never outlives the command that created it
 if (( $+functions[conda] )) && [[ "$functions[conda]" != *__conda_wrapped* ]]; then
   functions[__conda_wrapped]=$functions[conda]
-  conda() { __conda_wrapped "$@"; local ret=$?; __conda_tidy_home; return $ret }
+  conda() { __conda_wrapped "$@"; local ret=$?; __conda_tidy_home; return "$ret" }
 fi
 
 
@@ -98,10 +98,10 @@ source "$ZPLUGINDIR/conda_auto_env.zsh"
 
 if command -v uv &> /dev/null; then
   uv() {
-    # if [ -n "$UV_PROJECT_ENVIRONMENT" ]; then command uv "$@"; return; fi
+    # if [[ -n "$UV_PROJECT_ENVIRONMENT" ]]; then command uv "$@"; return; fi
 
-    if [ -n "$CONDA_PREFIX" ] && [ "$CONDA_DEFAULT_ENV" != "base" ]; then UV_PROJECT_ENVIRONMENT="$CONDA_PREFIX" command uv "$@"
-    elif [ -n "$VIRTUAL_ENV" ]; then UV_PROJECT_ENVIRONMENT="$VIRTUAL_ENV" command uv "$@"
+    if [[ -n "$CONDA_PREFIX" && "$CONDA_DEFAULT_ENV" != 'base' ]]; then UV_PROJECT_ENVIRONMENT="$CONDA_PREFIX" command uv "$@"
+    elif [[ -n "$VIRTUAL_ENV" ]]; then UV_PROJECT_ENVIRONMENT="$VIRTUAL_ENV" command uv "$@"
     else command uv "$@"
     fi
   }

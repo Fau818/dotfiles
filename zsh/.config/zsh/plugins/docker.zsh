@@ -9,7 +9,7 @@ if command -v docker &> /dev/null; then
 
   # Open a zsh login shell inside a running container.
   function dzsh() {
-    [[ -z "$1" ]] && echo "Usage: dzsh <container-name-or-id>" && return 1
-    docker exec --env TERM=$TERM -it "$1" zsh -l
+    [[ -z "$1" ]] && echo 'Usage: dzsh <container-name-or-id>' && return 1
+    docker exec --env "TERM=$TERM" -it "$1" zsh -l
   }
 fi

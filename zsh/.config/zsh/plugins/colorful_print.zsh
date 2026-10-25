@@ -19,3 +19,4 @@ function echo_info()  { echo "\e[1;34m[INFO]\e[0m $*" }
 function echo_ok()    { echo "\e[1;32m[OK]\e[0m $*" }
 function echo_warn()  { echo "\e[1;33m[WARN]\e[0m $*" }
 function echo_error() { echo "\e[1;31m[ERROR]\e[0m $*" }
+function echo_hl()    { echo "\e[96m$*\e[0m" }  # For names inside messages: packages, commands, paths

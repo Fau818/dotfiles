@@ -34,7 +34,7 @@ unfunction _cae_load_conf
 
 [[ -n "${CONDA_EXE-}" ]] || return 0  # needs conda.sh sourced first (python.zsh)
 
-zmodload zsh/zselect 2>/dev/null && typeset -g _CAE_ZSELECT=1 || typeset -g _CAE_ZSELECT=''
+zmodload zsh/zselect 2> /dev/null && typeset -g _CAE_ZSELECT=1 || typeset -g _CAE_ZSELECT=''
 
 typeset -gi _CAE_GEN=0 _CAE_TICKS=0
 typeset -gi _CAE_MAX_TICKS=5  # give up after this many 1s timer ticks
@@ -71,8 +71,8 @@ _cae_tick() {
 
 # Kill the in-flight switch and drop its result.
 _cae_abort() {
-  [[ -n "$_CAE_PID" ]] && kill "$_CAE_PID" 2>/dev/null
-  command rm -f -- "$_CAE_PENDING" "$_CAE_PENDING.wip" 2>/dev/null
+  [[ -n "$_CAE_PID" ]] && kill "$_CAE_PID" 2> /dev/null
+  command rm -f -- "$_CAE_PENDING" "$_CAE_PENDING.wip" 2> /dev/null
   _CAE_PENDING=''
   _cae_disarm
 }
@@ -81,7 +81,7 @@ _cae_disarm() {
   [[ -n "$_CAE_ARMED" ]] || return 0
   _CAE_ARMED=''
   if [[ -n "$_CAE_TMOUT_SAVE" ]]; then TMOUT=$_CAE_TMOUT_SAVE; else unset TMOUT; fi
-  if [[ -n "$_CAE_TRAP_SAVE" ]]; then functions[TRAPALRM]=$_CAE_TRAP_SAVE; else unfunction TRAPALRM 2>/dev/null; fi
+  if [[ -n "$_CAE_TRAP_SAVE" ]]; then functions[TRAPALRM]=$_CAE_TRAP_SAVE; else unfunction TRAPALRM 2> /dev/null; fi
 }
 
 # $REPLY = env mapped to the longest pattern matching $PWD, or ''
@@ -108,7 +108,7 @@ _cae_pump() {
   _cae_lookup
   [[ "$REPLY" == "$_CAE_INTENT" && "${CONDA_DEFAULT_ENV-}" == "$_CAE_FROM" ]] || return 0
   if [[ -z "$out" ]]; then
-    print -ru2 -- "conda_auto_env: env switch failed (check env names in CONDA_AUTO_ENVS)"
+    print -ru2 -- 'conda_auto_env: env switch failed (check env names in CONDA_AUTO_ENVS)'
     return 1
   fi
   local saved_ps1=$PS1  # conda's output overwrites PS1; keep the real prompt
@@ -137,17 +137,17 @@ _cae_dispatch() {
   shift
   if [[ -o interactive && -z "$_CAE_INLINE" ]]; then
     [[ -n "$_CAE_PENDING" ]] && command rm -f -- "$_CAE_PENDING"
-    [[ -n "$_CAE_PID" ]] && kill "$_CAE_PID" 2>/dev/null
+    [[ -n "$_CAE_PID" ]] && kill "$_CAE_PID" 2> /dev/null
     local out="$_CAE_TMP.$_CAE_GEN"
     _CAE_PENDING=$out
     _CAE_TICKS=0
-    { "$CONDA_EXE" shell.posix "$@" > "$out.wip" 2>/dev/null && command mv -f -- "$out.wip" "$out" } &!
+    { "$CONDA_EXE" shell.posix "$@" > "$out.wip" 2> /dev/null && command mv -f -- "$out.wip" "$out" } &!
     _CAE_PID=$!
     _cae_arm
   else  # non-interactive, or mid-line (`cd x && vim`): switch synchronously
     [[ -n "$_CAE_PENDING" ]] && _cae_abort
     local out saved_ps1=$PS1
-    out="$("$CONDA_EXE" shell.posix "$@" 2>/dev/null)"
+    out="$("$CONDA_EXE" shell.posix "$@" 2> /dev/null)"
     [[ -n "$out" ]] && eval "$out" && rehash && _CAE_ACTIVE=$_CAE_INTENT
     PS1=$saved_ps1
   fi
@@ -162,7 +162,7 @@ _cae_preexec() {
     local -i waited=0
     while [[ -n "$_CAE_PENDING" && ! -e "$_CAE_PENDING" ]] \
         && (( waited < _CAE_WAIT_CS )); do
-      kill -0 "$_CAE_PID" 2>/dev/null || break  # died without a result
+      kill -0 "$_CAE_PID" 2> /dev/null || break  # died without a result
       if [[ -n "$_CAE_ZSELECT" ]]; then zselect -t 2; else command sleep 0.02; fi
       (( waited += 2 ))
     done
@@ -186,7 +186,7 @@ _cae_chpwd() {
   _cae_lookup
   if [[ -n "$REPLY" ]]; then
     [[ "$cur" == "$REPLY" ]] && return 0
-    if [[ -z "$cur" || "$cur" == base || "$cur" == "$_CAE_ACTIVE" ]]; then
+    if [[ -z "$cur" || "$cur" == 'base' || "$cur" == "$_CAE_ACTIVE" ]]; then
       _cae_dispatch "$REPLY" activate "$REPLY"
     fi
   elif [[ -n "$_CAE_ACTIVE" ]]; then
@@ -198,7 +198,7 @@ _cae_chpwd() {
   fi
 }
 
-_cae_cleanup() { command rm -f -- $_CAE_TMP.*(N) }
+_cae_cleanup() { command rm -f -- "$_CAE_TMP".*(N) }
 
 autoload -Uz add-zsh-hook
 add-zsh-hook chpwd   _cae_chpwd

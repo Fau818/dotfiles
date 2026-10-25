@@ -3,7 +3,7 @@
 _dzsh() {
   local containers
   # Get only container names
-  containers=(${(f)"$(docker ps -a --format "{{.Names}}")"})
+  containers=(${(f)"$(docker ps -a --format '{{.Names}}')"})
 
   # If no containers found, return
   [[ $#containers -eq 0 ]] && return 1
