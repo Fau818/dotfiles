@@ -1,3 +1,7 @@
+-- ╔══════════════════════════════════════════════════════════╗
+-- ║                       Yazi Plugins                       ║
+-- ╚══════════════════════════════════════════════════════════╝
+
 ---@diagnostic disable-next-line: undefined-field
 require("full-border"):setup({ type = ui.Border.ROUNDED })
 require("smart-enter"):setup({ open_multi = true })

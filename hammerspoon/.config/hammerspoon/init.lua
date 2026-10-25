@@ -1,3 +1,7 @@
+-- ╔══════════════════════════════════════════════════════════╗
+-- ║                       Hammerspoon                        ║
+-- ╚══════════════════════════════════════════════════════════╝
+
 --- NOTE: Use `~/.config/hammerspoon` as the config directory.
 --- defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
 

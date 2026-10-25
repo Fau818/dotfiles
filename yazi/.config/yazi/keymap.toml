@@ -1,3 +1,7 @@
+# ╔══════════════════════════════════════════════════════════╗
+# ║                       Yazi Keymap                        ║
+# ╚══════════════════════════════════════════════════════════╝
+
 # ─── Fuzzy Finder (Swaped zoxide and fzf default keymappings) ───
 [[mgr.prepend_keymap]]
 on  = "z"

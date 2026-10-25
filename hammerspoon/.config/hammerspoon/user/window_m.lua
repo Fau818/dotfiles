@@ -1,6 +1,6 @@
--- ════════════════════════════════════════════════════════════
--- ════════════════════ Window Management ═════════════════════
--- ════════════════════════════════════════════════════════════
+-- ╔══════════════════════════════════════════════════════════╗
+-- ║                    Window Management                     ║
+-- ╚══════════════════════════════════════════════════════════╝
 
 -- ══════════════════════ Configuration ═══════════════════════
 
@@ -56,7 +56,7 @@ local function _move_and_resize_window(position, direction)
   local special_app_list = { ["System Settings"] = true, ["Reminders"] = true, ["Quantumult X"] = true, ["Arc"] = false, ["AlDente"] = true }
   local window = hs.window.focusedWindow()
   if window then
-    -- ─── 左右横跳 ───────────────────────────────────────────────
+    -- ─── 左右横跳 ───────────────────────────────────────────
     if _is_same(window, position) then
       hs.alert.show("SAME!!!")
 
