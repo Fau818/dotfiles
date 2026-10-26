@@ -29,15 +29,16 @@ autoload -Uz _zinit
 
 # ══════════════════════ OMZ Migration ═══════════════════════
 
+# NOTE: `nocd` keeps `atinit`/`atload` out of the plugin directory, where a Ctrl-C at startup could strand the shell.
 zinit ice depth=1 wait lucid; zinit snippet OMZL::clipboard.zsh
-zinit ice depth=1 wait lucid atinit'COMPLETION_WAITING_DOTS=true; HYPHEN_INSENSITIVE=true'; zinit snippet OMZL::completion.zsh
+zinit ice depth=1 wait lucid nocd atinit'COMPLETION_WAITING_DOTS=true; HYPHEN_INSENSITIVE=true'; zinit snippet OMZL::completion.zsh
 zinit ice depth=1; zinit snippet OMZL::directories.zsh
 zinit ice depth=1 wait lucid; zinit snippet OMZL::grep.zsh
 zinit ice depth=1; zinit snippet OMZL::history.zsh
-zinit ice depth=1 atload"bindkey -r '^R'; bindkey -r '^S'"; zinit snippet OMZL::key-bindings.zsh
+zinit ice depth=1 nocd atload"bindkey -r '^R'; bindkey -r '^S'"; zinit snippet OMZL::key-bindings.zsh
 zinit ice depth=1; zinit snippet OMZL::theme-and-appearance.zsh
 
-zinit ice wait lucid depth=1 atload'unalias g grv ghh'; zinit snippet OMZP::git
+zinit ice wait lucid depth=1 nocd atload'unalias g grv ghh'; zinit snippet OMZP::git
 
 
 # ══════════════════════ Zinit Plugins ═══════════════════════
@@ -61,7 +62,7 @@ zinit ice depth=1; zinit light zdharma-continuum/fast-syntax-highlighting
 zinit ice depth=1 wait lucid; zinit light MichaelAquilina/zsh-you-should-use
 
 zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
-zinit ice lucid wait'0a' from'gh-r' as'program' atload'eval "$(mcfly init zsh)"; export MCFLY_KEY_SCHEME=vim'; zinit light cantino/mcfly
+zinit ice lucid wait'0a' from'gh-r' as'program' nocd atload'eval "$(mcfly init zsh)"; export MCFLY_KEY_SCHEME=vim'; zinit light cantino/mcfly
 
 # NOTE: No `blockf`: let the plugin add its `src` to `$fpath`, since zinit symlinks completions only on first clone.
-zinit ice depth=1 lucid atload'zicompinit; zicdreplay'; zinit light zsh-users/zsh-completions
+zinit ice depth=1 lucid nocd atload'zicompinit; zicdreplay'; zinit light zsh-users/zsh-completions

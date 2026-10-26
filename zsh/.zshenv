@@ -156,3 +156,5 @@ export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
 
 # ┄┄┄ Zoxide
 export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
+export _ZO_EXCLUDE_DIRS="$HOME:$DOTFILE_PATH/*/.*"
+export _ZO_MAXAGE=1000
