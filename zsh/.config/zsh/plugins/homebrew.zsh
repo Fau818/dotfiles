@@ -15,7 +15,7 @@ HOMEBREW_ALIYUN_BOTTLE_DOMAIN='https://mirrors.aliyun.com/homebrew/homebrew-bott
 # └──────────────────────────────────────────────────────────┘
 
 # RETURN: if no binary file `brew`, return.
-! command -v brew &> /dev/null && return 0
+(( $+commands[brew] )) || return 0
 
 
 # ─── Auto set bottle domain ─────────────────────────────────
@@ -37,7 +37,7 @@ function ___homebrew_auto_set_bottle_domain() {
 # ─── Sourcer ────────────────────────────────────────────────
 # Switch Homebrew source (default: official)
 function __homebrew_set_source() {
-  ! command -v brew &> /dev/null && { echo_error "Not found: $(echo_hl 'brew') command"; return 1; }
+  (( $+commands[brew] )) || { echo_error "Not found: $(echo_hl 'brew') command"; return 1; }
 
   echo 'Select Homebrew source:'
   echo '1) Official - https://github.com/Homebrew (default)'

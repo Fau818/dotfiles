@@ -36,6 +36,7 @@ function vpn() {
 
 # ─── Quick Start Clash on Linux ─────────────────────────────
 function __get_clash_tool_name() {
+  # NOTE: Use `command -v`, as `$+commands` misses a tool installed since the shell started.
   if command -v mihomo &> /dev/null; then echo 'mihomo'
   elif command -v clash &> /dev/null; then echo 'clash'
   else echo_error "Not found: $(echo_hl 'clash/mihomo') command"; return 1

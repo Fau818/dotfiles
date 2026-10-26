@@ -36,17 +36,17 @@ alias gcmm='git commit -m' gcmmd='gcmm "$(date)"'
 # ┄┄┄ Kitty
 [[ "$TERM" == 'xterm-kitty' ]] && alias kssh='kitty +kitten ssh'
 # ┄┄┄ Rsync
-command -v rsync &> /dev/null && alias frsync='rsync -razvhP'
+(( $+commands[rsync] )) && alias frsync='rsync -razvhP'
 # ┄┄┄ Mysql
-command -v mysql &> /dev/null && alias mysqlStart='mysql.server start' mysqlStop='mysql.server stop'
+(( $+commands[mysql] )) && alias mysqlStart='mysql.server start' mysqlStop='mysql.server stop'
 # ┄┄┄ Neovim
-command -v nvim &> /dev/null && alias vim=nvim
+(( $+commands[nvim] )) && alias vim=nvim
 # ┄┄┄ Thefuck
-command -v thefuck &> /dev/null && eval "$(thefuck --alias)" && alias ff=fuck
+(( $+commands[thefuck] )) && eval "$(thefuck --alias)" && alias ff=fuck
 # ┄┄┄ Yabai
-command -v yabai &> /dev/null && alias yabai_sudo='echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 "${commands[yabai]}" | cut -d " " -f 1) ${commands[yabai]} --load-sa" | sudo tee /private/etc/sudoers.d/yabai > /dev/null'
+(( $+commands[yabai] )) && alias yabai_sudo='echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 "${commands[yabai]}" | cut -d " " -f 1) ${commands[yabai]} --load-sa" | sudo tee /private/etc/sudoers.d/yabai > /dev/null'
 # ┄┄┄ Ripgrep
-command -v rg &> /dev/null && alias rg="rg --ignore-file '$XDG_CONFIG_HOME/git/ignore'"
+(( $+commands[rg] )) && alias rg="rg --ignore-file '$XDG_CONFIG_HOME/git/ignore'"
 
 
 # ═════════════════════════ Plugins ══════════════════════════
@@ -64,6 +64,7 @@ source "$ZPLUGINDIR/ssh.zsh"
 source "$ZPLUGINDIR/docker.zsh"
 source "$ZPLUGINDIR/python.zsh"
 source "$ZPLUGINDIR/utils.zsh"
+source "$ZPLUGINDIR/stow.zsh"
 source "$ZPLUGINDIR/pinstall.zsh"
 
 
@@ -76,7 +77,7 @@ source "$ZPLUGINDIR/zinit.zsh"
 source "$ZPLUGINDIR/gcloud.zsh"
 
 # Eza (NOTE: After zinit, or OMZL::theme-and-appearance.zsh overrides ls.)
-command -v eza &> /dev/null && alias ls='eza --icons --time-style=iso'
+(( $+commands[eza] )) && alias ls='eza --icons --time-style=iso'
 
 
 # ═══════════════════════ Completions ════════════════════════

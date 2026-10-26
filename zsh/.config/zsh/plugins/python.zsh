@@ -85,7 +85,7 @@ fi
 
 
 # ─── Aliases ────────────────────────────────────────────────
-command -v conda &> /dev/null && alias dl='conda activate dl'
+(( $+functions[conda] )) && alias dl='conda activate dl'
 
 
 # ─── Conda Auto Env ─────────────────────────────────────────
@@ -96,7 +96,7 @@ source "$ZPLUGINDIR/conda_auto_env.zsh"
 # │                            UV                            │
 # └──────────────────────────────────────────────────────────┘
 
-if command -v uv &> /dev/null; then
+if (( $+commands[uv] )); then
   uv() {
     # if [[ -n "$UV_PROJECT_ENVIRONMENT" ]]; then command uv "$@"; return; fi
 

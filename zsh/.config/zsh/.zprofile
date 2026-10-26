@@ -10,7 +10,7 @@ PATH="$HOME/.local/bin:$PATH"
 # ═════════════════════════ Homebrew ═════════════════════════
 
 # ─── Initialization ─────────────────────────────────────────
-if ! command -v brew &> /dev/null; then
+if (( ! $+commands[brew] )); then
   # Make sure the `brew` command is available on Linux and Mac (Apple Chip)
   function ___homebrew_init() {
     local prefix=$([[ "$(uname)" == 'Linux' ]] && echo /home/linuxbrew/.linuxbrew || echo /opt/homebrew)
@@ -31,7 +31,7 @@ fi
 
 # ══════════════════════════ Neovim ══════════════════════════
 
-if command -v nvim &> /dev/null; then
+if (( $+commands[nvim] )); then
   export VIM_CONFIG="$XDG_CONFIG_HOME/nvim"
   export EDITOR='nvim' VISUAL='nvim'
   export SUDO_EDITOR="$(whence -p nvim)"
@@ -42,12 +42,12 @@ fi
 
 # ═══════════════════════════ Rust ═══════════════════════════
 
-if command -v rustup &> /dev/null; then PATH="$CARGO_HOME/bin:$PATH"; fi
+if (( $+commands[rustup] )); then PATH="$CARGO_HOME/bin:$PATH"; fi
 
 
 # ═══════════════════════════ Gem ════════════════════════════
 
-if command -v gem &> /dev/null; then PATH="$XDG_DATA_HOME/gem/bin:$PATH"; fi
+if (( $+commands[gem] )); then PATH="$XDG_DATA_HOME/gem/bin:$PATH"; fi
 
 
 # ═════════════════════════ Orbstack ═════════════════════════
