@@ -5,7 +5,6 @@
   email = zhangyuFau@gmail.com
 [core]
   excludesFile = ~/.config/git/ignore
-  editor = nvim
   ignorecase = false
   bigFileThreshold = 1m
 [status]
