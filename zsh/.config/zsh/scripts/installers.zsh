@@ -8,13 +8,14 @@
 #
 # Each one is an `install_<name>` function, listed in `INSTALLERS` below. It installs what is missing, says what it
 # did, and returns 1 when it fails. Nothing is asked but the sudo password, when needed, and whether to retry
-# Homebrew from a mirror.
+# Homebrew from a mirror. Once one succeeds, the config packages `INSTALLER_CONFIGS` lists for it are stowed.
 # - With `INSTALLER_LOG_DIR` set, as `starter.sh` does, the tools' own output goes to logs there.
 # - Without it, as in `pinstall`, that output shows as usual.
 # IMPO: Linux means Ubuntu here; the apt steps are skipped where there's no `apt-get`.
 
 CONFIG_DIR=${0:A:h:h}  # This zsh config, wherever it is linked from
 source "$CONFIG_DIR/plugins/colorful_print.zsh"
+source "$CONFIG_DIR/plugins/stow.zsh"
 
 
 # ┌──────────────────────────────────────────────────────────┐
@@ -29,6 +30,13 @@ typeset -A INSTALLERS=(
   [yazi]='all|yazi, the terminal file manager, with zoxide, bat, ripgrep, fd, eza'
   [docker]='linux|Docker Engine from get.docker.com (needs root or sudo)'
   [miniconda]='linux|Miniconda into ~/.local/miniconda3 (no sudo needed)'
+)
+
+# Name -> the dotfiles' config packages for its tools.
+typeset -A INSTALLER_CONFIGS=(
+  [neovim]='fd lazygit github-copilot'
+  [yazi]='yazi bat fd'
+  [miniconda]='conda'
 )
 
 
@@ -192,6 +200,25 @@ function run_remote() {
   local script
   script=$(curl -fsSL "$2") || { echo_error "Could not download $(echo_hl "$2")"; return 1 }
   quiet "$1" /bin/bash -c "$script"
+}
+
+
+# ─── Configs ────────────────────────────────────────────────
+# Stow the dotfiles' config packages `$@`.
+# - Without stow, or for a package this checkout lacks: skipped.
+# - When stow fails, e.g. on a conflict: a warning.
+function stow_configs() {
+  (( $+functions[__stow] )) || return 0  # NOTE: `plugins/stow.zsh` defines it only where stow is installed
+  local name
+  local -a stowed=()
+  for name in "$@"; do
+    [[ -d "$DOTFILE_PATH/private/$name" || -d "$DOTFILE_PATH/$name" ]] || continue  # NOTE: `__stow` would warn instead
+    if __stow "$name"; then stowed+=("$name")
+    else echo_warn "Could not stow $(echo_hl "$name"); see stow's message above."
+    fi
+  done
+  (( ${#stowed} )) && echo_ok "Stowed configuration for $(echo_hl "${(j:, :)stowed}")."
+  return 0  # NOTE: A config that can't be stowed doesn't fail its installer
 }
 
 
@@ -364,6 +391,8 @@ for name in "$@"; do
   runs_here "$name" || { echo_error "No installer named $(echo_hl "$name") for this platform."; ret=1; continue }
   echo_info "Running installer: $(echo_hl "$name")"
   # NOTE: A subshell each, so an installer's `exit`, `cd` or variables don't reach the next one.
-  ( "install_$name" ) || { echo_error "Installer $(echo_hl "$name") failed."; ret=1 }
+  if ( "install_$name" ); then stow_configs ${=INSTALLER_CONFIGS[$name]}
+  else echo_error "Installer $(echo_hl "$name") failed."; ret=1
+  fi
 done
 exit "$ret"
