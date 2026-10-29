@@ -2,7 +2,7 @@
   defaultBranch = main
 [user]
   name = Phoenix
-  email = zhangyuFau@gmail.com
+  email = yu.p.zhang@outlook.com
 [core]
   excludesFile = ~/.config/git/ignore
   ignorecase = false
