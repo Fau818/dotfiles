@@ -1,0 +1,84 @@
+#compdef cloudflared
+# Written by Claude (Opus 5.5, in Claude Code) on 2026-10-30.
+#
+# cloudflared has no command that prints a completion script, so this one reads its `--help` pages
+# instead. It completes subcommands at any depth, their flags, and files after a flag that takes a
+# value. It doesn't complete tunnel names, since listing them needs a call to Cloudflare.
+# SEE: https://github.com/cloudflare/cloudflared/issues/586 (the request for built-in completions)
+# TODO: Once cloudflared can print its own completion, delete this file and add a `cached_compdef`
+# \     line to `.zshrc` instead, like `uv` and `ruff`.
+
+# The `--help` pages read so far, kept for the rest of the shell session.
+typeset -gA _cloudflared_help
+
+# Complete a cloudflared command line, following the typed subcommands down the command tree.
+#   after a flag that takes a value -> files
+#   word starts with `-`            -> the command's flags
+#   command has subcommands         -> its subcommands
+#   otherwise                       -> files
+_cloudflared() {
+  local i=2
+  local -a chain names cmds flags value_flags
+
+  __cloudflared_parse
+  while (( i < CURRENT )); do
+    if (( ${value_flags[(Ie)${words[i]}]} )); then
+      (( i += 2 ))
+      continue
+    fi
+    if (( ${names[(Ie)${words[i]}]} )); then
+      chain+=("${words[i]}")
+      __cloudflared_parse "${chain[@]}"
+    fi
+    (( i += 1 ))
+  done
+
+  if (( ${value_flags[(Ie)${words[CURRENT-1]}]} )); then
+    _files
+  elif [[ "$PREFIX" == -* ]]; then
+    _describe -t flags 'flag' flags
+  elif (( $#cmds )); then
+    _describe -t commands 'command' cmds
+  else
+    _files
+  fi
+}
+
+# Fill the caller's `names`, `cmds`, `flags` and `value_flags` from `cloudflared <chain> --help`.
+function __cloudflared_parse() {
+  local key="cloudflared $*" line spec raw desc section item
+  # NOTE: Only real subcommands go before `--help`: cloudflared runs `tunnel` for any other word.
+  (( ${+_cloudflared_help[$key]} )) || _cloudflared_help[$key]="$(_call_program help cloudflared ${(q)@} --help 2> /dev/null)"
+
+  names=() cmds=() flags=() value_flags=()
+  for line in "${(@f)_cloudflared_help[$key]}"; do
+    case "$line" in
+      COMMANDS:) section=cmds; continue ;;
+      *OPTIONS:) section=flags; continue ;;
+      [A-Z][A-Z[:space:]]#:) section=''; continue ;;
+      [^[:space:]]*) continue ;;  # NOTE: the wrapped tail of a long description starts at column 0
+    esac
+    line="${line##[[:space:]]##}"
+    [[ -n "$section" && -n "$line" ]] || continue
+    [[ "$section" == flags && "$line" != -* ]] && continue
+    [[ "$line" == *: && "$line" != *'  '* ]] && continue  # NOTE: a group heading inside COMMANDS, such as `Tunnel:`
+    spec="${line%%  *}" raw='' desc=''
+    [[ "$line" == *'  '* ]] && raw="${${line#*  }##[[:space:]]##}"
+    desc="${${${raw%%. *}%% [\[\(]*}%.}"
+
+    if [[ "$section" == cmds ]]; then
+      [[ "${spec%%,*}" == help ]] && continue
+      names+=(${(s:, :)spec})
+      cmds+=("${spec%%,*}:$desc")
+    else
+      for item in ${(s:, :)spec}; do
+        # NOTE: A second word is the value's placeholder, but cloudflared prints one for some switches too,
+        # \     which its help marks with a true/false default.
+        [[ "$item" == *' '* && "$raw" != *'(default: '(true|false)')'* ]] && value_flags+=("${item%% *}")
+        flags+=("${item%% *}:$desc")
+      done
+    fi
+  done
+}
+
+_cloudflared "$@"
