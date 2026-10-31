@@ -91,3 +91,7 @@ cached_compdef uv uv generate-shell-completion zsh
 # ┄┄┄ Rust
 cached_compdef cargo rustup completions zsh cargo
 cached_compdef rustup rustup completions zsh rustup
+
+# ┄┄┄ Codeforces
+# NOTE: `$ZCACHEDIR/completions` comes first in `$fpath`, so this `_cf` wins over zsh-completions' (Cloud Foundry's `cf`).
+cached_compdef cf cf completion zsh
