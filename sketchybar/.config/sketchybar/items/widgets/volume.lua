@@ -136,7 +136,7 @@ end
 
 volume_bracket:subscribe("volume_change", change_volume)
 -- NOTE: "mouse.clicked" on `volume_bracket` never fires: its members tile it exactly,
--- and the hit test returns the member first. Subscribe on the members instead.
+-- \     and the hit test returns the member first. Subscribe on the members instead.
 volume_icon:subscribe("mouse.clicked", click_volume)
 volume_percent:subscribe("mouse.clicked", click_volume)
 volume_bracket:subscribe("mouse.exited.global", collapse_volume_details)
