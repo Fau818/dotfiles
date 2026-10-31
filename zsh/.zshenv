@@ -42,8 +42,9 @@ export HISTFILE="$ZDOTDIR/.zsh_history"
 
 
 # ─── Personal Preference ────────────────────────────────────
-# ┄┄┄ Dotfile path
+# ┄┄┄ Dotfiles and Projects
 export DOTFILE_PATH=$([[ "$(uname)" == 'Darwin' ]] && echo "$HOME/Documents/Fau/dotfiles" || echo "$XDG_CONFIG_HOME/dotfiles")
+export PROJECT_PATH=$([[ "$(uname)" == 'Darwin' ]] && echo "$HOME/Documents/Fau/projects" || echo "$HOME/projects")
 
 # ┄┄┄ ICLOUD
 if [[ "$(uname)" == 'Darwin' ]] then
@@ -53,6 +54,8 @@ if [[ "$(uname)" == 'Darwin' ]] then
   export IOBSIDIAN="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Phoenix"
 fi
 
+
+# ─── Tokens ─────────────────────────────────────────────────
 # ┄┄┄ OpenAI
 export OPENAI_API_PATH="$DOTFILE_PATH/private/openai"
 
