@@ -60,3 +60,34 @@ if (( $+commands[yazi] && ! $+functions[__yazi] )); then
   }
   alias yazi=__yazi f=__yazi
 fi
+
+
+# ══════════════════════════ Surge ═══════════════════════════
+
+if (( $+commands[surge-cli] )); then
+  # Print the tailnet the way `tailscale status` does, from Surge's Tailscale policy `$1` (`PTailnet` by default):
+  # this device first, then each peer as offline, `direct <address>` or `relay "<DERP region>"`, with its latency.
+  function tstatus() {
+    local program='
+      def short: split(".")[0];
+      def path:
+        if .online | not then "offline"
+        elif .status == "direct" then "direct \(.directAddress)"
+        elif .status == "relay" then "relay \"\(.derpRegionCode)\""
+        else .status end;
+      def latency: if .latencyMs then "\(.latencyMs) ms" else "-" end;
+      # NOTE: Surge reports when this device last talked to the peer, not when the peer was last online.
+      def last_activity:
+        .lastActivityAgo as $s
+        | if $s == null then "-"
+          elif $s < 60 then "\($s)s ago"
+          elif $s < 3600 then "\($s / 60 | floor)m ago"
+          else "\($s / 3600 | floor)h ago" end;
+
+      .tailscale // ((.result // "Not a Tailscale policy") + "\n" | halt_error(1))
+      | [.selfIPv4, (.selfName | short), "this device"],
+        (.peers[] | [.addresses[0], (.name | short), path, latency, last_activity])
+      | @tsv'
+    surge-cli --raw proxy-runtime-status "${1:-PTailnet}" | jq -r "$program" | column -t -s $'\t'
+  }
+fi

@@ -59,6 +59,7 @@ pinstall docker miniconda   # run them, in order
 | `node`      | macOS, Linux | Node.js, for Copilot and the LSP servers installed through npm                                                         |
 | `docker`    | Linux        | Docker Engine, from get.docker.com                                                                                     |
 | `miniconda` | Linux        | Miniconda, into `~/.local/miniconda3`                                                                                  |
+| `tailscale` | Linux        | Tailscale, from tailscale.com; sign in afterwards with `sudo tailscale up`                                             |
 
 `neovim`, `yazi` and `node` install with Homebrew, on Linux too, so they need `homebrew` first. Each installer skips what's already there, then links its tools' configs from this repo.
 

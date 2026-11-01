@@ -30,6 +30,7 @@ typeset -A INSTALLERS=(
   [yazi]='all|yazi, the terminal file manager, with zoxide, bat, ripgrep, fd, eza'
   [docker]='linux|Docker Engine from get.docker.com (needs root or sudo)'
   [miniconda]='linux|Miniconda into ~/.local/miniconda3 (no sudo needed)'
+  [tailscale]='linux|Tailscale from tailscale.com/install.sh (needs root or sudo)'
 )
 
 # Name -> the dotfiles' config packages for its tools.
@@ -195,11 +196,12 @@ function brew_install() {
 
 
 # ─── Downloads ──────────────────────────────────────────────
-# Download the script at `$2` and run it with bash, its output in the log `$1`; fails when either step does.
+# Download the script at `$2` and run it, its output in the log `$1`; fails when either step does.
+# The arguments after the URL are the shell to run it with, `/bin/bash` by default, e.g. `as_root sh`.
 function run_remote() {
-  local script
-  script=$(curl -fsSL "$2") || { echo_error "Could not download $(echo_hl "$2")"; return 1 }
-  quiet "$1" /bin/bash -c "$script"
+  local log=$1 url=$2 script; shift 2
+  script=$(curl -fsSL "$url") || { echo_error "Could not download $(echo_hl "$url")"; return 1 }
+  quiet "$log" "${@:-/bin/bash}" -c "$script"
 }
 
 
@@ -333,12 +335,8 @@ function install_docker() {
   (( EUID == 0 || $+commands[sudo] )) || { echo_error "Installing $(echo_hl 'Docker') needs root or $(echo_hl 'sudo')."; return 1 }
   (( EUID == 0 )) || sudo_ready || return 1
 
-  local script
-  script=$(mktemp) || return 1
-  {
-    echo_info "Installing $(echo_hl 'Docker Engine') ..."
-    curl -fsSL https://get.docker.com -o "$script" && quiet docker as_root sh "$script" || return 1
-  } always { rm -f "$script" }
+  echo_info "Installing $(echo_hl 'Docker Engine') ..."
+  run_remote docker https://get.docker.com as_root sh || return 1
   echo_ok "$(echo_hl 'Docker') installed: $(docker --version)"
 }
 
@@ -361,6 +359,19 @@ function install_miniconda() {
     quiet miniconda bash "$script" -b -p "$prefix" || return 1
   } always { rm -f "$script" }
   echo_ok "$(echo_hl 'Miniconda') installed at $(echo_hl "$prefix"); run $(echo_hl 'exec zsh -l') to use $(echo_hl 'conda')."
+}
+
+
+# ─── Tailscale ──────────────────────────────────────────────
+# Install Tailscale with tailscale.com's script, unless tailscale is there already; signing in is left to you.
+function install_tailscale() {
+  (( $+commands[tailscale] )) && { echo_ok "$(echo_hl 'Tailscale') is already installed: $(tailscale version | head -n 1)"; return 0 }
+  (( EUID == 0 || $+commands[sudo] )) || { echo_error "Installing $(echo_hl 'Tailscale') needs root or $(echo_hl 'sudo')."; return 1 }
+  (( EUID == 0 )) || sudo_ready || return 1
+
+  echo_info "Installing $(echo_hl 'Tailscale') ..."
+  run_remote tailscale https://tailscale.com/install.sh as_root sh || return 1
+  echo_ok "$(echo_hl 'Tailscale') installed; run $(echo_hl 'sudo tailscale up') and open its link on any device to sign in."
 }
 
 
