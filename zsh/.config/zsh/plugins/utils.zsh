@@ -65,6 +65,9 @@ fi
 # ══════════════════════════ Surge ═══════════════════════════
 
 if (( $+commands[surge-cli] )); then
+  # Sync the Surge profiles between iCloud and `private/surge/` from any folder; `surge-sync status` previews it.
+  alias surge-sync="$DOTFILE_PATH/private/surge/surge-sync"
+
   # Print the tailnet the way `tailscale status` does, from Surge's Tailscale policy `$1` (`PTailnet` by default):
   # this device first, then each peer as offline, `direct <address>` or `relay "<DERP region>"`, with its latency.
   function tstatus() {
