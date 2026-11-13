@@ -251,7 +251,7 @@
                                 "type": "basic"
                             },
                             {
-                                "description": "<HYPER>s := open Browser (Arc)",
+                                "description": "<HYPER>s := open Browser (Dia)",
                                 "from": {
                                     "key_code": "s",
                                     "modifiers": {
@@ -261,7 +261,7 @@
                                 },
                                 "to": [
                                     { "key_code": "vk_none" },
-                                    { "shell_command": "open -a Arc" }
+                                    { "shell_command": "open -a Dia" }
                                 ],
                                 "type": "basic"
                             },

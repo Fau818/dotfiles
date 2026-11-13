@@ -109,10 +109,10 @@
         },
 
         {
-          "description": "<HYPER>s := open Browser (Arc)",
+          "description": "<HYPER>s := open Browser (Dia)",
           "type": "basic",
           "from": { "key_code": "s", "modifiers": { "mandatory": ["right_command", "left_control", "left_shift", "left_option"], "optional": ["caps_lock"] } },
-          "to": [{ "key_code": "vk_none" }, { "shell_command": "open -a Arc" }]
+          "to": [{ "key_code": "vk_none" }, { "shell_command": "open -a Dia" }]
         },
 
         {
