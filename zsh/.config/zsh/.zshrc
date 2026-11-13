@@ -18,7 +18,9 @@ fi
 # └──────────────────────────────────────────────────────────┘
 
 setopt interactive_comments
-fpath=($ZDOTDIR/completions $ZCACHEDIR/completions $fpath)
+
+typeset -U fpath
+fpath=($ZDOTDIR/completions $ZCACHEDIR/completions $XDG_DATA_HOME/zsh/site-functions $fpath)
 
 
 # ═════════════════════════ Aliases ══════════════════════════
