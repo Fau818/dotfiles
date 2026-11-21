@@ -9,6 +9,43 @@
                 },
                 "rules": [
                     {
+                        "description": "kitty: <CTRL>s := pane mode",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": ["^net\\.kovidgoyal\\.kitty$"],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "description": "kitty: <CTRL>s := pane mode, for the next key if tapped, until released if held (see kitty's pane_mode.py)",
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": {
+                                        "mandatory": ["right_control"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "parameters": { "basic.to_if_alone_timeout_milliseconds": 1000 },
+                                "to": [
+                                    {
+                                        "key_code": "s",
+                                        "modifiers": ["right_control"],
+                                        "repeat": false
+                                    }
+                                ],
+                                "to_after_key_up": [{ "key_code": "escape" }],
+                                "to_if_alone": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "f20"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "<FN> := <FN> with sticky and <FN> Open",
                         "manipulators": [
                             {
@@ -261,7 +298,7 @@
                                 },
                                 "to": [
                                     { "key_code": "vk_none" },
-                                    { "shell_command": "open -a Dia" }
+                                    { "shell_command": "open -a Dia || open -a Safari" }
                                 ],
                                 "type": "basic"
                             },
@@ -1056,16 +1093,6 @@
                     }
                 ]
             },
-            "fn_function_keys": [
-                {
-                    "from": { "key_code": "f4" },
-                    "to": [{ "apple_vendor_keyboard_key_code": "launchpad" }]
-                },
-                {
-                    "from": { "key_code": "f5" },
-                    "to": [{ "key_code": "f5" }]
-                }
-            ],
             "name": "Phoenix",
             "selected": true,
             "virtual_hid_keyboard": {

@@ -2,6 +2,21 @@
   "title": "Basic Configurations",
   "rules": [
     {
+      "description": "kitty: <CTRL>s := pane mode",
+      "manipulators": [
+        {
+          "description": "kitty: <CTRL>s := pane mode, for the next key if tapped, until released if held (see kitty's pane_mode.py)",
+          "type": "basic",
+          "conditions": [{ "type": "frontmost_application_if", "bundle_identifiers": ["^net\\.kovidgoyal\\.kitty$"] }],
+          "from": { "key_code": "s", "modifiers": { "mandatory": ["right_control"], "optional": ["caps_lock"] } },
+          "parameters": { "basic.to_if_alone_timeout_milliseconds": 1000 },
+          "to": [{ "key_code": "s", "modifiers": ["right_control"], "repeat": false }],
+          "to_if_alone": [{ "key_code": "f20", "halt": true }],
+          "to_after_key_up": [{ "key_code": "escape" }]
+        }
+      ]
+    },
+    {
       "description": "Better <TAB> <L_CTRL> <CAPS_LOCK>",
       "manipulators": [
         {
