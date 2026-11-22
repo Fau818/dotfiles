@@ -70,8 +70,8 @@ has()       { command -v "$1" &> /dev/null; }
 has_en_us() { locale -a 2> /dev/null | grep -qiE '^en_US\.utf-?8$'; }
 # Ubuntu is the only Linux the package and tool steps are written for.
 is_ubuntu() { grep -qs '^ID=ubuntu$' /etc/os-release; }
-# Homebrew counts even when it isn't on PATH yet.
-has_brew()  { has brew || [[ -x /opt/homebrew/bin/brew || -x /home/linuxbrew/.linuxbrew/bin/brew ]]; }
+# Homebrew, or the command `$1`, counts also from Homebrew's bin, which may not be on PATH yet.
+has_brew()  { local cmd=${1:-brew}; has "$cmd" || [[ -x "/opt/homebrew/bin/$cmd" || -x "/home/linuxbrew/.linuxbrew/bin/$cmd" ]]; }
 
 
 # ─── Questions ──────────────────────────────────────────────
@@ -219,7 +219,7 @@ ask_tools() {
   if ask "Install $(echo_hl 'yazi') and its tools?" y; then TOOLS+=(yazi); fi
   if ask "Install $(echo_hl 'neovim') and its tools?" y; then
     TOOLS+=(neovim)
-    if ! has node && ask "Also install $(echo_hl 'node')? $(echo_hl 'Copilot') and LSP servers installed through $(echo_hl 'npm') need it." n; then TOOLS+=(node); fi
+    if ! has_brew node && ask "Also install $(echo_hl 'node')? $(echo_hl 'Copilot') and LSP servers installed through $(echo_hl 'npm') need it." n; then TOOLS+=(node); fi
   fi
 }
 
@@ -350,17 +350,20 @@ install_tools() {
 
 # ─── 8. Hand Over to Zsh ────────────────────────────────────
 # Hand over to zsh; returns only without a terminal, 1 when an installer failed.
-# 1. A first, quiet start: `auto_stow` links the tools' configs, zinit installs its plugins, `plugins/bash.zsh` sets up `~/.bashrc`.
+# 1. A first, quiet start: `auto_stow` links the tools' configs, zinit installs its plugins, `plugins/bash.zsh` sets up `~/.bashrc`,
+#    and gitstatusd and McFly's history are set up, so the first prompt stays quiet.
 # 2. Where the logs are, and `pinstall` for more installers.
 # 3. On a terminal, `exec zsh -l`. Without one (e.g. a Docker build), the run ends, failing if an installer failed.
 start_zsh() {
   has zsh || { echo_warn "$(echo_hl 'zsh') is not installed, so staying in this shell."; return 0; }
 
   echo_info 'Linking tool configurations and installing zsh plugins ...'
-  # NOTE: `plugins/stow.zsh` defines `auto_stow` only where stow is installed; it goes first, so the exit status is zinit's.
+  # NOTE: `plugins/stow.zsh` defines `auto_stow` only where stow is installed, so its status doesn't count.
   # NOTE: `burst` runs zinit's turbo (`wait`) loads right away, which a plain `exit` would quit before;
   # \     `+m` leaves the terminal alone.
-  quiet zsh-first-start zsh +m -lic '(( $+functions[auto_stow] )) && auto_stow; @zinit-scheduler burst' \
+  # NOTE: McFly loads only once the history file exists, and its `stats` does the first import.
+  quiet zsh-first-start zsh +m -lic '(umask 077; : >> "$HISTFILE"); (( $+functions[auto_stow] )) && auto_stow
+    @zinit-scheduler burst && "$__p9k_root_dir/gitstatus/install" && "$MCFLY_PATH" --history_format "$MCFLY_HISTORY_FORMAT" stats > /dev/null' \
     || echo_warn "$(echo_hl 'zsh') exited with an error; check it on the next login."
   echo_info "More installers later, from $(echo_hl 'zsh'): $(echo_hl 'pinstall') lists them. Logs of this run: $(echo_hl "$INSTALLER_LOG_DIR")"
   (( TOOLS_FAILED )) && echo_warn "Some installers failed (see above); $(echo_hl 'pinstall') can run them again."
