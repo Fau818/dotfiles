@@ -36,6 +36,12 @@ export HISTFILE="$ZDOTDIR/.zsh_history"
 # ┄┄┄ Language
 [[ -z "$LANG" ]] &&  export LANG='en_US.UTF-8' LC_ALL='en_US.UTF-8' LC_CTYPE='en_US.UTF-8'
 
+# ┄┄┄ Time Zone
+# NOTE: LC_TZ only carries the Mac's zone to servers (ssh passes LC_* by default); there it becomes TZ, else US Eastern.
+if [[ "$(uname)" == 'Darwin' ]] then export LC_TZ=${$(readlink /etc/localtime)#*zoneinfo/}
+else export TZ=${LC_TZ:-America/New_York}
+fi
+
 # ┄┄┄ Umask
 # NOTE: Under OrbStack, `docker exec` (so `dzsh`) starts with umask 000.
 [[ "$(umask)" == 000 ]] && umask 022
