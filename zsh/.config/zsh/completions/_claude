@@ -1,0 +1,132 @@
+#compdef claude
+# Written by Claude (Opus 5.5, in Claude Code) on 2026-11-05.
+#
+# Claude Code has no command that prints a completion script, so this one reads its `--help` pages
+# instead. It completes subcommands at any depth, their flags, the values a flag's help lists, and
+# background session ids after `attach`, `logs`, `stop`, `rm` and `respawn`.
+# TODO: Once claude can print its own completion, delete this file and add a `cached_compdef` line
+# \     to `.zshrc` instead, like `uv` and `ruff`.
+
+# The `--help` pages read so far, kept for the rest of the shell session.
+typeset -gA _claude_help
+
+# Complete a claude command line, following the typed subcommands down the command tree.
+#   after a flag that takes a value       -> that value
+#   word starts with `-`                  -> the command's flags
+#   command has subcommands               -> its subcommands, until a positional argument is typed
+#   command takes a background session id -> the background sessions
+#   otherwise                             -> files
+_claude() {
+  local i=2 positional=0 flag prev="${words[CURRENT-1]}"
+  local -a chain names cmds flags
+  local -A values choices
+
+  __claude_parse
+  while (( i < CURRENT )); do
+    if [[ "${values[${words[i]}]}" == '<'* ]]; then  # NOTE: A `[value]` is optional, so the next word may not be it.
+      (( i += 2 ))
+      continue
+    fi
+    if [[ "${words[i]}" != -* ]]; then
+      (( ${names[(Ie)${words[i]}]} )) || { positional=1; break }
+      chain+=("${words[i]}")
+      __claude_parse "${chain[@]}"
+    fi
+    (( i += 1 ))
+  done
+
+  if [[ "$PREFIX" == -*=* && -n "${values[${PREFIX%%=*}]}" ]]; then
+    flag="${PREFIX%%=*}"
+    compset -P '*='
+  elif [[ "${values[$prev]}" == '<'* || ( -n "${values[$prev]}" && "$PREFIX" != -* ) ]]; then
+    flag="$prev"
+  fi
+
+  if [[ -n "$flag" ]]; then
+    __claude_value "$flag"
+  elif [[ "$PREFIX" == -* ]]; then
+    _describe -t flags 'flag' flags
+  elif (( $#cmds && ! positional )); then
+    _describe -t commands 'command' cmds
+  elif [[ "${chain[*]}" == (attach|logs|stop|kill|rm|respawn) ]]; then
+    __claude_sessions
+  else
+    _files
+  fi
+}
+
+# Fill the caller's `names`, `cmds`, `flags`, `values` and `choices` from `claude <chain> --help`.
+function __claude_parse() {
+  local key="claude $*" line section spec desc short list name opts arg
+  local -a entries
+  (( ${+_claude_help[$key]} )) || _claude_help[$key]="$(_call_program help claude ${(q)@} --help 2> /dev/null)"
+
+  # Gather each entry of the Commands and Options sections as `section<TAB>spec<TAB>description`.
+  for line in "${(@f)_claude_help[$key]}"; do
+    case "$line" in
+      Commands:) section=cmds ;;
+      Options:) section=flags ;;
+      [^[:space:]]*) section='' ;;
+      '  '[^[:space:]]*)
+        spec="${${line#  }%%  *}"
+        desc="${${line#  $spec}##[[:space:]]#}"
+        [[ -n "$section" ]] && entries+=("$section"$'\t'"$spec"$'\t'"$desc")
+        ;;
+      *[^[:space:]]*)  # NOTE: the wrapped tail of the last entry's description, or a long spec's description
+        [[ -n "$section" ]] && (( $#entries )) && entries[-1]+=" ${line##[[:space:]]##}"
+        ;;
+    esac
+  done
+
+  names=() cmds=() flags=() values=() choices=()
+  for line in "${entries[@]}"; do
+    IFS=$'\t' read -r section spec desc <<< "$line"
+    desc="${desc## }" short="${${${desc%%. *}%% [\[\(]*}%.}"
+
+    if [[ "$section" == cmds ]]; then
+      name="${spec%% *}"
+      # NOTE: Skips `help`, and the `Examples:` heading that `claude mcp --help` prints inside its
+      # \     Commands section.
+      [[ "$name" == [a-z][-a-z\|]# && "$name" != help ]] || continue
+      names+=(${(s:|:)name})
+      cmds+=("${name%%|*}:$short")
+    else
+      opts="${spec%% [<\[]*}" arg="${${spec#$opts}# }" list=''
+      # NOTE: The `list=` lines stay unquoted: in double quotes, each nested step would see one string
+      # \     instead of the split words.
+      if [[ "$desc" =~ '\(choices: ([^)]*)\)' ]]; then
+        list=${(j: :)${(Q)${(M)${(s:, :)match[1]}:#\"*\"}}}  # NOTE: drops a trailing `default: "…"` or `preset: "…"`
+      elif [[ "$desc" =~ '\(([a-z]+(, (or )?[a-z]+)+)\)' ]]; then
+        list=${(j: :)${${(s:, :)match[1]}#or }}  # NOTE: a plain list, such as `(local, user, or project)`
+      fi
+      for name in ${(s:, :)opts}; do
+        flags+=("$name:$short")
+        [[ -n "$arg" ]] && values[$name]="$arg"
+        [[ -n "$list" ]] && choices[$name]="$list"
+      done
+    fi
+  done
+}
+
+# Complete the value of flag $1: the choices its help lists, a path, or else a hint of what it takes.
+function __claude_value() {
+  local arg="${values[$1]}"
+  if [[ -n "${choices[$1]}" ]]; then
+    compadd -- ${=choices[$1]}
+  elif [[ "$arg" == *dir* ]]; then
+    _files -/
+  elif [[ "$arg" == *(path|file|config)* ]]; then
+    _files
+  else
+    _message "${arg//[<>\[\]]}"
+  fi
+}
+
+# Complete a background session id, described by its name and state.
+function __claude_sessions() {
+  local -a sessions=(${(f)"$(_call_program sessions claude agents --json --all 2> /dev/null \
+    | jq -r '.[] | "\(.id):\(.name // "") (\(.state))"')"})
+  _describe -t sessions 'background session' sessions
+}
+
+_claude "$@"
